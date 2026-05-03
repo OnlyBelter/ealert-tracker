@@ -441,34 +441,43 @@ function ensureFields(paper) {
 }
 
 /**
- * 生成精炼点评（v3.5 简化版）
- * 要求：3-5句话，回答：为什么重要？解决了什么问题？有什么价值？
+ * 生成精炼点评（v3.5 增强版）
+ * 要求：回答——为什么重要？解决了什么问题？有什么发现？
  */
 function generateComment(title, abstract, researchQuestion, journal) {
   const combined = (title + ' ' + abstract).toLowerCase();
   const t = title.toLowerCase();
   const abs = abstract || '';
   
-  // 从摘要中提取关键发现（最多2句）
-  let keyFindings = '';
+  // 从摘要中提取关键发现
+  let keyFindings = [];
   if (abs.length > 50) {
     const sentences = abs.split(/[.。]/).filter(s => s.trim().length > 30);
-    // 找包含 "reveal/show/demonstrate/find" 的句子
-    for (const s of sentences.slice(0, 5)) {
-      if (/reveal|show|demonstrate|find|discover|identify|provide/i.test(s)) {
-        keyFindings = s.trim().substring(0, 200);
-        break;
+    // 找包含关键动词的句子
+    for (const s of sentences.slice(0, 8)) {
+      if (/reveal|show|demonstrate|find|discover|identify|provide|demonstrate|indicate|suggest/i.test(s)) {
+        keyFindings.push(s.trim().substring(0, 200));
+        if (keyFindings.length >= 2) break;
       }
     }
     // 如果没找到，用第一句
-    if (!keyFindings && sentences.length > 0) {
-      keyFindings = sentences[0].trim().substring(0, 200);
+    if (keyFindings.length === 0 && sentences.length > 0) {
+      keyFindings.push(sentences[0].trim().substring(0, 200));
     }
   }
   
-  // 领域特定点评（精简版）
+  // 领域特定点评（基于标题关键词）
   if (t.includes('foxp3') || t.includes('treg') || t.includes('regulatory t')) {
     return 'Treg 细胞是肿瘤免疫和自身免疫疾病的核心靶点。本研究揭示了 Foxp3 如何通过表观遗传程序定义 Treg 身份，对理解免疫耐受机制和开发 Treg 靶向疗法有重要意义。';
+  }
+  if (t.includes('chemokine') || t.includes('t cell activation')) {
+    return 'T 细胞激活是适应性免疫的核心过程。本研究探讨了趋化因子在 T 细胞激活中的双重作用，对理解免疫调节机制和开发免疫调节疗法有参考价值。';
+  }
+  if (combined.includes('colorectal cancer') || combined.includes('crc')) {
+    if (combined.includes('ccr5') || combined.includes('ccl5')) {
+      return 'CCR5/CCL5 轴在结直肠癌中扮演重要角色。本研究系统分析了其表达谱和临床价值，为结直肠癌的免疫治疗提供了新的生物标志物和潜在靶点。';
+    }
+    return '结直肠癌是全球高发恶性肿瘤。本研究探索了新的分子标志物或治疗靶点，对改善结直肠癌诊断和治疗有潜在价值。';
   }
   if (combined.includes('cancer') && combined.includes('immunotherapy')) {
     return '肿瘤免疫治疗响应率低是当前最大瓶颈。本研究探索了增强抗肿瘤免疫的新策略，为提高免疫治疗疗效提供了潜在新靶点或新思路。';
@@ -486,9 +495,12 @@ function generateComment(title, abstract, researchQuestion, journal) {
     return '衰老是多种慢性疾病的共同风险因素。本研究揭示了衰老相关的新机制或新靶点，对延缓衰老或治疗衰老相关疾病有潜在价值。';
   }
   
-  // 通用点评：基于摘要内容生成
-  if (keyFindings) {
-    return `研究发现：${keyFindings}。该研究对理解相关生物学过程或开发新策略有参考价值。`;
+  // 通用点评：基于摘要内容生成（更详细）
+  if (keyFindings.length > 0) {
+    const finding = keyFindings[0];
+    // 提取核心动词
+    const action = finding.match(/reveal|show|demonstrate|find|discover|identify|provide|indicate/i)?.[0] || 'show';
+    return `本研究${action}：${finding.substring(0, 150)}。该发现对理解相关生物学过程或开发新策略有参考价值。`;
   }
   
   return '相关领域研究，建议阅读原文了解详细内容。';
@@ -839,11 +851,15 @@ function generateQQReport(papers) {
       r += `**作者**: ${p.authors}\n`;
     }
     
-    // v3.5: 链接必须显示
+    // v3.5: 链接必须显示（如果没有链接，尝试用 DOI 或期刊 URL 拼接）
     if (p.link) {
       r += `\n🔗 **链接**: ${p.link}\n`;
     } else if (p.doi) {
       r += `\n🔗 **DOI**: https://doi.org/${p.doi}\n`;
+    } else if (p.journal) {
+      // 尝试根据期刊名拼接搜索 URL
+      const journalSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(p.title + ' ' + p.journal)}`;
+      r += `\n🔍 **搜索链接**: ${journalSearchUrl}\n`;
     }
     r += '\n';
     
@@ -910,12 +926,15 @@ function generateMarkdownReport(papers) {
     if (p.authors && p.authors !== '见原文' && p.authors !== '未知') {
       md += `| **作者** | ${p.authors} |\n`;
     }
-    // v3.5: 链接必须显示
+    // v3.5: 链接必须显示（如果没有链接，尝试用 DOI 或期刊 URL 拼接）
     if (p.link) {
       md += `| **链接** | [点击访问](${p.link}) |\n`;
-    }
-    if (p.doi) {
+    } else if (p.doi) {
       md += `| **DOI** | ${p.doi} |\n`;
+      md += `| **链接** | https://doi.org/${p.doi} |\n`;
+    } else if (p.journal) {
+      const journalSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(p.title + ' ' + p.journal)}`;
+      md += `| **搜索** | [Google 搜索](${journalSearchUrl}) |\n`;
     }
     md += `\n`;
     
@@ -1021,7 +1040,7 @@ async function sendEmail(mdReport) {
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.4 启动\n');
+  console.log('🚀 EAlert Tracker v3.5 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
   
   // Step 1: 获取期刊邮件
@@ -1170,7 +1189,7 @@ async function run() {
   await sendEmail(mdReport);
   
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.4 完成！`);
+  console.log(`✅ EAlert Tracker v3.5 完成！`);
   console.log(`   📧 期刊邮件: ${journalEmails.length} 封`);
   console.log(`   🔔 Scholar邮件: ${scholarEmails.length} 封`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);

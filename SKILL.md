@@ -1,10 +1,10 @@
 ---
 name: ealert-tracker
-description: "科研期刊追踪器 v2.4。通过 Gmail IMAP 读取最近 24 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告并推送到 GitHub。取消邮件发送，改为 QQ 推送 + GitHub 同步。每周生成综合评述。"
+description: "科研期刊追踪器 v3.5.0。通过 Gmail IMAP 读取最近 24 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告并推送到 GitHub。取消邮件发送，改为 QQ 推送 + GitHub 同步。每周生成综合评述。"
 metadata:
   openclaw:
     emoji: "📚"
-    version: "2.4.0"
+    version: "3.5.0"
     requires:
       bins:
         - python3
@@ -13,7 +13,7 @@ metadata:
         - IMAP_PASS
 ---
 
-# EAlert Tracker v2.4 - 科研期刊追踪器
+# EAlert Tracker v3.5.0 - 科研期刊追踪器
 
 > 通过 Gmail IMAP 自动读取订阅期刊的 Table of Contents 邮件，提取所有文章，生成完整摘要报告。
 
@@ -107,7 +107,7 @@ python3 scripts/email_reader.py
 
 ```
 ealert-tracker/
-├── SKILL.md                    # 本文档 (v2.4)
+├── SKILL.md                    # 本文档 (v3.5.0)
 ├── .env                        # 邮箱配置
 ├── scripts/
 │   ├── email_reader.py         # ⭐ Python 邮件读取脚本
@@ -211,7 +211,7 @@ since = datetime.now() - timedelta(days=1)
 
 ---
 
-*由 EAlert Tracker v2.4.0 自动生成 | 日期: YYYY-MM-DD*
+*由 EAlert Tracker v3.5.0 自动生成 | 日期: YYYY-MM-DD*
 ```
 
 > ⚠️ 每次生成报告时，**必须读取本 SKILL.md 获取当前版本号**，并在报告末尾标注。版本号变更时自动跟随。
@@ -333,8 +333,8 @@ https://github.com/OnlyPandaX/bioinformatics-frontier
 
 ---
 
-**版本**: 2.4.0
+**版本**: 3.5.0
 **更新**: 2026-04-22
 
-> v2.4.0: 强化报告保存路径说明，增加正确/错误示例，禁止存入 reports/ 根目录
+> v3.5.0: 强化报告保存路径说明，增加正确/错误示例，禁止存入 reports/ 根目录
 > v2.3.0: 报告迁移至 `YYYY/MM/YYYY-Wxx/` 目录结构归档（配合 tracker.js v3.3）

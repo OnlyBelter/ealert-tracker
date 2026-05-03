@@ -1,0 +1,928 @@
+{
+  "_comment": "已发送过的期刊文章追踪列表，用于去重。每篇文章只发一次。",
+  "_format": {
+    "title": "文章标题",
+    "journal": "期刊名",
+    "sent_date": "发送日期 YYYY-MM-DD",
+    "reason": "首次发送理由",
+    "republish_notes": "如需重新发送，必须说明理由（如：趋势更新、重要后续进展）"
+  },
+  "papers": [
+    {
+      "title": "Ribosome基因突变与人类多样性",
+      "journal": "Science",
+      "sent_date": "2026-04-14",
+      "reason": "核糖体基因与人类表型多样性相关的新研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "深海鮟鱇发光的秘密：可能是为了找对象",
+      "journal": "Science",
+      "sent_date": "2026-04-14",
+      "reason": "生物发光与性选择的新演化证据",
+      "republish_notes": ""
+    },
+    {
+      "title": "星系中的双超大质量黑洞：预计一个世纪内碰撞",
+      "journal": "Science",
+      "sent_date": "2026-04-14",
+      "reason": "引力波来源的重要天体物理发现",
+      "republish_notes": ""
+    },
+    {
+      "title": "AI for Science：AI对蛋白质工程的痴迷",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-14",
+      "reason": "AI+蛋白质工程的综述，与AI for Science方向高度相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "野生动物贸易：2079个哺乳动物物种，41%携带人畜共患病原",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-14",
+      "reason": "人畜共患疾病生态学研究，公共卫生热点",
+      "republish_notes": ""
+    },
+    {
+      "title": "HS-20093 (B7-H3 ADC) 治疗肺癌：ARTEMIS-001试验结果",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-04-14",
+      "reason": "B7-H3靶向ADC在肺癌的1a/b期临床数据，肿瘤免疫治疗进展",
+      "republish_notes": ""
+    },
+    {
+      "title": "血管STING激活促进NK细胞抗小细胞肺癌免疫",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-04-14",
+      "reason": "STING通路与NK细胞在SCLC中的机制研究，肿瘤免疫新靶点",
+      "republish_notes": ""
+    },
+    {
+      "title": "NSF研究生奖学金创历史新高，从2025低谷反弹",
+      "journal": "Science",
+      "sent_date": "2026-04-15",
+      "reason": "科研政策与研究生培养动态",
+      "republish_notes": ""
+    },
+    {
+      "title": "ARPA-E投入1.35亿美元推进聚变能源",
+      "journal": "Science",
+      "sent_date": "2026-04-15",
+      "reason": "能源科技政策重大投入",
+      "republish_notes": ""
+    },
+    {
+      "title": "企鹅佩戴污染物检测脚环追踪PFAS",
+      "journal": "Science",
+      "sent_date": "2026-04-15",
+      "reason": "生态毒理学新方法，PFAS环境监测",
+      "republish_notes": ""
+    },
+    {
+      "title": "Forgotten but not gone — 婴儿期遗忘的神经机制",
+      "journal": "Neuron / ScienceAdviser",
+      "sent_date": "2026-04-15",
+      "reason": "神经科学热点，记忆与遗忘机制研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "清洁蚁帮助其他蚁种 — 跨物种合作",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-15",
+      "reason": "生态学新发现，跨物种互作",
+      "republish_notes": ""
+    },
+    {
+      "title": "Evolving approaches to broaden public and patient involvement in cancer research",
+      "journal": "Trends in Cancer",
+      "sent_date": "2026-04-15",
+      "reason": "患者参与癌症研究的方法论演进",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial organization of tissue-resident memory T cells",
+      "journal": "Immunity",
+      "sent_date": "2026-04-15",
+      "reason": "TRM细胞空间组织研究，肿瘤免疫与感染免疫热点",
+      "republish_notes": ""
+    },
+    {
+      "title": "Immunological memory to vaccines",
+      "journal": "Immunity",
+      "sent_date": "2026-04-15",
+      "reason": "Crotty经典综述，疫苗免疫记忆机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Fatty acids that selectively induce death in senescent cells",
+      "journal": "Cell Press Blue / Immunity",
+      "sent_date": "2026-04-15",
+      "reason": "选择性清除衰老细胞，抗衰老新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "A sweet path to memory loss",
+      "journal": "Science Signaling",
+      "sent_date": "2026-04-16",
+      "reason": "糖尿病与认知损伤的神经科学机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "On-demand GLUT3 expression augments CAR T cell metabolic fitness and antitumor efficacy in preclinical models of glioblastoma",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-04-16",
+      "reason": "CAR T代谢工程，GLUT3按需表达增强GBM疗效",
+      "republish_notes": ""
+    },
+    {
+      "title": "The orphan receptor GPR84 drives inflammation in Buruli ulcer",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-04-16",
+      "reason": "孤儿受体GPR84新功能发现",
+      "republish_notes": ""
+    },
+    {
+      "title": "Establishing whole-body cellomics",
+      "journal": "Nature Methods",
+      "sent_date": "2026-04-16",
+      "reason": "全身细胞组学新方法，多组学与AI for Science热点",
+      "republish_notes": ""
+    },
+    {
+      "title": "Recording transcriptomes with TimeVault",
+      "journal": "Nature Methods",
+      "sent_date": "2026-04-16",
+      "reason": "时间分辨转录组新技术，基因表达时序重建",
+      "republish_notes": ""
+    },
+    {
+      "title": "First complete genome loaded onto a quantum computer",
+      "journal": "News from Science",
+      "sent_date": "2026-04-17",
+      "reason": "量子基因组学首例，量子计算+基因组学交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "Ten thousand years ago, human evolution went into overdrive",
+      "journal": "News from Science",
+      "sent_date": "2026-04-17",
+      "reason": "古DNA揭示农业革命后人类遗传加速变迁",
+      "republish_notes": ""
+    },
+    {
+      "title": "Astronomers complete largest 3D map of the universe",
+      "journal": "News from Science",
+      "sent_date": "2026-04-17",
+      "reason": "史上最大宇宙3D地图完成",
+      "republish_notes": ""
+    },
+    {
+      "title": "AI needs solid botanical data more than ever",
+      "journal": "Nature",
+      "sent_date": "2026-04-17",
+      "reason": "AI+植物学数据，分类学专业知识面临威胁",
+      "republish_notes": ""
+    },
+    {
+      "title": "If you give a monkey VR - BCI breakthrough",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-17",
+      "reason": "VR训练BCI，猴子凭思维导航虚拟世界",
+      "republish_notes": ""
+    },
+    {
+      "title": "Integrated single-cell and spatial proteotranscriptomics atlas",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-04-17",
+      "reason": "单细胞+空间蛋白质转录组学，多组学新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rapid customization of base editors via machine learning",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-04-17",
+      "reason": "机器学习驱动碱基编辑器定制，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Discovery of tau clearing brain cells in Alzheimer",
+      "journal": "Cell",
+      "sent_date": "2026-04-17",
+      "reason": "发现清除tau的脑细胞，阿尔茨海默病新线索",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cancer neuroscience: past, present and future",
+      "journal": "Cell",
+      "sent_date": "2026-04-17",
+      "reason": "癌症神经科学综述，癌生物学热点",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rise of farming supercharged human evolution",
+      "journal": "Science",
+      "sent_date": "2026-04-17",
+      "reason": "农业革命加速人类演化，古DNA大规模研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "The rise of spatial TCR profiling: Emerging technologies and open challenges",
+      "journal": "Science Immunology",
+      "sent_date": "2026-04-18",
+      "reason": "空间TCR分析技术综述，癌症免疫学关键技术进展"
+    },
+    {
+      "title": "The autoantigen TRIM21 assembles proinflammatory immune complexes after lytic cell death",
+      "journal": "Science Immunology",
+      "sent_date": "2026-04-18",
+      "reason": "自身抗原TRIM21与炎症新机制"
+    },
+    {
+      "title": "Mitochondrial translation elongation controls OXPHOS biogenesis",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-04-18",
+      "reason": "线粒体翻译与氧化磷酸化调控"
+    },
+    {
+      "title": "Structural basis for TORC2 activation",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-04-18",
+      "reason": "TORC2激活结构生物学"
+    },
+    {
+      "title": "Ancient lake flood and Grand Canyon formation",
+      "journal": "Science",
+      "sent_date": "2026-04-18",
+      "reason": "地质学新发现"
+    },
+    {
+      "title": "Ribosome differences and human diversity",
+      "journal": "Science",
+      "sent_date": "2026-04-18",
+      "reason": "核糖体基因与人类多样性"
+    },
+    {
+      "title": "Rise of farming and human evolution",
+      "journal": "Science",
+      "sent_date": "2026-04-18",
+      "reason": "农业革命加速人类演化"
+    },
+    {
+      "title": "Addressing equity in faculty career advancement",
+      "journal": "Science Advances",
+      "sent_date": "2026-04-18",
+      "reason": "学术政策"
+    },
+    {
+      "title": "Minimal life by computer",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-04-19",
+      "reason": "合成生物学+计算生物学"
+    },
+    {
+      "title": "Scientists snap kinases in motion to reveal invisible states",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-04-19",
+      "reason": "结构生物学+药物发现"
+    },
+    {
+      "title": "NMR-as-you-go for drug hunters",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-04-19",
+      "reason": "NMR技术助力药物研发"
+    },
+    {
+      "title": "China approves brain chip to overcome paralysis",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-04-19",
+      "reason": "脑机接口临床应用里程碑"
+    },
+    {
+      "title": "Embryogenesis of a distant relative - salps",
+      "journal": "PLOS Biology / In Other Journals",
+      "sent_date": "2026-04-19",
+      "reason": "萨尔普独特发育模式，演化生物学"
+    },
+    {
+      "title": "Hallucinating efficacy - PAT for depression",
+      "journal": "JAMA Psychiatry / In Other Journals",
+      "sent_date": "2026-04-19",
+      "reason": "迷幻药疗法有效性争议"
+    },
+    {
+      "title": "Transport defects lead to ruptures",
+      "journal": "J Cell Biol / In Other Journals",
+      "sent_date": "2026-04-19",
+      "reason": "细胞运输缺陷与膜破裂"
+    },
+    {
+      "title": "Severe malaria may affect children cognitive abilities more than a decade later",
+      "journal": "News from Science",
+      "sent_date": "2026-04-21",
+      "reason": "疟疾长期认知损伤研究，神经科学与传染病交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "After long wait Trump nominates a CDC director",
+      "journal": "News from Science",
+      "sent_date": "2026-04-21",
+      "reason": "CDC新主任提名，科研政策动态",
+      "republish_notes": ""
+    },
+    {
+      "title": "Magnetic robots could help remove dangerous nanoplastics from water",
+      "journal": "News from Science",
+      "sent_date": "2026-04-21",
+      "reason": "纳米机器人清除纳米塑料，环境科学+纳米技术",
+      "republish_notes": ""
+    },
+    {
+      "title": "Sea ice thickening geoengineering first results",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-21",
+      "reason": "海冰增厚地球工程实地试验首批结果",
+      "republish_notes": ""
+    },
+    {
+      "title": "Nanobots capture nanoplastics via electrostatic attraction",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-21",
+      "reason": "纳米机器人静电捕获纳米塑料，Environmental Science Nano 2026",
+      "republish_notes": ""
+    },
+    {
+      "title": "Splitting genomes across nuclei",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-21",
+      "reason": "基因组分裂至多核，基因组学新发现",
+      "republish_notes": ""
+    },
+    {
+      "title": "Uncommon behavior discovered in a common mold",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-21",
+      "reason": "常见霉菌罕见行为，微生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Early humans turned favored rock sites into toolmaking assembly lines",
+      "journal": "Science News",
+      "sent_date": "2026-04-22",
+      "reason": "Science科学新闻",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cocaine pollution gives salmon wanderlust",
+      "journal": "Science News",
+      "sent_date": "2026-04-22",
+      "reason": "Science科学新闻",
+      "republish_notes": ""
+    },
+    {
+      "title": "This disabled parrot has become king by learning to 'joust'",
+      "journal": "Science News",
+      "sent_date": "2026-04-22",
+      "reason": "Science科学新闻",
+      "republish_notes": ""
+    },
+    {
+      "title": "Small polaron-mediated zero differential transconductance of 2D semiconductor/CoFe2O4 heterojunctions",
+      "journal": "Nature Communications",
+      "sent_date": "2026-04-23",
+      "reason": "材料科学新发现，2D半导体异质结电学特性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Operando spectroelectrochemical identification of peroxide intermediate in molten carbonate CO2-to-carbon electroreduction",
+      "journal": "Nature Communications",
+      "sent_date": "2026-04-23",
+      "reason": "CO2电还原机制研究，能源科学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Charge symmetry breaking stabilizes high-valence Ru sites for proton exchange membrane electrolysis",
+      "journal": "Nature Communications",
+      "sent_date": "2026-04-23",
+      "reason": "电催化新机制，质子交换膜电解",
+      "republish_notes": ""
+    },
+    {
+      "title": "Whistleblower alleges Finnish startup's vaunted solid-state battery isn't what it claims",
+      "journal": "News from Science",
+      "sent_date": "2026-04-23",
+      "reason": "固态电池争议，科技新闻",
+      "republish_notes": ""
+    },
+    {
+      "title": "Watch a spider's heart race when traffic gets too loud",
+      "journal": "News from Science",
+      "sent_date": "2026-04-23",
+      "reason": "城市噪音对野生动物应激反应研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "This simple house may help prevent multiple fatal diseases in African children",
+      "journal": "News from Science",
+      "sent_date": "2026-04-23",
+      "reason": "公共卫生创新方案",
+      "republish_notes": ""
+    },
+    {
+      "title": "Biology gone sideways — When crabs went sideways",
+      "journal": "ScienceAdviser / eLife",
+      "sent_date": "2026-04-23",
+      "reason": "演化生物学，螃蟹横行步态起源",
+      "republish_notes": ""
+    },
+    {
+      "title": "Programming peripheral artery disease in diabetes",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-04-23",
+      "reason": "TREM2+巨噬细胞在糖尿病血管病变中的作用",
+      "republish_notes": ""
+    },
+    {
+      "title": "Phase separation–based HTS identifies cobimetinib as YAP-TEAD inhibitor",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-04-23",
+      "reason": "老药新用，FDA批准药物cobimetinib靶向YAP-TEAD",
+      "republish_notes": ""
+    },
+    {
+      "title": "Diabetes-induced TREM2–endothelial cell signaling impairs ischemic vascular repair",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-04-23",
+      "reason": "糖尿病血管修复机制研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Vaginal bacteria turn newborn skin into a beneficial bioreactor",
+      "journal": "News from Science",
+      "sent_date": "2026-04-24",
+      "reason": "微生物组与神经发育新机制，阴道播种的科学依据",
+      "republish_notes": ""
+    },
+    {
+      "title": "South America settlement was surprisingly complex",
+      "journal": "News from Science",
+      "sent_date": "2026-04-24",
+      "reason": "古基因组学揭示人类迁徙复杂历史",
+      "republish_notes": ""
+    },
+    {
+      "title": "Preclinical ASO therapy for X-linked neurodevelopmental disorder",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-04-24",
+      "reason": "ASO基因治疗在神经发育障碍中的新应用",
+      "republish_notes": ""
+    },
+    {
+      "title": "Vaccines mean malaria deaths should be falling — not rising",
+      "journal": "Nature",
+      "sent_date": "2026-04-24",
+      "reason": "疟疾防控全球健康议题",
+      "republish_notes": ""
+    },
+    {
+      "title": "Vaginal microbes make a brain-boosting lipid on babies skin",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-24",
+      "reason": "微生物组-肠-脑轴机制研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Dormant volcanoes may not be so dormant",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-24",
+      "reason": "火山灾害评估新发现",
+      "republish_notes": ""
+    },
+    {
+      "title": "Sea ice artificially thickened, but concept may not scale",
+      "journal": "Science",
+      "sent_date": "2026-04-24",
+      "reason": "地球工程实地试验结果",
+      "republish_notes": ""
+    },
+    {
+      "title": "Sperm cargo is richer than we thought",
+      "journal": "ScienceAdviser / Science",
+      "sent_date": "2026-04-25",
+      "reason": "精子携带比预期更丰富的RNA，表观遗传学新发现",
+      "republish_notes": ""
+    },
+    {
+      "title": "U.S. moves to reclassify some types of marijuana as lower risk",
+      "journal": "News from Science",
+      "sent_date": "2026-04-25",
+      "reason": "大麻政策转变，科研政策动态",
+      "republish_notes": ""
+    },
+    {
+      "title": "Thousands of shady ads sell paper authorship for cash",
+      "journal": "News from Science",
+      "sent_date": "2026-04-25",
+      "reason": "论文代写灰色市场调查，学术诚信议题",
+      "republish_notes": ""
+    },
+    {
+      "title": "Estimating in silico causal effects of DNA methylation on gene expression in asthma",
+      "journal": "Science Advances",
+      "sent_date": "2026-04-25",
+      "reason": "DNA甲基化因果推断，多组学方法创新",
+      "republish_notes": ""
+    },
+    {
+      "title": "Fetal and postnatal metal metabolism changes associated with childhood behavioral deficits",
+      "journal": "Science Advances",
+      "sent_date": "2026-04-25",
+      "reason": "早期金属暴露与神经发育，环境健康研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cytokine gene therapy calms an infected lung",
+      "journal": "Science Immunology",
+      "sent_date": "2026-04-25",
+      "reason": "细胞因子基因治疗呼吸道感染，免疫治疗新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Octopuses as large as semi-trucks stalked ancient seas",
+      "journal": "Science / ScienceAdviser",
+      "sent_date": "2026-04-25",
+      "reason": "史前巨型头足类古生物新发现",
+      "republish_notes": ""
+    },
+    {
+      "title": "Whistleblower alleges Finnish startup's vaunted solid-state battery isn't what it claims",
+      "journal": "Science / News from Science",
+      "sent_date": "2026-04-25",
+      "reason": "固态电池技术争议，科研诚信议题",
+      "republish_notes": ""
+    },
+    {
+      "title": "Estimating in silico causal effects of DNA methylation on gene expression through genetic anchors in airway epithelium in asthma",
+      "journal": "Science Advances",
+      "sent_date": "2026-04-26",
+      "reason": "DNA甲基化因果推断新方法，多组学与表观遗传学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Fetal and postnatal metal metabolism–related changes in brain function are associated with childhood behavioral deficits",
+      "journal": "Science Advances",
+      "sent_date": "2026-04-26",
+      "reason": "早期金属暴露与神经发育，环境健康研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Protecting newborns from COVID",
+      "journal": "Pediatrics / In Other Journals",
+      "sent_date": "2026-04-26",
+      "reason": "孕期疫苗接种与新生儿COVID保护",
+      "republish_notes": ""
+    },
+    {
+      "title": "Macrophages reset the meshwork",
+      "journal": "Immunity / In Other Journals",
+      "sent_date": "2026-04-26",
+      "reason": "巨噬细胞调控眼部液体引流，免疫学新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "The weight of the world on the brain",
+      "journal": "Nature Medicine / In Other Journals",
+      "sent_date": "2026-04-26",
+      "reason": "肥胖与脑衰老，代谢-神经科学交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "The oldest individual stars",
+      "journal": "Astronomy & Astrophysics / In Other Journals",
+      "sent_date": "2026-04-26",
+      "reason": "最古老恒星发现，宇宙学新突破",
+      "republish_notes": ""
+    },
+    {
+      "title": "Trump fires NSF's oversight board",
+      "journal": "News from Science",
+      "sent_date": "2026-04-28",
+      "reason": "NSF National Science Board被解雇，科研政策动态",
+      "republish_notes": ""
+    },
+    {
+      "title": "After pulling vaccine study, Bhattacharya criticizes long-running CDC publication",
+      "journal": "News from Science",
+      "sent_date": "2026-04-28",
+      "reason": "CDC临时主任批评MMWR，科研政策与公共卫生",
+      "republish_notes": ""
+    },
+    {
+      "title": "Why cancer rarely takes heart",
+      "journal": "Science / ScienceAdviser",
+      "sent_date": "2026-04-28",
+      "reason": "心脏机械应力抑制肿瘤生长，癌生物学新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "A cloudy future for the Amazon",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-28",
+      "reason": "森林砍伐增加云量，气候反馈机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Three-legged dogs strut their stuff + ancient humans dislike of mosquitoes",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-04-28",
+      "reason": "三足犬运动适应与古人类-蚊虫关系，科学新闻速览",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bizarre Hawking radiation may smooth the jagged hearts of black holes",
+      "journal": "News from Science",
+      "sent_date": "2026-04-29",
+      "reason": "霍金辐射与奇点问题新视角",
+      "republish_notes": ""
+    },
+    {
+      "title": "How an HIV/AIDS tragedy spurred human evolution",
+      "journal": "News from Science",
+      "sent_date": "2026-04-29",
+      "reason": "HIV/AIDS高死亡率在十年内重塑人类免疫基因，免疫遗传学",
+      "republish_notes": ""
+    },
+    {
+      "title": "The stratosphere is filled with particles so small even scientists overlooked them",
+      "journal": "Science",
+      "sent_date": "2026-04-29",
+      "reason": "平流层亚150nm颗粒物的大气化学影响",
+      "republish_notes": ""
+    },
+    {
+      "title": "The evolution of gene regulatory networks",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-04-30",
+      "reason": "基因调控网络演化规律，多组学与系统生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Universal restoration of medical images",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-04-30",
+      "reason": "医学影像通用修复，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Magnetic resonance identification tags for ultra-flexible electrodes",
+      "journal": "Nature Communications",
+      "sent_date": "2026-04-30",
+      "reason": "超柔性电极磁共振标签，神经接口技术",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mechanochemical atom transfer radical polymerization unlocks functional methacrylate lifecycles",
+      "journal": "Nature Communications",
+      "sent_date": "2026-04-30",
+      "reason": "力化学聚合新方法，可持续材料方向",
+      "republish_notes": ""
+    },
+    {
+      "title": "DPP6 regulates the cardiac I_Na-I_to balance influencing arrhythmogenesis",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-04-30",
+      "reason": "DPP6 蛋白调控心律失常机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Internal limiting membrane inhibits retinal ganglion cell transplantation",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-04-30",
+      "reason": "青光眼细胞治疗新见解，神经科学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Fauci aide indicted over federal records violations related to COVID-19",
+      "journal": "ScienceInsider",
+      "sent_date": "2026-04-30",
+      "reason": "科研政策动态，COVID-19 起源调查",
+      "republish_notes": ""
+    },
+    {
+      "title": "Dolphin vortex visualization for swimming robots",
+      "journal": "Physical Review Fluids / ScienceAdviser",
+      "sent_date": "2026-04-30",
+      "reason": "海豚游泳涡流可视化，机器人工程灵感",
+      "republish_notes": ""
+    },
+    {
+      "title": "Decoding tumor heterogeneity and plasticity",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-01",
+      "reason": "肿瘤异质性专题社论",
+      "republish_notes": ""
+    },
+    {
+      "title": "New payloads drive next-gen antibody-drug conjugates",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-01",
+      "reason": "ADC肿瘤靶向治疗进展",
+      "republish_notes": ""
+    },
+    {
+      "title": "Decoding pediatric brain tumors via CSF-derived methylomes",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-01",
+      "reason": "脑脊液甲基化组学液体活检",
+      "republish_notes": ""
+    },
+    {
+      "title": "Harnessing foundation models for digital pathology without re-training",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-01",
+      "reason": "基础模型AI for Science数字病理",
+      "republish_notes": ""
+    },
+    {
+      "title": "Gene therapy for HIV suppression shows promise in monkeys",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-05-01",
+      "reason": "HIV基因治疗猴子功能性治愈",
+      "republish_notes": ""
+    },
+    {
+      "title": "Scorpions reinforce their most lethal weapons with metal",
+      "journal": "ScienceAdviser",
+      "sent_date": "2026-05-01",
+      "reason": "蝎子金属强化武器演化适应",
+      "republish_notes": ""
+    },
+    {
+      "title": "We need to talk about failure in science",
+      "journal": "Nature",
+      "sent_date": "2026-05-01",
+      "reason": "科研文化反思社论",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cephalopods deserve higher welfare standards in research",
+      "journal": "Nature",
+      "sent_date": "2026-05-01",
+      "reason": "头足类动物研究福利伦理",
+      "republish_notes": ""
+    },
+    {
+      "title": "Trees and technology both important for carbon mitigation",
+      "journal": "Nature",
+      "sent_date": "2026-05-01",
+      "reason": "碳移除策略World View",
+      "republish_notes": ""
+    },
+    {
+      "title": "Eating primes immune cells - feed a cold",
+      "journal": "Nature",
+      "sent_date": "2026-05-01",
+      "reason": "进食激活免疫细胞研究亮点",
+      "republish_notes": ""
+    },
+    {
+      "title": "A call to join collective effort on AI evaluation",
+      "journal": "Cell",
+      "sent_date": "2026-05-01",
+      "reason": "AI评估实践指南德尔菲过程",
+      "republish_notes": ""
+    },
+    {
+      "title": "PLANeT understanding land plant genome for sustainable future",
+      "journal": "Cell",
+      "sent_date": "2026-05-01",
+      "reason": "陆生植物基因组计划可持续",
+      "republish_notes": ""
+    },
+    {
+      "title": "Selective targeting of endothelial and perivascular angiocrine ROCK2 treats liver fibrosis",
+      "journal": "Cell",
+      "sent_date": "2026-05-01",
+      "reason": "ROCK2靶向肝纤维化精准治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "The misinformation accelerator - AI era truth and lies",
+      "journal": "Science",
+      "sent_date": "2026-05-01",
+      "reason": "AI虚假信息特刊Feature",
+      "republish_notes": ""
+    },
+    {
+      "title": "Seabed mining needs integrity not haste",
+      "journal": "Science",
+      "sent_date": "2026-05-01",
+      "reason": "海床采矿环境社论",
+      "republish_notes": ""
+    },
+    {
+      "title": "To misinformation researchers AI is scourge and powerful tool",
+      "journal": "News from Science",
+      "sent_date": "2026-05-01",
+      "reason": "AI虚假信息研究双重角色",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tiny probes make sense of abnormal bursts in the epileptic brain",
+      "journal": "Science / News from Science",
+      "sent_date": "2026-05-02",
+      "reason": "癫痫脑异常爆发可预测，认知神经元劫持机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Deepfakes are everywhere - godfather of digital forensics fighting back",
+      "journal": "News from Science",
+      "sent_date": "2026-05-02",
+      "reason": "AI虚假信息检测，数字取证开创性工作",
+      "republish_notes": ""
+    },
+    {
+      "title": "Herbivore experiment - convergent evolution in Australian marsupials",
+      "journal": "Science",
+      "sent_date": "2026-05-02",
+      "reason": "澳洲有袋类趋同演化，演化生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Carbon swap in indole",
+      "journal": "Science",
+      "sent_date": "2026-05-02",
+      "reason": "吲哚碳交换反应，有机化学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bacterium gets by with one of its amino acids partially removed",
+      "journal": "Science / ScienceAdviser",
+      "sent_date": "2026-05-02",
+      "reason": "最小生命研究，氨基酸字母表缩减，合成生物学前沿",
+      "republish_notes": ""
+    },
+    {
+      "title": "Why do penguins waddle - mysterious muscle may be key",
+      "journal": "News from Science",
+      "sent_date": "2026-05-02",
+      "reason": "企鹅摇摆步态肌肉机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Foxp3 - the epigenetic engineer of regulatory T cell identity",
+      "journal": "Science Immunology",
+      "sent_date": "2026-05-02",
+      "reason": "Treg细胞身份决定，肿瘤免疫核心靶点",
+      "republish_notes": ""
+    },
+    {
+      "title": "Citraconate preserves T cell stemness and antitumor immunity",
+      "journal": "Science Immunology",
+      "sent_date": "2026-05-02",
+      "reason": "PDE1-cAMP-ALOX5轴调控T细胞干性和铁死亡，免疫代谢学新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Foxp3 drives context-dependent epigenetic programs defining Treg molecular identity",
+      "journal": "Science Immunology",
+      "sent_date": "2026-05-02",
+      "reason": "Treg细胞表观遗传机制研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Advancing anthropology in the social and interdisciplinary sciences",
+      "journal": "Science Advances",
+      "sent_date": "2026-05-03",
+      "reason": "人类学跨学科发展社论",
+      "republish_notes": ""
+    },
+    {
+      "title": "Precipitation variability, fertility, and metabolic stress over 5 millennia in the ancient Andes",
+      "journal": "Science Advances",
+      "sent_date": "2026-05-03",
+      "reason": "古安第斯气候变化与人群适应，生物考古学新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "The ER shows its age",
+      "journal": "Nature Cell Biology / In Other Journals",
+      "sent_date": "2026-05-03",
+      "reason": "内质网重塑与衰老，衰老生物学新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "The new Neanderthal on the block",
+      "journal": "PNAS / In Other Journals",
+      "sent_date": "2026-05-03",
+      "reason": "尼安德特人新证据，古人类遗传学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Battery-inspired therapeutics",
+      "journal": "Nature Materials / In Other Journals",
+      "sent_date": "2026-05-03",
+      "reason": "电池原理启发生物工程治疗策略",
+      "republish_notes": ""
+    }
+  ]
+}
