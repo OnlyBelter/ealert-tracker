@@ -1,6 +1,6 @@
 ---
 name: ealert-tracker
-description: "科研期刊追踪器 v3.6.0。通过 Gmail IMAP 读取最近 24 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告并推送到 GitHub。取消邮件发送，改为 QQ 推送 + GitHub 同步。每周生成综合评述。"
+description: "科研期刊追踪器 v3.6.1。通过 Gmail IMAP 读取最近 24 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告并推送到 GitHub。取消邮件发送，改为 QQ 推送 + GitHub 同步。每周生成综合评述。"
 metadata:
   openclaw:
     emoji: "📚"
@@ -13,7 +13,7 @@ metadata:
         - IMAP_PASS
 ---
 
-# EAlert Tracker v3.6.0 - 科研期刊追踪器
+# EAlert Tracker v3.6.1 - 科研期刊追踪器
 
 > 通过 Gmail IMAP 自动读取订阅期刊的 Table of Contents 邮件，提取所有文章，生成完整摘要报告。
 
@@ -107,9 +107,9 @@ python3 scripts/email_reader.py
 
 ```
 ealert-tracker/
-├── SKILL.md                    # 本文档 (v3.6.0)
+├── SKILL.md                    # 本文档 (v3.6.1)
 ├── .env                        # 邮箱配置
-├── template.md                 # 每日报告模板（独立文件，生成前必读）
+├── template.md                 # 每日报告模板（生成前必读）
 ├── scripts/
 │   ├── email_reader.py         # ⭐ Python 邮件读取脚本
 │   └── tracker.js              # 旧版 Node.js 脚本 (备用)
@@ -118,9 +118,6 @@ ealert-tracker/
 ├── reports/                    # 本地报告备份
 ├── node_modules/               # (不再使用)
 └── assets/
-```
-
-## 定时任务
 
 | 任务 | ID | 时间 | 功能 |
 |------|-----|------|------|
@@ -311,8 +308,9 @@ https://github.com/OnlyPandaX/bioinformatics-frontier
 
 ---
 
-**版本**: 3.6.1
+**版本**: 3.6.2
 **更新**: 2026-05-07
 
+> v3.6.2: 删除重复的 assets/template.md，整理目录结构
 > v3.6.1: 修复去重逻辑（URL+DOI 双重比对）、点评套话、日期/摘要问题，新增 README + CHANGELOG
 > v3.6.0: 模板独立为 template.md，修复报告问题：日期提取、点评质量、去重逻辑、摘要提炼
