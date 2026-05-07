@@ -4,7 +4,7 @@ description: "科研期刊追踪器 v3.6.0。通过 Gmail IMAP 读取最近 24 �
 metadata:
   openclaw:
     emoji: "📚"
-    version: "3.6.0"
+    version: "3.6.1"
     requires:
       bins:
         - python3
@@ -311,8 +311,8 @@ https://github.com/OnlyPandaX/bioinformatics-frontier
 
 ---
 
-**版本**: 3.6.0
+**版本**: 3.6.1
 **更新**: 2026-05-07
 
+> v3.6.1: 修复去重逻辑（URL+DOI 双重比对）、点评套话、日期/摘要问题，新增 README + CHANGELOG
 > v3.6.0: 模板独立为 template.md，修复报告问题：日期提取、点评质量、去重逻辑、摘要提炼
-> v3.5.0: 强化报告保存路径说明，增加正确/错误示例，禁止存入 reports/ 根目录

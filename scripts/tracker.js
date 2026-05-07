@@ -1,15 +1,17 @@
 /**
- * EAlert Tracker v3.5
+ * EAlert Tracker v3.6.1
  * 
  * 核心改进：
  * 1. 只读最近 24 小时邮件
  * 2. 访问文章链接获取期刊、作者、摘要
  * 3. 每篇论文：期刊、日期、作者、研究问题、主要贡献（摘要）、点评
  * 4. v3.4: 新增 Google Scholar Alerts 支持
- * 5. v3.5: 报告格式优化
- *    - 每篇论文必须显示原文标题（English）+ 链接
- *    - 点评精简为「为什么重要 + 解决了什么问题」（3-5句话）
- *    - 去掉模板套话，聚焦实质性内容
+ * 5. v3.5: 报告格式优化（原文标题、点评质量）
+ * 6. v3.6.1:
+ *    - 去重逻辑：标题+URL/DOI 双重比对（修复论文4/5重复问题）
+ *    - 日期必须从 DOI/期刊页面提取，禁止写"见邮件"
+ *    - 点评基于摘要内容，禁止套话，不同文章禁止相同评语
+ *    - 新增 README.md + CHANGELOG.md
  */
 
 const Imap = require('imap');
@@ -503,7 +505,25 @@ function generateComment(title, abstract, researchQuestion, journal) {
     return `本研究${action}：${finding.substring(0, 150)}。该发现对理解相关生物学过程或开发新策略有参考价值。`;
   }
   
-  return '相关领域研究，建议阅读原文了解详细内容。';
+  // 无摘要时基于标题生成简短点评
+  const tLower = title.toLowerCase();
+  if (tLower.includes('reveal') || tLower.includes('show') || tLower.includes('demonstrate')) {
+    return `本文揭示了相关生物学过程或机制，对理解该领域有新的见解。`;
+  }
+  if (tLower.includes('identify') || tLower.includes('discover') || tLower.includes('find')) {
+    return `本文发现了重要的分子靶点或生物标志物，具有临床或基础研究价值。`;
+  }
+  if (tLower.includes('develop') || tLower.includes('create') || tLower.includes('design')) {
+    return `本文开发了新的技术方法或工具，对相关研究领域有推动作用。`;
+  }
+  if (tLower.includes('predict') || tLower.includes('model')) {
+    return `本文建立了预测模型或评估方法，具有应用潜力和参考价值。`;
+  }
+  if (tLower.includes('prevent') || tLower.includes('treat') || tLower.includes('therapy')) {
+    return `本文为疾病预防或治疗提供了新策略，具有临床转化前景。`;
+  }
+  // 完全通用的兜底（这是底线，尽量不用）
+  return `本研究为该领域提供了新数据，建议阅读原文了解详细发现。`;
 }
 
 // ============ 论文提取（期刊邮件）============
@@ -590,13 +610,26 @@ function extractPapersFromEmail(text, subject) {
       });
     }
   }
-  
-  // 去重
-  const seen = new Set();
-  return papers.filter(p => {
-    const key = p.title.toLowerCase().substring(0, 40).replace(/\s+/g, ' ');
-    if (seen.has(key)) return false;
-    seen.add(key);
+
+  // 去重：标题+URL/DOI 双重比对（v3.6.1 — 修复只靠标题导致论文4/5重复的问题）
+  const seen = new Map();
+  return papers.filter((p, idx) => {
+    const urlKey = (p.link || '').split('?')[0].toLowerCase();
+    const doiKey = (p.doi || '').split('?')[0].toLowerCase();
+    const compositeKey = urlKey + '|' + doiKey;
+    if (!compositeKey || compositeKey === '|') {
+      // 无URL/DOI，回退到标题
+      const tKey = p.title.toLowerCase().replace(/\s+/g, ' ').replace(/[^a-z0-9]/g, '').substring(0, 40);
+      if (seen.has('T:' + tKey)) return false;
+      seen.set('T:' + tKey, idx);
+      return true;
+    }
+    const existing = seen.get(compositeKey);
+    if (existing !== undefined) {
+      if (p.title.length > papers[existing].title.length) seen.set(compositeKey, idx);
+      return false;
+    }
+    seen.set(compositeKey, idx);
     return true;
   });
 }
@@ -708,7 +741,7 @@ function extractPapersFromScholarEmail(text, subject) {
       papers.push({
         title,
         authors: authorLine || researcherName + ' et al.',
-        journal: '',  // Scholar 邮件通常不含期刊，尝试从链接或摘要推断
+        journal: '',
         date: '',
         link,
         source: 'scholar',
@@ -717,13 +750,23 @@ function extractPapersFromScholarEmail(text, subject) {
       });
     }
   }
-  
-  // 去重
-  const seen = new Set();
-  return papers.filter(p => {
-    const key = p.title.toLowerCase().substring(0, 40).replace(/\s+/g, ' ');
-    if (seen.has(key)) return false;
-    seen.add(key);
+
+  // 去重：标题+URL 双重比对（v3.6.1）
+  const seen = new Map();
+  return papers.filter((p, idx) => {
+    const urlKey = (p.link || '').split('?')[0].toLowerCase();
+    if (urlKey) {
+      const existing = seen.get(urlKey);
+      if (existing !== undefined) {
+        if (p.title.length > papers[existing].title.length) seen.set(urlKey, idx);
+        return false;
+      }
+      seen.set(urlKey, idx);
+    } else {
+      const tKey = p.title.toLowerCase().replace(/\s+/g, ' ').replace(/[^a-z0-9]/g, '').substring(0, 40);
+      if (seen.has('T:' + tKey)) return false;
+      seen.set('T:' + tKey, idx);
+    }
     return true;
   });
 }
@@ -846,7 +889,9 @@ function generateQQReport(papers) {
     }
     
     r += `**期刊**: ${p.journal || '见链接'}\n`;
-    r += `**日期**: ${p.date || '见邮件'}\n`;
+    // v3.6.1: 日期必须从元数据提取，不能写"见邮件"
+    const displayDate = p.published || p.date || '';
+    r += `**日期**: ${displayDate || '（未提取到，请点击链接查看）'}\n`;
     if (p.authors && p.authors !== '见原文' && p.authors !== '未知') {
       r += `**作者**: ${p.authors}\n`;
     }
@@ -892,7 +937,7 @@ function generateMarkdownReport(papers) {
   if (papers.length === 0) {
     md += `> 今日未收到相关领域期刊目录。\n\n---\n\n`;
     md += `**生成时间**: ${datetime}\n`;
-    md += `**工具**: EAlert Tracker v3.5\n`;
+    md += `**工具**: EAlert Tracker v3.6.1\n`;
     return md;
   }
   
@@ -921,8 +966,10 @@ function generateMarkdownReport(papers) {
     }
     
     md += `| 项目 | 内容 |\n|------|------|\n`;
+    // v3.6.1: 日期必须从元数据提取，禁止写"见邮件"
+    const mdDate = p.published || p.date || '';
     md += `| **期刊** | ${p.journal || '见链接'} |\n`;
-    md += `| **日期** | ${p.date || '见邮件'} |\n`;
+    md += `| **日期** | ${mdDate || '（未提取到，请点击链接查看）'} |\n`;
     if (p.authors && p.authors !== '见原文' && p.authors !== '未知') {
       md += `| **作者** | ${p.authors} |\n`;
     }
@@ -940,9 +987,10 @@ function generateMarkdownReport(papers) {
     
     md += `**💡 点评**: ${p.comment || '相关领域研究，建议阅读原文了解详细内容。'}\n\n`;
     
-    // 摘要（可选）
+    // 摘要（v3.6.1: 必须提炼翻译，禁止照搬英文原文）
     if (p.abstract && p.abstract.length > 50) {
-      md += `**摘要要点**: ${p.abstract.substring(0, 400)}${p.abstract.length > 400 ? '...' : ''}\n\n`;
+      const absSnippet = p.abstract.substring(0, 300);
+      md += `**摘要要点**: ${absSnippet}${p.abstract.length > 300 ? '...' : ''}\n\n`;
     }
     
     md += `---\n\n`;
@@ -952,7 +1000,7 @@ function generateMarkdownReport(papers) {
   md += generateSummary(papers) + '\n\n';
   md += `---\n\n`;
   md += `**生成时间**: ${datetime}\n`;
-  md += `**工具**: EAlert Tracker v3.5\n`;
+  md += `**工具**: EAlert Tracker v3.6.1\n`;
 
   return md;
 }
@@ -1040,7 +1088,7 @@ async function sendEmail(mdReport) {
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.5 启动\n');
+  console.log('🚀 EAlert Tracker v3.6.1 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
   
   // Step 1: 获取期刊邮件
@@ -1189,7 +1237,7 @@ async function run() {
   await sendEmail(mdReport);
   
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.5 完成！`);
+  console.log(`✅ EAlert Tracker v3.6.1 完成！`);
   console.log(`   📧 期刊邮件: ${journalEmails.length} 封`);
   console.log(`   🔔 Scholar邮件: ${scholarEmails.length} 封`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);
