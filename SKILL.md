@@ -1,10 +1,10 @@
 ---
 name: ealert-tracker
-description: "科研期刊追踪器 v3.5.0。通过 Gmail IMAP 读取最近 24 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告并推送到 GitHub。取消邮件发送，改为 QQ 推送 + GitHub 同步。每周生成综合评述。"
+description: "科研期刊追踪器 v3.6.0。通过 Gmail IMAP 读取最近 24 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告并推送到 GitHub。取消邮件发送，改为 QQ 推送 + GitHub 同步。每周生成综合评述。"
 metadata:
   openclaw:
     emoji: "📚"
-    version: "3.5.0"
+    version: "3.6.0"
     requires:
       bins:
         - python3
@@ -13,7 +13,7 @@ metadata:
         - IMAP_PASS
 ---
 
-# EAlert Tracker v3.5.0 - 科研期刊追踪器
+# EAlert Tracker v3.6.0 - 科研期刊追踪器
 
 > 通过 Gmail IMAP 自动读取订阅期刊的 Table of Contents 邮件，提取所有文章，生成完整摘要报告。
 
@@ -107,8 +107,9 @@ python3 scripts/email_reader.py
 
 ```
 ealert-tracker/
-├── SKILL.md                    # 本文档 (v3.5.0)
+├── SKILL.md                    # 本文档 (v3.6.0)
 ├── .env                        # 邮箱配置
+├── template.md                 # 每日报告模板（独立文件，生成前必读）
 ├── scripts/
 │   ├── email_reader.py         # ⭐ Python 邮件读取脚本
 │   └── tracker.js              # 旧版 Node.js 脚本 (备用)
@@ -169,52 +170,22 @@ since = datetime.now() - timedelta(days=1)
 }
 ```
 
-## 每周综合评述格式
+## 报告模板
 
-```markdown
-# 📊 本周期刊汇总综合评述 - YYYY年第NN周
+模板保存在独立文件 [`template.md`](./template.md)。**生成报告前必须先读取该文件**，严格按其结构输出，版本号用 `{version}` 占位（运行时替换为当前版本）。
 
-**日期范围**: YYYY-MM-DD ~ YYYY-MM-DD
-
----
-
-## 📈 本周概览
-本周共追踪 X 封期刊邮件，覆盖 [期刊列表]。
-
-### 研究领域分布
-- [领域1]: X 篇
-- [领域2]: X 篇
-...
-
-### 本周亮点
-[选取本周最重要的 3-5 个研究发现]
-
----
-
-## 🔬 重点研究评述
-
-### 1. [研究标题]
-**期刊**: [期刊名]
-**研究问题**: [一句话描述研究想回答的问题]
-**主要发现**: [2-3 个关键发现]
-**点评**: [Critical thinking：历史背景、motivation、价值、future work]
-
----
-
-## 🧭 领域趋势
-[基于本周所有文献，评述该领域的发展趋势]
-
----
-
-## 🎯 下周关注方向
-[基于本周文献，预测或建议下周值得关注的领域/关键词]
-
----
-
-*由 EAlert Tracker v3.5.0 自动生成 | 日期: YYYY-MM-DD*
-```
+模板要点速查：
+- **日期**：从 DOI 页面或期刊官网提取，**禁止写"见邮件"**
+- **作者**：从页面提取，**禁止把摘要片段当成作者**
+- **链接**：使用 DOI 直链，**禁止用跟踪跳转链接**
+- **摘要要点**：**提炼 + 翻译成中文**，禁止完全照搬英文原文
+- **点评**：基于摘要内容写，**不同文章禁止用相同评语**，必须包含 5 个维度（背景→动机→突破→局限→future work）
 
 > ⚠️ 每次生成报告时，**必须读取本 SKILL.md 获取当前版本号**，并在报告末尾标注。版本号变更时自动跟随。
+
+## 每日报告模板
+
+模板保存在独立文件 [`template.md`](./template.md)，生成报告前必须先读取该文件作为参考基准。
 
 ## 报告保存位置
 
@@ -239,6 +210,7 @@ since = datetime.now() - timedelta(days=1)
 - 如需创建目录：`mkdir -p ~/Documents/bioinformatics-frontier/reports/YYYY/MM/YYYY-Wxx/`
 
 > ⚠️ **v3.3 更新**：报告已迁移至按 `YYYY/MM/YYYY-Wxx/` 目录结构归档。所有报告必须存放在此结构下，禁止存放在 reports/ 根目录。
+> ⚠️ **v3.6 更新**：模板独立为 template.md；日期/作者/链接必须从页面提取；摘要须提炼翻译，禁止照搬；不同文章禁止相同评语。
 
 ## GitHub 仓库
 
@@ -294,13 +266,19 @@ https://github.com/OnlyPandaX/bioinformatics-frontier
 
 ---
 
-## ⚠️ 去重机制（v2.2 新增）
+## ⚠️ 去重机制（v3.6 强化）
+
+> ⚠️ **v3.6 重要更新**：去重不能只看标题，必须同时比对 URL/DOI。
+> - 标题不同但 URL/DOI 相同 → 判定为**重复**，只保留一篇（保留标题更完整的那条）
+> - 标题相同但 URL/DOI 不同 → 保留两条（可能是不同期刊的同名文章）
+> - 生成报告前先扫描 sent-papers.json，相同 URL/DOI 的论文跳过
 
 ### 工作原理
 
-1. **发送前检查**：每次生成报告前，读取 `sent-papers.json`
-2. **只发一次**：每篇文章只发送一次，除非有正当理由
-3. **强制理由**：重新发送时必须说明原因
+1. **URL/DOI 去重**：标题 + URL 双重比对，不能只靠标题
+2. **发送前检查**：每次生成报告前，读取 `sent-papers.json`
+3. **只发一次**：每篇文章只发送一次，除非有正当理由
+4. **强制理由**：重新发送时必须说明原因
 
 ### 去重列表文件
 
@@ -333,8 +311,8 @@ https://github.com/OnlyPandaX/bioinformatics-frontier
 
 ---
 
-**版本**: 3.5.0
-**更新**: 2026-04-22
+**版本**: 3.6.0
+**更新**: 2026-05-07
 
+> v3.6.0: 模板独立为 template.md，修复报告问题：日期提取、点评质量、去重逻辑、摘要提炼
 > v3.5.0: 强化报告保存路径说明，增加正确/错误示例，禁止存入 reports/ 根目录
-> v2.3.0: 报告迁移至 `YYYY/MM/YYYY-Wxx/` 目录结构归档（配合 tracker.js v3.3）

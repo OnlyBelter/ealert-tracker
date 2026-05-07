@@ -923,6 +923,125 @@
       "sent_date": "2026-05-03",
       "reason": "电池原理启发生物工程治疗策略",
       "republish_notes": ""
+    },
+    {
+      "title": "Foxp3: The epigenetic engineer of regulatory T cell identity",
+      "journal": "Science Immunology",
+      "sent_date": "2026-05-04",
+      "reason": "Treg细胞身份决定机制综述，Foxp3表观遗传编程核心论文",
+      "republish_notes": ""
+    },
+    {
+      "title": "Foxp3 drives context-dependent epigenetic programs that define regulatory T cell molecular identity and function",
+      "journal": "Science Immunology",
+      "sent_date": "2026-05-04",
+      "reason": "Treg表观遗传机制研究论文，与Foxp3综述同期发表",
+      "republish_notes": ""
+    },
+    {
+      "title": "Citraconate preserves T cell stemness and antitumor immunity",
+      "journal": "Science Immunology",
+      "sent_date": "2026-05-04",
+      "reason": "PDE1-cAMP-ALOX5轴调控T细胞干性和铁死亡，免疫代谢学新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Precipitation variability, fertility, and metabolic stress over 5 millennia in the ancient Andes",
+      "journal": "Science Advances",
+      "sent_date": "2026-05-04",
+      "reason": "生物考古学新方法，气候变化与人群适应",
+      "republish_notes": ""
+    },
+    {
+      "title": "The ER shows its age",
+      "journal": "Nature Cell Biology / In Other Journals",
+      "sent_date": "2026-05-04",
+      "reason": "内质网重塑与衰老因果机制，秀丽隐杆线虫研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "The new Neanderthal on the block",
+      "journal": "PNAS / In Other Journals",
+      "sent_date": "2026-05-04",
+      "reason": "尼安德特人新种群结构，古人类基因组学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Battery-inspired therapeutics",
+      "journal": "Nature Materials / In Other Journals",
+      "sent_date": "2026-05-04",
+      "reason": "电池原理启发生物工程治疗策略，材料科学与生物医学交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cell-based bots on cancer's TRAIL",
+      "journal": "Science Advances",
+      "sent_date": "2026-05-06",
+      "reason": "细胞机器人靶向癌症，生物工程+癌生物学交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "Has the lost Maya city of Sac Balam been found?",
+      "journal": "Science / News from Science",
+      "sent_date": "2026-05-06",
+      "reason": "考古学新发现，玛雅古城",
+      "republish_notes": ""
+    },
+    {
+      "title": "Newton's law of gravity passes its biggest test ever",
+      "journal": "News from Science",
+      "sent_date": "2026-05-06",
+      "reason": "天体物理学新发现，基础物理验证",
+      "republish_notes": ""
+    },
+    {
+      "title": "Chaotic whale rescue shocks marine biologists",
+      "journal": "ScienceInsider",
+      "sent_date": "2026-05-06",
+      "reason": "海洋生物学新闻，动物保护伦理讨论",
+      "republish_notes": ""
+    },
+    {
+      "title": "A sharper eye on the sky thanks to AI",
+      "journal": "Science",
+      "sent_date": "2026-05-06",
+      "reason": "AI for Science，天文观测数据挖掘",
+      "republish_notes": ""
+    },
+    {
+      "title": "Organ-on-chip technologies at the cancer-thrombosis interface",
+      "journal": "Trends in biotechnology",
+      "sent_date": "2026-05-07",
+      "reason": "OoC芯片技术在肿瘤血栓界面的研究，与癌生物学高度相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "A practical guide to spatial transcriptomics: lessons from over 1000 samples",
+      "journal": "Trends in biotechnology",
+      "sent_date": "2026-05-07",
+      "reason": "空间转录组学实用指南，千级样本经验，多组学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rewiring holobiont systems with synthetic biology",
+      "journal": "Trends in biotechnology",
+      "sent_date": "2026-05-07",
+      "reason": "合成生物学重塑全生物系统，微生物组与合成生物交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "Pipeline and insulated dual-reporter system to predict and quantify strong terminators from RNA-seq datasets for metabolic engineering",
+      "journal": "Trends in biotechnology",
+      "sent_date": "2026-05-07",
+      "reason": "RNA-seq预测强终止子用于代谢工程，AI+生物工程",
+      "republish_notes": ""
+    },
+    {
+      "title": "terminators from RNA-seq datasets for metabolic engineering",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-05-07",
+      "reason": "同篇重发，RNA-seq终止子预测",
+      "republish_notes": "Duplicate of above"
     }
   ]
 }
