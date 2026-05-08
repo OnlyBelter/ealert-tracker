@@ -308,9 +308,16 @@ https://github.com/OnlyPandaX/bioinformatics-frontier
 
 ---
 
-**版本**: 3.6.2
-**更新**: 2026-05-07
+**版本**: 3.7.0
+**更新**: 2026-05-08
 
+> **⚠️ 准确性原则（v3.7.0 — 最高优先级）**:
+> 提供的信息必须经过确认，绝不捏造任何字段。所有字段（DOI、作者、日期、摘要）必须从可靠 API 验证获取，无法提取时明确标注占位符，绝不猜测。
+>
+> v3.7.0:
+> - 删除 extractDOI 捏造假 DOI 逻辑（abc123、def456 等格式不再出现）
+> - 新增 validateDOI() 通过 CrossRef API 验证 DOI 真实性
+> - ensureFields → ensureAccurateFields：无确认字段时明确标注「（作者信息无法确认）」
+> - 无 DOI 时显示 Google 学术搜索链接替代，不再显示假 DOI
 > v3.6.2: 删除重复的 assets/template.md，整理目录结构
-> v3.6.1: 修复去重逻辑（URL+DOI 双重比对）、点评套话、日期/摘要问题，新增 README + CHANGELOG
-> v3.6.0: 模板独立为 template.md，修复报告问题：日期提取、点评质量、去重逻辑、摘要提炼
+> v3.6.1: 修复去重逻辑（URL+DOI 双重比对）、点评套话、日期/摘要问题

@@ -1,17 +1,18 @@
 /**
- * EAlert Tracker v3.6.1
+ * EAlert Tracker v3.7.0
  * 
- * 核心改进：
- * 1. 只读最近 24 小时邮件
- * 2. 访问文章链接获取期刊、作者、摘要
- * 3. 每篇论文：期刊、日期、作者、研究问题、主要贡献（摘要）、点评
- * 4. v3.4: 新增 Google Scholar Alerts 支持
- * 5. v3.5: 报告格式优化（原文标题、点评质量）
- * 6. v3.6.1:
- *    - 去重逻辑：标题+URL/DOI 双重比对（修复论文4/5重复问题）
- *    - 日期必须从 DOI/期刊页面提取，禁止写"见邮件"
- *    - 点评基于摘要内容，禁止套话，不同文章禁止相同评语
- *    - 新增 README.md + CHANGELOG.md
+ * ⚠️ 准确性原则（最高优先级）：
+ * 提供的信息必须经过确认，绝不捏造任何字段。
+ * 所有字段（DOI、作者、日期、摘要）必须从可靠 API 验证获取，
+ * 无法提取时明确标注「（作者信息无法确认）」等占位符，绝不猜测。
+ * 
+ * 主要版本历史：
+ * v3.7.0: 删除 extractDOI 捏造 DOI 逻辑；新增 validateDOI 验证；
+ *         ensureFields 重写为 ensureAccurateFields；所有无法确认字段标注清楚
+ * v3.6.1: 去重逻辑（标题+URL/DOI 双重比对）
+ * v3.6.0: 模板独立为 template.md
+ * v3.5:   报告格式优化（原文标题、点评质量）
+ * v3.4:   新增 Google Scholar Alerts 支持
  */
 
 const Imap = require('imap');
@@ -150,59 +151,75 @@ function extractJournalFromSubject(subject) {
 
 // ============ 元数据获取 ============
 
-/** 从链接提取 DOI */
+/**
+ * 从链接提取真实 DOI
+ * 
+ * ⚠️ 准确性原则（v3.7.0）：
+ * 此函数只提取链接中已存在的真实 DOI。
+ * 如果链接中没有真实 DOI（格式: 10.xxxx/字母开头），绝不生成或猜测。
+ * 之前 v3.6.x 会通过 PII 格式生成假 DOI（如 10.1126/scitranslmed.abc123），
+ * 已删除此逻辑，不再捏造任何 DOI。
+ */
 function extractDOI(link) {
   if (!link) return '';
   
-  // 直接 DOI
-  const direct = link.match(/10\.\d{4,}\/[^\s&"?#]+/);
+  // 从 URL 中提取已有的真实 DOI
+  const direct = link.match(/(10\.\d{4,}\/[^\s&"'?#<>,;]+)/);
   if (direct) {
-    let doi = direct[0].replace(/[&\?#].*$/, '');
-    // 解码 URL 编码
+    let doi = direct[1].replace(/[&"'?#<>,;].*$/, '');
     try { doi = decodeURIComponent(doi); } catch {}
-    return doi;
-  }
-  
-  // Cell Press PII 格式: S0167-7799(25)00315-4
-  const pii = link.match(/S\d{4}-\d{4}\(\d{2}\)\d{4,5}-\d/);
-  if (pii) {
-    // PII 格式: S0167-7799(YY)XXXX-Z
-    // 年份前缀: 19xx 或 20xx
-    const m = pii[0].match(/S(\d{4})-(\d{4})\((\d{2})\)(.+)/);
-    if (m) {
-      const [, journal1, journal2, yy, rest] = m;
-      const year = parseInt(yy) > 50 ? '19' + yy : '20' + yy;
-      // 期刊代码对应关系
-      const journalCodes = {
-        '0167-7799': 'j.tibtech',  // Trends in Biotechnology
-        '0167-779X': 'j.tig',       // Trends in Genetics
-        '0169-5172': 'j.jdermsci',  // Journal of Dermatological Science
-        '0958-1669': 'j.copbio',    // Current Opinion in Biotechnology
-      };
-      const jc = journalCodes[journal2] || 'j.article';
-      const volIssue = rest.match(/^(\d{4,})/)?.[1] || '';
-      return `10.1016/${jc}.${year}.${volIssue}`;
+    // v3.7.0: 验证看起来像真实 DOI（字母开头，不是 abc123 这种随机字符）
+    if (/^10\.\d{4,}\/[a-zA-Z]/.test(doi)) {
+      return doi;
     }
   }
   
-  return '';
+  return '';  // 链接中没有真实 DOI，返回空字符串
 }
 
+/**
+ * 获取论文详情（v3.7.0 重写）
+ * 
+ * 准确性优先流程：
+ * 1. 通过 PubMed API 获取完整元数据（作者、期刊、摘要、真实 DOI）
+ * 2. 如果 PubMed 无结果，从链接提取 DOI 并通过 CrossRef 验证
+ * 3. CrossRef 验证通过才使用该 DOI
+ * 4. 完全无法获取时：确保原始字段准确，不捏造任何信息
+ */
 async function fetchPaperDetails(paper) {
-  // 优先用 PubMed 搜索（通过标题）
+  // Step 1: 优先通过 PubMed 获取完整元数据
   try {
     const meta = await fetchFromPubMed(paper.title);
-    if (meta) return { ...paper, ...meta };
+    if (meta && meta.journal && meta.title) {
+      ensureAccurateFields(meta);
+      return meta;
+    }
   } catch (e) {}
   
-  // 备用：尝试解码链接中的 DOI
+  // Step 2: 尝试从链接提取真实 DOI 并验证
   const doi = extractDOI(paper.link);
   if (doi) {
-    await sleep(300);
-    const meta = await fetchCrossRef(doi);
-    if (meta) return { ...paper, ...meta };
+    const isValid = await validateDOI(doi);
+    if (isValid) {
+      await sleep(300);
+      const meta = await fetchCrossRef(doi);
+      if (meta) {
+        ensureAccurateFields(meta);
+        return { ...paper, ...meta, doi };
+      }
+    }
+    // DOI 无效或无法验证，不使用该 DOI
   }
   
+  // Step 3: 完全无法获取可靠元数据
+  // ⚠️ 确保原始字段准确，不捏造任何信息
+  paper.authors = '（作者信息无法确认）';
+  paper.date = paper.date || '（发表日期无法确认）';
+  paper.journal = paper.journal || '（期刊信息无法确认）';
+  paper.doi = '';  // 不显示无法验证的 DOI
+  paper.researchQuestion = inferResearchQuestion(paper.title, '');
+  paper.contributions = inferContributions('', paper.title);
+  paper.comment = generateComment(paper.title, '', paper.researchQuestion, paper.journal);
   return paper;
 }
 
@@ -244,9 +261,11 @@ async function fetchFromPubMed(title) {
     const corresponding = paperMeta.authors?.[paperMeta.authors.length - 1]?.name || '';
     const journal = paperMeta.fulljournalname || paperMeta.source || '';
     const published = paperMeta.pubdate || '';
-    
-    // v3.5: 保留原文标题（PubMed 返回的是英文原文）
     const originalTitle = paperMeta.title || title;
+    
+    // v3.7.0: 验证 DOI 格式，拒绝捏造的假 DOI
+    let doi = paperMeta.elocationid?.replace('doi: ', '') || '';
+    if (doi && !/^10\.\d{4,}\/[a-zA-Z]/.test(doi)) doi = '';
     
     const researchQuestion = inferResearchQuestion(originalTitle, abstract);
     const contributions = inferContributions(abstract, originalTitle);
@@ -256,7 +275,7 @@ async function fetchFromPubMed(title) {
       journal,
       title: originalTitle,
       originalTitle,
-      authors: authors || '未知',
+      authors: authors || '（作者信息无法确认）',
       corresponding,
       researchQuestion,
       contributions,
@@ -264,7 +283,7 @@ async function fetchFromPubMed(title) {
       abstract,
       published,
       pmid,
-      doi: paperMeta.elocationid?.replace('doi: ', '') || ''
+      doi
     };
   } catch (e) {
     return null;
@@ -430,7 +449,37 @@ function inferContributions(abstract, title) {
   return contributions.slice(0, 3);
 }
 
-function ensureFields(paper) {
+/**
+ * 验证并确保关键字段准确（v3.7.0 重写）
+ * 
+ * ⚠️ 准确性原则：
+ * - DOI: 只保留格式正确（10.xxxx/字母开头）的真实 DOI，无则清空
+ * - 作者: 无法确认时标注「（作者信息无法确认）」，绝不写「见原文」或「待补充」
+ * - 日期: 无法确认时标注「（发表日期无法确认）」
+ * - 期刊: 必须有值，无则标注「（期刊信息无法确认）」
+ */
+function ensureAccurateFields(paper) {
+  // DOI: 验证格式，过滤捏造的假 DOI（如 abc123）
+  if (paper.doi && !/^10\.\d{4,}\/[a-zA-Z]/.test(paper.doi)) {
+    paper.doi = '';  // 格式不对，不是真实 DOI，清空
+  }
+  
+  // 作者: 必须有确认的内容
+  if (!paper.authors || ['见原文', '未知', '待补充', '(待补充)', '（待补充）', ''].includes(paper.authors)) {
+    paper.authors = '（作者信息无法确认）';
+  }
+  
+  // 日期
+  if (!paper.published && !paper.date) {
+    paper.date = '（发表日期无法确认）';
+  }
+  
+  // 期刊
+  if (!paper.journal) {
+    paper.journal = '（期刊信息无法确认）';
+  }
+  
+  // 研究问题 / 贡献 / 点评: 有则保留，无则生成（基于标题推断，这是补充说明不是事实字段）
   if (!paper.researchQuestion || paper.researchQuestion === '探索相关生物学机制或应用研究') {
     paper.researchQuestion = inferResearchQuestion(paper.title, paper.abstract || '');
   }
@@ -439,6 +488,22 @@ function ensureFields(paper) {
   }
   if (!paper.comment) {
     paper.comment = generateComment(paper.title, paper.abstract || '', paper.researchQuestion, paper.journal || '');
+  }
+}
+
+/**
+ * 验证 DOI 是否真实存在（通过 CrossRef API 查询）
+ * v3.7.0: 用于在链接提取 DOI 后验证其真实性，避免使用捏造的假 DOI
+ */
+async function validateDOI(doi) {
+  if (!doi || !/^10\.\d{4,}\/[a-zA-Z]/.test(doi)) return false;
+  try {
+    const url = 'https://api.crossref.org/works/' + encodeURIComponent(doi);
+    const data = await httpGet(url, 8000);
+    const json = JSON.parse(data);
+    return json.status === 'ok' && json.message;
+  } catch {
+    return false;
   }
 }
 
@@ -892,19 +957,20 @@ function generateQQReport(papers) {
     // v3.6.1: 日期必须从元数据提取，不能写"见邮件"
     const displayDate = p.published || p.date || '';
     r += `**日期**: ${displayDate || '（未提取到，请点击链接查看）'}\n`;
-    if (p.authors && p.authors !== '见原文' && p.authors !== '未知') {
+    if (p.authors) {
       r += `**作者**: ${p.authors}\n`;
     }
     
-    // v3.5: 链接必须显示（如果没有链接，尝试用 DOI 或期刊 URL 拼接）
+    // v3.7.0: 链接优先级：原始链接 > 真实DOI > Google学术搜索
     if (p.link) {
       r += `\n🔗 **链接**: ${p.link}\n`;
-    } else if (p.doi) {
+    } else if (p.doi && /^10\.\d{4,}\/[a-zA-Z]/.test(p.doi)) {
+      // v3.7.0: 只显示经过验证的真实 DOI
       r += `\n🔗 **DOI**: https://doi.org/${p.doi}\n`;
-    } else if (p.journal) {
-      // 尝试根据期刊名拼接搜索 URL
-      const journalSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(p.title + ' ' + p.journal)}`;
-      r += `\n🔍 **搜索链接**: ${journalSearchUrl}\n`;
+    } else {
+      // v3.7.0: 无有效链接/DOI，显示 Google 学术搜索
+      const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(p.title)}`;
+      r += `\n🔍 **搜索**: [Google 学术搜索](${searchUrl})\n`;
     }
     r += '\n';
     
@@ -937,7 +1003,7 @@ function generateMarkdownReport(papers) {
   if (papers.length === 0) {
     md += `> 今日未收到相关领域期刊目录。\n\n---\n\n`;
     md += `**生成时间**: ${datetime}\n`;
-    md += `**工具**: EAlert Tracker v3.6.1\n`;
+    md += `**工具**: EAlert Tracker v3.7.0（准确性优先，不捏造任何字段）\n`;
     return md;
   }
   
@@ -970,18 +1036,20 @@ function generateMarkdownReport(papers) {
     const mdDate = p.published || p.date || '';
     md += `| **期刊** | ${p.journal || '见链接'} |\n`;
     md += `| **日期** | ${mdDate || '（未提取到，请点击链接查看）'} |\n`;
-    if (p.authors && p.authors !== '见原文' && p.authors !== '未知') {
+    if (p.authors) {
       md += `| **作者** | ${p.authors} |\n`;
     }
-    // v3.5: 链接必须显示（如果没有链接，尝试用 DOI 或期刊 URL 拼接）
+    // v3.7.0: 链接优先级：原始链接 > 真实DOI > Google学术搜索
     if (p.link) {
       md += `| **链接** | [点击访问](${p.link}) |\n`;
-    } else if (p.doi) {
+    } else if (p.doi && /^10\.\d{4,}\/[a-zA-Z]/.test(p.doi)) {
+      // v3.7.0: 只显示经过验证的真实 DOI
       md += `| **DOI** | ${p.doi} |\n`;
       md += `| **链接** | https://doi.org/${p.doi} |\n`;
-    } else if (p.journal) {
-      const journalSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(p.title + ' ' + p.journal)}`;
-      md += `| **搜索** | [Google 搜索](${journalSearchUrl}) |\n`;
+    } else {
+      // v3.7.0: 无有效链接/DOI，显示 Google 学术搜索作为兜底
+      const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(p.title)}`;
+      md += `| **搜索** | [Google 学术搜索](${searchUrl}) |\n`;
     }
     md += `\n`;
     
@@ -1000,7 +1068,7 @@ function generateMarkdownReport(papers) {
   md += generateSummary(papers) + '\n\n';
   md += `---\n\n`;
   md += `**生成时间**: ${datetime}\n`;
-  md += `**工具**: EAlert Tracker v3.6.1\n`;
+  md += `**工具**: EAlert Tracker v3.7.0（准确性优先，不捏造任何字段）\n`;
 
   return md;
 }
@@ -1088,7 +1156,7 @@ async function sendEmail(mdReport) {
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.6.1 启动\n');
+  console.log('🚀 EAlert Tracker v3.7.0 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
   
   // Step 1: 获取期刊邮件
@@ -1162,7 +1230,7 @@ async function run() {
     const p = toEnrich[i];
     console.log(`  [${i + 1}/${toEnrich.length}] ${p.title.substring(0, 50)}...`);
     const detailed = await fetchPaperDetails(p);
-    ensureFields(detailed);
+    ensureAccurateFields(detailed);
     enriched.push(detailed);
     if (i < toEnrich.length - 1) await sleep(200);
   }
@@ -1176,7 +1244,7 @@ async function run() {
       await sleep(300);
       const meta = await fetchCrossRef(doi);
       if (meta) {
-        ensureFields(meta);
+        ensureAccurateFields(meta);
         meta.source = 'scholar';
         meta.researcher = p.researcher;
         enriched.push(meta);
@@ -1186,7 +1254,7 @@ async function run() {
     // 备用：直接从 PubMed 搜索标题
     const meta = await fetchPaperDetails(p);
     if (meta && meta.journal) {
-      ensureFields(meta);
+      ensureAccurateFields(meta);
       meta.source = 'scholar';
       meta.researcher = p.researcher;
       enriched.push(meta);
@@ -1237,7 +1305,7 @@ async function run() {
   await sendEmail(mdReport);
   
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.6.1 完成！`);
+  console.log(`✅ EAlert Tracker v3.7.0 完成！`);
   console.log(`   📧 期刊邮件: ${journalEmails.length} 封`);
   console.log(`   🔔 Scholar邮件: ${scholarEmails.length} 封`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);

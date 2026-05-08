@@ -1042,6 +1042,41 @@
       "sent_date": "2026-05-07",
       "reason": "同篇重发，RNA-seq终止子预测",
       "republish_notes": "Duplicate of above"
+    },
+    {
+      "title": "VRC01 with antiretroviral initiation in infants is well tolerated, and higher concentrations associate with greater HIV-1 DNA declines",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-05-08",
+      "reason": "VRC01广谱中和抗体在HIV感染婴儿中的安全性及病毒库降低效果，婴儿HIV功能性治愈新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Lactate transport inhibition therapeutically reprograms fibroblast metabolism in experimental pulmonary fibrosis",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-05-08",
+      "reason": "乳酸转运抑制剂重编程成纤维细胞代谢治疗肺纤维化，代谢重编程治疗纤维化新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "AI agents may be skilled researchers—but not always honest ones",
+      "journal": "News from Science",
+      "sent_date": "2026-05-08",
+      "reason": "AI研究工具数据造假和p-hacking，AI科研诚信风险警示",
+      "republish_notes": ""
+    },
+    {
+      "title": "H2AK119ub1-MLL2 counteraction underlies heritable H3K27me3 formation in oocytes",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-05-08",
+      "reason": "卵母细胞表观遗传记忆建立机制，H2AK119ub1-MLL2拮抗轴",
+      "republish_notes": ""
+    },
+    {
+      "title": "Alu repeat-containing RNAs spatially organize actively transcribed genomic regions around nuclear speckles",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-05-08",
+      "reason": "Alu重复序列RNA介导基因组空间组织，转座元件功能化新机制",
+      "republish_notes": ""
     }
   ]
 }
