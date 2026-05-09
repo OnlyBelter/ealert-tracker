@@ -1,5 +1,5 @@
 /**
- * EAlert Tracker v3.8.0
+ * EAlert Tracker v3.8.1
  * 
  * ⚠️ 准确性原则（最高优先级）：
  * 提供的信息必须经过确认，绝不捏造任何字段。
@@ -21,7 +21,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-// v3.8.0: 移除 nodemailer，不再发送邮件
+// v3.8.1: 移除 nodemailer，不再发送邮件
 // const nodemailer = require('nodemailer');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
@@ -70,7 +70,7 @@ const CONFIG = {
     'In Other Journals',
   ],
 
-  // v3.8.0: 移除邮件配置，只保留核心追踪参数
+  // v3.8.1: 移除邮件配置，只保留核心追踪参数
   daysBack: 1,
 };
 
@@ -959,13 +959,13 @@ function generateQQReport(papers) {
     // v3.6.1: 日期必须从元数据提取，不能写"见邮件"
     const displayDate = p.published || p.date || '';
     r += `**日期**: ${displayDate || '（未提取到，请点击链接查看）'}\n`;
-    // v3.8.0: 检测作者字段是否包含摘要片段
+    // v3.8.1: 检测作者字段是否包含摘要片段
     let displayAuthors = p.authors;
     if (displayAuthors && /^(Protein sequences|These|Background|Results|Methods)/.test(displayAuthors.substring(0, 50))) {
       displayAuthors = '（作者信息无法确认）';
     }
     if (displayAuthors) {
-      r += `**作者**: ${p.authors}\n`;
+      r += `**作者**: ${displayAuthors}\n`;
     }
     
     // v3.7.0: 链接优先级：原始链接 > 真实DOI > Google学术搜索
@@ -1010,7 +1010,7 @@ function generateMarkdownReport(papers) {
   if (papers.length === 0) {
     md += `> 今日未收到相关领域期刊目录。\n\n---\n\n`;
     md += `**生成时间**: ${datetime}\n`;
-    md += `**工具**: EAlert Tracker v3.8.0（准确性优先，不捏造任何字段）\n`;
+    md += `**工具**: EAlert Tracker v3.8.1（准确性优先，不捏造任何字段）\n`;
     return md;
   }
   
@@ -1043,13 +1043,13 @@ function generateMarkdownReport(papers) {
     const mdDate = p.published || p.date || '';
     md += `| **期刊** | ${p.journal || '见链接'} |\n`;
     md += `| **日期** | ${mdDate || '（未提取到，请点击链接查看）'} |\n`;
-    // v3.8.0: 检测作者字段是否包含摘要片段
+    // v3.8.1: 检测作者字段是否包含摘要片段
     let mdAuthors = p.authors;
     if (mdAuthors && /^(Protein sequences|These|Background|Results|Methods)/.test(mdAuthors.substring(0, 50))) {
       mdAuthors = '（作者信息无法确认）';
     }
     if (mdAuthors) {
-      md += `| **作者** | ${p.authors} |\n`;
+      md += `| **作者** | ${mdAuthors} |\n`;
     }
     // v3.7.0: 链接优先级：原始链接 > 真实DOI > Google学术搜索
     if (p.link) {
@@ -1080,7 +1080,7 @@ function generateMarkdownReport(papers) {
   md += generateSummary(papers) + '\n\n';
   md += `---\n\n`;
   md += `**生成时间**: ${datetime}\n`;
-  md += `**工具**: EAlert Tracker v3.8.0（准确性优先，不捏造任何字段）\n`;
+  md += `**工具**: EAlert Tracker v3.8.1（准确性优先，不捏造任何字段）\n`;
 
   return md;
 }
@@ -1140,12 +1140,12 @@ function generateSummary(papers) {
 }
 
 // ============ 发送（已移除） ============
-// v3.8.0: 邮件发送已移除，由 AI 负责通过 message 工具发送 QQ + 推送 GitHub
+// v3.8.1: 邮件发送已移除，由 AI 负责通过 message 工具发送 QQ + 推送 GitHub
 
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.8.0 启动\n');
+  console.log('🚀 EAlert Tracker v3.8.1 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
   
   // Step 1: 获取期刊邮件
@@ -1160,7 +1160,7 @@ async function run() {
   console.log(`  → 找到 ${emails.length} 封期刊邮件\n`);
   
   if (emails.length === 0) {
-    // v3.8.0: 移除 sendEmail，无邮件时只输出提示（由 AI 决定是否发送）
+    // v3.8.1: 移除 sendEmail，无邮件时只输出提示（由 AI 决定是否发送）
     console.log('⚠️ 今日无期刊邮件');
     return;
   }
@@ -1203,7 +1203,7 @@ async function run() {
   const allRelevant = [...relevantPapers, ...relevantScholar];
   
   if (allRelevant.length === 0) {
-    // v3.8.0: 移除 sendEmail，无相关论文时只输出提示（由 AI 决定是否发送）
+    // v3.8.1: 移除 sendEmail，无相关论文时只输出提示（由 AI 决定是否发送）
     console.log('⚠️ 未发现相关领域论文');
     return;
   }
@@ -1298,7 +1298,7 @@ async function run() {
   console.log('-'.repeat(60) + '\n');
   
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.8.0 完成！`);
+  console.log(`✅ EAlert Tracker v3.8.1 完成！`);
   console.log(`   📧 期刊邮件: ${journalEmails.length} 封`);
   console.log(`   🔔 Scholar邮件: ${scholarEmails.length} 封`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);
