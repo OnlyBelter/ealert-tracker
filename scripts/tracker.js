@@ -1,5 +1,5 @@
 /**
- * EAlert Tracker v3.7.0
+ * EAlert Tracker v3.8.0
  * 
  * ⚠️ 准确性原则（最高优先级）：
  * 提供的信息必须经过确认，绝不捏造任何字段。
@@ -21,7 +21,8 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const nodemailer = require('nodemailer');
+// v3.8.0: 移除 nodemailer，不再发送邮件
+// const nodemailer = require('nodemailer');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 // ============ 配置 ============
@@ -69,8 +70,8 @@ const CONFIG = {
     'In Other Journals',
   ],
 
-  targetEmail: 'onlybelter@gmail.com'
-};
+  // v3.8.0: 移除邮件配置，只保留核心追踪参数
+  daysBack: 1,
 
 // ============ 工具函数 ============
 
@@ -1127,31 +1128,8 @@ function generateSummary(papers) {
   return lines.join('\n');
 }
 
-// ============ 发送 ============
-
-async function sendEmail(mdReport) {
-  try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-      tls: { rejectUnauthorized: false }
-    });
-    
-    const today = new Date().toISOString().split('T')[0];
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM,
-      to: CONFIG.targetEmail,
-      subject: `📚 科研期刊追踪报告 - ${today}`,
-      text: '详细报告见附件。',
-      attachments: [{ filename: `ealert-report-${today}.md`, content: mdReport, contentType: 'text/markdown' }]
-    });
-    console.log('✅ 邮件已发送到:', CONFIG.targetEmail);
-  } catch (err) {
-    console.error('❌ 邮件发送失败:', err.message);
-  }
-}
+// ============ 发送（已移除） ============
+// v3.8.0: 邮件发送已移除，由 AI 负责通过 message 工具发送 QQ + 推送 GitHub
 
 // ============ 主流程 ============
 
@@ -1299,10 +1277,14 @@ async function run() {
   fs.writeFileSync(reportPath, mdReport);
   console.log(`  ✓ 报告已保存: reports/${year}/${month}/${weekDir}/report_${todayStr}.md\n`);
   
-  // Step 7: 发送
-  console.log('📤 发送报告...');
-  console.log('\n' + qqReport.substring(0, 1200) + '\n...');
-  await sendEmail(mdReport);
+  // Step 7: 输出报告（不发送邮件，由 AI 负责 QQ + GitHub）
+  console.log('📤 报告生成完成，等待 AI 发送到 QQ 和 GitHub...');
+  console.log('\n' + '='.repeat(60));
+  console.log('📄 QQ 报告预览：');
+  console.log('-'.repeat(60));
+  console.log(qqReport.substring(0, 1500));
+  if (qqReport.length > 1500) console.log('... (更多内容省略)');
+  console.log('-'.repeat(60) + '\n');
   
   console.log('\n' + '='.repeat(60));
   console.log(`✅ EAlert Tracker v3.7.0 完成！`);

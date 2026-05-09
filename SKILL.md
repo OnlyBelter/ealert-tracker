@@ -1,10 +1,10 @@
 ---
 name: ealert-tracker
-description: "科研期刊追踪器 v3.7.0。通过 Gmail IMAP 读取最近 48 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告并推送到 GitHub。⚠️ 准确性优先原则：绝不捏造任何字段，无法确认时明确标注占位符。"
+description: "科研期刊追踪器 v3.8.0。通过 Gmail IMAP 读取最近 48 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告。⚠️ 准确性优先原则：绝不捏造任何字段，无法确认时明确标注占位符。由 AI 发送 QQ + 推送 GitHub。"
 metadata:
   openclaw:
     emoji: "📚"
-    version: "3.7.0"
+    version: "3.8.0"
     requires:
       bins:
         - python3
@@ -13,7 +13,7 @@ metadata:
         - IMAP_PASS
 ---
 
-# EAlert Tracker v3.7.0 - 科研期刊追踪器
+# EAlert Tracker v3.8.0 - 科研期刊追踪器
 
 > ⚠️ **准确性原则（最高优先级）**：提供的信息必须经过确认，绝不捏造任何字段。所有字段（DOI、作者、日期、摘要）必须从可靠 API 验证获取，无法提取时明确标注「（XXX信息无法确认）」，绝不猜测。
 
@@ -21,10 +21,10 @@ metadata:
 
 ## 核心特点
 
-- 📅 **最近 24 小时**：每天早上 9:00 读取当日新邮件
+- 📅 **最近 48 小时**：每天早上读取最近两天的期刊邮件
 - 📰 **全部内容**：研究论文 + 科学新闻，不过滤
 - 🤖 **AI 辅助**：自动提取标题和关键信息
-- 📱 **多渠道发送**：QQ 推送 + GitHub 同步
+- 📱 **多渠道发送**：QQ 推送 + GitHub 同步（由 AI 负责）
 - 📊 **每周汇总**：周日上午综合评述 + 领域趋势
 
 ## 快速开始
@@ -33,18 +33,18 @@ metadata:
 
 ```bash
 cd ~/.qclaw/workspace/ealert-tracker
-python3 scripts/email_reader.py
+node scripts/tracker.js
 ```
 
 这会自动：
 1. 连接 Gmail IMAP
-2. 读取最近 24 小时的期刊邮件
-3. 提取每封邮件中的文章标题
-4. 保存到 `/tmp/journal_emails.json` 和 `/tmp/journal_emails.txt`
+2. 读取最近 48 小时的期刊邮件
+3. 提取每封邮件中的文章标题和元数据
+4. 生成 Markdown 报告保存到 `reports/YYYY/MM/YYYY-Wxx/`
 
-### 生成报告
+### 发送报告
 
-让 AI 读取 `/tmp/journal_emails.json`，生成 Markdown 报告，发送到 QQ 并推送到 GitHub。
+AI 读取生成的报告，通过 message 工具发送到 QQ，并推送到 GitHub。
 
 ## 支持的期刊
 
