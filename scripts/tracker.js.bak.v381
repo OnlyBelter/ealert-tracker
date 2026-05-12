@@ -710,50 +710,132 @@ function extractPapersFromEmail(text, subject) {
  *   - 内容包含论文标题列表，每篇附有链接和摘要（部分有）
  */
 function extractPapersFromScholarEmail(text, subject) {
-  // v2.1: 调用 Python 解析器处理 Scholar 邮件
-  const { execSync } = require('child_process');
-  const fs = require('fs');
-  const path = require('path');
+  const papers = [];
+  if (!text) return papers;
   
-  if (!text) return [];
+  // 从 Subject 提取研究者名字
+  const researcherMatch = subject.match(/^([^\-]+)\s+-\s+(\d+)\s+new articles?/i);
+  const researcherName = researcherMatch ? researcherMatch[1].trim() : 'Unknown Researcher';
+  const articleCount = researcherMatch ? parseInt(researcherMatch[2]) : 0;
   
-  // 写临时文件
-  const tmpFile = '/tmp/scholar_email_' + Date.now() + '.txt';
-  const subjectFile = '/tmp/scholar_subj_' + Date.now() + '.txt';
-  fs.writeFileSync(tmpFile, text);
-  fs.writeFileSync(subjectFile, subject);
+  // Scholar 邮件正文结构：论文标题 -> 作者/出处 -> 链接 -> 摘要片段
+  // 标题行特征：以大写字母开头，长度适中（30-200字符），不是链接不是元信息
+  const lines = text.split(/\n|\r/);
+  const candidateTitles = [];
   
-  try {
-    const pythonScript = path.join(__dirname, 'parse_scholar_emails.py');
-    const cmd = `python3 "${pythonScript}" "${tmpFile}" "${subjectFile.replace(/"/g, '\\"')}" --json`;
-    const raw = execSync(cmd, { maxBuffer: 1024 * 1024 });
-    const papers = JSON.parse(raw.toString());
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
     
-    // 清理临时文件
-    fs.unlinkSync(tmpFile);
-    fs.unlinkSync(subjectFile);
+    // 跳过常见的非标题行
+    if (/^(http|https|www\.)/i.test(line)) continue;
+    if (/^(Figure|TABLE|Image|Advertisement|Website|Facebook|Twitter|YouTube)/i.test(line)) continue;
+    if (/^(Vol\.|Volume|Issue|ISSN|DOI|doi:)/i.test(line)) continue;
+    if (/^(This message|You are receiving|Unsubscribe|Cancel alert|Google Scholar)/i.test(line)) continue;
+    if (/^\d{1,2}\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i.test(line)) continue;
+    if (line.length < 20 || line.length > 250) continue;
+    if (!/[a-z]/.test(line.substring(0, 20))) continue;
     
-    // 标准化字段
-    return papers.map(p => ({
-      title: p.title || '',
-      authors: p.authors || p.researcher + ' et al.',
-      journal: p.journal || '',
-      date: p.year || '',
-      link: p.url || '',
-      doi: p.doi || '',
-      source: 'scholar',
-      researcher: p.researcher || 'Unknown',
-      abstract: p.abstract || ''
-    }));
-  } catch (err) {
-    console.error('Scholar parser error:', err.message);
-    // 回退：尝试从 subject 提取链接
-    const linkMatch = subject.match(/(https?:\/\/[\w.\/\-?=&%]+)/);
-    if (linkMatch) {
-      return [{ title: subject, authors: 'Unknown', journal: '', date: '', link: linkMatch[1], source: 'scholar', researcher: 'Unknown', abstract: '' }];
+    // 标题行：通常以大写字母开头，不包含常见元信息关键词
+    const isMeta = /^(The|This|These|Our|We|Received|Published|Accepted|Copyright)/i.test(line.substring(0, 10)) && 
+                   line.length < 40;
+    if (isMeta) continue;
+    
+    // 确认是标题：下一行或下下行有链接或作者信息
+    let link = '';
+    let linkLineIdx = -1;
+    let authorLine = '';
+    let authorLineIdx = -1;
+    let abstractLines = [];
+    
+    for (let j = i + 1; j < Math.min(i + 8, lines.length); j++) {
+      const nextLine = lines[j].trim();
+      if (!nextLine) continue;
+      
+      // 找链接
+      if (linkLineIdx < 0 && (nextLine.startsWith('http') || nextLine.includes('.com/') || nextLine.includes('.org/'))) {
+        const urlMatch = nextLine.match(/(https?:\/\/[^\s\s]+)/);
+        if (urlMatch) {
+          link = urlMatch[1];
+          linkLineIdx = j;
+        }
+      }
+      
+      // 找作者行（包含逗号的作者列表或"..."省略）
+      if (authorLineIdx < 0 && linkLineIdx >= 0) {
+        // 链接之后第一行通常包含摘要或作者
+        if (/^\.{3}$|^et al|^[A-Z][a-z]+,/.test(nextLine)) {
+          authorLine = nextLine;
+          authorLineIdx = j;
+        } else if (/^[A-Z]/.test(nextLine) && 
+                   (nextLine.includes(',') || nextLine.includes('...') || nextLine.includes('[')) &&
+                   nextLine.length < 200 &&
+                   !nextLine.startsWith('http') &&
+                   !/^(Figure|Table|Image|Vol\.|http)/i.test(nextLine)) {
+          authorLine = nextLine;
+          authorLineIdx = j;
+        }
+      }
+      
+      // 找摘要片段（在链接之后、常见分隔符之前）
+      if (linkLineIdx >= 0 && j > linkLineIdx && j < linkLineIdx + 6) {
+        if (nextLine.length > 30 && 
+            !nextLine.startsWith('http') &&
+            !/^(Figure|Table|This message|You are|Unsubscribe|Cancel|Google Scholar)/i.test(nextLine) &&
+            !/^(Vol\.|Volume|Issue|DOI|doi:)/i.test(nextLine) &&
+            !/^\d{1,2}\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i.test(nextLine)) {
+          abstractLines.push(nextLine);
+        }
+      }
+      
+      // 遇到新论文标题（再次出现大写开头的长行）则停止
+      if (j > i + 3 && /^[A-Z]/.test(nextLine) && nextLine.length > 30 && nextLine.length < 200) {
+        if (!/^(Figure|Table|This message|You are|Unsubscribe|Cancel|Google Scholar)/i.test(nextLine)) {
+          break;
+        }
+      }
     }
-    return [];
+    
+    if (link) {
+      let title = line;
+      // 清理标题格式
+      if (title === title.toUpperCase()) {
+        title = title.toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).replace(/'/g, "'");
+      }
+      
+      const abstract = abstractLines.join(' ').substring(0, 500);
+      
+      papers.push({
+        title,
+        authors: authorLine || researcherName + ' et al.',
+        journal: '',
+        date: '',
+        link,
+        source: 'scholar',
+        researcher: researcherName,
+        abstract: abstract
+      });
+    }
   }
+
+  // 去重：标题+URL 双重比对（v3.6.1）
+  const seen = new Map();
+  return papers.filter((p, idx) => {
+    const urlKey = (p.link || '').split('?')[0].toLowerCase();
+    if (urlKey) {
+      const existing = seen.get(urlKey);
+      if (existing !== undefined) {
+        if (p.title.length > papers[existing].title.length) seen.set(urlKey, idx);
+        return false;
+      }
+      seen.set(urlKey, idx);
+    } else {
+      const tKey = p.title.toLowerCase().replace(/\s+/g, ' ').replace(/[^a-z0-9]/g, '').substring(0, 40);
+      if (seen.has('T:' + tKey)) return false;
+      seen.set('T:' + tKey, idx);
+    }
+    return true;
+  });
 }
 
 // ============ 邮件读取 ============
