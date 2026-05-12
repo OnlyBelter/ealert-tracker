@@ -1,5 +1,5 @@
 /**
- * EAlert Tracker v3.8.1
+ * EAlert Tracker v3.8.2
  * 
  * ⚠️ 准确性原则（最高优先级）：
  * 提供的信息必须经过确认，绝不捏造任何字段。
@@ -21,6 +21,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 // v3.8.1: 移除 nodemailer，不再发送邮件
 // const nodemailer = require('nodemailer');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
@@ -1202,9 +1203,24 @@ async function run() {
   const weekDir = `${year}-W${weekNum}`;
   const reportDir = path.join(__dirname, '../reports', `${year}`, `${month}`, weekDir);
   const reportPath = path.join(reportDir, `report_${todayStr}.md`);
-  fs.mkdirSync(reportDir, { recursive: true });
-  fs.writeFileSync(reportPath, mdReport);
-  console.log(`  ✓ 报告已保存: reports/${year}/${month}/${weekDir}/report_${todayStr}.md\n`);
+  // v3.8.2: 只推送到 bioinformatics-frontier 仓库（不保存到本地 ealert-tracker/reports/）
+  try {
+    const homedir = require('os').homedir();
+    const bioinfoBase = path.join(homedir, 'Documents', 'bioinformatics-frontier');
+    const bioinfoDir = path.join(bioinfoBase, 'reports', `${year}`, `${month}`, weekDir);
+    fs.mkdirSync(bioinfoDir, { recursive: true });
+    const bioinfoPath = path.join(bioinfoDir, `report_${todayStr}.md`);
+    fs.writeFileSync(bioinfoPath, mdReport);
+    console.log(`  ✓ 报告已保存: ~/Documents/bioinformatics-frontier/reports/${year}/${month}/${weekDir}/report_${todayStr}.md`);
+    
+    // Git commit & push
+    execSync('git add .', { cwd: bioinfoBase });
+    execSync(`git commit -m "EAlert Tracker: add ${todayStr} report"`, { cwd: bioinfoBase, stdio: 'ignore' });
+    execSync('git push origin main', { cwd: bioinfoBase });
+    console.log(`  ✓ 已推送到 GitHub: OnlyPandaX/bioinformatics-frontier\n`);
+  } catch (e) {
+    console.error(`  ⚠️  Push to bioinformatics-frontier failed: ${e.message}`);
+  }
   
   // Step 7: 输出报告（不发送邮件，由 AI 负责 QQ + GitHub）
   console.log('📤 报告生成完成，等待 AI 发送到 QQ 和 GitHub...');
