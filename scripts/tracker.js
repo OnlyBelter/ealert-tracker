@@ -1209,9 +1209,9 @@ async function run() {
     const bioinfoBase = path.join(homedir, 'Documents', 'bioinformatics-frontier');
     const bioinfoDir = path.join(bioinfoBase, 'reports', `${year}`, `${month}`, weekDir);
     fs.mkdirSync(bioinfoDir, { recursive: true });
-    const bioinfoPath = path.join(bioinfoDir, `${todayStr}-ealert-tracker.md`);
+    const bioinfoPath = path.join(bioinfoDir, `${todayStr}-journal-briefing.md`);
     fs.writeFileSync(bioinfoPath, mdReport);
-    console.log(`  ✓ 报告已保存: ~/Documents/bioinformatics-frontier/reports/${year}/${month}/${weekDir}/${todayStr}-ealert-tracker.md`);
+    console.log(`  ✓ 报告已保存: ~/Documents/bioinformatics-frontier/reports/${year}/${month}/${weekDir}/${todayStr}-journal-briefing.md`);
     
     // Git commit & push
     execSync('git add .', { cwd: bioinfoBase });
