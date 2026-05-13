@@ -1,5 +1,5 @@
 /**
- * EAlert Tracker v3.8.3
+ * EAlert Tracker v3.8.4
  * 
  * ⚠️ 准确性原则（最高优先级）：
  * 提供的信息必须经过确认，绝不捏造任何字段。
@@ -914,58 +914,74 @@ function generateQQReport(papers) {
   return r;
 }
 
-// v3.8.3: 从标题/摘要提炼一句话概要（核心科学问题，主动句，≤40字）
+// v3.8.4: 从标题/摘要提炼一句话概要（核心科学问题，≤40字，主动句）
 function generateOneSentenceSummary(p) {
-  const title = p.title || '';
+  // 优先用 originalTitle（未翻译的原文标题），比翻译标题信息更丰富
+  const rawTitle = p.originalTitle || p.title || '';
   const abstract = p.abstract || '';
-  
-  // 如果有摘要，尝试从摘要第一句提炼
-  if (abstract.length > 30) {
-    // 取摘要第一句（句号前的部分）
+
+  // 从摘要提炼（只针对有真实摘要的论文）
+  if (abstract.length > 80) {
     const firstSentence = abstract.split(/[.。]/)[0].trim();
-    if (firstSentence.length > 10 && firstSentence.length <= 60) {
-      // 确保以大写字母或中文字符开头
-      if (/^[A-Z一-龥]/.test(firstSentence)) {
-        // 翻译成中文句式（常见学术表达替换）
-        let summary = firstSentence
-          .replace(/^We show that/i, '揭示')
-          .replace(/^We demonstrate that/i, '证明')
-          .replace(/^We report/i, '报告')
-          .replace(/^We present/i, '提出')
-          .replace(/^We developed/i, '开发')
-          .replace(/^We identified/i, '鉴定')
-          .replace(/^We found that/i, '发现')
-          .replace(/^We describe/i, '描述')
-          .replace(/^This study/i, '本研究')
-          .replace(/^This paper/i, '本文')
-          .replace(/^Here,? /i, '')
-          .replace(/^Using /i, '利用')
-          .replace(/^Although /i, '尽管')
-          .replace(/^Despite /i, '尽管')
-          .replace(/^However,? /i, '')
-          .replace(/^These data suggest/i, '数据表明')
-          .replace(/^Our results show/i, '结果表明')
-          .replace(/^Our findings reveal/i, '研究揭示')
-          .trim();
-        if (summary.length <= 40) return summary + '。';
-        // 太长就截断
-        if (summary.length <= 60) return summary + '。';
-      }
+    if (firstSentence.length >= 15 && firstSentence.length <= 100) {
+      let s = firstSentence
+        .replace(/^We (show|demonstrate|present|report|identify|discover|found|describe|observe|introduce|develop|establish|propose|illustrate|provide)/i, '该研究')
+        .replace(/^We (have shown|have demonstrated|have identified|have discovered|have found)/i, '该研究')
+        .replace(/^This (study|paper|work|research|article|review|issue)/i, '该')
+        .replace(/^Here,? we (show|demonstrate|report|present)/i, '该研究')
+        .replace(/^Using /i, '利用')
+        .replace(/^By /i, '通过')
+        .replace(/^Our (results|data|findings|work)/i, '该研究')
+        .replace(/^These (results|data|findings)/i, '该研究')
+        .replace(/^These data (suggest|indicate|show|reveal)/i, '数据表明')
+        .replace(/^Our results (suggest|indicate|show|reveal|demonstrate)/i, '结果表明')
+        .replace(/^Our findings (reveal|suggest|show|indicate|demonstrate)/i, '研究表明')
+        .replace(/^Collectively,? /i, '综合')
+        .replace(/^Together,? /i, '综合')
+        .trim();
+      if (!/[。！？]$/.test(s) && s.length > 0) s += '。';
+      if (s.length <= 50) return s;
     }
   }
-  
-  // 从标题提炼（去掉常见前缀）
-  let shortTitle = title
-    .replace(/^(Single-cell|Single cell|Multi-omics|Multi omics|Multi\s*omics|Spatial|Proteomic|Metabolomic|Genomic|Transcriptomic|ATAC-Seq|RNA-Seq|CRISPR|Ai\s*for)\s+/i, '')
-    .replace(/^(Landscape|Atlas|Map|Atlas of|Global|Reconstructing|Reconstruction|Analysis of|Decoding|Decoding of|Understanding)/i, '')
+
+  // 从原文标题提炼（重点：去除无意义前缀，保留核心研究对象）
+  let clean = rawTitle
+    .replace(/^(Cell Press Symposia|Call for papers|Special issue|Review article|Original article|Research article|Letter to the|Brief communication|Hypothesis|Perspective|Mini review)\s*[:–—-]?\s*/i, '')
+    .replace(/\s*[-–—:](25 years|2026|2025|April|May|June|July|January|February|March|Apr|Vol\.?|Volume \d+|Issue \d+)\s*$/i, '')
+    .replace(/\s*\(.*?\)\s*$/g, '')
+    .replace(/\s*\[.*?\]\s*$/g, '')
+    .replace(/\s+(of|for|in|with|by|to|and|as|through|via|using|during|across|after|before)\s+[a-z]{3,15}$/i, '')
+    .replace(/^(Single.cell|Single cell|Multi.omics|Spatial|Proteomic|Metabolomic|Genomic|Transcriptomic|ATAC.Seq|RNA.Seq|CRISPR|Decoding|Understanding|Landscape|Atlas|Map|Reconstructing|Reconstruction|And)\s+/i, '')
+    .replace(/^(The|A|An)\s+/i, '')
+    .replace(/^Hallmarks\s+of\s+Cancer\s*/i, 'Hallmarks of Cancer ')
     .trim();
-  
-  if (shortTitle.length > 0) {
-    return `研究${shortTitle}的相关问题。`.substring(0, 40);
+
+  // Hallmarks 标题：保留完整（不去掉 "of Cancer"，去掉多余的时间后缀）
+  if (clean.toLowerCase().startsWith('hallmarks of cancer')) {
+    clean = clean.replace(/\s*[-–—:]\s*\d+\s*years.*$/i, '').trim();
+  }
+  // Hallmarks 太短则补充完整
+  if (clean.length >= 8 && clean.length <= 15 && clean.toLowerCase().startsWith('hallmarks')) {
+    clean = 'Hallmarks of Cancer';
   }
   
-  return '相关领域研究进展。';
+  // 去除标题开头残留的冒号/短横/空格（因正则截断产生）
+  clean = clean.replace(/^[\s:–—-]+/, '');
+  
+  // 处理全小写标题（如 email subject 转来的）
+  if (/^[a-z]/.test(clean) && clean.length > 3) {
+    clean = clean.charAt(0).toUpperCase() + clean.substring(1);
+  }
+
+    // 去除残留的 "And " 前缀（未在前面匹配到）
+  clean = clean.replace(/^And\s+/i, '');
+  if (clean.length >= 8 && clean.length <= 40) return `研究${clean}。`;
+  if (clean.length > 40) return `研究${clean.substring(0, 38)}...。`;
+  if (clean.length >= 4) return `研究${clean}的相关机制/问题。`;
+
+  return '相关领域重要研究进展。';
 }
+
 
 // v3.8.3: 从点评/摘要提取3个主要贡献
 function extractContributions(p) {
@@ -1176,7 +1192,7 @@ function generateSummary(papers) {
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.8.1 启动\n');
+  console.log('🚀 EAlert Tracker v3.8.4 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
   
   // Step 1: 获取期刊邮件
@@ -1344,7 +1360,7 @@ async function run() {
   console.log('-'.repeat(60) + '\n');
   
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.8.1 完成！`);
+  console.log(`✅ EAlert Tracker v3.8.4 完成！`);
   console.log(`   📧 期刊邮件: ${journalEmails.length} 封`);
   console.log(`   🔔 Scholar邮件: ${scholarEmails.length} 封`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);
