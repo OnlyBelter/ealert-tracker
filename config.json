@@ -1,7 +1,7 @@
 {
   "name": "ealert-tracker",
-  "version": "3.8.2",
-  "description": "科研期刊追踪器 v3.8.2 — Gmail IMAP + Google Scholar Alerts + PubMed/CrossRef（准确性优先；报告推送到 bioinformatics-frontier）",
+  "version": "3.8.3",
+  "description": "科研期刊追踪器 v3.8.3 — Gmail IMAP + Google Scholar Alerts + PubMed/CrossRef（准确性优先；报告推送到 bioinformatics-frontier）",
   "author": "胖达",
   "license": "MIT",
   "keywords": ["bioinformatics", "journal-alert", "pubmed", "scholar-alerts", "ealert"],

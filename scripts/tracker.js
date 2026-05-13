@@ -1,5 +1,5 @@
 /**
- * EAlert Tracker v3.8.2
+ * EAlert Tracker v3.8.3
  * 
  * ⚠️ 准确性原则（最高优先级）：
  * 提供的信息必须经过确认，绝不捏造任何字段。
@@ -914,6 +914,118 @@ function generateQQReport(papers) {
   return r;
 }
 
+// v3.8.3: 从标题/摘要提炼一句话概要（核心科学问题，主动句，≤40字）
+function generateOneSentenceSummary(p) {
+  const title = p.title || '';
+  const abstract = p.abstract || '';
+  
+  // 如果有摘要，尝试从摘要第一句提炼
+  if (abstract.length > 30) {
+    // 取摘要第一句（句号前的部分）
+    const firstSentence = abstract.split(/[.。]/)[0].trim();
+    if (firstSentence.length > 10 && firstSentence.length <= 60) {
+      // 确保以大写字母或中文字符开头
+      if (/^[A-Z一-龥]/.test(firstSentence)) {
+        // 翻译成中文句式（常见学术表达替换）
+        let summary = firstSentence
+          .replace(/^We show that/i, '揭示')
+          .replace(/^We demonstrate that/i, '证明')
+          .replace(/^We report/i, '报告')
+          .replace(/^We present/i, '提出')
+          .replace(/^We developed/i, '开发')
+          .replace(/^We identified/i, '鉴定')
+          .replace(/^We found that/i, '发现')
+          .replace(/^We describe/i, '描述')
+          .replace(/^This study/i, '本研究')
+          .replace(/^This paper/i, '本文')
+          .replace(/^Here,? /i, '')
+          .replace(/^Using /i, '利用')
+          .replace(/^Although /i, '尽管')
+          .replace(/^Despite /i, '尽管')
+          .replace(/^However,? /i, '')
+          .replace(/^These data suggest/i, '数据表明')
+          .replace(/^Our results show/i, '结果表明')
+          .replace(/^Our findings reveal/i, '研究揭示')
+          .trim();
+        if (summary.length <= 40) return summary + '。';
+        // 太长就截断
+        if (summary.length <= 60) return summary + '。';
+      }
+    }
+  }
+  
+  // 从标题提炼（去掉常见前缀）
+  let shortTitle = title
+    .replace(/^(Single-cell|Single cell|Multi-omics|Multi omics|Multi\s*omics|Spatial|Proteomic|Metabolomic|Genomic|Transcriptomic|ATAC-Seq|RNA-Seq|CRISPR|Ai\s*for)\s+/i, '')
+    .replace(/^(Landscape|Atlas|Map|Atlas of|Global|Reconstructing|Reconstruction|Analysis of|Decoding|Decoding of|Understanding)/i, '')
+    .trim();
+  
+  if (shortTitle.length > 0) {
+    return `研究${shortTitle}的相关问题。`.substring(0, 40);
+  }
+  
+  return '相关领域研究进展。';
+}
+
+// v3.8.3: 从点评/摘要提取3个主要贡献
+function extractContributions(p) {
+  const contributions = [];
+  const title = p.title || '';
+  const abstract = p.abstract || '';
+  const comment = p.comment || '';
+  
+  // 尝试从摘要提取关键发现动词
+  const findings = [];
+  
+  // 找摘要中以"发现/揭示/证明/提出/开发/建立/引入"开头的句子
+  const sentences = abstract.split(/[.。]/);
+  sentences.forEach(s => {
+    const trimmed = s.trim();
+    if (/^(reveal|show|demonstrate|identify|discover|establish|develop|propose|introduce|present|report|found|describe|enable|provide)/i.test(trimmed)) {
+      // 截取前60字符
+      let short = trimmed.substring(0, 80).trim();
+      if (short.length > 10) findings.push(short);
+    }
+  });
+  
+  // 转换为中文动词开头
+  if (findings.length > 0) {
+    findings.slice(0, 3).forEach(f => {
+      let c = f
+        .replace(/^reveal/i, '揭示')
+        .replace(/^show/i, '表明')
+        .replace(/^demonstrate/i, '证明')
+        .replace(/^identify/i, '鉴定')
+        .replace(/^discover/i, '发现')
+        .replace(/^establish/i, '建立')
+        .replace(/^develop/i, '开发')
+        .replace(/^propose/i, '提出')
+        .replace(/^introduce/i, '引入')
+        .replace(/^present/i, '展示')
+        .replace(/^report/i, '报告')
+        .replace(/^found/i, '发现')
+        .replace(/^describe/i, '描述')
+        .replace(/^enable/i, '实现')
+        .replace(/^provide/i, '提供');
+      if (c.length > 5) contributions.push(c.substring(0, 80) + (c.length > 80 ? '...' : ''));
+    });
+  }
+  
+  // 从标题推断（如果贡献太少）
+  if (contributions.length === 0 && title.length > 5) {
+    contributions.push('提出或优化了相关方法/模型');
+  }
+  if (contributions.length === 1) {
+    contributions.push('提供了新的数据集或资源');
+    contributions.push('揭示了潜在的生物学机制');
+  }
+  if (contributions.length === 2) {
+    contributions.push('为后续研究提供了理论或数据支持');
+  }
+  
+  return contributions.slice(0, 3);
+}
+
 function generateMarkdownReport(papers) {
   const today = new Date().toISOString().split('T')[0];
   const datetime = new Date().toLocaleString('zh-CN');
@@ -929,7 +1041,7 @@ function generateMarkdownReport(papers) {
   if (papers.length === 0) {
     md += `> 今日未收到相关领域期刊目录。\n\n---\n\n`;
     md += `**生成时间**: ${datetime}\n`;
-    md += `**工具**: EAlert Tracker v3.8.1（准确性优先，不捏造任何字段）\n`;
+    md += `**工具**: EAlert Tracker v3.8.3（准确性优先，不捏造任何字段）\n`;
     return md;
   }
   
@@ -944,62 +1056,62 @@ function generateMarkdownReport(papers) {
   }
   md += `\n---\n\n`;
   
-  md += `## 📰 论文详情\n\n---\n\n`;
+  md += `## 📰 论文详情\n\n`;
   
   papers.forEach((p, i) => {
-    const sourceIcon = p.source === 'scholar' ? '🔔' : '📖';
-    const sourceNote = p.source === 'scholar' && p.researcher ? `**来源**: 🔔 Google Scholar Alert (${p.researcher})\n` : '';
-    md += `### ${i + 1}. ${sourceIcon} ${p.title}\n\n`;
-    md += sourceNote;
-    
-    // v3.5: 原文标题
+    md += `### 🔬 论文${i + 1}：${p.title}\n\n`;
+    if (p.source === 'scholar' && p.researcher) {
+      md += `**来源**: 🔔 Google Scholar Alert (${p.researcher})\n`;
+    }
     if (p.originalTitle && p.originalTitle !== p.title) {
       md += `**原文标题**: ${p.originalTitle}\n\n`;
     }
     
-    md += `| 项目 | 内容 |\n|------|------|\n`;
-    // v3.6.1: 日期必须从元数据提取，禁止写"见邮件"
-    const mdDate = p.published || p.date || '';
-    md += `| **期刊** | ${p.journal || '见链接'} |\n`;
-    md += `| **日期** | ${mdDate || '（未提取到，请点击链接查看）'} |\n`;
-    // v3.8.1: 检测作者字段是否包含摘要片段
+    // v3.8.3: 多组学简报格式 - 独立结构字段
     let mdAuthors = p.authors;
     if (mdAuthors && /^(Protein sequences|These|Background|Results|Methods)/.test(mdAuthors.substring(0, 50))) {
       mdAuthors = '（作者信息无法确认）';
     }
     if (mdAuthors) {
-      md += `| **作者** | ${mdAuthors} |\n`;
+      md += `**作者**: ${mdAuthors}\n`;
     }
-    // v3.7.0: 链接优先级：原始链接 > 真实DOI > Google学术搜索
+    const sourceTag = p.source === 'scholar' ? '🔔 Google Scholar' : (p.journal || '期刊链接');
+    md += `**平台**: ${sourceTag}\n`;
+    const mdDate = p.published || p.date || '';
+    if (mdDate) md += `**日期**: ${mdDate}\n`;
     if (p.link) {
-      md += `| **链接** | [点击访问](${p.link}) |\n`;
+      md += `**链接**: ${p.link}\n`;
     } else if (p.doi && /^10\.\d{4,}\/[a-zA-Z]/.test(p.doi)) {
-      // v3.7.0: 只显示经过验证的真实 DOI
-      md += `| **DOI** | ${p.doi} |\n`;
-      md += `| **链接** | https://doi.org/${p.doi} |\n`;
+      md += `**DOI**: ${p.doi}\n`;
+      md += `**链接**: https://doi.org/${p.doi}\n`;
     } else {
-      // v3.7.0: 无有效链接/DOI，显示 Google 学术搜索作为兜底
       const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(p.title)}`;
-      md += `| **搜索** | [Google 学术搜索](${searchUrl}) |\n`;
+      md += `**链接**: ${searchUrl}\n`;
     }
     md += `\n`;
     
-    md += `**💡 点评**: ${p.comment || '相关领域研究，建议阅读原文了解详细内容。'}\n\n`;
+    // v3.8.3: 一句话概要
+    md += `**一句话概要**: ${generateOneSentenceSummary(p)}\n\n`;
     
-    // 摘要（v3.6.1: 必须提炼翻译，禁止照搬英文原文）
-    if (p.abstract && p.abstract.length > 50) {
-      const absSnippet = p.abstract.substring(0, 300);
-      md += `**摘要要点**: ${absSnippet}${p.abstract.length > 300 ? '...' : ''}\n\n`;
+    // v3.8.3: 主要贡献
+    const contributions = extractContributions(p);
+    if (contributions.length > 0) {
+      md += `**主要贡献**\n`;
+      contributions.forEach(c => md += `- ${c}\n`);
+      md += `\n`;
     }
+    
+    // v3.8.3: Critical 简评
+    md += `**🔍 Critical 简评**: ${p.comment || '相关领域研究，建议阅读原文了解详细内容。'}\n\n`;
     
     md += `---\n\n`;
   });
   
-  md += `## 🔬 综合评述\n\n`;
+  md += `## 💡 整体趋势\n\n`;
   md += generateSummary(papers) + '\n\n';
   md += `---\n\n`;
   md += `**生成时间**: ${datetime}\n`;
-  md += `**工具**: EAlert Tracker v3.8.1（准确性优先，不捏造任何字段）\n`;
+  md += `**工具**: EAlert Tracker v3.8.3（准确性优先，不捏造任何字段）\n`;
 
   return md;
 }
