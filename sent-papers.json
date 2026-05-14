@@ -1350,6 +1350,111 @@
       "sent_date": "2026-05-13",
       "reason": "儿童癌症结构变异图谱",
       "republish_notes": ""
+    },
+    {
+      "title": "Cell Press Symposia: Hallmarks of aging",
+      "journal": "Cell",
+      "sent_date": "2026-05-14",
+      "reason": "衰老标志研讨会",
+      "republish_notes": ""
+    },
+    {
+      "title": "A Krüppel of factors regulate T cell residency and exhaustion",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "Krüppel因子调控T细胞驻留与耗竭",
+      "republish_notes": ""
+    },
+    {
+      "title": "CD8(+) T cells turn resilient under stress.",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "CD8+ T细胞营养胁迫适应性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Paving the road for CARs in pediatric autoimmune diseases.",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "儿童自身免疫病CAR疗法",
+      "republish_notes": ""
+    },
+    {
+      "title": "Age- and tissue-dependent diversity of human plasmacytoid dendritic cells uncovers a cycling subset dominant in early life and cancer.",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "pDC年龄和组织依赖多样性，增殖亚群与癌症",
+      "republish_notes": ""
+    },
+    {
+      "title": "CD8+ T cells turn resilient under stress",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "CD8+ T细胞压力韧性（标题变体）",
+      "republish_notes": ""
+    },
+    {
+      "title": "uncovers a cycling subset dominant in early life and cancer",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "增殖亚群与癌症（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "for effector Treg cell differentiation",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "Treg分化（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "anti-tumor immunity under nutrient stress",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "营养胁迫下的抗肿瘤免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "required for Th2 priming. Instead, tuft cell effectors directly activate memory",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "Tuft细胞直接激活记忆Th2（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Nonsense-mediated mRNA decay inhibition reshapes the cancer immunopeptidome",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "NMD抑制重塑肿瘤免疫肽组",
+      "republish_notes": ""
+    },
+    {
+      "title": "macrophages and shapes an immunosuppressive tumor microenvironment",
+      "journal": "Immunity",
+      "sent_date": "2026-05-14",
+      "reason": "巨噬细胞与免疫抑制微环境（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Molecular advances and therapeutic potential in leveraging hepcidin",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-05-14",
+      "reason": "Hepcidin分子进展与治疗潜力",
+      "republish_notes": ""
+    },
+    {
+      "title": "Prostate cancer germline variants with therapeutic implications",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-05-14",
+      "reason": "前列腺癌胚系变异与治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Microbiota: a dawn for cancer metastasis therapy",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-05-14",
+      "reason": "微生物组与癌症转移治疗",
+      "republish_notes": ""
     }
   ]
 }
