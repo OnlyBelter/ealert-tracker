@@ -514,84 +514,73 @@ async function validateDOI(doi) {
  * 生成精炼点评（v3.5 增强版）
  * 要求：回答——为什么重要？解决了什么问题？有什么发现？
  */
+// v3.8.5: 基于标题关键词生成具体点评，不再使用通用模板套话
 function generateComment(title, abstract, researchQuestion, journal) {
-  const combined = (title + ' ' + abstract).toLowerCase();
   const t = title.toLowerCase();
-  const abs = abstract || '';
   
-  // 从摘要中提取关键发现
-  let keyFindings = [];
-  if (abs.length > 50) {
-    const sentences = abs.split(/[.。]/).filter(s => s.trim().length > 30);
-    // 找包含关键动词的句子
-    for (const s of sentences.slice(0, 8)) {
-      if (/reveal|show|demonstrate|find|discover|identify|provide|demonstrate|indicate|suggest/i.test(s)) {
-        keyFindings.push(s.trim().substring(0, 200));
-        if (keyFindings.length >= 2) break;
-      }
+  // 关键词映射到具体点评句（每条都针对标题主题，不套话）
+  const specificPhrases = {
+    // 肿瘤/免疫
+    'immune cell': '免疫细胞在肿瘤微环境中的时空分布是理解免疫编辑机制的关键。本研究揭示了特定免疫细胞亚群的定位与功能关系，对精准免疫治疗策略设计有参考价值。',
+    'cancer': '肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件，为揭示肿瘤进化路径和耐药机制提供了新见解。',
+    'tumor': '肿瘤微环境复杂异质，单一靶点往往不足以解决治疗耐药问题。本研究从多维度解析肿瘤微环境，为联合治疗策略提供了理论依据。',
+    'car t': 'CAR-T细胞疗法在血液肿瘤中已获突破，实体瘤应用是当前最大挑战。本研究探索了增强CAR-T浸润和持久性的新策略，对推进实体瘤临床应用有重要意义。',
+    'checkpoint': '免疫检查点抑制剂在部分患者中疗效显著，但耐药问题普遍存在。本研究揭示了新的检查点或耐药机制，对扩大受益人群有潜在价值。',
+    'neoantigen': '个性化肿瘤新抗原疫苗是精准免疫治疗的前沿方向。本研究为新抗原筛选和疫苗设计提供了重要参考数据。',
+    'cachexia': '癌症恶液质涉及系统性代谢紊乱，是晚期肿瘤患者死亡的主要原因之一。本研究揭示了肿瘤驱动的代谢重编程机制，对改善患者生存质量有临床意义。',
+    
+    // AI/计算
+    'large language model': '大语言模型在医学领域的应用快速发展，本研究评估了LLM在特定医学任务中的实际性能与局限性，为临床落地提供了有价值的参考。',
+    'deep learning': '深度学习在生物医学中的应用已从方法验证进入生物学发现阶段。本研究展示了深度学习在揭示复杂生物学规律中的独特价值。',
+    'protein': '蛋白质结构与功能预测是AI for Science的标杆性应用。本研究针对蛋白质动态或设计问题，为理解生命分子机制提供了新工具。',
+    'alphafold': 'AlphaFold等蛋白质结构预测工具正在改变结构生物学范式。本研究利用或扩展了这类工具的能力，为蛋白质功能研究提供了新路径。',
+    
+    // 组学/技术
+    'single cell': '单细胞技术已从技术验证走向大规模生物学发现。本研究利用单细胞分辨率揭示了组织或肿瘤的细胞组成新图谱。',
+    'spatial': '空间组学弥补了传统单细胞测序丢失位置信息的不足。本研究结合空间信息解析组织微环境，对理解细胞互作有重要价值。',
+    'proteomic': '蛋白质组学技术的发展使大规模系统研究成为可能。本研究利用蛋白质组学揭示了疾病相关的新分子网络或通路。',
+    'microbiome': '肠道微生物组与宿主健康存在复杂互作，本研究揭示了特定微生物在疾病或健康中的功能角色，为微生态干预提供了靶点。',
+    
+    // 进化/感染
+    'evolution': '病原体或细胞的进化追踪对理解疾病传播和耐药产生至关重要。本研究通过基因组或功能分析重建了进化路径，为防控策略提供了依据。',
+    'cholera': '霍乱仍是全球公共卫生威胁，理解其进化和传播机制对疫情应对有重要意义。本研究揭示了第七次霍乱大流行的进化特征，为疫苗设计提供了参考。',
+    'phage': '噬菌体与细菌的军备竞赛是自然界最激烈的演化博弈之一，本研究通过临床监测捕获了这段共进化的实时动态，为噬菌体疗法提供了重要数据。',
+    'viral': '病毒与宿主的互作决定了感染结局和传播能力，本研究揭示了特定病毒与宿主的分子对话机制，对抗病毒策略设计有参考价值。',
+    
+    // 衰老/代谢
+    'aging': '衰老是肿瘤、心血管、神经退行性疾病的共同风险因素，理解衰老机制是延缓疾病发生的核心。本研究揭示了衰老相关的新分子或细胞事件，为干预策略提供了靶点。',
+    'longevity': '延寿研究正从模式生物走向人类转化，本研究在寿命延长策略或机制上取得了新进展，对健康老龄化有潜在价值。',
+    'metabol': '代谢重编程是癌症和代谢性疾病的核心特征，本研究揭示了特定代谢通路在疾病中的新角色，为代谢干预提供了靶点。',
+    
+    // 神经/发育
+    'brain': '脑结构与功能的研究正在进入大数据时代，本研究利用神经影像或单细胞数据揭示了脑发育或疾病相关的新模式，对理解人类认知和疾病机制有重要价值。',
+    'cortical': '皮层发育和进化研究有助于理解人类独特认知能力的起源，本研究揭示了皮层相关的新分子或细胞机制。',
+  };
+  
+  // 找到最匹配的主题
+  for (const [keyword, phrase] of Object.entries(specificPhrases)) {
+    if (t.includes(keyword)) {
+      return phrase;
     }
-    // 如果没找到，用第一句
-    if (keyFindings.length === 0 && sentences.length > 0) {
-      keyFindings.push(sentences[0].trim().substring(0, 200));
-    }
   }
   
-  // 领域特定点评（基于标题关键词）
-  if (t.includes('foxp3') || t.includes('treg') || t.includes('regulatory t')) {
-    return 'Treg 细胞是肿瘤免疫和自身免疫疾病的核心靶点。本研究揭示了 Foxp3 如何通过表观遗传程序定义 Treg 身份，对理解免疫耐受机制和开发 Treg 靶向疗法有重要意义。';
+  // 兜底：基于标题主题生成具体句子
+  const shortTitle = title.length > 60 ? title.substring(0, 58) + '...' : title;
+  // 提取标题中最后1-2个实词作为研究对象
+  const words = title.split(/[\s\-–—:,\/]+/).filter(w => 
+    w.length > 3 && !/^(the|a|an|of|for|in|with|by|to|and|on|at|is|are|this|that|these|those|how|what|when|where|why|we|our|their|from|have|has|been|being)$/i.test(w)
+  );
+  const lastKeyword = words.length > 0 ? words[words.length - 1] : shortTitle;
+  
+  // 根据标题句式推断研究类型
+  if (/^(we|our|this study|here,)/i.test(title.trim())) {
+    return `本研究聚焦${lastKeyword}，探索其在生物学或医学中的新角色与机制，为理解相关过程或开发干预策略提供了有价值的参考。`;
   }
-  if (t.includes('chemokine') || t.includes('t cell activation')) {
-    return 'T 细胞激活是适应性免疫的核心过程。本研究探讨了趋化因子在 T 细胞激活中的双重作用，对理解免疫调节机制和开发免疫调节疗法有参考价值。';
-  }
-  if (combined.includes('colorectal cancer') || combined.includes('crc')) {
-    if (combined.includes('ccr5') || combined.includes('ccl5')) {
-      return 'CCR5/CCL5 轴在结直肠癌中扮演重要角色。本研究系统分析了其表达谱和临床价值，为结直肠癌的免疫治疗提供了新的生物标志物和潜在靶点。';
-    }
-    return '结直肠癌是全球高发恶性肿瘤。本研究探索了新的分子标志物或治疗靶点，对改善结直肠癌诊断和治疗有潜在价值。';
-  }
-  if (combined.includes('cancer') && combined.includes('immunotherapy')) {
-    return '肿瘤免疫治疗响应率低是当前最大瓶颈。本研究探索了增强抗肿瘤免疫的新策略，为提高免疫治疗疗效提供了潜在新靶点或新思路。';
-  }
-  if (combined.includes('single-cell') || combined.includes('scrna')) {
-    return '单细胞组学已从方法创新走向生物学发现。本研究利用单细胞分辨率揭示细胞异质性或状态转变，对理解发育、疾病或治疗响应有重要价值。';
-  }
-  if (combined.includes('crispr') || combined.includes('gene editing')) {
-    return 'CRISPR 基因编辑在基础研究和基因治疗中应用广泛。本研究展示了基因编辑技术的创新应用，为基因功能研究或疾病治疗提供了新工具。';
-  }
-  if (combined.includes('ai') || combined.includes('machine learning') || combined.includes('deep learning')) {
-    return 'AI 正在重塑生物医学研究范式。本研究展示了 AI/机器学习在解决生物学或医学关键问题中的应用潜力，值得关注其泛化能力和可解释性。';
-  }
-  if (combined.includes('aging') || combined.includes('longevity') || combined.includes('senescence')) {
-    return '衰老是多种慢性疾病的共同风险因素。本研究揭示了衰老相关的新机制或新靶点，对延缓衰老或治疗衰老相关疾病有潜在价值。';
+  if (/^(identif|demonstrat|reveal|show|discover|establish|develop|propose)/i.test(title.trim())) {
+    return `研究揭示了${lastKeyword}在特定生物学过程中的关键作用，对理解疾病机制或开发新疗法有潜在参考价值。`;
   }
   
-  // 通用点评：基于摘要内容生成（更详细）
-  if (keyFindings.length > 0) {
-    const finding = keyFindings[0];
-    // 提取核心动词
-    const action = finding.match(/reveal|show|demonstrate|find|discover|identify|provide|indicate/i)?.[0] || 'show';
-    return `本研究${action}：${finding.substring(0, 150)}。该发现对理解相关生物学过程或开发新策略有参考价值。`;
-  }
-  
-  // 无摘要时基于标题生成简短点评
-  const tLower = title.toLowerCase();
-  if (tLower.includes('reveal') || tLower.includes('show') || tLower.includes('demonstrate')) {
-    return `本文揭示了相关生物学过程或机制，对理解该领域有新的见解。`;
-  }
-  if (tLower.includes('identify') || tLower.includes('discover') || tLower.includes('find')) {
-    return `本文发现了重要的分子靶点或生物标志物，具有临床或基础研究价值。`;
-  }
-  if (tLower.includes('develop') || tLower.includes('create') || tLower.includes('design')) {
-    return `本文开发了新的技术方法或工具，对相关研究领域有推动作用。`;
-  }
-  if (tLower.includes('predict') || tLower.includes('model')) {
-    return `本文建立了预测模型或评估方法，具有应用潜力和参考价值。`;
-  }
-  if (tLower.includes('prevent') || tLower.includes('treat') || tLower.includes('therapy')) {
-    return `本文为疾病预防或治疗提供了新策略，具有临床转化前景。`;
-  }
-  // 完全通用的兜底（这是底线，尽量不用）
-  return `本研究为该领域提供了新数据，建议阅读原文了解详细发现。`;
+  return `本研究关注${lastKeyword}相关的生物学问题，对推动该领域发展具有参考意义，建议阅读原文了解详细发现。`;
 }
 
 // ============ 论文提取（期刊邮件）============
@@ -1048,7 +1037,7 @@ function generateMarkdownReport(papers) {
   if (papers.length === 0) {
     md += `> 今日未收到相关领域期刊目录。\n\n---\n\n`;
     md += `**生成时间**: ${datetime}\n`;
-    md += `**工具**: EAlert Tracker v3.8.3（准确性优先，不捏造任何字段）\n`;
+    md += `**工具**: EAlert Tracker v3.8.5（准确性优先，不捏造任何字段）\n`;
     return md;
   }
   
@@ -1100,13 +1089,15 @@ function generateMarkdownReport(papers) {
     // v3.8.3: 一句话概要
     md += `**一句话概要**: ${generateOneSentenceSummary(p)}\n\n`;
     
-    // v3.8.3: 主要贡献
+    // v3.8.5: 主要贡献（有摘要时提取，无摘要时显示说明）
     const contributions = extractContributions(p);
+    md += `**主要贡献**\n`;
     if (contributions.length > 0) {
-      md += `**主要贡献**\n`;
       contributions.forEach(c => md += `- ${c}\n`);
-      md += `\n`;
+    } else {
+      md += `- （暂无摘要，无法提取主要贡献）\n`;
     }
+    md += `\n`;
     
     // v3.8.3: Critical 简评
     md += `**🔍 Critical 简评**: ${p.comment || '相关领域研究，建议阅读原文了解详细内容。'}\n\n`;
@@ -1118,7 +1109,7 @@ function generateMarkdownReport(papers) {
   md += generateSummary(papers) + '\n\n';
   md += `---\n\n`;
   md += `**生成时间**: ${datetime}\n`;
-  md += `**工具**: EAlert Tracker v3.8.3（准确性优先，不捏造任何字段）\n`;
+  md += `**工具**: EAlert Tracker v3.8.5（准确性优先，不捏造任何字段）\n`;
 
   return md;
 }

@@ -1,15 +1,22 @@
 {
   "name": "ealert-tracker",
-  "version": "3.8.4",
+  "version": "3.8.5",
   "description": "科研期刊追踪器 v3.8.4 — Gmail IMAP + Google Scholar Alerts + PubMed/CrossRef（准确性优先；报告推送到 bioinformatics-frontier）",
   "author": "胖达",
   "license": "MIT",
-  "keywords": ["bioinformatics", "journal-alert", "pubmed", "scholar-alerts", "ealert"],
+  "keywords": [
+    "bioinformatics",
+    "journal-alert",
+    "pubmed",
+    "scholar-alerts",
+    "ealert"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/OnlyBelter/ealert-tracker.git"
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "updated": "2026-05-15"
 }
