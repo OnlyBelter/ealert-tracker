@@ -1027,17 +1027,8 @@ function extractContributions(p) {
     });
   }
   
-  // 从标题推断（如果贡献太少）
-  if (contributions.length === 0 && title.length > 5) {
-    contributions.push('提出或优化了相关方法/模型');
-  }
-  if (contributions.length === 1) {
-    contributions.push('提供了新的数据集或资源');
-    contributions.push('揭示了潜在的生物学机制');
-  }
-  if (contributions.length === 2) {
-    contributions.push('为后续研究提供了理论或数据支持');
-  }
+  // v3.8.5: 无实质贡献时不添加通用文本，返回空数组
+  // (通用fallback已移除，避免所有论文显示相同贡献)
   
   return contributions.slice(0, 3);
 }
@@ -1192,7 +1183,7 @@ function generateSummary(papers) {
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.8.4 启动\n');
+  console.log('🚀 EAlert Tracker v3.8.5 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
   
   // Step 1: 获取期刊邮件
@@ -1360,7 +1351,7 @@ async function run() {
   console.log('-'.repeat(60) + '\n');
   
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.8.4 完成！`);
+  console.log(`✅ EAlert Tracker v3.8.5 完成！`);
   console.log(`   📧 期刊邮件: ${journalEmails.length} 封`);
   console.log(`   🔔 Scholar邮件: ${scholarEmails.length} 封`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);

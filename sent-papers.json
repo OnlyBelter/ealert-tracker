@@ -1455,6 +1455,223 @@
       "sent_date": "2026-05-14",
       "reason": "微生物组与癌症转移治疗",
       "republish_notes": ""
+    },
+    {
+      "title": "Long-lived immune cells show promise against cancer in world-first trial.",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "长寿命免疫细胞抗癌首次临床",
+      "republish_notes": ""
+    },
+    {
+      "title": "UK Biobank breach prompts the field of genomics to rethink open science.",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "UK Biobank数据泄露与开放科学反思",
+      "republish_notes": ""
+    },
+    {
+      "title": "Adaptive cellular evolution in the intestine of hyperdiverse cichlid fishes.",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "慈鲷鱼肠道适应性细胞进化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Large language models improve clinical decision making of medical students through patient simulation and structured feedback: a randomized controlled trial.",
+      "journal": "BMC medical education",
+      "sent_date": "2026-05-15",
+      "reason": "LLM提升医学生临床决策RCT",
+      "republish_notes": ""
+    },
+    {
+      "title": "Palaeoproteomic analysis of ancient enamel proteins extracted from Middle",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "古釉质蛋白古蛋白质组学（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "[citation] Proteinflux: Accurate, Rapid and Scalable Generative Prediction of Proteindynamics Driven by Post-translational Modifications",
+      "journal": "Scholar",
+      "sent_date": "2026-05-15",
+      "reason": "蛋白质动力学生成预测模型",
+      "republish_notes": ""
+    },
+    {
+      "title": "evolution in the intestine of hyperdiverse cichlid fishes",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "慈鲷鱼肠道进化（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "control influences large language models",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "控制影响LLM（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "triple-negative breast cancer in response to chemotherapy",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "TNBC化疗响应（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "analysis and design of protein energy landscapes",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "蛋白质能量景观分析与设计",
+      "republish_notes": ""
+    },
+    {
+      "title": "promote healthy ageing, lower disease risk and extend longevity.",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "促进健康衰老降低疾病风险（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "gene expression patterns driving species-specific cortical features",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "基因表达驱动物种特异性皮层特征",
+      "republish_notes": ""
+    },
+    {
+      "title": "macrostructure brain charts for the human lifespan",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "人脑宏观结构全生命周期图谱",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bacterial-viral conflicts shape cholera evolution",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "细菌-病毒冲突塑造霍乱进化",
+      "republish_notes": ""
+    },
+    {
+      "title": "How effective is the personalized off-label use of targeted cancer treatment?",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "个性化超适应症靶向癌症治疗有效性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Multiplexed magnetic resonance imaging",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "多重磁共振成像",
+      "republish_notes": ""
+    },
+    {
+      "title": "reconstituted protein machinery.",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "重构蛋白质机器（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Capturing dynamic phage-pathogen coevolution by clinical surveillance",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "临床监测捕捉噬菌体-病原体协同进化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Evolution of pandemic cholera at its global source",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "大流行霍乱在全球源头的进化",
+      "republish_notes": ""
+    },
+    {
+      "title": "detecting and responding to a lack of protein.",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "蛋白质缺乏检测与应答（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "B cell imprinting in children impairs antibodies to the haemagglutinin stalk",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "儿童B细胞印迹损害血凝素茎部抗体",
+      "republish_notes": ""
+    },
+    {
+      "title": "Proteasome-guided haem signalling axis contributes to T cell exhaustion",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "蛋白酶体-血红素信号轴促进T细胞耗竭",
+      "republish_notes": ""
+    },
+    {
+      "title": "Prospective evaluation of genomics-guided off-label treatment",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "基因组学指导超适应症治疗的前瞻性评估",
+      "republish_notes": ""
+    },
+    {
+      "title": "tandem with more stringent biomarker selection.",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "更严格的生物标志物选择（标题截断）",
+      "republish_notes": ""
+    },
+    {
+      "title": "A glucocorticoid-FAS axis controls immune evasion during metastatic seeding",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "糖皮质激素-FAS轴控制转移种植免疫逃逸",
+      "republish_notes": ""
+    },
+    {
+      "title": "Immune evasive DNA donors and recombinases license kilobase-scale writing",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "免疫逃逸DNA供体重组酶实现千碱基级DNA写入",
+      "republish_notes": ""
+    },
+    {
+      "title": "Structures of Marburgvirus glycoprotein and its complex with NPC1 receptor",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "马尔堡病毒糖蛋白与NPC1受体复合物结构",
+      "republish_notes": ""
+    },
+    {
+      "title": "Structural basis of supercoiling-induced CRISPR-Cas9 off-target activity",
+      "journal": "Nature",
+      "sent_date": "2026-05-15",
+      "reason": "超螺旋诱导CRISPR-Cas9脱靶的结构基础",
+      "republish_notes": ""
+    },
+    {
+      "title": "Respiratory viral infections prime accelerated lung cancer growth",
+      "journal": "Cell",
+      "sent_date": "2026-05-15",
+      "reason": "呼吸道病毒感染促进肺癌加速生长",
+      "republish_notes": ""
+    },
+    {
+      "title": "An activated wheat CCG10-NLR immune receptor forms an octameric resistosome",
+      "journal": "Cell",
+      "sent_date": "2026-05-15",
+      "reason": "小麦CCG10-NLR免疫受体八聚体抗病小体",
+      "republish_notes": ""
+    },
+    {
+      "title": "Immune-microbiome coordination defines interferon setpoints in healthy humans",
+      "journal": "Cell",
+      "sent_date": "2026-05-15",
+      "reason": "免疫-微生物组协调定义健康人干扰素设定点",
+      "republish_notes": ""
     }
   ]
 }
