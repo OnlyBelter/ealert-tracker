@@ -8,7 +8,7 @@
 
 ## 功能特点
 
-- 📅 **每日自动追踪** — 通过 Gmail IMAP 读取最近 24 小时期刊目录邮件
+- 📅 **每日自动追踪** — 通过 Gmail IMAP 读取最近 48 小时期刊目录邮件（由 Python pipeline 抓取与结构化解析）
 - 📰 **多期刊覆盖** — Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等
 - 🔔 **Google Scholar Alerts** — 自动追踪指定研究者新发表论文（Shane Crotty、Faisal Mahmood 等）
 - 🤖 **AI 辅助摘要** — 自动提取标题、作者、期刊、链接、研究问题、主要贡献、专家点评
@@ -32,7 +32,9 @@ ealert-tracker/
 ├── sent-papers.json       # 已发送论文记录（防重复发送）
 ├── scripts/
 │   ├── tracker.js         # Node.js 主脚本（v3.8.6）
-│   └── email_reader.py    # Python 邮件读取脚本（备用）
+│   ├── email_pipeline.py  # Python：IMAP 抓取 + 解析，输出 papers JSON（主流程使用）
+│   ├── email_reader.py    # Python：期刊 ToC 邮件解析（HTML 结构优先）
+│   └── parse_scholar_emails.py # Python：Google Scholar Alerts 邮件解析器
 ├── references/
 │   ├── INSTALL.md         # 安装说明
 │   └── keywords.md        # 领域关键词参考
@@ -69,6 +71,10 @@ cd ~/.qclaw/workspace/ealert-tracker
 node scripts/tracker.js
 ```
 
+运行时说明：
+- `tracker.js` 会调用 `python3 scripts/email_pipeline.py --hours 48 --json` 抓取并结构化解析邮件。
+- 如需单独调试抓取/解析，可运行 `python3 scripts/email_pipeline.py --hours 48` 查看 JSON 输出。
+
 ### 3. 订阅期刊邮件
 
 在对应期刊官网注册 Table of Contents（ToC）提醒：
@@ -82,7 +88,7 @@ node scripts/tracker.js
 
 | 任务 | 时间 | 功能 |
 |------|------|------|
-| 每日期刊追踪 | 每天 08:30 (Asia/Hong_Kong) | 读取 24h 邮件 → 生成报告 → QQ + GitHub |
+| 每日期刊追踪 | 每天 08:30 (Asia/Hong_Kong) | 读取 48h 邮件 → 生成报告 → QQ + GitHub |
 | 每周期刊汇总 | 每周日 11:00 (Asia/Hong_Kong) | 汇总一周 → 综合评述 → QQ + GitHub |
 
 **Cron Task ID**: `d7e631a3-be6c-422f-a74a-f61c5641c23e`

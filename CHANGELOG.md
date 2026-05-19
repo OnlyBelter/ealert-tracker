@@ -4,6 +4,20 @@
 
 ---
 
+## [v3.8.6] — 2026-05-19
+
+> **本次重点**：邮件抓取与解析流程升级为 “Python pipeline → papers JSON → Node 下游处理”，提升稳定性与结构化提取质量。
+
+### ✨ 新增
+
+- 新增 `scripts/email_pipeline.py`：统一抓取近 48 小时的期刊 ToC + Google Scholar Alerts 邮件，并直接输出 `papers` JSON（供 `tracker.js` 消费）。
+
+### 🔧 改进
+
+- `scripts/tracker.js`：主流程不再依赖 Node IMAP 抓取与解析，改为调用 Python pipeline 获取候选论文后再进行关键词过滤、PubMed/CrossRef 补全、报告生成与归档。
+- `scripts/email_reader.py`：期刊邮件解析改为 **HTML 结构优先**（遍历 `<a href>` 提取标题+链接），并加入 URL 规范化（去跟踪参数/解包常见跳转参数）与域名覆盖补全（含 `science.org`）。
+- 文档与元信息：版本号统一更新为 `v3.8.6`（README / SKILL / config / package）。
+
 ## [v3.7.0] — 2026-05-08
 
 > **⚠️ 准确性原则（最高优先级）**：绝不捏造任何字段，无法提取时明确标注占位符。
