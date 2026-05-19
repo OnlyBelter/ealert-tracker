@@ -153,7 +153,7 @@ def build_papers(hours: int, max_emails: int) -> List[Dict[str, Any]]:
 
     email_reader, parse_scholar_emails = _import_local_modules()
 
-    now = datetime.now()
+    now = datetime.now().astimezone()
     since = now - timedelta(hours=hours)
     imap_since = (now - timedelta(days=max(1, int(hours / 24) + 1))).strftime("%d-%b-%Y")
 
