@@ -1,10 +1,10 @@
 ---
 name: ealert-tracker
-description: "科研期刊追踪器 v3.8.6。通过 Gmail IMAP 读取最近 48 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告。⚠️ 准确性优先原则：绝不捏造任何字段，无法确认时明确标注占位符。由 AI 发送 QQ + 推送 GitHub。"
+description: "科研期刊追踪器 v3.8.7。通过 Gmail IMAP 读取最近 48 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告。⚠️ 准确性优先原则：绝不捏造任何字段，无法确认时明确标注占位符。由 AI 发送 QQ + 推送 GitHub。"
 metadata:
   openclaw:
     emoji: "📚"
-    version: "3.8.6"
+    version: "3.8.7"
     requires:
       bins:
         - python3
@@ -13,7 +13,7 @@ metadata:
         - IMAP_PASS
 ---
 
-# EAlert Tracker v3.8.6 - 科研期刊追踪器
+# EAlert Tracker v3.8.7 - 科研期刊追踪器
 
 > ⚠️ **准确性原则（最高优先级）**：提供的信息必须经过确认，绝不捏造任何字段。所有字段（DOI、作者、日期、摘要）必须从可靠 API 验证获取，无法提取时明确标注「（XXX信息无法确认）」，绝不猜测。
 

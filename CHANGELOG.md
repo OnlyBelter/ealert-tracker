@@ -4,6 +4,21 @@
 
 ---
 
+## [v3.8.7] — 2026-05-19
+
+> **本次重点**：修复 Nature 加密跟踪链接（links.springernature.com）无法打开的问题。
+
+### 🔧 修复
+
+- `scripts/email_reader.py`：新增 `_unwrap_springernature_link()` 函数，通过 HTTP 请求解包 Nature 加密跟踪链接，获取真实论文 URL。
+- 自动去除解包后 URL 中的跟踪参数（utm_* 等）。
+
+### ⚠️ 已知限制
+
+- Nature 跟踪链接有时效性，邮件中的链接过期后会重定向到 Google 搜索页。建议在邮件收到后尽快处理。
+
+---
+
 ## [v3.8.6] — 2026-05-19
 
 > **本次重点**：邮件抓取与解析流程升级为 “Python pipeline → papers JSON → Node 下游处理”，提升稳定性与结构化提取质量。

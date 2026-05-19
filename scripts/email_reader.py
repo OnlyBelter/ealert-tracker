@@ -145,6 +145,36 @@ class _LinkExtractor(HTMLParser):
         self._text_chunks = []
 
 
+def _unwrap_springernature_link(url):
+    """解包 Nature 加密跟踪链接 (links.springernature.com)"""
+    if 'links.springernature.com' not in url.lower():
+        return url
+    try:
+        import urllib.request
+        # 只跟随重定向，不下载内容
+        class RedirectHandler(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, req, fp, code, msg, headers, newurl):
+                return None  # 停止跟随，返回最终 URL
+        opener = urllib.request.build_opener(RedirectHandler)
+        opener.addheaders = [('User-Agent', 'Mozilla/5.0')]
+        try:
+            response = opener.open(url, timeout=5)
+            final_url = response.geturl()
+            if final_url and 'links.springernature.com' not in final_url.lower():
+                return final_url
+        except urllib.error.HTTPError as e:
+            # 302 重定向时，从 Location 头获取目标
+            if e.code in (301, 302, 303, 307, 308) and 'Location' in e.headers:
+                final_url = e.headers['Location']
+                if final_url and 'links.springernature.com' not in final_url.lower():
+                    return final_url
+        except Exception:
+            pass
+    except Exception:
+        pass
+    return url
+
+
 def _normalize_url(url):
     if not url:
         return ''
@@ -153,6 +183,9 @@ def _normalize_url(url):
         url = 'https://' + url
     if not url.lower().startswith(('http://', 'https://')):
         return ''
+
+    # 解包 Nature 加密跟踪链接
+    url = _unwrap_springernature_link(url)
 
     parsed = urlparse(url)
     qs = parse_qs(parsed.query or '')

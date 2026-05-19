@@ -1672,6 +1672,97 @@
       "sent_date": "2026-05-15",
       "reason": "免疫-微生物组协调定义健康人干扰素设定点",
       "republish_notes": ""
+    },
+    {
+      "title": "Thymus renaissance poised to boost health and longevity.",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "胸腺再生与健康长寿研究，延寿领域从模式生物走向人类转化的重要进展",
+      "republish_notes": ""
+    },
+    {
+      "title": "Intellia heads to FDA with first in vivo CRISPR-based gene editing therapy.",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "Intellia体内CRISPR疗法递交FDA里程碑",
+      "republish_notes": ""
+    },
+    {
+      "title": "Excalipoint's trispecific T cell engagers for solid tumors.",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "三特异性抗体平台在实体瘤治疗的重要进展",
+      "republish_notes": ""
+    },
+    {
+      "title": "UK's first go-ahead for CRISPR-edited plant",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "英国首个CRISPR编辑植物获批，监管松绑信号",
+      "republish_notes": ""
+    },
+    {
+      "title": "Re-evaluating the site-directed nuclease classification as a regulatory trigger for genome-edited plant products",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "基因编辑植物监管分类重新评估",
+      "republish_notes": ""
+    },
+    {
+      "title": "Excalipoint's trispecific T cell engagers for solid tumors",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "与Excalipoint trispecific T cell engagers第2篇高度相似",
+      "republish_notes": "Duplicate of above"
+    },
+    {
+      "title": "Synthetic biology's uncertain regulatory future in the wake of Loper Bright Enterprises v. Raimondo",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "合成生物学监管不确定性，Loper Bright案影响",
+      "republish_notes": ""
+    },
+    {
+      "title": "Programming B cell immunity from hematopoietic stem cells",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "从造血干细胞编程B细胞免疫，细胞治疗新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tracking microbiome-derived cell-free RNA modifications detects colorectal cancer",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "微生物组cfRNA修饰检测结直肠癌，液体活检新方向",
+      "republish_notes": ""
+    },
+    {
+      "title": "The promises and challenges of neoantigen cancer vaccines",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "新抗原癌症疫苗综述，个性化免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Modifications of microbiome-derived cell-free RNA in plasma discriminates colorectal cancer samples",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "血浆微生物cfRNA修饰区分结直肠癌，与第9篇互证",
+      "republish_notes": ""
+    },
+    {
+      "title": "Evolution-guided protein design of IscB for persistent epigenome editing in vivo",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "IscB演化引导蛋白设计实现持久表观基因组编辑",
+      "republish_notes": ""
+    },
+    {
+      "title": "Single-cell polygenic risk scores dissect cellular and molecular heterogeneity of complex human diseases",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-05-19",
+      "reason": "单细胞多基因风险评分解析复杂疾病异质性，多组学与AI for Science交叉",
+      "republish_notes": ""
     }
   ]
 }
