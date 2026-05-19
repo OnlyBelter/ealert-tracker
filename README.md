@@ -2,7 +2,7 @@
 
 > 科研期刊追踪器 — 自动追踪 Nature、Science、Cell 等主流期刊最新论文，生成结构化报告。
 
-[![Version](https://img.shields.io/badge/version-v3.6.1-blue.svg)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v3.8.6-blue.svg)](./CHANGELOG.md)
 
 ---
 
@@ -31,7 +31,7 @@ ealert-tracker/
 ├── .env                   # 邮箱 IMAP 凭证（不提交 Git）
 ├── sent-papers.json       # 已发送论文记录（防重复发送）
 ├── scripts/
-│   ├── tracker.js         # Node.js 主脚本（v3.6.1）
+│   ├── tracker.js         # Node.js 主脚本（v3.8.6）
 │   └── email_reader.py    # Python 邮件读取脚本（备用）
 ├── references/
 │   ├── INSTALL.md         # 安装说明

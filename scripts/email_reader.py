@@ -15,9 +15,12 @@ v2.0 — 重写版（2026-05-08）
 import imaplib
 import email
 from email.header import decode_header
+from email.utils import parsedate_to_datetime
+from html.parser import HTMLParser
 import json
 import os
 import re
+from urllib.parse import parse_qs, unquote, urlencode, urlparse, urlunparse
 from datetime import datetime, timedelta
 
 # ============ 从 .env 读取配置 ============
@@ -49,6 +52,7 @@ OUTPUT_TXT = '/tmp/journal_emails.txt'
 JOURNAL_DOMAINS = [
     'nature.com',
     'aaas.org',
+    'science.org',
     'sciencepubs.org',
     'cell.com',
     'pnas.org',
@@ -101,6 +105,146 @@ def html_to_text(html):
     text = re.sub(r'[ \t]+', ' ', text)
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text.strip()
+
+
+class _LinkExtractor(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self._in_a = False
+        self._href = ''
+        self._text_chunks = []
+        self.links = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() != 'a':
+            return
+        href = ''
+        for k, v in attrs:
+            if k.lower() == 'href':
+                href = v or ''
+                break
+        self._in_a = True
+        self._href = href
+        self._text_chunks = []
+
+    def handle_data(self, data):
+        if not self._in_a:
+            return
+        if data:
+            self._text_chunks.append(data)
+
+    def handle_endtag(self, tag):
+        if tag.lower() != 'a' or not self._in_a:
+            return
+        text = re.sub(r'\s+', ' ', ''.join(self._text_chunks)).strip()
+        href = (self._href or '').strip()
+        if href:
+            self.links.append((text, href))
+        self._in_a = False
+        self._href = ''
+        self._text_chunks = []
+
+
+def _normalize_url(url):
+    if not url:
+        return ''
+    url = url.strip()
+    if url.startswith('www.'):
+        url = 'https://' + url
+    if not url.lower().startswith(('http://', 'https://')):
+        return ''
+
+    parsed = urlparse(url)
+    qs = parse_qs(parsed.query or '')
+
+    for k in ('url', 'u', 'redirect', 'redirectUrl', 'target', 'dest', 'destination'):
+        if k in qs and qs[k]:
+            candidate = unquote(qs[k][0])
+            if candidate.lower().startswith(('http://', 'https://')):
+                url = candidate
+                parsed = urlparse(url)
+                break
+
+    drop_prefixes = (
+        'utm_',
+        'WT.',
+        'wt_',
+        'spm',
+        'cmpid',
+        'cid',
+        'mc_cid',
+        'mc_eid',
+        'mkt_tok',
+    )
+    kept_pairs = []
+    for k, v in parse_qs(parsed.query or '', keep_blank_values=True).items():
+        if any(k.startswith(p) for p in drop_prefixes):
+            continue
+        for vv in v:
+            kept_pairs.append((k, vv))
+
+    new_query = urlencode(kept_pairs, doseq=True) if kept_pairs else ''
+    parsed = parsed._replace(query=new_query, fragment='')
+    return urlunparse(parsed)
+
+
+def _extract_articles_from_html(html, subject):
+    if not html:
+        return []
+    parser = _LinkExtractor()
+    try:
+        parser.feed(html)
+    except Exception:
+        return []
+
+    journal = extract_journal_from_subject(subject)
+    articles = []
+    seen = set()
+    for text, href in parser.links:
+        title = re.sub(r'\s+', ' ', (text or '')).strip()
+        if len(title) < 20 or len(title) > 250:
+            continue
+        lower_title = title.lower()
+        if any(
+            x in lower_title
+            for x in (
+                'read more',
+                'view article',
+                'full text',
+                'abstract',
+                'pdf',
+                'table of contents',
+                'unsubscribe',
+                'privacy',
+                'manage preferences',
+                'sign up',
+                'register',
+                'log in',
+                'contact us',
+            )
+        ):
+            continue
+        if not re.search(r'[a-z]{3,}', title):
+            continue
+
+        url = _normalize_url(href)
+        if not url:
+            continue
+        lower_url = url.lower()
+        if 'unsubscribe' in lower_url:
+            continue
+        if not any(d in lower_url for d in JOURNAL_DOMAINS) and 'doi.org/' not in lower_url:
+            continue
+
+        title_key = re.sub(r'\s+', '', lower_title)[:80]
+        url_key = lower_url.split('?', 1)[0][:160]
+        key = (title_key, url_key)
+        if key in seen:
+            continue
+        seen.add(key)
+        articles.append({'title': title, 'url': url, 'date': '', 'journal': journal})
+
+    return articles
 
 
 def is_journal_email(sender):
@@ -296,10 +440,54 @@ def extract_articles_from_text(text, subject):
     return articles
 
 
+def _extract_best_body(msg):
+    if msg is None:
+        return '', ''
+
+    best_html = ''
+    best_text = ''
+
+    if msg.is_multipart():
+        for part in msg.walk():
+            ct = (part.get_content_type() or '').lower()
+            if ct.startswith('multipart/'):
+                continue
+            if part.get('Content-Disposition', '').lower().startswith('attachment'):
+                continue
+
+            payload = part.get_payload(decode=True)
+            if payload is None:
+                continue
+            charset = part.get_content_charset() or 'utf-8'
+            try:
+                decoded = payload.decode(charset, errors='replace')
+            except Exception:
+                decoded = payload.decode('utf-8', errors='replace')
+
+            if ct == 'text/html' and len(decoded) > len(best_html):
+                best_html = decoded
+            elif ct == 'text/plain' and len(decoded) > len(best_text):
+                best_text = decoded
+    else:
+        payload = msg.get_payload(decode=True)
+        if payload is not None:
+            charset = msg.get_content_charset() or 'utf-8'
+            try:
+                decoded = payload.decode(charset, errors='replace')
+            except Exception:
+                decoded = payload.decode('utf-8', errors='replace')
+            if (msg.get_content_type() or '').lower() == 'text/html':
+                best_html = decoded
+            else:
+                best_text = decoded
+
+    return best_html, best_text
+
+
 def fetch_emails():
     """连接 Gmail，读取最近期刊邮件"""
     if not IMAP_PASS:
-        print("错误：需要 GMAIL_PASS，在 .env 文件中设置")
+        print("错误：需要 IMAP_PASS，在 .env 文件中设置")
         return []
 
     print(f"连接 Gmail: {IMAP_USER}")
@@ -315,7 +503,7 @@ def fetch_emails():
     try:
         mail.select('INBOX')
 
-        # 搜索最近 48 小时邮件
+        # 搜索最近 48 小时邮件（IMAP SINCE 只有日期粒度，需后续再按 Date 精确过滤）
         since = datetime.now() - timedelta(days=2)
         date_str = since.strftime('%d-%b-%Y')
 
@@ -348,31 +536,21 @@ def fetch_emails():
                 msg_date = msg.get('Date', '')
                 journal = extract_journal_from_subject(subject)
 
+                try:
+                    msg_dt = parsedate_to_datetime(msg_date) if msg_date else None
+                except Exception:
+                    msg_dt = None
+                if msg_dt and msg_dt < since:
+                    continue
+
                 print(f"  处理: {subject[:60]}")
 
-                text = ''
-                if msg.is_multipart():
-                    for part in msg.walk():
-                        ct = part.get_content_type()
-                        if ct == 'text/html':
-                            try:
-                                charset = part.get_content_charset() or 'utf-8'
-                                html = part.get_payload(decode=True).decode(charset, errors='replace')
-                                text = html_to_text(html)
-                                if len(text) > 200:
-                                    break
-                            except Exception:
-                                pass
-                else:
-                    try:
-                        charset = msg.get_content_charset() or 'utf-8'
-                        html = msg.get_payload(decode=True).decode(charset, errors='replace')
-                        text = html_to_text(html)
-                    except Exception:
-                        pass
+                html, plain_text = _extract_best_body(msg)
+                text = html_to_text(html) if html else (plain_text or '')
 
-                # v2.0: 提取带 URL 的文章列表
-                articles = extract_articles_from_text(text, subject)
+                articles = _extract_articles_from_html(html, subject)
+                if not articles:
+                    articles = extract_articles_from_text(text, subject)
 
                 if articles:
                     results.append({

@@ -1,10 +1,10 @@
 ---
 name: ealert-tracker
-description: "科研期刊追踪器 v3.8.0。通过 Gmail IMAP 读取最近 48 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告。⚠️ 准确性优先原则：绝不捏造任何字段，无法确认时明确标注占位符。由 AI 发送 QQ + 推送 GitHub。"
+description: "科研期刊追踪器 v3.8.6。通过 Gmail IMAP 读取最近 48 小时的期刊目录邮件（Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等），提取所有文章标题，生成 Markdown 格式的完整期刊摘要报告。⚠️ 准确性优先原则：绝不捏造任何字段，无法确认时明确标注占位符。由 AI 发送 QQ + 推送 GitHub。"
 metadata:
   openclaw:
     emoji: "📚"
-    version: "3.8.0"
+    version: "3.8.6"
     requires:
       bins:
         - python3
@@ -13,7 +13,7 @@ metadata:
         - IMAP_PASS
 ---
 
-# EAlert Tracker v3.8.0 - 科研期刊追踪器
+# EAlert Tracker v3.8.6 - 科研期刊追踪器
 
 > ⚠️ **准确性原则（最高优先级）**：提供的信息必须经过确认，绝不捏造任何字段。所有字段（DOI、作者、日期、摘要）必须从可靠 API 验证获取，无法提取时明确标注「（XXX信息无法确认）」，绝不猜测。
 
@@ -70,7 +70,7 @@ AI 读取生成的报告，通过 message 工具发送到 QQ，并推送到 GitH
 ├─────────────────────────────────────────────┤
 │  1. 执行 Python 脚本                        │
 │     python3 scripts/email_reader.py          │
-│     ↓ (读取最近 24h 期刊邮件)               │
+│     ↓ (读取最近 48h 期刊邮件)               │
 │  2. 保存 JSON → /tmp/journal_emails.json   │
 │     ↓                                      │
 │  3. AI 读取 JSON                          │
@@ -109,7 +109,7 @@ AI 读取生成的报告，通过 message 工具发送到 QQ，并推送到 GitH
 
 ```
 ealert-tracker/
-├── SKILL.md                    # 本文档 (v3.6.1)
+├── SKILL.md                    # 本文档 (v3.8.6)
 ├── .env                        # 邮箱配置
 ├── template.md                 # 每日报告模板（生成前必读）
 ├── scripts/
@@ -123,7 +123,7 @@ ealert-tracker/
 
 | 任务 | ID | 时间 | 功能 |
 |------|-----|------|------|
-| 每日期刊追踪 | `d7e631a3-be6c-422f-a74a-f61c5641c23e` | 每天 9:00 AM | 读取 24h 邮件 → 生成报告 → QQ + GitHub |
+| 每日期刊追踪 | `d7e631a3-be6c-422f-a74a-f61c5641c23e` | 每天 9:00 AM | 读取 48h 邮件 → 生成报告 → QQ + GitHub |
 | 每周综合汇总 | `weekly-journal-summary` | 每周日 10:00 AM | 汇总一周 → 综合评述 → QQ + GitHub |
 
 ## Python 脚本详解
@@ -132,21 +132,39 @@ ealert-tracker/
 
 **功能**：
 - 连接 Gmail IMAP (SSL 端口 993)
-- 搜索最近 **24 小时**期刊邮件
+- 搜索最近 **48 小时**期刊邮件
 - 支持的域名：nature.com, aaas.org, sciencepubs.org, cell.com, pnas.org, elsevier.com
-- HTML 转纯文本
-- 提取文章标题（通过分析文本行特征）
+- 优先解析 HTML 结构（`<a href>`）提取「标题 + 链接」，文本启发式作为兜底
+- HTML → 纯文本（仅用于预览与兜底）
 - 保存 JSON 和 TXT 两种格式
 
 **关键配置**：
 ```python
-# 读取最近 24 小时
-since = datetime.now() - timedelta(days=1)
+# 读取最近 48 小时
+since = datetime.now() - timedelta(days=2)
 ```
 
 **输出**：
 - `/tmp/journal_emails.json` - 结构化 JSON
 - `/tmp/journal_emails.txt` - 纯文本预览
+
+### Gmail 邮件结构化解析（重点）
+
+目标：把 Gmail 邮件的「半结构化 HTML」稳定转换成可用于下游生成报告的结构化 JSON，并在无法确认时输出空字符串而不是猜测。
+
+推荐解析顺序：
+1. **解析 MIME**：优先选择 `text/html`，没有再退回 `text/plain`。
+2. **HTML 结构提取**：遍历所有 `<a href="...">anchor_text</a>`：
+   - `anchor_text` 满足长度范围（避免导航按钮 / “Read more”）
+   - `href` 必须是 http(s) 链接
+   - 域名在允许列表内（或 `doi.org`）
+3. **URL 规范化**：尽量去掉跟踪参数并解包常见跳转参数（例如 `url=` / `redirect=`），得到更稳定的去重键。
+4. **兜底策略**：若 HTML 结构提取为空，再使用纯文本启发式：识别疑似标题行 + 向后查找紧邻链接行。
+
+输出字段约束：
+- `title`：必须来自邮件正文（HTML anchor 文本或文本行），禁止改写、禁止猜测。
+- `url`：必须来自邮件正文中的可见链接或 href，无法确认时输出空字符串。
+- `date`：邮件中无法确认时输出空字符串（报告阶段再从 DOI/官网/API 验证）。
 
 ### journal_emails.json 结构
 

@@ -1,5 +1,5 @@
 /**
- * EAlert Tracker v3.8.4
+ * EAlert Tracker v3.8.6
  * 
  * ⚠️ 准确性原则（最高优先级）：
  * 提供的信息必须经过确认，绝不捏造任何字段。
@@ -21,7 +21,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execSync, spawnSync } = require('child_process');
 // v3.8.1: 移除 nodemailer，不再发送邮件
 // const nodemailer = require('nodemailer');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
@@ -583,6 +583,24 @@ function generateComment(title, abstract, researchQuestion, journal) {
   return `本研究关注${lastKeyword}相关的生物学问题，对推动该领域发展具有参考意义，建议阅读原文了解详细发现。`;
 }
 
+function loadPapersFromPython(hours = 48) {
+  const pythonScript = path.join(__dirname, 'email_pipeline.py');
+  const res = spawnSync('python3', [pythonScript, '--hours', String(hours), '--json'], {
+    encoding: 'utf-8',
+    maxBuffer: 1024 * 1024 * 20
+  });
+
+  if (res.error) throw res.error;
+  if (res.status !== 0) {
+    const errText = (res.stderr || '').trim();
+    throw new Error(errText || `email_pipeline.py exited with code ${res.status}`);
+  }
+  const raw = (res.stdout || '').trim();
+  if (!raw) return [];
+  const parsed = JSON.parse(raw);
+  return Array.isArray(parsed.papers) ? parsed.papers : [];
+}
+
 // ============ 论文提取（期刊邮件）============
 
 function extractPapersFromEmail(text, subject) {
@@ -1037,7 +1055,7 @@ function generateMarkdownReport(papers) {
   if (papers.length === 0) {
     md += `> 今日未收到相关领域期刊目录。\n\n---\n\n`;
     md += `**生成时间**: ${datetime}\n`;
-    md += `**工具**: EAlert Tracker v3.8.5（准确性优先，不捏造任何字段）\n`;
+    md += `**工具**: EAlert Tracker v3.8.6（准确性优先，不捏造任何字段）\n`;
     return md;
   }
   
@@ -1109,7 +1127,7 @@ function generateMarkdownReport(papers) {
   md += generateSummary(papers) + '\n\n';
   md += `---\n\n`;
   md += `**生成时间**: ${datetime}\n`;
-  md += `**工具**: EAlert Tracker v3.8.5（准确性优先，不捏造任何字段）\n`;
+  md += `**工具**: EAlert Tracker v3.8.6（准确性优先，不捏造任何字段）\n`;
 
   return md;
 }
@@ -1174,52 +1192,26 @@ function generateSummary(papers) {
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.8.5 启动\n');
+  console.log('🚀 EAlert Tracker v3.8.6 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
   
-  // Step 1: 获取期刊邮件
-  console.log('📬 读取最近 24h 期刊邮件...');
-  let emails = [];
+  console.log('📬 读取最近 48h 期刊/Scholar 邮件（Python）...');
+  let papers = [];
   try {
-    emails = await fetchRecentEmails(24);
+    papers = loadPapersFromPython(48);
   } catch (err) {
-    console.error('❌ 邮件读取失败:', err.message);
+    console.error('❌ 邮件读取失败:', err.message || err);
   }
   
-  console.log(`  → 找到 ${emails.length} 封期刊邮件\n`);
+  console.log(`  → 提取 ${papers.length} 篇候选论文\n`);
   
-  if (emails.length === 0) {
-    // v3.8.1: 移除 sendEmail，无邮件时只输出提示（由 AI 决定是否发送）
-    console.log('⚠️ 今日无期刊邮件');
+  if (papers.length === 0) {
+    console.log('⚠️ 今日无候选论文');
     return;
   }
   
-  // Step 2: 分类提取论文
-  console.log('\n🔍 解析邮件提取论文...');
-  const journalEmails = emails.filter(e => e.type === 'journal');
-  const scholarEmails = emails.filter(e => e.type === 'scholar');
-  
-  let allPapers = [];
-  
-  // 期刊邮件解析
-  for (const email of journalEmails) {
-    const papers = extractPapersFromEmail(email.text, email.subject);
-    if (papers.length > 0) {
-      console.log(`  📖 [期刊] ${email.subject.substring(0, 50)}: ${papers.length} 篇`);
-      allPapers = allPapers.concat(papers);
-    }
-  }
-  
-  // Scholar 邮件解析
-  let scholarPapers = [];
-  for (const email of scholarEmails) {
-    const papers = extractPapersFromScholarEmail(email.text, email.subject);
-    if (papers.length > 0) {
-      console.log(`  🔔 [Scholar] ${email.subject.substring(0, 50)}: ${papers.length} 篇`);
-      scholarPapers = scholarPapers.concat(papers);
-    }
-  }
-  
+  const allPapers = papers.filter(p => p.source !== 'scholar');
+  const scholarPapers = papers.filter(p => p.source === 'scholar');
   console.log(`  → 共 ${allPapers.length} 篇（期刊）+ ${scholarPapers.length} 篇（Scholar）\n`);
   
   // Step 3: 关键词过滤
@@ -1342,9 +1334,9 @@ async function run() {
   console.log('-'.repeat(60) + '\n');
   
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.8.5 完成！`);
-  console.log(`   📧 期刊邮件: ${journalEmails.length} 封`);
-  console.log(`   🔔 Scholar邮件: ${scholarEmails.length} 封`);
+  console.log(`✅ EAlert Tracker v3.8.6 完成！`);
+  console.log(`   � 候选论文(期刊): ${allPapers.length} 篇`);
+  console.log(`   🔔 候选论文(Scholar): ${scholarPapers.length} 篇`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);
   console.log(`   🎯 相关论文: ${allRelevant.length} 篇`);
   const withAbstract = enriched.filter(p => p.abstract && p.abstract.length > 30).length;

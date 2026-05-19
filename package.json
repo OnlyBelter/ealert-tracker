@@ -1,6 +1,6 @@
 {
   "name": "ealert-tracker",
-  "version": "3.6.1",
+  "version": "3.8.6",
   "description": "科研期刊追踪器",
   "main": "scripts/tracker.js",
   "scripts": {
