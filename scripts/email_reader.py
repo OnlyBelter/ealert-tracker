@@ -59,6 +59,22 @@ JOURNAL_DOMAINS = [
     'elsevier.com',
 ]
 
+# Science 系列邮件的跟踪链接域名（这些链接指向真实文章）
+SCIENCE_TRACKING_DOMAINS = [
+    'click.science.org',
+    'science.10sr9c.cn',
+    'science.1bo8ae.cn',
+    'staging.science.org',
+    'prod.science.org',
+    'em.science.org',
+    'email.science.org',
+    'link.immunology.org',
+    'link.aaas.org',
+    'daily.science.org',
+    'advances.sciencemag.org',
+    'stm.sciencemag.org',
+]
+
 # ============ 工具函数 ============
 
 
@@ -145,10 +161,89 @@ class _LinkExtractor(HTMLParser):
         self._text_chunks = []
 
 
-def _unwrap_springernature_link(url):
-    """解包 Nature 加密跟踪链接 (links.springernature.com)"""
-    if 'links.springernature.com' not in url.lower():
+def _unwrap_tracking_link(url):
+    """解包各类期刊加密跟踪链接：Nature (links.springernature.com) 和 Science (click.science.org 等)"""
+    url_lower = url.lower()
+    
+    # 解包 Nature 加密跟踪链接
+    if 'links.springernature.com' in url_lower:
+        try:
+            import urllib.request
+            class RedirectHandler(urllib.request.HTTPRedirectHandler):
+                def redirect_request(self, req, fp, code, msg, headers, newurl):
+                    return None
+            opener = urllib.request.build_opener(RedirectHandler)
+            opener.addheaders = [('User-Agent', 'Mozilla/5.0')]
+            try:
+                response = opener.open(url, timeout=5)
+                final_url = response.geturl()
+                if final_url and 'links.springernature.com' not in final_url.lower():
+                    return final_url
+            except urllib.error.HTTPError as e:
+                if e.code in (301, 302, 303, 307, 308) and 'Location' in e.headers:
+                    final_url = e.headers['Location']
+                    if final_url and 'links.springernature.com' not in final_url.lower():
+                        return final_url
+            except Exception:
+                pass
+        except Exception:
+            pass
         return url
+    
+    # 解包 Science 点击跟踪链接 (click.science.org 等)
+    # Science 链接格式: https://click.science.org/...?url=https://www.science.org/...
+    # AAAS/Science Pubs 格式: https://click.aaas.sciencepubs.org/?qs=...&dest=...
+    for tracking_prefix in ('click.science.org', 'click.aaas.sciencepubs.org', 'science.10sr9c.cn', 
+                            'science.1bo8ae.cn', 'staging.science.org', 'prod.science.org', 
+                            'em.science.org', 'email.science.org', 'daily.science.org', 
+                            'link.aaas.org', 'go.aaas.org'):
+        if tracking_prefix in url_lower:
+            try:
+                from urllib.parse import parse_qs, unquote, urlparse
+                parsed = urlparse(url)
+                qs = parse_qs(parsed.query or '')
+                
+                # 方式1: 标准 url 参数
+                for k in ('url', 'u', 'redirect', 'r', 'dest', 'destination', 'target', 'goto', 'link'):
+                    if k in qs and qs[k]:
+                        candidate = unquote(qs[k][0])
+                        if candidate.lower().startswith(('http://', 'https://')):
+                            return candidate
+                
+                # 方式2: AAAS 的 qs=base64 或 qs=json 格式（dest 参数）
+                # 格式: click.aaas.sciencepubs.org/?qs=...&dest=base64_encoded_url
+                if 'dest' in qs:
+                    for dest_val in qs['dest']:
+                        # 尝试直接解码
+                        candidate = unquote(dest_val)
+                        if candidate.lower().startswith(('http://', 'https://')):
+                            return candidate
+                        # 尝试 base64 解码
+                        try:
+                            import base64
+                            decoded = base64.b64decode(candidate).decode('utf-8', errors='replace')
+                            if decoded.lower().startswith(('http://', 'https://')):
+                                return decoded.strip()
+                        except Exception:
+                            pass
+                
+                # 方式3: 从完整 URL 路径中找真实链接
+                import re
+                match = re.search(r'https?://[^\s"\'<>]{10,200}', url)
+                if match:
+                    candidate = unquote(match.group(0))
+                    if any(t in candidate.lower() for t in ('science.org', 'aaas.org', 'nature.com', 'cell.com', 'pnas.org', 'doi.org')):
+                        return candidate
+                        
+            except Exception:
+                pass
+    
+    return url
+
+
+def _unwrap_springernature_link(url):
+    """解包 Nature 加密跟踪链接 (links.springernature.com) — 保留旧函数名兼容"""
+    return _unwrap_tracking_link(url)
     try:
         import urllib.request
         # 只跟随重定向，不下载内容
@@ -184,8 +279,8 @@ def _normalize_url(url):
     if not url.lower().startswith(('http://', 'https://')):
         return ''
 
-    # 解包 Nature 加密跟踪链接
-    url = _unwrap_springernature_link(url)
+    # 解包各类期刊跟踪链接（Nature + Science）
+    url = _unwrap_tracking_link(url)
 
     parsed = urlparse(url)
     qs = parse_qs(parsed.query or '')
@@ -260,13 +355,26 @@ def _extract_articles_from_html(html, subject):
         if not re.search(r'[a-z]{3,}', title):
             continue
 
-        url = _normalize_url(href)
+        # v3.9.0: 先解包跟踪链接，再过滤
+        url = _unwrap_tracking_link(href)
+        if not url:
+            continue
+        url = _normalize_url(url)
         if not url:
             continue
         lower_url = url.lower()
         if 'unsubscribe' in lower_url:
             continue
-        if not any(d in lower_url for d in JOURNAL_DOMAINS) and 'doi.org/' not in lower_url:
+        
+        # 检查是否为有效期刊链接：
+        # 1. 直接匹配期刊域名（解包后）
+        # 2. DOI 链接
+        # 3. Science 跟踪链接（保留原始跟踪链接，tracker.js 会直接抓取摘要）
+        is_valid_url = any(d in lower_url for d in JOURNAL_DOMAINS)
+        has_doi = 'doi.org/' in lower_url
+        is_science_tracking = any(d in lower_url for d in SCIENCE_TRACKING_DOMAINS)
+        
+        if not is_valid_url and not has_doi and not is_science_tracking:
             continue
 
         title_key = re.sub(r'\s+', '', lower_title)[:80]
@@ -439,11 +547,17 @@ def extract_articles_from_text(text, subject):
             # 向前看几行提取日期
             date = extract_date_from_line(line, lines[max(0, i-5):i])
             
-            # 向后找 URL（最多看3行）
+            # 向后找 URL（最多看5行）
             url = ''
-            for j in range(i + 1, min(i + 4, len(lines))):
+            for j in range(i + 1, min(i + 6, len(lines))):
                 next_line = lines[j].strip()
                 next_lower = next_line.lower()
+                
+                # 处理 markdown 链接格式: [title](url) 或 [title](url "title")
+                md_match = re.match(r'\[(?:[^\]]*)\]\(([^)\s"\']+)', next_line)
+                if md_match:
+                    url = md_match.group(1).strip()
+                    break
                 
                 # 跳过非链接行
                 if next_lower.startswith('http'):

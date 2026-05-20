@@ -1,5 +1,5 @@
 /**
- * EAlert Tracker v3.9.1
+ * EAlert Tracker v3.8.6
  * 
  * ⚠️ 准确性原则（最高优先级）：
  * 提供的信息必须经过确认，绝不捏造任何字段。
@@ -181,14 +181,13 @@ function extractDOI(link) {
 }
 
 /**
- * 获取论文详情（v3.9.1 重写 — 混合方案）
+ * 获取论文详情（v3.7.0 重写）
  * 
  * 准确性优先流程：
  * 1. 通过 PubMed API 获取完整元数据（作者、期刊、摘要、真实 DOI）
  * 2. 如果 PubMed 无结果，从链接提取 DOI 并通过 CrossRef 验证
  * 3. CrossRef 验证通过才使用该 DOI
- * 4. 如果还是没有摘要，尝试从论文 URL 直接抓取（web_fetch）
- * 5. 完全无法获取时：确保原始字段准确，不捏造任何信息
+ * 4. 完全无法获取时：确保原始字段准确，不捏造任何信息
  */
 async function fetchPaperDetails(paper) {
   // Step 1: 优先通过 PubMed 获取完整元数据
@@ -198,19 +197,7 @@ async function fetchPaperDetails(paper) {
       ensureAccurateFields(meta);
       return meta;
     }
-    // PubMed 有结果但无摘要？尝试 Step 4
-    if (meta && (!meta.abstract || meta.abstract.length < 30)) {
-      const webAbstract = await fetchAbstractFromURL(paper.link, paper.journal);
-      if (webAbstract) {
-        meta.abstract = webAbstract;
-        meta.researchQuestion = inferResearchQuestion(meta.title || paper.title, webAbstract);
-        meta.contributions = inferContributions(webAbstract, meta.title || paper.title);
-        meta.comment = generateComment(meta.title || paper.title, webAbstract, meta.researchQuestion, meta.journal || paper.journal);
-      }
-    }
-  } catch (e) {
-    console.log(`    PubMed查询失败，尝试其他方式: ${e.message}`);
-  }
+  } catch (e) {}
   
   // Step 2: 尝试从链接提取真实 DOI 并验证
   const doi = extractDOI(paper.link);
@@ -220,19 +207,6 @@ async function fetchPaperDetails(paper) {
       await sleep(300);
       const meta = await fetchCrossRef(doi);
       if (meta) {
-        // CrossRef 有摘要则使用
-        if (meta.abstract && meta.abstract.length > 30) {
-          ensureAccurateFields(meta);
-          return { ...paper, ...meta, doi };
-        }
-        // CrossRef 无摘要但之前 PubMed 也没拿到？尝试网页抓取
-        const webAbstract = await fetchAbstractFromURL(paper.link, paper.journal || meta.journal);
-        if (webAbstract) {
-          meta.abstract = webAbstract;
-          meta.researchQuestion = inferResearchQuestion(meta.title || paper.title, webAbstract);
-          meta.contributions = inferContributions(webAbstract, meta.title || paper.title);
-          meta.comment = generateComment(meta.title || paper.title, webAbstract, meta.researchQuestion, meta.journal || paper.journal);
-        }
         ensureAccurateFields(meta);
         return { ...paper, ...meta, doi };
       }
@@ -240,177 +214,16 @@ async function fetchPaperDetails(paper) {
     // DOI 无效或无法验证，不使用该 DOI
   }
   
-  // Step 3: 尝试从论文 URL 直接抓取摘要
-  // 适用于：没有 DOI、PubMed/CrossRef 都失败的论文
-  if (paper.link && !paper.link.includes('google.com/search')) {
-    const paperLinkLower = (paper.link || '').toLowerCase();
-    const isScienceTracking = paperLinkLower.includes('click.aaas.sciencepubs.org') || 
-                              paperLinkLower.includes('click.science.org');
-    // v3.9.1: Science 跟踪链接先通过 CrossRef 标题搜索找 DOI
-    if (isScienceTracking) {
-      console.log(`    ⚡ 检测到 Science 跟踪链接: ${paperLinkLower.substring(0,60)}`);
-      const doiFromTitle = await searchCrossRefByTitle(paper.title);
-      if (doiFromTitle) {
-        await sleep(300);
-        const meta = await fetchCrossRef(doiFromTitle);
-        if (meta && meta.abstract && meta.abstract.length > 30) {
-          paper.abstract = meta.abstract;
-          paper.doi = doiFromTitle;
-          paper.researchQuestion = inferResearchQuestion(paper.title, meta.abstract);
-          paper.contributions = inferContributions(meta.abstract, paper.title);
-          paper.comment = generateComment(paper.title, meta.abstract, paper.researchQuestion, paper.journal);
-          return paper;
-        }
-      }
-    }
-    
-    try {
-      const webAbstract = await fetchAbstractFromURL(paper.link, paper.journal);
-      if (webAbstract && webAbstract.length > 30) {
-        paper.abstract = webAbstract;
-        paper.researchQuestion = inferResearchQuestion(paper.title, webAbstract);
-        paper.contributions = inferContributions(webAbstract, paper.title);
-        paper.comment = generateComment(paper.title, webAbstract, paper.researchQuestion, paper.journal);
-        return paper;
-      }
-    } catch (e) {
-      console.log(`    网页抓取摘要失败: ${e.message}`);
-    }
-  }
-  
-  // Step 4: 完全无法获取可靠元数据
+  // Step 3: 完全无法获取可靠元数据
   // ⚠️ 确保原始字段准确，不捏造任何信息
-  paper.authors = paper.authors || '（作者信息无法确认）';
+  paper.authors = '（作者信息无法确认）';
   paper.date = paper.date || '（发表日期无法确认）';
   paper.journal = paper.journal || '（期刊信息无法确认）';
   paper.doi = '';  // 不显示无法验证的 DOI
-  
-  // v3.9.1: 无摘要时标注清楚，不生成模板内容
-  if (!paper.abstract || paper.abstract.length < 30) {
-    paper.researchQuestion = '（无法获取摘要，无法提取研究问题）';
-    paper.contributions = ['（无法获取摘要，无法提取主要贡献）'];
-    paper.comment = '（无法获取摘要，无法生成简评。建议访问原文链接查看详情。）';
-  } else {
-    paper.researchQuestion = inferResearchQuestion(paper.title, paper.abstract);
-    paper.contributions = inferContributions(paper.abstract, paper.title);
-    paper.comment = generateComment(paper.title, paper.abstract, paper.researchQuestion, paper.journal);
-  }
+  paper.researchQuestion = inferResearchQuestion(paper.title, '');
+  paper.contributions = inferContributions('', paper.title);
+  paper.comment = generateComment(paper.title, '', paper.researchQuestion, paper.journal);
   return paper;
-}
-
-/**
- * 从论文 URL 直接抓取摘要（v3.9.1 新增）
- * 支持：Nature、Science、Cell、PNAS、bioRxiv 等主流期刊
- */
-async function fetchAbstractFromURL(url, journal) {
-  if (!url || url.includes('google.com/search')) return null;
-  
-  const journalLower = (journal || '').toLowerCase();
-  const urlLower = url.toLowerCase();
-  
-  // 确定最适合的抓取策略
-  let fetchUrl = url;
-  
-  // Science: DOI URL 直接可抓
-  if (urlLower.includes('science.org/doi/')) {
-    fetchUrl = url;
-  }
-  // Science AAAS 跟踪链接: https://click.aaas.sciencepubs.org/?qs=...&dest=base64
-  // qs=base64 是内部数据库 ID，无法解码为 URL。
-  // httpGet 跟随重定向尝试获取内容
-  if (urlLower.includes('click.aaas.sciencepubs.org') || urlLower.includes('click.science.org')) {
-    if (urlLower.includes('science.org/doi/')) {
-      fetchUrl = url; // Science DOI URL，直接抓
-    }
-    // 否则：尝试 httpGet 看是否重定向到真实页面
-    // （部分链接会 302 重定向到 science.org）
-  }
-  // Nature: 加密链接解包后直接可抓
-  else if (urlLower.includes('nature.com/articles') || urlLower.includes('nature.com/news')) {
-    fetchUrl = url;
-  }
-  // bioRxiv/medRxiv: 有标准 API
-  else if (urlLower.includes('biorxiv.org') || urlLower.includes('medrxiv.org')) {
-    // 从 URL 提取 DOI/文章ID
-    const biorxivMatch = url.match(/\/([\w.-]+)\/(\d{4}\.\d+)/i);
-    if (biorxivMatch) {
-      try {
-        const apiUrl = `https://api.biorxiv.org/details/biorxiv/${biorxivMatch[2]}/`;
-        const data = await httpGet(apiUrl);
-        const json = JSON.parse(data);
-        const collection = json.collection || [];
-        for (const item of collection) {
-          if (item.abstract && item.abstract.length > 50) {
-            return item.abstract.replace(/<[^>]+>/g, '').trim();
-          }
-        }
-      } catch (e) {}
-    }
-    // fallback: 直接抓页面
-    fetchUrl = url;
-  }
-  // arXiv: 用 API
-  else if (urlLower.includes('arxiv.org/abs/')) {
-    const arxivMatch = url.match(/arxiv\.org\/abs\/([\w.-]+)/i);
-    if (arxivMatch) {
-      try {
-        const apiUrl = `https://export.arxiv.org/api/query?id_list=${arxivMatch[1]}&max_results=1`;
-        const xml = await httpGet(apiUrl);
-        const abstractMatch = xml.match(/<summary[^>]*>([\s\S]*?)<\/summary>/i);
-        if (abstractMatch) {
-          return abstractMatch[1].replace(/<[^>]+>/g, '').trim();
-        }
-      } catch (e) {}
-    }
-  }
-  
-  // 通用网页抓取（处理 Nature、Science、Cell 等）
-  try {
-    const html = await httpGet(fetchUrl, 10000);
-    
-    // 从 HTML 中提取摘要
-    let abstract = '';
-    
-    // 方式1: meta标签
-    const metaAbstract = html.match(/<meta[^>]+name=["']abstract["'][^>]+content=["']([^"']+)/i) ||
-                              html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']abstract["']/i);
-    if (metaAbstract) {
-      abstract = metaAbstract[1].replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').trim();
-    }
-    
-    // 方式2: JSON-LD
-    if (!abstract || abstract.length < 30) {
-      const jsonLdMatch = html.match(/<script[^>]+type=["']application\/json["'][^>]*>([\s\S]*?)<\/script>/i);
-      if (jsonLdMatch) {
-        try {
-          const ldJson = JSON.parse(jsonLdMatch[1]);
-          const abstractText = ldJson?.abstract || ldJson?.['@graph']?.[0]?.abstract || '';
-          if (abstractText && abstractText.length > 30) {
-            abstract = abstractText.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').trim();
-          }
-        } catch (e) {}
-      }
-    }
-    
-    // 方式3: 从 HTML 文本中找摘要区块
-    if (!abstract || abstract.length < 30) {
-      // 找 "Abstract" 或 "摘要" 标题后的内容
-      const abstractSection = html.match(/(?:<h[1-4][^>]*>\s*(?:Abstract|摘要|Summary)\s*<\/h[1-4]>|[\s\S]{0,200}(?:Abstract|摘要|Summary)[\s:]*)([\s\S]{100,2000}?)(?:<h[1-4]|Introduction|Background|Footnotes|References|\Z)/i);
-      if (abstractSection) {
-        abstract = abstractSection[1].replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
-      }
-    }
-    
-    if (abstract && abstract.length > 30) {
-      // 清理 HTML 实体
-      abstract = abstract.replace(/&#xa;?/g, '\n').replace(/&hellip;/g, '…').replace(/&mdash;/g, '—').trim();
-      return abstract;
-    }
-  } catch (e) {
-    console.log(`    fetchAbstractFromURL: ${fetchUrl} 失败 — ${e.message}`);
-  }
-  
-  return null;
 }
 
 /** PubMed API 查询（通过标题搜索） */
@@ -478,44 +291,6 @@ async function fetchFromPubMed(title) {
   } catch (e) {
     return null;
   }
-}
-
-/**
- * 通过标题在 CrossRef 搜索论文（用于 Science 跟踪链接等无法提取 DOI 的情况）
- * v3.9.1: 新增
- */
-async function searchCrossRefByTitle(title) {
-  try {
-    const query = encodeURIComponent(title.replace(/[^\w\s]/g, ' ').trim().substring(0, 200));
-    const url = `https://api.crossref.org/works?query.title=${query}&rows=3&sort=relevance`;
-    const data = await httpGet(url, 10000);
-    const json = JSON.parse(data);
-    const items = json.message?.items || [];
-    
-    for (const item of items) {
-      // 验证标题相似度（避免匹配到无关论文）
-      const crTitle = (item.title || [''])[0].toLowerCase();
-      const origTitle = title.toLowerCase();
-      
-      // 简单匹配：标题前80字符有50%以上重叠
-      const overlap = origTitle.substring(0, 80).split(' ').filter(w => 
-        w.length > 3 && crTitle.includes(w)
-      ).length;
-      const threshold = origTitle.split(' ').filter(w => w.length > 3).length * 0.4;
-      
-      if (overlap >= threshold && item.DOI) {
-        const cleanDoi = item.DOI;
-        // 验证 DOI 格式
-        if (/^10\.\d{4,}\/[a-zA-Z]/.test(cleanDoi)) {
-          console.log(`    CrossRef标题搜索找到 DOI: ${cleanDoi}`);
-          return cleanDoi;
-        }
-      }
-    }
-  } catch (e) {
-    console.log(`    CrossRef标题搜索失败: ${e.message}`);
-  }
-  return null;
 }
 
 /** CrossRef API 查询 */
@@ -707,35 +482,15 @@ function ensureAccurateFields(paper) {
     paper.journal = '（期刊信息无法确认）';
   }
   
-  // v3.9.1: 摘要判断 — 优先使用 API 真实摘要，兜底使用邮件正文伪摘要（>30字）
-  const realAbstract = paper.abstract && paper.abstract.length > 30;
-  const emailAbstract = paper.email_body && paper.email_body.length > 30;
-  const effectiveAbstract = realAbstract ? paper.abstract : (emailAbstract ? paper.email_body : '');
-  const abstractSource = realAbstract ? 'api' : (emailAbstract ? 'email' : 'none');
-  
-  if (effectiveAbstract) {
-    // v3.9.1: 有摘要（真实或伪摘要），生成基于内容的分析
-    // 研究问题/贡献/点评全部基于 effectiveAbstract 生成
-    if (!paper.researchQuestion || paper.researchQuestion === '探索相关生物学机制或应用研究') {
-      paper.researchQuestion = inferResearchQuestion(paper.title, effectiveAbstract);
-    }
-    if (!paper.contributions || paper.contributions.length === 0) {
-      paper.contributions = inferContributions(effectiveAbstract, paper.title);
-    }
-    if (!paper.comment) {
-      paper.comment = generateComment(paper.title, effectiveAbstract, paper.researchQuestion, paper.journal || '', abstractSource);
-    }
-  } else {
-    // v3.9.1: 无摘要时明确标注，不生成模板内容
-    if (!paper.researchQuestion || paper.researchQuestion === '探索相关生物学机制或应用研究') {
-      paper.researchQuestion = '（无法获取摘要，无法提取研究问题）';
-    }
-    if (!paper.contributions || paper.contributions.length === 0) {
-      paper.contributions = ['（无法获取摘要，无法提取主要贡献）'];
-    }
-    if (!paper.comment) {
-      paper.comment = '（无法获取摘要，无法生成简评。建议访问原文链接查看详情。）';
-    }
+  // 研究问题 / 贡献 / 点评: 有则保留，无则生成（基于标题推断，这是补充说明不是事实字段）
+  if (!paper.researchQuestion || paper.researchQuestion === '探索相关生物学机制或应用研究') {
+    paper.researchQuestion = inferResearchQuestion(paper.title, paper.abstract || '');
+  }
+  if (!paper.contributions || paper.contributions.length === 0) {
+    paper.contributions = inferContributions(paper.abstract || '', paper.title);
+  }
+  if (!paper.comment) {
+    paper.comment = generateComment(paper.title, paper.abstract || '', paper.researchQuestion, paper.journal || '');
   }
 }
 
@@ -760,7 +515,7 @@ async function validateDOI(doi) {
  * 要求：回答——为什么重要？解决了什么问题？有什么发现？
  */
 // v3.8.5: 基于标题关键词生成具体点评，不再使用通用模板套话
-function generateComment(title, abstract, researchQuestion, journal, abstractSource = 'api') {
+function generateComment(title, abstract, researchQuestion, journal) {
   const t = title.toLowerCase();
   
   // 关键词映射到具体点评句（每条都针对标题主题，不套话）
@@ -1166,20 +921,21 @@ function generateQQReport(papers) {
   return r;
 }
 
-// v3.8.7: 从标题/摘要提炼一句话概要（核心科学问题，≤60字）
+// v3.8.4: 从标题/摘要提炼一句话概要（核心科学问题，≤40字，主动句）
 function generateOneSentenceSummary(p) {
-  const rawTitle = (p.originalTitle || p.title || '').trim();
+  // 优先用 originalTitle（未翻译的原文标题），比翻译标题信息更丰富
+  const rawTitle = p.originalTitle || p.title || '';
   const abstract = p.abstract || '';
 
-  // ---- 有摘要：从摘要第一句提炼 ----
+  // 从摘要提炼（只针对有真实摘要的论文）
   if (abstract.length > 80) {
     const firstSentence = abstract.split(/[.。]/)[0].trim();
     if (firstSentence.length >= 15 && firstSentence.length <= 100) {
       let s = firstSentence
-        .replace(/^We (show|demonstrate|present|report|identify|discover|found|describe|observe|introduce|develop|establish|propose|illustrate|provide)/i, '本研究揭示')
-        .replace(/^We (have shown|have demonstrated|have identified|have discovered|have found)/i, '本研究揭示')
+        .replace(/^We (show|demonstrate|present|report|identify|discover|found|describe|observe|introduce|develop|establish|propose|illustrate|provide)/i, '该研究')
+        .replace(/^We (have shown|have demonstrated|have identified|have discovered|have found)/i, '该研究')
         .replace(/^This (study|paper|work|research|article|review|issue)/i, '该')
-        .replace(/^Here,? we (show|demonstrate|report|present)/i, '本研究揭示')
+        .replace(/^Here,? we (show|demonstrate|report|present)/i, '该研究')
         .replace(/^Using /i, '利用')
         .replace(/^By /i, '通过')
         .replace(/^Our (results|data|findings|work)/i, '该研究')
@@ -1191,215 +947,95 @@ function generateOneSentenceSummary(p) {
         .replace(/^Together,? /i, '综合')
         .trim();
       if (!/[。！？]$/.test(s) && s.length > 0) s += '。';
-      if (s.length <= 60) return s;
+      if (s.length <= 50) return s;
     }
   }
 
-  // ---- 无摘要：从标题语义结构提炼有意义的概要 ----
+  // 从原文标题提炼（重点：去除无意义前缀，保留核心研究对象）
   let clean = rawTitle
     .replace(/^(Cell Press Symposia|Call for papers|Special issue|Review article|Original article|Research article|Letter to the|Brief communication|Hypothesis|Perspective|Mini review)\s*[:–—-]?\s*/i, '')
-    .replace(/\s*[-–—:](\d+\s*years|2026|2025|April|May|June|July|January|February|March|Apr|Vol\.?|Volume \d+|Issue \d+).*$/i, '')
-    .replace(/\s*\([^)]*\)\s*$/g, '')
-    .replace(/\s*\[[^\]]*\]\s*$/g, '')
+    .replace(/\s*[-–—:](25 years|2026|2025|April|May|June|July|January|February|March|Apr|Vol\.?|Volume \d+|Issue \d+)\s*$/i, '')
+    .replace(/\s*\(.*?\)\s*$/g, '')
+    .replace(/\s*\[.*?\]\s*$/g, '')
+    .replace(/\s+(of|for|in|with|by|to|and|as|through|via|using|during|across|after|before)\s+[a-z]{3,15}$/i, '')
+    .replace(/^(Single.cell|Single cell|Multi.omics|Spatial|Proteomic|Metabolomic|Genomic|Transcriptomic|ATAC.Seq|RNA.Seq|CRISPR|Decoding|Understanding|Landscape|Atlas|Map|Reconstructing|Reconstruction|And)\s+/i, '')
+    .replace(/^(The|A|An)\s+/i, '')
+    .replace(/^Hallmarks\s+of\s+Cancer\s*/i, 'Hallmarks of Cancer ')
     .trim();
 
-  if (!clean || clean.length < 4) return '相关领域重要研究进展。';
-
-  // 模式1: "X drives/reveals/enables Y"
-  const actionMatch = clean.match(/^(.+?)\s+(drives?|reveals?|enables?|mediates?|promotes?|inhibits?|suppresses?|induces?|regulates?|modulates?|facilitates?|supports?|underlies?|governs?|controls?|determines?|shapes?|fuels?|triggers?|blocks?|prevents?|protects?|enhances?|attenuates?|impairs?|disrupts?|activates?|inactivates?)\s+(.+)$/i);
-  if (actionMatch) {
-    const subject = actionMatch[1].trim();
-    const verb = actionMatch[2].toLowerCase();
-    const object = actionMatch[3].trim().replace(/\.$/, '');
-    const verbMap = {
-      drives:'驱动', reveals:'揭示', enables:'实现', mediates:'介导', promotes:'促进',
-      inhibits:'抑制', suppresses:'抑制', induces:'诱导', regulates:'调控', modulates:'调节',
-      facilitates:'促进', supports:'支持', underlies:'构成基础', governs:'支配', controls:'控制',
-      determines:'决定', shapes:'塑造', fuels:'推动', triggers:'触发', blocks:'阻断',
-      prevents:'防止', protects:'保护', enhances:'增强', attenuates:'减弱', impairs:'损伤',
-      disrupts:'破坏', activates:'激活', inactivates:'灭活',
-      drive:'驱动', reveal:'揭示', enable:'实现', mediate:'介导', promote:'促进',
-      inhibit:'抑制', suppress:'抑制', induce:'诱导', regulate:'调控', modulate:'调节',
-      facilitate:'促进', support:'支持', underlie:'构成基础', govern:'支配', control:'控制',
-      determine:'决定', shape:'塑造', fuel:'推动', trigger:'触发', block:'阻断',
-      prevent:'防止', protect:'保护', enhance:'增强', attenuate:'减弱', impair:'损伤',
-      disrupt:'破坏', activate:'激活', inactivate:'灭活'
-    };
-    const cnVerb = verbMap[verb] || verb;
-    // 动作模式：以中文动词开头，描述主语对宾语的作用
-    let result = `本研究${cnVerb}了${subject}对${object}的作用。`;
-    if (result.length <= 70) return result;
-    // 太长则简化
-    let shortObj = object.length > 30 ? object.substring(0, 28) + '…' : object;
-    result = `${cnVerb}${shortObj}。`;
-    if (result.length <= 60) return result;
-    return `${cnVerb}${object.substring(0, 38)}…。`;
+  // Hallmarks 标题：保留完整（不去掉 "of Cancer"，去掉多余的时间后缀）
+  if (clean.toLowerCase().startsWith('hallmarks of cancer')) {
+    clean = clean.replace(/\s*[-–—:]\s*\d+\s*years.*$/i, '').trim();
+  }
+  // Hallmarks 太短则补充完整
+  if (clean.length >= 8 && clean.length <= 15 && clean.toLowerCase().startsWith('hallmarks')) {
+    clean = 'Hallmarks of Cancer';
+  }
+  
+  // 去除标题开头残留的冒号/短横/空格（因正则截断产生）
+  clean = clean.replace(/^[\s:–—-]+/, '');
+  
+  // 处理全小写标题（如 email subject 转来的）
+  if (/^[a-z]/.test(clean) && clean.length > 3) {
+    clean = clean.charAt(0).toUpperCase() + clean.substring(1);
   }
 
-  // 模式2: "X of Y in Z" / "X of Y"
-  const ofMatch = clean.match(/^(?:The\s+)?(.+?)\s+of\s+(.+?)(?:\s+in\s+(.+))?$/i);
-  if (ofMatch) {
-    const property = ofMatch[1].trim().toLowerCase();
-    const target = ofMatch[2].trim().replace(/\.$/, '');
-    const context = ofMatch[3];
-    const propMap = {
-      role:'作用', mechanism:'机制', function:'功能', structure:'结构', dynamics:'动力学',
-      regulation:'调控', impact:'影响', significance:'意义', origin:'起源', evolution:'演化',
-      landscape:'图谱', atlas:'图谱', map:'图谱', characterization:'表征', analysis:'分析',
-      identification:'鉴定', discovery:'发现', development:'开发'
-    };
-    const cnProp = propMap[property] || property;
-    let result = context ? `${context}中${target}的${cnProp}。` : `${target}的${cnProp}。`;
-    if (result.length > 60) result = `${target}的${cnProp}研究。`;
-    return result;
-  }
+    // 去除残留的 "And " 前缀（未在前面匹配到）
+  clean = clean.replace(/^And\s+/i, '');
+  if (clean.length >= 8 && clean.length <= 40) return `研究${clean}。`;
+  if (clean.length > 40) return `研究${clean.substring(0, 38)}...。`;
+  if (clean.length >= 4) return `研究${clean}的相关机制/问题。`;
 
-  // 模式3: 动词开头的标题 "Unlocking/Leveraging/Targeting X"
-  const verbStartMatch = clean.match(/^(Unlocking|Leveraging|Targeting|Harnessing|Exploiting|Reprogramming|Reconstructing|Decoding|Understanding|Defining|Characterizing|Mapping|Profiling|Engineering|Expanding|Exploring|Overcoming|Rewiring|Remodeling|Revisiting|Re-evaluating|Integrating|Combining|Applying|Developing|Designing|Building|Creating|Generating|Establishing|Optimizing|Improving|Advancing|Extending)\s+(.+)$/i);
-  if (verbStartMatch) {
-    const verb = verbStartMatch[1].toLowerCase();
-    const object = verbStartMatch[2].trim().replace(/\.$/, '');
-    const vMap = {
-      unlocking:'解锁', leveraging:'利用', targeting:'靶向', harnessing:'利用', exploiting:'利用',
-      reprogramming:'重编程', reconstructing:'重建', decoding:'解码', understanding:'理解',
-      defining:'定义', characterizing:'表征', mapping:'绘制图谱', profiling:'分析图谱',
-      engineering:'工程化', expanding:'扩展', exploring:'探索', overcoming:'克服',
-      rewiring:'重连', remodeling:'重塑', revisiting:'重新审视', 're-evaluating':'重新评估',
-      integrating:'整合', combining:'结合', applying:'应用', developing:'开发',
-      designing:'设计', building:'构建', creating:'创建', generating:'生成',
-      establishing:'建立', optimizing:'优化', improving:'改进', advancing:'推进',
-      extending:'延长'
-    };
-    const cnV = vMap[verb] || '探索';
-    let result = `${cnV}${object}。`;
-    if (result.length <= 60) return result;
-    return `${cnV}${object.substring(0, 48)}…。`;
-  }
-
-  // 模式4: 名词性标题含 "in Z"
-  const inMatch = clean.match(/^(?:A\s+|An\s+)?(.+?)\s+in\s+(.+)$/i);
-  if (inMatch) {
-    const finding = inMatch[1].trim();
-    const context = inMatch[2].trim().replace(/\.$/, '');
-    let result = `${context}中发现${finding}。`;
-    if (result.length <= 60) return result;
-    return `在${context}中发现新的研究线索。`;
-  }
-
-  // Fallback: 截取标题核心内容
-  let fallback = clean
-    .replace(/^(The|A|An|And)\s+/i, '')
-    .replace(/^Hallmarks\s+of\s+Cancer/i, '癌症标志')
-    .trim();
-  if (fallback.length > 50) fallback = fallback.substring(0, 48) + '…';
-  return `关于${fallback}的研究。`;
+  return '相关领域重要研究进展。';
 }
 
 
-
-// v3.8.7: 从标题/摘要提取主要贡献（无摘要时从标题推断）
+// v3.8.3: 从点评/摘要提取3个主要贡献
 function extractContributions(p) {
   const contributions = [];
-  const title = (p.originalTitle || p.title || '').trim();
+  const title = p.title || '';
   const abstract = p.abstract || '';
+  const comment = p.comment || '';
   
-  // ---- 有摘要：从摘要提取关键发现 ----
-  if (abstract.length > 80) {
-    const findings = [];
-    const sentences = abstract.split(/[.。]/);
-    sentences.forEach(s => {
-      const trimmed = s.trim();
-      if (/^(reveal|show|demonstrate|identify|discover|establish|develop|propose|introduce|present|report|found|describe|enable|provide)/i.test(trimmed)) {
-        let short = trimmed.substring(0, 80).trim();
-        if (short.length > 10) findings.push(short);
-      }
+  // 尝试从摘要提取关键发现动词
+  const findings = [];
+  
+  // 找摘要中以"发现/揭示/证明/提出/开发/建立/引入"开头的句子
+  const sentences = abstract.split(/[.。]/);
+  sentences.forEach(s => {
+    const trimmed = s.trim();
+    if (/^(reveal|show|demonstrate|identify|discover|establish|develop|propose|introduce|present|report|found|describe|enable|provide)/i.test(trimmed)) {
+      // 截取前60字符
+      let short = trimmed.substring(0, 80).trim();
+      if (short.length > 10) findings.push(short);
+    }
+  });
+  
+  // 转换为中文动词开头
+  if (findings.length > 0) {
+    findings.slice(0, 3).forEach(f => {
+      let c = f
+        .replace(/^reveal/i, '揭示')
+        .replace(/^show/i, '表明')
+        .replace(/^demonstrate/i, '证明')
+        .replace(/^identify/i, '鉴定')
+        .replace(/^discover/i, '发现')
+        .replace(/^establish/i, '建立')
+        .replace(/^develop/i, '开发')
+        .replace(/^propose/i, '提出')
+        .replace(/^introduce/i, '引入')
+        .replace(/^present/i, '展示')
+        .replace(/^report/i, '报告')
+        .replace(/^found/i, '发现')
+        .replace(/^describe/i, '描述')
+        .replace(/^enable/i, '实现')
+        .replace(/^provide/i, '提供');
+      if (c.length > 5) contributions.push(c.substring(0, 80) + (c.length > 80 ? '...' : ''));
     });
-    
-    if (findings.length > 0) {
-      findings.slice(0, 3).forEach(f => {
-        let c = f
-          .replace(/^reveal/i, '揭示')
-          .replace(/^show/i, '表明')
-          .replace(/^demonstrate/i, '证明')
-          .replace(/^identify/i, '鉴定')
-          .replace(/^discover/i, '发现')
-          .replace(/^establish/i, '建立')
-          .replace(/^develop/i, '开发')
-          .replace(/^propose/i, '提出')
-          .replace(/^introduce/i, '引入')
-          .replace(/^present/i, '展示')
-          .replace(/^report/i, '报告')
-          .replace(/^found/i, '发现')
-          .replace(/^describe/i, '描述')
-          .replace(/^enable/i, '实现')
-          .replace(/^provide/i, '提供');
-        if (c.length > 5) contributions.push(c.substring(0, 80) + (c.length > 80 ? '...' : ''));
-      });
-    }
-    if (contributions.length > 0) return contributions.slice(0, 3);
   }
   
-  // ---- 无摘要或摘要无发现动词：从标题语义推断贡献 ----
-  const cleanTitle = title
-    .replace(/^(Cell Press Symposia|Call for papers|Special issue|Review article|Original article|Research article|Letter to the|Brief communication|Hypothesis|Perspective|Mini review)\s*[:–—-]?\s*/i, '')
-    .replace(/\s*[-–—:](\d+\s*years|2026|2025).*$/i, '')
-    .trim();
-  
-  // 从标题核心动词推断贡献方向
-  const verbContributionMap = [
-    { pattern: /\b(drives?|fuels?|triggers?)\b/i, contrib: '阐明了驱动因素及其作用机制' },
-    { pattern: /\b(reveals?|uncovers?|discovers?)\b/i, contrib: '揭示了新的生物学现象或机制' },
-    { pattern: /\b(inhibits?|suppresses?|blocks?|prevents?)\b/i, contrib: '鉴定了具有抑制/阻断作用的靶点或策略' },
-    { pattern: /\b(promotes?|enhances?|facilitates?|boosts?)\b/i, contrib: '发现了促进/增强特定过程的关键因素' },
-    { pattern: /\b(enables?|allows?|achieves?)\b/i, contrib: '实现了新的技术方法或应用突破' },
-    { pattern: /\b(regulates?|modulates?|controls?|governs?)\b/i, contrib: '阐明了调控机制及其生物学意义' },
-    { pattern: /\b(induces?|mediates?)\b/i, contrib: '揭示了诱导/介导特定效应的分子途径' },
-    { pattern: /\b(extends?|prolongs?|improves?)\b/i, contrib: '证实了延长/改善特定指标的有效性' },
-    { pattern: /\b(targets?|leveraging|harnessing)\b/i, contrib: '提出了靶向/利用特定目标的策略' },
-    { pattern: /\b(engineering|designing|developing|creating|building)\b/i, contrib: '开发了新的技术平台或工具' },
-    { pattern: /\b(mapping|profiling|atlas|landscape|characterizing)\b/i, contrib: '提供了系统性的图谱或表征数据' },
-    { pattern: /\b(overcoming|resistance|overcomes?)\b/i, contrib: '为克服耐药/抗性问题提供了新方案' },
-  ];
-  
-  const matchedContribs = [];
-  for (const { pattern, contrib } of verbContributionMap) {
-    if (pattern.test(cleanTitle)) {
-      matchedContribs.push(contrib);
-    }
-  }
-  
-  // 根据研究领域补充
-  const domainContribs = [];
-  if (/cancer|tumor|oncology/i.test(cleanTitle)) domainContribs.push('为肿瘤诊疗提供了新思路');
-  if (/immune|immunotherapy|T cell/i.test(cleanTitle)) domainContribs.push('对免疫治疗策略优化具有参考价值');
-  if (/CRISPR|gene edit/i.test(cleanTitle)) domainContribs.push('拓展了基因编辑技术的应用范围');
-  if (/single.cell|spatial|scRNA|multi.omics/i.test(cleanTitle)) domainContribs.push('以高分辨率解析了生物系统复杂性');
-  if (/aging|longevity|lifespan|healthspan/i.test(cleanTitle)) domainContribs.push('对延缓衰老和促进健康寿命有潜在意义');
-  if (/\bAI\b|\bmachine learning\b|\bdeep learning\b|\bneural network\b/i.test(cleanTitle)) domainContribs.push('展示了AI方法在生物医学中的应用潜力');
-  
-  // 合并去重，最多3条
-  const allContribs = [...matchedContribs, ...domainContribs];
-  const seen = new Set();
-  for (const c of allContribs) {
-    if (!seen.has(c)) {
-      seen.add(c);
-      contributions.push(c);
-      if (contributions.length >= 3) break;
-    }
-  }
-  
-  // 仍无贡献：从标题提取研究对象作为基本贡献
-  if (contributions.length === 0) {
-    const coreSubject = cleanTitle
-      .replace(/^(The|A|An)\s+/i, '')
-      .replace(/\s+(in|of|for|with|by|to|and|through|via)\s+.*$/i, '')
-      .trim();
-    if (coreSubject.length > 3) {
-      contributions.push(`对${coreSubject}进行了研究，提供了新的实验数据或理论视角`);
-    } else {
-      contributions.push('为该领域提供了新的研究数据或理论框架');
-    }
-  }
+  // v3.8.5: 无实质贡献时不添加通用文本，返回空数组
+  // (通用fallback已移除，避免所有论文显示相同贡献)
   
   return contributions.slice(0, 3);
 }
@@ -1419,7 +1055,7 @@ function generateMarkdownReport(papers) {
   if (papers.length === 0) {
     md += `> 今日未收到相关领域期刊目录。\n\n---\n\n`;
     md += `**生成时间**: ${datetime}\n`;
-    md += `**工具**: EAlert Tracker v3.9.1（准确性优先，不捏造任何字段）\n`;
+    md += `**工具**: EAlert Tracker v3.8.6（准确性优先，不捏造任何字段）\n`;
     return md;
   }
   
@@ -1491,7 +1127,7 @@ function generateMarkdownReport(papers) {
   md += generateSummary(papers) + '\n\n';
   md += `---\n\n`;
   md += `**生成时间**: ${datetime}\n`;
-  md += `**工具**: EAlert Tracker v3.9.1（准确性优先，不捏造任何字段）\n`;
+  md += `**工具**: EAlert Tracker v3.8.6（准确性优先，不捏造任何字段）\n`;
 
   return md;
 }
@@ -1556,7 +1192,7 @@ function generateSummary(papers) {
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.9.1 启动\n');
+  console.log('🚀 EAlert Tracker v3.8.6 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
   
   console.log('📬 读取最近 48h 期刊/Scholar 邮件（Python）...');
@@ -1643,31 +1279,14 @@ async function run() {
     await sleep(200);
   }
   
-  // v3.9.1: 剩余论文中，对 Science 跟踪链接调用 fetchPaperDetails（CrossRef 标题搜索）
+  // 剩余论文用基础信息
   const enrichedTitles = new Set(enriched.map(p => p.title.toLowerCase().substring(0, 40)));
   for (const p of allRelevant) {
     if (enrichedTitles.has(p.title.toLowerCase().substring(0, 40))) continue;
-    
-    // 对 Science 跟踪链接尝试 CrossRef 标题搜索
-    const linkLower = (p.link || '').toLowerCase();
-    const isScienceTracking = linkLower.includes('click.aaas.sciencepubs.org') || 
-                              linkLower.includes('click.science.org');
-    
-    if (isScienceTracking) {
-      console.log(`  [Science] ${p.title.substring(0, 50)}...`);
-      const detailed = await fetchPaperDetails(p);
-      ensureAccurateFields(detailed);
-      enriched.push(detailed);
-      await sleep(300);
-    } else {
-      // v3.9.1: 尝试用邮件正文伪摘要（兜底摘要）
-      const fallbackAbstract = p.email_body || '';
-      p.researchQuestion = inferResearchQuestion(p.title, fallbackAbstract);
-      p.contributions = inferContributions(fallbackAbstract, p.title);
-      const absSrc = fallbackAbstract ? 'email' : 'none';
-      p.comment = generateComment(p.title, fallbackAbstract, p.researchQuestion, p.journal || '', absSrc);
-      enriched.push(p);
-    }
+    p.researchQuestion = inferResearchQuestion(p.title, '');
+    p.contributions = inferContributions('', p.title);
+    p.comment = generateComment(p.title, '', p.researchQuestion, p.journal || '');
+    enriched.push(p);
   }
   
   console.log(`  → 详情获取完成\n`);
@@ -1715,7 +1334,7 @@ async function run() {
   console.log('-'.repeat(60) + '\n');
   
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.9.1 完成！`);
+  console.log(`✅ EAlert Tracker v3.8.6 完成！`);
   console.log(`   � 候选论文(期刊): ${allPapers.length} 篇`);
   console.log(`   🔔 候选论文(Scholar): ${scholarPapers.length} 篇`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);

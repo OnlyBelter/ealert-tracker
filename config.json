@@ -1,7 +1,7 @@
 {
   "name": "ealert-tracker",
-  "version": "3.8.7",
-  "description": "科研期刊追踪器 v3.8.6 — Gmail IMAP + Google Scholar Alerts + PubMed/CrossRef（准确性优先；报告推送到 bioinformatics-frontier）",
+  "version": "3.9.1",
+  "description": "科研期刊追踪器 v3.9.0 — Gmail IMAP + Google Scholar Alerts + PubMed/CrossRef + 网页摘要抓取（混合方案；报告推送到 bioinformatics-frontier）",
   "author": "胖达",
   "license": "MIT",
   "keywords": [
@@ -18,5 +18,21 @@
   "engines": {
     "node": ">=18"
   },
-  "updated": "2026-05-19"
+  "updated": "2026-05-20",
+  "changelog": {
+    "3.9.0": [
+      "【混合方案】新增 fetchAbstractFromURL() 函数：PubMed/CrossRef 无摘要时，尝试从论文 URL 直接抓取",
+      "【Science 链接修复】email_reader.py 新增 Science 跟踪域名支持，修复 _unwrap_tracking_link() 解包 Science click.science.org 链接",
+      "【Markdown 链接修复】email_reader.py 修复纯文本提取时的 markdown 链接解析（[title](url) 格式）",
+      "【无摘要处理】ensureAccurateFields() 重写：无摘要时明确标注「无法获取摘要」，不再生成模板内容",
+      "【fetchPaperDetails 重写】fetchPaperDetails() 重写为 v3.9.0：改进摘要获取流程，无摘要时标注清楚"
+    ],
+    "3.8.7": [
+      "修复 generateOneSentenceSummary() 标题截断问题（保留冒号分隔的研究主题）"
+    ],
+    "3.8.5": [
+      "移除 extractContributions 通用 fallback（避免40篇中36篇相同）",
+      "新增基于关键词的 generateComment() 具体点评（20+主题关键词）"
+    ]
+  }
 }

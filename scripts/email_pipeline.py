@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import email
+import re
 import imaplib
 import json
 import os
@@ -141,6 +142,85 @@ def _import_local_modules():
     return email_reader, parse_scholar_emails
 
 
+def _extract_pseudo_abstract(email_text: str, title: str, link: str) -> str:
+    """从邮件正文中提取伪摘要（v3.9.0）
+    策略：找到标题所在位置，向后取1-3段描述性文字，过滤元信息和无关内容。
+    """
+    if not email_text or not title:
+        return ''
+    
+    # 找标题在正文中的位置
+    title_lower = title.lower()
+    lines = email_text.split('\n')
+    title_idx = -1
+    for i, line in enumerate(lines):
+        # 标题行通常完整出现或部分匹配
+        line_clean = re.sub(r'[^a-z0-9\s]', '', line.lower())
+        title_clean = re.sub(r'[^a-z0-9\s]', '', title_lower)
+        if len(title_clean) > 15 and title_clean[:40] in line_clean:
+            title_idx = i
+            break
+    
+    if title_idx < 0:
+        return ''
+    
+    # 收集标题后的1-3段文字
+    abstract_parts = []
+    skip_count = 0  # 跳过空行计数
+    
+    for i in range(title_idx + 1, min(title_idx + 20, len(lines))):
+        line = lines[i].strip()
+        
+        # 跳过：空行、URL、元信息
+        if not line:
+            skip_count += 1
+            if skip_count > 1:  # 超过1个空行则停止
+                break
+            continue
+        skip_count = 0
+        
+        lower_line = line.lower()
+        
+        # 跳过无关内容
+        if any(k in lower_line for k in [
+            'click here', 'unsubscribe', 'view in browser',
+            'advertisement', 'you are receiving',
+            'brought to you', 'follow us', 'twitter', 'facebook',
+            'image:', 'figure', 'fig.', 'table',
+            '©', 'copyright', 'all rights reserved',
+            'website:', 'visit:', 'read more',
+        ]):
+            continue
+        
+        # 跳过纯标题（ALL CAPS 短行）
+        if line.isupper() and len(line) < 80:
+            continue
+        
+        # 跳过引用/转发标记
+        if re.match(r'^>\s*', line):
+            continue
+        
+        # 跳过过短或过长的行
+        if len(line) < 40 or len(line) > 500:
+            continue
+        
+        # 这是描述性文字（包含动词或研究术语）
+        abstract_parts.append(line)
+        if len(abstract_parts) >= 3:
+            break
+    
+    if not abstract_parts:
+        return ''
+    
+    result = ' '.join(abstract_parts)
+    # 清理多余空格
+    result = re.sub(r'\s+', ' ', result).strip()
+    # 截断过长内容
+    if len(result) > 600:
+        result = result[:600] + '...'
+    return result
+
+
 def build_papers(hours: int, max_emails: int) -> List[Dict[str, Any]]:
     env = load_env(ENV_FILE)
     host = env.get("IMAP_HOST", "imap.gmail.com")
@@ -226,6 +306,9 @@ def build_papers(hours: int, max_emails: int) -> List[Dict[str, Any]]:
                 articles = email_reader.extract_articles_from_text(text, subject)
 
             for a in articles:
+                # v3.9.0: 从邮件正文中提取伪摘要（用于 API 失败的兜底）
+                # 策略：找标题后第1-3段的描述性文字，过滤掉元信息
+                pseudo_abstract = _extract_pseudo_abstract(text, a.get('title') or '', a.get('url') or '')
                 papers.append(
                     {
                         "id": str(uuid4()),
@@ -238,6 +321,7 @@ def build_papers(hours: int, max_emails: int) -> List[Dict[str, Any]]:
                         "source": "email",
                         "researcher": "",
                         "abstract": "",
+                        "email_body": pseudo_abstract,  # v3.9.0: 邮件正文伪摘要
                     }
                 )
 
