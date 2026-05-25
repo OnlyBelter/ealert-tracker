@@ -1798,6 +1798,188 @@
       "sent_date": "2026-05-20",
       "reason": "代谢标志物追踪颗石藻水华，海洋生态碳循环",
       "republish_notes": ""
+    },
+    {
+      "title": "Inferring stochastic dynamics by biophysical Neural ODE using single-cell transcriptomics",
+      "journal": "Nature Communications",
+      "sent_date": "2026-05-21",
+      "reason": "生物物理神经ODE推断单细胞随机动力学，AI+单细胞组学新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "Semaglutide slows epigenetic aging in a randomized trial of HIV-associated lipohypertrophy",
+      "journal": "Nature Communications",
+      "sent_date": "2026-05-21",
+      "reason": "司美格鲁肽减缓表观遗传衰老RCT，GLP-1RA抗衰老新证据",
+      "republish_notes": ""
+    },
+    {
+      "title": "De novo design of quasisymmetric two-component protein cages",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "Baker Lab蛋白质笼设计，AI+蛋白质设计前沿",
+      "republish_notes": ""
+    },
+    {
+      "title": "A critical initialization for biological neural networks",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "生物神经网络初始化，神经计算与AI交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "Neural representation of action symbols in primate frontal cortex",
+      "journal": "bioRxiv",
+      "sent_date": "2026-05-22",
+      "reason": "灵长类额叶动作符号表征，认知神经科学",
+      "republish_notes": ""
+    },
+    {
+      "title": "A deep-learning framework reveals whole-body perturbations at cell level",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "深度学习揭示细胞级全身扰动，AI+多组学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Design of one-component quasisymmetric protein nanocages",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "单组分蛋白纳米笼设计",
+      "republish_notes": ""
+    },
+    {
+      "title": "Specific combinations of human and viral genetic variants explain a cancer predisposition in southern China",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "华南癌症易感性人病毒遗传变异组合",
+      "republish_notes": ""
+    },
+    {
+      "title": "Protein engineering fixes a major crop trade-off",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "蛋白质工程解决作物权衡",
+      "republish_notes": ""
+    },
+    {
+      "title": "EBV strain interacts with host HLA to drive nasopharyngeal carcinoma risk",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "EBV-HLA互作驱动鼻咽癌",
+      "republish_notes": ""
+    },
+    {
+      "title": "Asymmetric selection of a rice immune module and rebuild of disease resistance",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "水稻免疫模块不对称选择",
+      "republish_notes": ""
+    },
+    {
+      "title": "Dynamic antigen expression and cytotoxic T cell resistance in HIV reservoir clones",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "HIV储库动态抗原与CTL抵抗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Exposed phosphatidylserine is an inhibitory molecule in T cell exhaustion",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "PS抑制T细胞耗竭新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Facile induction of immune tolerance by an IL-2–TGFβ surrogate agonist",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "IL-2-TGFβ替代激动剂诱导免疫耐受",
+      "republish_notes": ""
+    },
+    {
+      "title": "Somatic evolution following cancer treatment in normal tissue",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "癌症治疗后正常组织体细胞进化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Evolutionary characterization of lung cancer metastasis",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "肺癌转移进化表征",
+      "republish_notes": ""
+    },
+    {
+      "title": "Gene regulatory landscape dissected by single-cell four-omics sequencing",
+      "journal": "Nature",
+      "sent_date": "2026-05-22",
+      "reason": "单细胞四组学测序解析基因调控，多组学技术突破",
+      "republish_notes": ""
+    },
+    {
+      "title": "Integrated single-cell and spatial proteotranscriptomics atlas maps human oral immunoregulatory architecture",
+      "journal": "Trends",
+      "sent_date": "2026-05-22",
+      "reason": "空间蛋白质转录组人口腔免疫架构",
+      "republish_notes": ""
+    },
+    {
+      "title": "CAR-T therapy drives remission in patient with three autoimmune diseases",
+      "journal": "Trends",
+      "sent_date": "2026-05-22",
+      "reason": "CAR-T治疗三种自身免疫病缓解",
+      "republish_notes": ""
+    },
+    {
+      "title": "Proteasome-haem-BACH2 axis fuels T cell exhaustion",
+      "journal": "Trends in Immunology",
+      "sent_date": "2026-05-22",
+      "reason": "蛋白酶体-血红素-BACH2轴驱动T细胞耗竭",
+      "republish_notes": ""
+    },
+    {
+      "title": "Interleukin-23 biology linking mucosal immunity to autoimmune diseases and cancer",
+      "journal": "Trends in Immunology",
+      "sent_date": "2026-05-22",
+      "reason": "IL-23连接黏膜免疫与自身免疫病和癌症",
+      "republish_notes": ""
+    },
+    {
+      "title": "Targeting gamma-delta T cells for immunotherapies against colorectal cancer",
+      "journal": "Trends in Immunology",
+      "sent_date": "2026-05-22",
+      "reason": "γδ T细胞靶向结直肠癌免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Glycolytic diversity drives immune complexity in cancer",
+      "journal": "Trends in Immunology",
+      "sent_date": "2026-05-22",
+      "reason": "糖酵解多样性驱动癌症免疫复杂性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rapid customization of base editors via machine learning-powered combinatorial mutagenesis",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-05-22",
+      "reason": "ML驱动碱基编辑器快速定制，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Alphaviral non-structural protein-host RBP co-condensation sustains virus replication",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-05-22",
+      "reason": "α病毒蛋白-RBP共凝聚维持病毒复制",
+      "republish_notes": ""
+    },
+    {
+      "title": "CRL2FEM1B uses heme to recruit BACH1 for degradation and regulate ferroptosis in lung cancer",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-05-22",
+      "reason": "CRL2FEM1B-血红素-BACH1调控肺癌铁死亡",
+      "republish_notes": ""
     }
   ]
 }
