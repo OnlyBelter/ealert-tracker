@@ -1980,6 +1980,20 @@
       "sent_date": "2026-05-22",
       "reason": "CRL2FEM1B-血红素-BACH1调控肺癌铁死亡",
       "republish_notes": ""
+    },
+    {
+      "title": "A percolation theory analysis of continuous functional paths in protein sequence space",
+      "journal": "PLOS ONE",
+      "sent_date": "2026-05-27",
+      "reason": "蛋白质序列空间渗流理论，蛋白质设计与AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Evolutionary percolation through protein space",
+      "journal": "Science",
+      "sent_date": "2026-05-27",
+      "reason": "蛋白质空间进化渗流，与PLOS ONE渗流理论互证",
+      "republish_notes": ""
     }
   ]
 }

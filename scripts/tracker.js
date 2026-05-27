@@ -414,16 +414,52 @@ async function fetchAbstractFromURL(url, journal) {
 }
 
 /** PubMed API 查询（通过标题搜索） */
+// 计算两个字符串的标题相似度（基于词重叠率）
+// 返回值：0~1，>0.6 认为匹配
+function titleSimilarity(a, b) {
+  const normalize = s => (s || '').toLowerCase().replace(/[^\w\s]/g, ' ').split(/\s+/).filter(w => w.length > 3);
+  const wordsA = new Set(normalize(a));
+  const wordsB = normalize(b);
+  if (wordsA.size === 0 || wordsB.length === 0) return 0;
+  const overlap = wordsB.filter(w => wordsA.has(w)).length;
+  return overlap / Math.max(wordsA.size, wordsB.length);
+}
+
 async function fetchFromPubMed(title) {
   try {
-    const query = encodeURIComponent(title.replace(/[^\w\s]/g, ' ').trim().substring(0, 100));
-    const url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${query}&retmax=1&retmode=json&sort=relevance`;
+    const query = encodeURIComponent(title.replace(/[^\w\s]/g, ' ').trim().substring(0, 200));
+    // v3.9.2: 增加 retmax=5，逐条校验标题相似度，避免匹配到错误论文
+    const url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${query}&retmax=5&retmode=json&sort=relevance`;
     
     const data = await httpGet(url);
     const json = JSON.parse(data);
-    const pmid = json?.esearchresult?.idlist?.[0];
+    const pmids = json?.esearchresult?.idlist || [];
+    if (pmids.length === 0) return null;
+
+    // v3.9.2: 逐条校验标题相似度，取第一条匹配的
+    let pmid = null;
+    for (const candidatePmid of pmids) {
+      await sleep(200);
+      const checkUrl = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=${candidatePmid}&retmode=json`;
+      try {
+        const checkData = await httpGet(checkUrl, 8000);
+        const checkJson = JSON.parse(checkData);
+        const candidateMeta = checkJson?.result?.[candidatePmid];
+        if (candidateMeta?.title) {
+          const sim = titleSimilarity(title, candidateMeta.title);
+          console.log(`    PubMed 候选 PMID ${candidatePmid}: 相似度 ${(sim*100).toFixed(0)}% | ${candidateMeta.title.substring(0,80)}`);
+          if (sim > 0.5) {
+            pmid = candidatePmid;
+            break;
+          }
+        }
+      } catch (e) { /* skip */ }
+    }
     
-    if (!pmid) return null;
+    if (!pmid) {
+      console.log(`    PubMed 未找到标题匹配的论文（已检查 ${pmids.length} 条候选）`);
+      return null;
+    }
     
     await sleep(300);
     
@@ -456,6 +492,26 @@ async function fetchFromPubMed(title) {
     // v3.7.0: 验证 DOI 格式，拒绝捏造的假 DOI
     let doi = paperMeta.elocationid?.replace('doi: ', '') || '';
     if (doi && !/^10\.\d{4,}\/[a-zA-Z]/.test(doi)) doi = '';
+    
+    // v3.9.2: 过滤发表日期，排除 6 个月前的论文
+    if (published && published.length >= 4) {
+      const pubYear = parseInt(published.substring(0, 4));
+      const currentYear = new Date().getFullYear();
+      const currentMonth = new Date().getMonth() + 1;
+      // 计算 6 个月前的年份
+      let cutoffYear = currentYear;
+      let cutoffMonth = currentMonth - 6;
+      if (cutoffMonth <= 0) { cutoffMonth += 12; cutoffYear -= 1; }
+      const pubMonthMatch = published.match(/^(\d{4})-?(\d{2})?/);
+      if (pubMonthMatch) {
+        const py = parseInt(pubMonthMatch[1]);
+        const pm = pubMonthMatch[2] ? parseInt(pubMonthMatch[2]) : 12;
+        if (py < cutoffYear || (py === cutoffYear && pm < cutoffMonth)) {
+          console.log(`    ⚠️ 论文发表超过 6 个月（${published}），跳过`);
+          return null;
+        }
+      }
+    }
     
     const researchQuestion = inferResearchQuestion(originalTitle, abstract);
     const contributions = inferContributions(abstract, originalTitle);

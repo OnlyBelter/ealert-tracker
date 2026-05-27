@@ -130,18 +130,23 @@ class _LinkExtractor(HTMLParser):
         self._href = ''
         self._text_chunks = []
         self.links = []
+        self._a_stack = 0  # 跟踪 <a> 嵌套层级
 
     def handle_starttag(self, tag, attrs):
-        if tag.lower() != 'a':
-            return
-        href = ''
-        for k, v in attrs:
-            if k.lower() == 'href':
-                href = v or ''
-                break
-        self._in_a = True
-        self._href = href
-        self._text_chunks = []
+        if tag.lower() == 'a':
+            href = ''
+            for k, v in attrs:
+                if k.lower() == 'href':
+                    href = v or ''
+                    break
+            if not self._in_a:
+                self._in_a = True
+                self._href = href
+                self._text_chunks = []
+            self._a_stack += 1
+        elif self._in_a:
+            # 在 <a> 内的标签（如 <span>、<em>）不截断文本
+            pass
 
     def handle_data(self, data):
         if not self._in_a:
@@ -150,15 +155,16 @@ class _LinkExtractor(HTMLParser):
             self._text_chunks.append(data)
 
     def handle_endtag(self, tag):
-        if tag.lower() != 'a' or not self._in_a:
-            return
-        text = re.sub(r'\s+', ' ', ''.join(self._text_chunks)).strip()
-        href = (self._href or '').strip()
-        if href:
-            self.links.append((text, href))
-        self._in_a = False
-        self._href = ''
-        self._text_chunks = []
+        if tag.lower() == 'a':
+            self._a_stack = max(0, self._a_stack - 1)
+            if self._a_stack == 0 and self._in_a:
+                text = re.sub(r'\s+', ' ', ''.join(self._text_chunks)).strip()
+                href = (self._href or '').strip()
+                if href:
+                    self.links.append((text, href))
+                self._in_a = False
+                self._href = ''
+                self._text_chunks = []
 
 
 def _unwrap_tracking_link(url):
@@ -497,14 +503,12 @@ def is_skip_line(line, lower_line):
 
 def extract_articles_from_text(text, subject):
     """
-    重写版提取逻辑（v2.0）
+    改进版提取逻辑（v2.1）
     
-    准确性原则：
-    - 每个字段必须从邮件内容中真实提取，绝不捏造
-    - 标题: 找到论文标题行
-    - URL: 标题行后面紧跟的链接行（视为该论文的链接）
-    - 日期: 在标题附近或前文中提取
-    - 期刊: 从 subject 识别
+    修复 PNAS 邮件标题截断问题：
+    - 标题可能跨多行（被 <br> 或 \n 分割）
+    - 合并多行标题（直到遇到 URL 或日期行）
+    - 改进 URL 提取（支持 doi.org 链接）
     """
     articles = []
     if not text:
@@ -524,10 +528,10 @@ def extract_articles_from_text(text, subject):
             continue
         
         # 判断是否为论文标题特征：
-        # 1. 长度 30-250 字符
+        # 1. 长度 15-300 字符（降低阈值，允许跨行合并）
         # 2. 包含小写字母（不是全大写缩写）
         # 3. 不以 http/www/@ 开头
-        if (30 <= len(line) <= 250 
+        if (15 <= len(line) <= 300 
                 and re.search(r'[a-z]{3,}', line)
                 and not lower_line.startswith('http')
                 and not lower_line.startswith('www.')
@@ -535,26 +539,53 @@ def extract_articles_from_text(text, subject):
             
             # 清理标题
             title = re.sub(r'\s+', ' ', line).strip()
-            title = re.sub(r'^[\s\-\*\.\|•\[\]:]+', '', title).strip()
+            title = re.sub(r'^[\s\-\*\."|•\[\]:]+', '', title).strip()
+            
+            # v2.1: 尝试向后合并多行标题（PNAS 邮件常见格式）
+            # 合并条件：下一行是小写开头（标题 continuation）
+            j = i + 1
+            while j < min(i + 5, len(lines)):
+                next_line = lines[j].strip()
+                next_lower = next_line.lower()
+                
+                # 停止合并的条件
+                if (not next_line or
+                    next_lower.startswith('http') or 
+                    next_lower.startswith('www.') or
+                    next_lower.startswith('doi:') or
+                    'doi.org/' in next_lower or
+                    next_lower.startswith('10.') or
+                    re.match(r'^\d{4}\\s', next_line) or  # 日期开头
+                    len(next_line) < 5 or  # 太短
+                    is_skip_line(next_line, next_lower) or
+                    (next_line and next_line[0].isupper())):  # 大写开头（新标题或作者）
+                    break
+                
+                # 合并小写开头的行（标题 continuation）
+                if next_line and not next_line[0].isupper():
+                    title = title + ' ' + next_line
+                    j += 1
+                else:
+                    break
             
             # 标题去重
-            title_key = re.sub(r'\s+', '', title.lower())[:50]
+            title_key = re.sub(r'\s+', '', title.lower())[:80]
             if len(title) < 15 or title_key in seen_titles:
-                i += 1
+                i = max(i + 1, j)
                 continue
             seen_titles.add(title_key)
             
             # 向前看几行提取日期
             date = extract_date_from_line(line, lines[max(0, i-5):i])
             
-            # 向后找 URL（最多看5行）
+            # 向后找 URL（最多看8行，适应合并后的位置）
             url = ''
-            for j in range(i + 1, min(i + 6, len(lines))):
-                next_line = lines[j].strip()
+            for k in range(j, min(j + 8, len(lines))):
+                next_line = lines[k].strip()
                 next_lower = next_line.lower()
                 
                 # 处理 markdown 链接格式: [title](url) 或 [title](url "title")
-                md_match = re.match(r'\[(?:[^\]]*)\]\(([^)\s"\']+)', next_line)
+                md_match = re.match(r'\[(?:[^\]]*)\]\(([^)\s"\']+)\)', next_line)
                 if md_match:
                     url = md_match.group(1).strip()
                     break
@@ -568,6 +599,11 @@ def extract_articles_from_text(text, subject):
                 elif next_lower.startswith('www.'):
                     url = 'https://' + next_line.strip().split()[0]
                     break
+                elif 'doi.org/' in next_lower:
+                    doi_match = re.search(r'doi\.org/[\S]+', next_line)
+                    if doi_match:
+                        url = 'https://' + doi_match.group(0)
+                        break
                 elif len(next_line) > 0 and len(next_line) < 15:
                     # 很短的行可能是序号，跳过继续
                     continue
@@ -581,11 +617,13 @@ def extract_articles_from_text(text, subject):
                 'date': date,        # 可能为空字符串（无法确认）
                 'journal': extract_journal_from_subject(subject),
             })
+            
+            i = j  # 跳到合并后的位置
+            continue
         
         i += 1
 
     return articles
-
 
 def _extract_best_body(msg):
     if msg is None:
