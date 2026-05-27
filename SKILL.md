@@ -4,7 +4,7 @@ description: "科研期刊追踪器 v3.8.7。通过 Gmail IMAP 读取最近 48 �
 metadata:
   openclaw:
     emoji: "📚"
-    version: "3.8.7"
+    version: "3.9.2"
     requires:
       bins:
         - python3
@@ -13,7 +13,7 @@ metadata:
         - IMAP_PASS
 ---
 
-# EAlert Tracker v3.8.7 - 科研期刊追踪器
+# EAlert Tracker v3.9.2 - 科研期刊追踪器
 
 > ⚠️ **准确性原则（最高优先级）**：提供的信息必须经过确认，绝不捏造任何字段。所有字段（DOI、作者、日期、摘要）必须从可靠 API 验证获取，无法提取时明确标注「（XXX信息无法确认）」，绝不猜测。
 
@@ -260,7 +260,13 @@ https://github.com/OnlyPandaX/bioinformatics-frontier
 
 ## 更新日志
 
-### v2.1.0 (2026-04-12)
+### v3.9.2 (2026-05-27)
+- 🔧 修复 PNAS 邮件解析 bug（标题截断导致 PubMed 匹配错误）
+- 🔧 新增 PubMed 标题相似度校验（避免截断标题匹配到错误论文）
+- 🔧 修复 email_reader.py datetime 时区比较错误
+- 🔧 修复 URL 提取逻辑（正确跳过作者行）
+
+### v3.9.1 (2026-05-20)
 - 📅 读取时间从 48h 改为 **24h**（每天早上读取当日新邮件）
 - 📧 **取消邮件发送**，只保留 QQ + GitHub
 - 🆕 新增每周汇总任务（每周日 10:00 AM）
@@ -328,8 +334,8 @@ https://github.com/OnlyPandaX/bioinformatics-frontier
 
 ---
 
-**版本**: 3.7.0
-**更新**: 2026-05-08
+**版本**: 3.9.2
+**更新**: 2026-05-27
 
 > **⚠️ 准确性原则（v3.7.0 — 最高优先级）**:
 > 提供的信息必须经过确认，绝不捏造任何字段。所有字段（DOI、作者、日期、摘要）必须从可靠 API 验证获取，无法提取时明确标注占位符，绝不猜测。
