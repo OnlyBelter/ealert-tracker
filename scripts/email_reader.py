@@ -527,6 +527,26 @@ def extract_articles_from_text(text, subject):
             i += 1
             continue
         
+        # 判断是否为作者行（跳过）
+        # 作者行特征：多个单词、大部分首字母大写、可能含 "and"/逗号
+        def is_author_line(line):
+            words = line.split()
+            if len(words) < 2:
+                return False
+            # 统计首字母大写的单词（忽略纯数字和标点）
+            capitalized = sum(1 for w in words if w[0].isupper())
+            # 如果 >= 50% 的单词首字母大写，且包含 "and" 或逗号 → 作者行
+            if capitalized >= len(words) * 0.5 and ('and' in words or ',' in line):
+                return True
+            # 如果 >= 70% 的单词首字母大写 → 可能是作者名列表
+            if capitalized >= len(words) * 0.7:
+                return True
+            return False
+        
+        if is_author_line(line):
+            i += 1
+            continue
+        
         # 判断是否为论文标题特征：
         # 1. 长度 15-300 字符（降低阈值，允许跨行合并）
         # 2. 包含小写字母（不是全大写缩写）
@@ -584,6 +604,13 @@ def extract_articles_from_text(text, subject):
                 next_line = lines[k].strip()
                 next_lower = next_line.lower()
                 
+                # v2.1: 跳过作者行（调用 is_author_line 判断）
+                if (next_line and is_author_line(next_line)
+                    and not next_lower.startswith('http')
+                    and not next_lower.startswith('www.')
+                    and 'doi.org/' not in next_lower):
+                    continue
+                
                 # 处理 markdown 链接格式: [title](url) 或 [title](url "title")
                 md_match = re.match(r'\[(?:[^\]]*)\]\(([^)\s"\']+)\)', next_line)
                 if md_match:
@@ -600,9 +627,16 @@ def extract_articles_from_text(text, subject):
                     url = 'https://' + next_line.strip().split()[0]
                     break
                 elif 'doi.org/' in next_lower:
-                    doi_match = re.search(r'doi\.org/[\S]+', next_line)
+                    # 提取 doi.org 链接（PNAS 邮件格式）
+                    doi_match = re.search(r'https?://(?:dx\.)?doi\.org/[\S]+', next_line)
+                    if not doi_match:
+                        doi_match = re.search(r'doi\.org/[\S]+', next_line)
                     if doi_match:
-                        url = 'https://' + doi_match.group(0)
+                        url = doi_match.group(0)
+                        if not url.startswith('http'):
+                            url = 'https://' + url
+                        # 清理 URL 末尾的标点
+                        url = re.split(r'[\s<>"\']', url)[0]
                         break
                 elif len(next_line) > 0 and len(next_line) < 15:
                     # 很短的行可能是序号，跳过继续
@@ -689,7 +723,7 @@ def fetch_emails():
         mail.select('INBOX')
 
         # 搜索最近 48 小时邮件（IMAP SINCE 只有日期粒度，需后续再按 Date 精确过滤）
-        since = datetime.now() - timedelta(days=2)
+        since = datetime.now().replace(tzinfo=timezone.utc) - timedelta(hours=48)
         date_str = since.strftime('%d-%b-%Y')
 
         print(f"搜索最近 48 小时邮件 (since {date_str})...")
@@ -723,6 +757,10 @@ def fetch_emails():
 
                 try:
                     msg_dt = parsedate_to_datetime(msg_date) if msg_date else None
+                    # 统一为 offset-aware（parsedate_to_datetime 可能返回 naive）
+                    if msg_dt and msg_dt.tzinfo is None:
+                        from datetime import timezone
+                        msg_dt = msg_dt.replace(tzinfo=timezone.utc)
                 except Exception:
                     msg_dt = None
                 if msg_dt and msg_dt < since:
