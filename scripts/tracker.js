@@ -1,5 +1,5 @@
 /**
- * EAlert Tracker v3.9.1
+ * EAlert Tracker v3.9.2
  * 
  * ⚠️ 准确性原则（最高优先级）：
  * 提供的信息必须经过确认，绝不捏造任何字段。
@@ -181,7 +181,7 @@ function extractDOI(link) {
 }
 
 /**
- * 获取论文详情（v3.9.1 重写 — 混合方案）
+ * 获取论文详情（v3.9.2 重写 — 混合方案）
  * 
  * 准确性优先流程：
  * 1. 通过 PubMed API 获取完整元数据（作者、期刊、摘要、真实 DOI）
@@ -246,7 +246,7 @@ async function fetchPaperDetails(paper) {
     const paperLinkLower = (paper.link || '').toLowerCase();
     const isScienceTracking = paperLinkLower.includes('click.aaas.sciencepubs.org') || 
                               paperLinkLower.includes('click.science.org');
-    // v3.9.1: Science 跟踪链接先通过 CrossRef 标题搜索找 DOI
+    // v3.9.2: Science 跟踪链接先通过 CrossRef 标题搜索找 DOI
     if (isScienceTracking) {
       console.log(`    ⚡ 检测到 Science 跟踪链接: ${paperLinkLower.substring(0,60)}`);
       const doiFromTitle = await searchCrossRefByTitle(paper.title);
@@ -285,7 +285,7 @@ async function fetchPaperDetails(paper) {
   paper.journal = paper.journal || '（期刊信息无法确认）';
   paper.doi = '';  // 不显示无法验证的 DOI
   
-  // v3.9.1: 无摘要时标注清楚，不生成模板内容
+  // v3.9.2: 无摘要时标注清楚，不生成模板内容
   if (!paper.abstract || paper.abstract.length < 30) {
     paper.researchQuestion = '（无法获取摘要，无法提取研究问题）';
     paper.contributions = ['（无法获取摘要，无法提取主要贡献）'];
@@ -299,7 +299,7 @@ async function fetchPaperDetails(paper) {
 }
 
 /**
- * 从论文 URL 直接抓取摘要（v3.9.1 新增）
+ * 从论文 URL 直接抓取摘要（v3.9.2 新增）
  * 支持：Nature、Science、Cell、PNAS、bioRxiv 等主流期刊
  */
 async function fetchAbstractFromURL(url, journal) {

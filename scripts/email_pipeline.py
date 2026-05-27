@@ -12,6 +12,23 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from uuid import uuid4
 
+# 兼容映射：email_reader.py 重写后去除了函数名前的下划线
+# 这里统一做映射，避免修改 email_pipeline.py 的大量调用
+import email_reader as _er
+for _old, _new in [
+    ('_extract_best_body', 'extract_best_body'),
+    ('_extract_articles_from_html', 'extract_articles_from_html'),
+    ('_html_to_text', 'html_to_text'),
+    ('_is_journal_email', 'is_journal_email'),
+    ('_extract_journal_from_subject', 'extract_journal_from_subject'),
+    ('_normalize_url', 'normalize_url'),
+    ('_unwrap_tracking_link', 'unwrap_tracking_link'),
+]:
+    if not hasattr(_er, _old) and hasattr(_er, _new):
+        setattr(_er, _old, getattr(_er, _new))
+# 让后续代码能用 email_reader.xxx 访问
+import email_reader  # noqa: F401
+
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT_DIR = SCRIPT_DIR.parent

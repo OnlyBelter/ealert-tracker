@@ -301,7 +301,7 @@ def is_journal_email(sender):
 
 def is_skip_line(line):
     """
-    判断是否为应跳过的行（导航/页脚/按钮等）。
+    判断是否为应跳过的行（导航/页脚/按钮/元信息等）。
     返回 True 表示跳过。
     """
     if not line or len(line) < 3:
@@ -317,16 +317,32 @@ def is_skip_line(line):
     # 全大写短行（可能是栏目名）
     if line.isupper() and len(line) < 60 and ' ' not in line:
         return True
-    # 已知垃圾关键词
+
+    # 已知垃圾关键词（行级匹配）
     skip_kws = [
         'read more', 'view article', 'full text', 'abstract', 'pdf',
         'table of contents', 'unsubscribe', 'privacy policy',
         'manage preferences', 'sign up', 'register', 'log in',
         'contact us', 'copyright', 'all rights reserved',
         'follow us', 'twitter', 'facebook', 'advertisement',
+        # PNAS/Science 邮件元信息
+        'proceedings of the national academy',
+        'the above issue is now available',
+        'volume:', 'issue:', 'date:', 'page:', 'doi:',
+        'preferences, please visit',
+        'if you need any further help',
+        'brought to you', 'sent to ', 'update your ',
+        'first release', 'sign up', 'join ', 'log in',
+        'circularity', 'multi-journal', 'highlights', 'announcements',
+        'editorial board', 'advisory board',
     ]
     if any(kw in lower for kw in skip_kws):
         return True
+
+    # 分隔线
+    if re.match(r'^[\s\-–—=*_#.|•\[\]:]+$', line):
+        return True
+
     return False
 
 
@@ -393,11 +409,8 @@ def extract_articles_from_html(html, subject):
         if len(title) < 20 or len(title) > 250:
             continue
         lower_title = title.lower()
-        # 过滤导航/按钮文字
-        if any(kw in lower_title for kw in
-               ('read more', 'view article', 'full text', 'abstract', 'pdf',
-                'table of contents', 'unsubscribe', 'privacy', 'manage preferences',
-                'sign up', 'register', 'log in', 'contact us')):
+        # 过滤导航/按钮文字 + 元信息行
+        if is_skip_line(title):
             continue
         # 必须包含至少3个连续小写字母（排除全大写栏目名）
         if not re.search(r'[a-z]{3,}', title):
@@ -757,3 +770,8 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# ============ 兼容别名（email_pipeline.py 调用旧名称 _extract_best_body）============
+import sys
+_mod = sys.modules[__name__]
+_mod._extract_best_body = extract_best_body
