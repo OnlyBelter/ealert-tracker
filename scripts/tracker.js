@@ -585,7 +585,7 @@ async function fetchFromPubMed(title) {
 
 /**
  * 通过标题在 CrossRef 搜索论文(用于 Science 跟踪链接等无法提取 DOI 的情况)
- * v3.9.1: 新增
+ * v3.9.2: 新增
  */
 async function searchCrossRefByTitle(title) {
   try {
@@ -810,14 +810,14 @@ function ensureAccurateFields(paper) {
     paper.journal = '(期刊信息无法确认)';
   }
 
-  // v3.9.1: 摘要判断 - 优先使用 API 真实摘要,兜底使用邮件正文伪摘要(>30字)
+  // v3.9.2: 摘要判断 - 优先使用 API 真实摘要,兜底使用邮件正文伪摘要(>30字)
   const realAbstract = paper.abstract && paper.abstract.length > 30;
   const emailAbstract = paper.email_body && paper.email_body.length > 30;
   const effectiveAbstract = realAbstract ? paper.abstract : (emailAbstract ? paper.email_body : '');
   const abstractSource = realAbstract ? 'api' : (emailAbstract ? 'email' : 'none');
 
   if (effectiveAbstract) {
-    // v3.9.1: 有摘要(真实或伪摘要),生成基于内容的分析
+    // v3.9.2: 有摘要(真实或伪摘要),生成基于内容的分析
     // 研究问题/贡献/点评全部基于 effectiveAbstract 生成
     if (!paper.researchQuestion || paper.researchQuestion === '探索相关生物学机制或应用研究') {
       paper.researchQuestion = inferResearchQuestion(paper.title, effectiveAbstract);
@@ -829,7 +829,7 @@ function ensureAccurateFields(paper) {
       paper.comment = generateComment(paper.title, effectiveAbstract, paper.researchQuestion, paper.journal || '', abstractSource);
     }
   } else {
-    // v3.9.1: 无摘要时明确标注,不生成模板内容
+    // v3.9.2: 无摘要时明确标注,不生成模板内容
     if (!paper.researchQuestion || paper.researchQuestion === '探索相关生物学机制或应用研究') {
       paper.researchQuestion = '(无法获取摘要,无法提取研究问题)';
     }
@@ -1523,7 +1523,7 @@ function generateMarkdownReport(papers) {
   if (papers.length === 0) {
     md += `> 今日未收到相关领域期刊目录。\n\n---\n\n`;
     md += `**生成时间**: ${datetime}\n`;
-    md += `**工具**: EAlert Tracker v3.9.1(准确性优先,不捏造任何字段)\n`;
+    md += `**工具**: EAlert Tracker v3.9.2(准确性优先,不捏造任何字段)\n`;
     return md;
   }
 
@@ -1595,7 +1595,7 @@ function generateMarkdownReport(papers) {
   md += generateSummary(papers) + '\n\n';
   md += `---\n\n`;
   md += `**生成时间**: ${datetime}\n`;
-  md += `**工具**: EAlert Tracker v3.9.1(准确性优先,不捏造任何字段)\n`;
+  md += `**工具**: EAlert Tracker v3.9.2(准确性优先,不捏造任何字段)\n`;
 
   return md;
 }
@@ -1660,7 +1660,7 @@ function generateSummary(papers) {
 // ============ 主流程 ============
 
 async function run() {
-  console.log('🚀 EAlert Tracker v3.9.1 启动\n');
+  console.log('🚀 EAlert Tracker v3.9.2 启动\n');
   console.log(`📅 ${new Date().toLocaleString('zh-CN')}\n`);
 
   console.log('📬 读取最近 48h 期刊/Scholar 邮件(Python)...');
@@ -1747,7 +1747,7 @@ async function run() {
     await sleep(200);
   }
 
-  // v3.9.1: 剩余论文中,对 Science 跟踪链接调用 fetchPaperDetails(CrossRef 标题搜索)
+  // v3.9.2: 剩余论文中,对 Science 跟踪链接调用 fetchPaperDetails(CrossRef 标题搜索)
   const enrichedTitles = new Set(enriched.map(p => p.title.toLowerCase().substring(0, 40)));
   for (const p of allRelevant) {
     if (enrichedTitles.has(p.title.toLowerCase().substring(0, 40))) continue;
@@ -1764,7 +1764,7 @@ async function run() {
       enriched.push(detailed);
       await sleep(300);
     } else {
-      // v3.9.1: 尝试用邮件正文伪摘要(兜底摘要)
+      // v3.9.2: 尝试用邮件正文伪摘要(兜底摘要)
       const fallbackAbstract = p.email_body || '';
       p.researchQuestion = inferResearchQuestion(p.title, fallbackAbstract);
       p.contributions = inferContributions(fallbackAbstract, p.title);
@@ -1824,7 +1824,7 @@ async function run() {
   console.log('-'.repeat(60) + '\n');
 
   console.log('\n' + '='.repeat(60));
-  console.log(`✅ EAlert Tracker v3.9.1 完成!`);
+  console.log(`✅ EAlert Tracker v3.9.2 完成!`);
   console.log(`   � 候选论文(期刊): ${allPapers.length} 篇`);
   console.log(`   🔔 候选论文(Scholar): ${scholarPapers.length} 篇`);
   console.log(`   📄 论文总数: ${allPapers.length + scholarPapers.length} 篇`);
