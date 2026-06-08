@@ -1994,6 +1994,873 @@
       "sent_date": "2026-05-27",
       "reason": "蛋白质空间进化渗流，与PLOS ONE渗流理论互证",
       "republish_notes": ""
+    },
+    {
+      "title": "Pathogenic variants in EPG5 drive neurodegeneration through mitochondrial dysfunction and innate immune activation",
+      "journal": "Nature Communications",
+      "sent_date": "2026-05-29",
+      "reason": "自噬-线粒体-神经退行性疾病新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Targeting arginine metabolism reverses bone immunosuppressive microenvironment and metastasis in ARID1A-deficient TNBC",
+      "journal": "Nature Communications",
+      "sent_date": "2026-05-29",
+      "reason": "ARID1A缺陷TNBC精氨酸代谢靶向治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genomic instability drives POSTN+ myofibroblasts via STING-WNT axis to promote immunosuppression and PARPi resistance in ovarian cancer",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-05-29",
+      "reason": "STING-WNT轴驱动PARPi耐药新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "The Hallmarks of Cancer: 25 years guiding discovery and therapy",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "癌症标志25周年里程碑综述",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mesenchymal drift: A convergent framework for the hallmarks of aging",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "间充质漂移统一衰老标志框架",
+      "republish_notes": ""
+    },
+    {
+      "title": "Predicting competition and substrate preferences for targeted microbiome alteration",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "微生物组靶向改造预测方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "Farnesylation-driven KRAS phase separation promotes colon tumor growth",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "KRAS相分离促结肠癌新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial transcriptomics redraws the olfactory map",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "空间转录组学重绘嗅觉图谱",
+      "republish_notes": ""
+    },
+    {
+      "title": "B cell deficiency limits exercise capacity by remodeling liver glutamate metabolism",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "B细胞缺乏通过重塑肝谷氨酸代谢限制运动能力",
+      "republish_notes": ""
+    },
+    {
+      "title": "Unbiased niche labeling maps immune-excluded niche in bone metastasis",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "骨转移免疫排斥微环境图谱",
+      "republish_notes": ""
+    },
+    {
+      "title": "ErbB family receptor dimerization dynamics via long-term single-molecule imaging",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "ErbB受体二聚化动力学单分子成像",
+      "republish_notes": ""
+    },
+    {
+      "title": "Electromagnetic field-inducible in vivo gene switch for remote spatiotemporal control of gene expression",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "电磁场诱导体内基因开关时空调控",
+      "republish_notes": ""
+    },
+    {
+      "title": "Affinity-matured B cell responses neutralizing type-I interferons underlie severe viral infections",
+      "journal": "Cell",
+      "sent_date": "2026-05-29",
+      "reason": "中和I型干扰素的高亲和力B细胞应答导致严重病毒感染",
+      "republish_notes": ""
+    },
+    {
+      "title": "Illuminations Collection: Exploring AI and Machine Learning",
+      "journal": "PNAS",
+      "sent_date": "2026-05-29",
+      "reason": "AI/ML特刊合集",
+      "republish_notes": ""
+    },
+    {
+      "title": "Move over AlphaFold: open source model predicts shape of 1 billion proteins",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "开源蛋白质结构预测新模型",
+      "republish_notes": ""
+    },
+    {
+      "title": "Human blood stem cells remember previous inflammation",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "造血干细胞记忆炎症新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Evaluating large language models for accuracy incentivizes hallucinations",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "LLM准确性评估激励幻觉产生",
+      "republish_notes": ""
+    },
+    {
+      "title": "The DNA virome varies with human genes and environments",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "DNA病毒组与人类基因和环境关联",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial atlas of diabetic kidney disease reveals a B cell-rich subgroup",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "糖尿病肾病空间图谱揭示B细胞亚群",
+      "republish_notes": ""
+    },
+    {
+      "title": "Multiomics and deep learning dissect regulatory syntax in human development",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "多组学+深度学习解析人类发育调控语法",
+      "republish_notes": ""
+    },
+    {
+      "title": "Ectopic NMDAR expression in cancer unmasks germline-encoded autoimmunity",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "肿瘤NMDAR异位表达揭示胚系编码自身免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "Improving access to essential medicines via decision-aware machine learning",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "决策感知ML改善基本药物可及性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genetic architecture of sugarcane traits in a polyploid genomics framework",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "多倍体基因组学框架解析甘蔗性状遗传架构",
+      "republish_notes": ""
+    },
+    {
+      "title": "Machine learning improves health-care access in Sierra Leone",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "ML改善塞拉利昂医疗可及性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bee-inspired navigation robot pinpoints its home using a neural network",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "蜜蜂启发的导航机器人",
+      "republish_notes": ""
+    },
+    {
+      "title": "β-Arrestin condensates regulate G-protein-coupled receptor function",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "β-Arrestin凝集体调控GPCR功能",
+      "republish_notes": ""
+    },
+    {
+      "title": "Human haematopoietic stem cells remember inflammatory stress",
+      "journal": "Nature",
+      "sent_date": "2026-05-29",
+      "reason": "人造血干细胞记忆炎症应激",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mesenchymal drift: A convergent framework for the hallmarks of aging",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "间充质漂移衰老标志汇聚框架"
+    },
+    {
+      "title": "Predicting competition and substrate preferences for targeted microbiome alteration",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "微生物竞争底物偏好预测"
+    },
+    {
+      "title": "Farnesylation-driven KRAS phase separation promotes colon tumor growth",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "KRAS法尼基化相分离促进结肠癌"
+    },
+    {
+      "title": "Hallmarks of Cancer: 25 years guiding discovery and therapy (Cell issue)",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "Hallmarks of Cancer Cell专刊issue链接"
+    },
+    {
+      "title": "Spatial transcriptomics redraws the olfactory map",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "空间转录组学嗅觉图谱"
+    },
+    {
+      "title": "B cells just got a workout",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "B细胞与运动"
+    },
+    {
+      "title": "Affinity-matured B cell responses neutralizing type-I interferons underlie severe viral infections",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "B细胞中和干扰素与重症病毒感染"
+    },
+    {
+      "title": "B cell deficiency limits exercise capacity by remodeling liver glutamate metabolism",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "B细胞缺乏重塑肝脏代谢限制运动"
+    },
+    {
+      "title": "Unbiased niche labeling maps immune-excluded niche in bone metastasis",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "骨转移免疫排斥微环境"
+    },
+    {
+      "title": "ErbB family receptor dimerization dynamics and dysregulation via long-term single-molecule imaging",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "ErbB受体二聚化单分子成像"
+    },
+    {
+      "title": "Electromagnetic field-inducible in vivo gene switch for remote spatiotemporal control of gene expression",
+      "journal": "Cell",
+      "sent_date": "2026-05-30",
+      "reason": "电磁场诱导体内基因开关"
+    },
+    {
+      "title": "Illuminations Collection: Exploring AI and Machine Learning (PNAS)",
+      "journal": "PNAS",
+      "sent_date": "2026-05-30",
+      "reason": "AI/ML专题文集"
+    },
+    {
+      "title": "Move over, AlphaFold: open source model predicts shape of 1 billion proteins",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "开源蛋白质结构预测挑战AlphaFold"
+    },
+    {
+      "title": "Human blood stem cells remember previous inflammation",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "造血干细胞记忆炎症"
+    },
+    {
+      "title": "Nests in an egg cell: structures of protein-storage units in oocytes",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "卵母细胞蛋白质储存单元结构"
+    },
+    {
+      "title": "beta-Arrestin condensates regulate G-protein-coupled receptor function",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "beta-Arrestin凝聚体调控GPCR"
+    },
+    {
+      "title": "Human haematopoietic stem cells remember inflammatory stress",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "造血干细胞炎症记忆"
+    },
+    {
+      "title": "Genetic architecture of sugarcane traits in a polyploid genomics framework",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "甘蔗多倍体基因组学"
+    },
+    {
+      "title": "Machine learning improves health-care access in Sierra Leone",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "ML改善塞拉利昂医疗可及性"
+    },
+    {
+      "title": "Bee-inspired navigation robot pinpoints its home using a neural network",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "蜜蜂启发导航机器人"
+    },
+    {
+      "title": "Evaluating large language models for accuracy incentivizes hallucinations",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "LLM评估激励幻觉"
+    },
+    {
+      "title": "The DNA virome varies with human genes and environments",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "DNA病毒组与人类基因环境"
+    },
+    {
+      "title": "Spatial atlas of diabetic kidney disease reveals a B cell-rich subgroup",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "糖尿病肾病空间图谱B细胞亚群"
+    },
+    {
+      "title": "Improving access to essential medicines via decision-aware machine learning",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "决策感知ML改善药物可及性"
+    },
+    {
+      "title": "Ectopic NMDAR expression in cancer unmasks germline-encoded autoimmunity",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "癌症异位NMDAR自身免疫"
+    },
+    {
+      "title": "Multiomics and deep learning dissect regulatory syntax in human development",
+      "journal": "Nature",
+      "sent_date": "2026-05-30",
+      "reason": "多组学深度学习人类发育调控"
+    },
+    {
+      "title": "Protein language models for structural biology",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "蛋白质语言模型"
+    },
+    {
+      "title": "Modeling context-dependent RNA splicing by deep learning",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "深度学习RNA剪接建模"
+    },
+    {
+      "title": "Scaling and quantization of a foundational deep learning model for network biology",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "网络生物学基础模型量化"
+    },
+    {
+      "title": "A neural network that bridges sensory experience and symbolic thought",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "神经网络桥感觉与符号思维"
+    },
+    {
+      "title": "Scaling and quantization of large-scale foundation model enables resource-efficient predictions in network biology",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "基础模型资源高效预测"
+    },
+    {
+      "title": "Feature-preserving manifold approximation and projection to analyze single-cell data",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "特征保留流形近似单细胞分析"
+    },
+    {
+      "title": "A neural network for modeling human concept formation, understanding and communication",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "神经网络建模人类概念形成"
+    },
+    {
+      "title": "Generalized design of sequence-ensemble-function relationships for intrinsically disordered proteins",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "内在无序蛋白序列设计"
+    },
+    {
+      "title": "Benchmarking alignment methods for spatial transcriptomics data",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-30",
+      "reason": "空间转录组学比对方法基准测试"
+    },
+    {
+      "title": "Illuminations Collection: Exploring AI and Machine Learning (PNAS 2)",
+      "journal": "PNAS",
+      "sent_date": "2026-05-30",
+      "reason": "AI/ML专题文集(第二链接)"
+    },
+    {
+      "title": "Modeling context-dependent RNA splicing by deep learning.",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-31",
+      "reason": "深度学习建模RNA可变剪接上下文依赖性",
+      "republish_notes": ""
+    },
+    {
+      "title": "A neural network that bridges sensory experience and symbolic thought.",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-31",
+      "reason": "感觉经验到符号思维的神经网络桥梁",
+      "republish_notes": ""
+    },
+    {
+      "title": "Scaling and quantization of large-scale foundation model enables resource-efficient predictions in network biology.",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-05-31",
+      "reason": "基础模型量化实现资源高效预测",
+      "republish_notes": ""
+    },
+    {
+      "title": "A tumor-derived metabolite primes the leptomeningeal pre-metastatic niche",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "肿瘤代谢物预塑造软脑膜转移前微环境",
+      "republish_notes": ""
+    },
+    {
+      "title": "Activation of CD40 in tumors reprograms the tumor microenvironment",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "CD40激活重编程肿瘤微环境",
+      "republish_notes": ""
+    },
+    {
+      "title": "Advances in predicting T cell epitope recognition for cancer immunotherapy",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "T细胞表位识别预测进展",
+      "republish_notes": ""
+    },
+    {
+      "title": "Oncolytic viruses and cytokine-based gene therapies reprogram the tumor microenvironment",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "溶瘤病毒+细胞因子基因治疗重编程TME",
+      "republish_notes": ""
+    },
+    {
+      "title": "Harnessing myeloid cell plasticity for cancer therapy",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "利用髓系细胞可塑性抗癌",
+      "republish_notes": ""
+    },
+    {
+      "title": "Leptomeningeal metastatic cancer cells induce a permissive choroid plexus vasculature through extracellular-vesicle-derived 5-HIAA signaling",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "脑膜转移癌细胞5-HIAA信号诱导脉络丛血管允许性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Multi-omic characterization of nasopharyngeal carcinoma delineates the subtype-specific landscape of response to induction chemotherapy",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "鼻咽癌多组学特征描绘化疗亚型响应",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tumor-localized CD40 agonism with MP0317, a FAP x CD40 DARPin, reprograms the tumor microenvironment in patients with advanced solid tumors",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "FAP×CD40 DARPin CD40激动I期临床",
+      "republish_notes": ""
+    },
+    {
+      "title": "TMEM87A suppresses ferroptosis and increases cancer immunotherapy resistance by maintaining the Golgi apparatus pH homeostasis",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "TMEM87A维持高尔基pH抑制铁死亡促耐药",
+      "republish_notes": ""
+    },
+    {
+      "title": "Safety and activity of RO7300490, a bispecific CD40 agonist targeted to fibroblast activation protein, in patients with advanced solid tumors",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "FAP靶向CD40双特异激动剂I期试验",
+      "republish_notes": ""
+    },
+    {
+      "title": "Dual targeting of PI3Kγ and STING overcomes regulatory B cell- and myeloid cell-driven immune suppression in pancreatic cancer",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-05-31",
+      "reason": "PI3Kγ+STING双靶点克服胰腺癌免疫抑制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Simple Agents Outperform Experts in Biomedical Imaging Workflow Optimization",
+      "journal": "CVPR 2026 / Google Scholar",
+      "sent_date": "2026-06-01",
+      "reason": "AI for Science，简单Agent优于专家设计，生物医学影像工作流优化",
+      "republish_notes": ""
+    },
+    {
+      "title": "[PDF] Simple Agents Outperform Experts in Biomedical Imaging Workflow Optimization",
+      "journal": "CVPR 2026 (Scholar Alert)",
+      "sent_date": "2026-06-02",
+      "reason": "AI for Science: 简单Agent超越专家优化生物医学影像工作流",
+      "republish_notes": ""
+    },
+    {
+      "title": "The revised three-step detour pathway in dolichol biosynthesis is evolutionarily conserved in budding yeast.",
+      "journal": "PNAS",
+      "sent_date": "2026-06-03",
+      "reason": "dolichol生物合成进化保守途径首次追踪",
+      "republish_notes": ""
+    },
+    {
+      "title": "The revised three-step detour pathway in dolichol biosynthesis is evolutionarily conserved in budding yeast.",
+      "journal": "PNAS",
+      "sent_date": "2026-06-04",
+      "reason": "已在2026-06-03发送过，本期再次出现确认去重",
+      "republish_notes": "Already sent 2026-06-03"
+    },
+    {
+      "title": "Mevalonate pathway rewiring driven by enhancer remodelling confers resistance to KRAS inhibitors in colorectal cancer.",
+      "journal": "Nature Communications",
+      "sent_date": "2026-06-04",
+      "reason": "增强子重塑驱动甲羟戊酸途径重编程致KRAS抑制剂耐药",
+      "republish_notes": ""
+    },
+    {
+      "title": "Towards the ethical development of functional genomics research",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-04",
+      "reason": "功能基因组学伦理框架，Ideker等跨学科合作",
+      "republish_notes": ""
+    },
+    {
+      "title": "Connectogenomics: edges-first spatial biology",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-04",
+      "reason": "连接组学新概念，Weinstein Lab空间生物学方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "An immune-inspired intelligent aptasensor with broad detection capability",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-04",
+      "reason": "仿免疫系统智能适配体传感器，广谱检测",
+      "republish_notes": ""
+    },
+    {
+      "title": "Biosensor-guided indexing of genome evolution for boosting microbial chemical synthesis",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-04",
+      "reason": "生物传感器引导基因组进化索引提升微生物合成",
+      "republish_notes": ""
+    },
+    {
+      "title": "The genome editing revolution",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-04",
+      "reason": "基因组编辑革命综述",
+      "republish_notes": ""
+    },
+    {
+      "title": "Move over, AlphaFold: open-source model predicts shape of 1 billion proteins",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "'Transformative' CAR-T therapy allows three people to receive kidney transplants",
+      "journal": "Unknown",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Landmark cancer trial shows success against undruggable cancer",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mevalonate pathway rewiring driven by enhancer remodelling confers resistance to KRAS inhibitors in colorectal cancer",
+      "journal": "Nature Communications",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Connectogenomics: edges-first spatial biology",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Hard-to-detect mutations explain how common autoimmune diseases arise",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Polyclonal selection of immune checkpoint mutations in thyroid autoimmunity",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Commensal-derived acetylcholine enhances mucosal immune education",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "In vivo single-cell ribosome profiling reveals cell-type-specific translational programs during aging",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Use it or lose it: A ubiquitin-mediated autophagy pathway for degradation of MHC-I in pancreatic cancer",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Towards the ethical development of functional genomics research",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bang! Exploding immune cells splatter potent toxins everywhere",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Emergence of oncofetal plasticity is ubiquitous in early colorectal cancers",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Centromeric footprints preserve telomere integrity in ALT cancers",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Hypoxia-driven lncRNA SHIELD promotes GPX4 translation and protects against ferroptosis in hepatocellular carcinoma",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "5-Triphosphate guanosine RNAs recruit GTP-binding proteins to suppress RIG-I/IFN type I signaling",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Ubiquitin tags detected on non-protein biomolecules using new method",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Teosinte alleles enhance nitrogen assimilation and seed protein in maize",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Will AI ruin the social sciences or revolutionize them",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Troubled waters: a plant protein senses when cells are running dry",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Analysis of trade-offs of post-sorting plastic packaging",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Myosin forces remodel F-actin for mechanosensitive protein recognition",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Neural representation of action symbols in primate frontal cortex",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "An immune-inspired intelligent aptasensor with broad detection capability",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Biosensor-guided indexing of genome evolution for boosting microbial chemical synthesis",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Intrinsic bias of the genetic code shapes the folding and stability landscapes of microproteins",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "RNAP at the apex: Cryo-ET unveils the torsional tango between plasmid DNA and double-helix-melting proteins",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "A multi-subunit autophagic capture complex facilitates degradation of ER-stalled MHC class I in pancreatic cancer",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "The genome editing revolution",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Author Correction: Postprandial lipid metabolism durably enhances T cell immunity",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Publisher Correction: Microbiota-induced T cell plasticity enables immune-mediated tumour control",
+      "journal": "Nature",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cell Press Symposia: Next-generation cell biology",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-05",
+      "reason": "EAlert Tracker 2026-06-05 daily tracking",
+      "republish_notes": ""
+    },
+    {
+      "title": "CAR-T therapy breakthrough kidney transplants",
+      "journal": "Nature",
+      "sent_date": "2026-06-06",
+      "reason": "CAR-T器官移植重大进展",
+      "republish_notes": ""
+    },
+    {
+      "title": "Landmark cancer trial undruggable targets",
+      "journal": "Nature",
+      "sent_date": "2026-06-06",
+      "reason": "不可成药靶点突破",
+      "republish_notes": ""
+    },
+    {
+      "title": "Open-source protein structure prediction",
+      "journal": "Nature",
+      "sent_date": "2026-06-06",
+      "reason": "AI for Science开源工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "Exploding immune cells toxins",
+      "journal": "Nature",
+      "sent_date": "2026-06-06",
+      "reason": "免疫细胞新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Single-cell ribosome profiling aging",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-06",
+      "reason": "衰老翻译调控新见解",
+      "republish_notes": ""
+    },
+    {
+      "title": "Hypoxia lncRNA SHIELD HCC ferroptosis",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-06",
+      "reason": "肝癌铁死亡保护机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "MHC-I autophagy pancreatic cancer",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-06-06",
+      "reason": "胰腺癌免疫逃逸新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Autoimmune disease hard-to-detect mutations",
+      "journal": "Nature",
+      "sent_date": "2026-06-06",
+      "reason": "自身免疫病新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Oncofetal plasticity early colorectal cancer",
+      "journal": "Nature",
+      "sent_date": "2026-06-06",
+      "reason": "结直肠癌早期演化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Erratum for the Research Resource - Systematic analysis of functional genetic and epigenetic variants in colorectal cancer",
+      "journal": "Science Advances",
+      "sent_date": "2026-06-08",
+      "reason": "Erratum勘误通知，无实质新内容，跳过推送",
+      "republish_notes": "仅erratum，无需重发"
     }
   ]
 }
