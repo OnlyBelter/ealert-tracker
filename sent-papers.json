@@ -2861,6 +2861,261 @@
       "sent_date": "2026-06-08",
       "reason": "Erratum勘误通知，无实质新内容，跳过推送",
       "republish_notes": "仅erratum，无需重发"
+    },
+    {
+      "title": "3D mapping reveals extreme immune heterogeneity around pancreatic precancers",
+      "journal": "Cell",
+      "sent_date": "2026-06-09",
+      "reason": "胰腺癌前病变3D免疫异质性图谱"
+    },
+    {
+      "title": "Efficacy, safety, and biomarker analysis of datopotamab deruxtecan in advanced NSCLC: ICARUS-LUNG01",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "TROP2-ADC在NSCLC的II期临床数据"
+    },
+    {
+      "title": "Anticancer activity of RAS-GTP inhibition in cholangiocarcinoma",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "KRAS-GTP直接抑制剂胆管癌突破"
+    },
+    {
+      "title": "Pathogenesis of diffuse large B cell lymphoma proteogenotypes",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "DLBCL蛋白质基因组学分子发病机制"
+    },
+    {
+      "title": "Clonal lineage tracing of innate immune cells in human cancer",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "肿瘤先天免疫细胞克隆谱系追踪"
+    },
+    {
+      "title": "Reimagining HER2 therapy: Bridging oncogene addiction and immune modulation",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "HER2疗法连接致癌成瘾与免疫调控"
+    },
+    {
+      "title": "Extracellular vesicles: Whisperers of tumor immune evasion",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "外泌体非经典信号介导免疫逃逸"
+    },
+    {
+      "title": "Rethinking immune states in brain metastasis",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "脑转移免疫状态重新审视"
+    },
+    {
+      "title": "RAS-ing the bar in KRAS-mutant cholangiocarcinoma treatment",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "KRAS突变胆管癌治疗进展"
+    },
+    {
+      "title": "Engineered enhancers: Using tumor switches for precision therapy",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "工程化增强子肿瘤特异性精准治疗"
+    },
+    {
+      "title": "Antibody-drug conjugates in precision oncology",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "ADC精准肿瘤学综述"
+    },
+    {
+      "title": "Cancer stem cells orchestrate immune evasion through EV-mediated non-canonical signaling",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "CSC外泌体非经典信号免疫逃逸"
+    },
+    {
+      "title": "Identification of cycling Treg precursors as conductors of immune escape in breast cancer",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "增殖Treg前体乳腺癌免疫逃逸"
+    },
+    {
+      "title": "Endocytic evasion confers resistance to ADC therapy in cancer",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "内吞逃逸致ADC耐药"
+    },
+    {
+      "title": "Tumor cells metabolically resist ICB by macrophage efferocytosis-mediated fatty acid recycling",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "巨噬细胞胞葬脂肪酸循环致ICB代谢抵抗"
+    },
+    {
+      "title": "A conserved re-epithelialization program underlies malignancy in PDAC",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "PDAC保守上皮再生程序驱动恶性"
+    },
+    {
+      "title": "Dissecting cellular architecture of breast cancer brain metastases",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "乳腺癌脑转移细胞架构与免疫景观"
+    },
+    {
+      "title": "Subclonal immune evasion in non-small cell lung cancer",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-06-09",
+      "reason": "NSCLC亚克隆免疫逃逸"
+    },
+    {
+      "title": "Cholesterol metabolism in immune cells: From mechanisms to therapeutic opportunities",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "免疫细胞胆固醇代谢机制与治疗综述",
+      "republish_notes": ""
+    },
+    {
+      "title": "Activating an IL4-FLT3-STAT6 axis in multipotent progenitors restores lymphopoiesis in inflammation and aging",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "IL4-FLT3-STAT6恢复淋巴造血",
+      "republish_notes": ""
+    },
+    {
+      "title": "Guardian of two galaxies: Senescence-associated immune cells control disease tolerance and aging",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "衰老相关免疫细胞控制疾病耐受",
+      "republish_notes": ""
+    },
+    {
+      "title": "Exhaustion in name only: CD8+ T cells drive lupus nephritis",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "CD8+T细胞驱动狼疮肾炎",
+      "republish_notes": ""
+    },
+    {
+      "title": "MAIT cells egress the thymus at several maturation stages with selective capacity to seed different tissues",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "MAIT细胞多阶段出胸腺",
+      "republish_notes": ""
+    },
+    {
+      "title": "NF-kB-activated fibroblasts orchestrate inflammaging and emergence of pro-inflammatory granzyme K+ T cells",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "NF-kB成纤维细胞编排炎性衰老",
+      "republish_notes": ""
+    },
+    {
+      "title": "Astrocytic calcium-dependent enzyme PAD2 governs microglia activity to exacerbate amyloid pathology",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "星形胶质细胞PAD2调控小胶质细胞AD",
+      "republish_notes": ""
+    },
+    {
+      "title": "Dietary soy shapes the microbiome to induce commensal-specific Tfh cells and IgA production",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "大豆膳食-微生物组-Tfh-IgA轴",
+      "republish_notes": ""
+    },
+    {
+      "title": "p16High immune cells control disease tolerance as a defense and health span-extending strategy",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "p16高免疫细胞控制疾病耐受",
+      "republish_notes": ""
+    },
+    {
+      "title": "Aged circulating CD8+ T cells and their secreted factors drive cognitive decline",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "衰老CD8+T细胞驱动认知衰退",
+      "republish_notes": ""
+    },
+    {
+      "title": "Organ injury in systemic autoimmunity is mediated by stem-like CD8+ T cells from tissue-draining lymph nodes",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "干样CD8+T细胞介导自身免疫损伤",
+      "republish_notes": ""
+    },
+    {
+      "title": "Homeostatic mature DC instruct fibroblast specialization via Notch2 to establish T cell niches",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "DC经Notch2指导成纤维细胞建立T生态位",
+      "republish_notes": ""
+    },
+    {
+      "title": "Dietary sulfur amino acids enhance anti-tumor immunity in colon cancer via NKT-XCL1-cDC1 circuit",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "含硫氨基酸-NKT-cDC1增强抗肿瘤免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tumor-draining lymph nodes in ovarian cancer lack germinal centers but harbor tumor-reactive memory B cells",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "卵巢癌TDLN记忆B细胞与瘤内B克隆关联",
+      "republish_notes": ""
+    },
+    {
+      "title": "IL-17-Producing gamma-delta T Cells Originate from SOX13+ Progenitors Independent of gamma-delta TCR Signaling",
+      "journal": "Immunity",
+      "sent_date": "2026-06-10",
+      "reason": "IL-17+γδT源自SOX13+前体不依赖TCR",
+      "republish_notes": ""
+    },
+    {
+      "title": "Platelets: the next-generation ovarian cancer biomarker?",
+      "journal": "Trends in Cancer",
+      "sent_date": "2026-06-10",
+      "reason": "血小板卵巢癌生物标志物",
+      "republish_notes": ""
+    },
+    {
+      "title": "The rationale for targeting nectin-4 in pancreatic cancer",
+      "journal": "Trends in Cancer",
+      "sent_date": "2026-06-10",
+      "reason": "nectin-4胰腺癌靶向",
+      "republish_notes": ""
+    },
+    {
+      "title": "LGR5: from stem cell marker to therapeutic target",
+      "journal": "Trends in Cancer",
+      "sent_date": "2026-06-10",
+      "reason": "LGR5从标志到靶点",
+      "republish_notes": ""
+    },
+    {
+      "title": "Advancements in organoid models emulating metastatic niches",
+      "journal": "Trends in Cancer",
+      "sent_date": "2026-06-10",
+      "reason": "类器官模拟转移微环境",
+      "republish_notes": ""
+    },
+    {
+      "title": "p53: defender of lineage fidelity and foe of plasticity in cancer and regeneration",
+      "journal": "Trends in Cancer",
+      "sent_date": "2026-06-10",
+      "reason": "p53谱系忠诚与可塑性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Targeting cyclin-dependent kinases in cancer: emerging therapeutics and clinical strategies",
+      "journal": "Trends in Cancer",
+      "sent_date": "2026-06-10",
+      "reason": "CDK靶向癌症治疗",
+      "republish_notes": ""
     }
   ]
 }
