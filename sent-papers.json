@@ -9,6 +9,300 @@
   },
   "papers": [
     {
+      "title": "Probe-based identification of metal-binding sites using deep learning representations",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-03",
+      "reason": "深度学习识别金属结合位点，AI for Science新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "Convergence and divergence of DNA methylation and gene expression patterns in neopolyploid Arabidopsis kamchatica",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-03",
+      "reason": "拟南芥多倍化DNA甲基化与基因表达趋同发散，表观遗传学",
+      "republish_notes": ""
+    },
+    {
+      "title": "A pilot translational study of neoadjuvant fulvestrant plus abemaciclib in women with advanced low-grade serous carcinoma",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-03",
+      "reason": "CDK4/6抑制剂联合治疗高级别浆液性癌，肿瘤精准治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Erratum for the Research Article Guanosine diphosphate-mannose suppresses homologous recombination repair and potentiates antitumor immunity in triple-negative breast cancer",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-07-03",
+      "reason": "三阴性乳腺癌同源重组修复与抗肿瘤免疫，Erratum",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genomic surveillance: protecting sport in the post-CRISPR era",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-03",
+      "reason": "CRISPR时代基因组监测在体育中的应用，生物技术伦理",
+      "republish_notes": ""
+    },
+    {
+      "title": "CRISPR screen-based mammalian cell engineering for complex biotherapeutics",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-03",
+      "reason": "CRISPR筛选哺乳动物细胞工程用于复杂生物制剂，基因编辑",
+      "republish_notes": ""
+    },
+    {
+      "title": "Chromoproteins: visible tools for advancing synthetic biology",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-03",
+      "reason": "色素蛋白作为合成生物学可视化工具，合成生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "CRISPR as a next-generation environmental biosurveillance tool for air, land, and water",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-03",
+      "reason": "CRISPR作为下一代环境生物监测工具，环境生物技术应用",
+      "republish_notes": ""
+    },
+    {
+      "title": "A synthetic biology roadmap for sustainable production of the plant-originated anti-cancer drug paclitaxel",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-03",
+      "reason": "紫杉醇可持续生产的合成生物学路线图，抗癌药物生物制造",
+      "republish_notes": ""
+    },
+    {
+      "title": "Synthetic M13 phage engagers expand CAR-T cell antigen recognition to overcome tumor heterogeneity",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-03",
+      "reason": "合成M13噬菌体engager扩展CAR-T抗原识别克服肿瘤异质性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Breaking the immunosuppressive barrier: an armored CAR-M biotechnology with the original M1 phenotype dominance rescues antitumor immunity",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-03",
+      "reason": "装甲CAR-M细胞突破免疫抑制屏障，肿瘤免疫治疗新技术",
+      "republish_notes": ""
+    },
+    {
+      "title": "Clinical-scale bioreactor production of hiPSC-derived extracellular vesicles modulates miRNA and protein cargo to enhance angiogenic function",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-03",
+      "reason": "临床级生物反应器生产hiPSC外泌体增强血管生成，再生医学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Paper mill cancer studies get double the number of citations as genuine papers",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "论文工厂癌症研究引用率是真实论文两倍，科研诚信警示",
+      "republish_notes": ""
+    },
+    {
+      "title": "Making samples one billion times bigger lets simple microscopes pinpoint amino acids",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "样品放大10亿倍让简单显微镜定位氨基酸，显微镜技术创新",
+      "republish_notes": ""
+    },
+    {
+      "title": "Stem cells banish severe autoimmune disease for 15 years",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "干细胞治疗严重自身免疫病缓解15年，干细胞治疗突破",
+      "republish_notes": ""
+    },
+    {
+      "title": "CRISPR's next act: the companies editing the epigenome to treat disease",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "CRISPR下一代：编辑表观基因组治疗疾病的公司，基因编辑新方向",
+      "republish_notes": ""
+    },
+    {
+      "title": "Briefing Chat: What tickling a chimpanzee can tell us about the evolution of speech",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "挠痒痒告诉我们的关于语言进化的信息，演化生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Liver fat steers the outcome of advanced colorectal cancer",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "肝脏脂肪影响晚期结直肠癌预后，肿瘤代谢微环境",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mysterious protein sets up a beneficial partnership between bacteria and insects",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "神秘蛋白建立细菌与昆虫互利共生，微生物-昆虫互作",
+      "republish_notes": ""
+    },
+    {
+      "title": "A secreted endosymbiont protein essential for colonizing host cells",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "内共生体分泌蛋白对定植宿主细胞至关重要，细胞微生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Identification of cross-stage, cross-species malaria CD8+ T cell antigens",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "跨阶段跨物种疟疾CD8+ T细胞抗原鉴定，疟疾疫苗新靶点",
+      "republish_notes": ""
+    },
+    {
+      "title": "Targeted enzyme discovery using metal-coordination mining",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "金属配位挖掘用于靶向酶发现，酶工程新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "Connecting single-cell transcriptomes to projectomes in the mouse visual cortex",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "小鼠视觉皮层单细胞转录组与投射组连接，神经科学新技术",
+      "republish_notes": ""
+    },
+    {
+      "title": "Dual tumour–myeloid targeting of glioblastoma with GPNMB CAR-T cells",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "GPNMB CAR-T细胞双靶向胶质母细胞瘤肿瘤和骨髓细胞，实体瘤免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "TROP2 targeting reveals therapy-driven cell state dynamics in colorectal cancer",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "TROP2靶向揭示结直肠癌治疗驱动的细胞状态动态，肿瘤耐药性机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Casdatifan shows durable response linked to HIF-2α biology in kidney cancer",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "Casdatifan在肾癌中显示与HIF-2α生物学相关的持久响应",
+      "republish_notes": ""
+    },
+    {
+      "title": "Enhanced B cell priming induces broadly neutralizing HIV-1 apex antibodies",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "增强B细胞启动诱导广泛中和HIV-1 apex抗体，HIV疫苗新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "A hidden predictor of sudden cardiac death uncovered by deep learning",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "深度学习发现心源性猝死的隐藏预测因子，AI心血管疾病预警",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cancer cells adopt unprecedented strategies to produce a molecule that protects them from iron-dependent death",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "癌细胞采用前所未有的策略产生保护其免受铁死亡分子，肿瘤耐药新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Enamel proteins from six Homo erectus specimens across China",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "中国6个直立人标本的釉质蛋白，古蛋白质组学与人属演化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Deep learning four decades of human migration",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "深度学习解析四十年人类迁徙，AI人类学新应用",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genome-wide sweeps create ecological units in the human gut microbiome",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "全基因组选择性清除在人类肠道微生物组中创建生态单元",
+      "republish_notes": ""
+    },
+    {
+      "title": "An ECG biomarker for sudden cardiac death discovered with deep learning",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "深度学习发现心源性猝死ECG生物标志物，临床应用潜力大",
+      "republish_notes": ""
+    },
+    {
+      "title": "RNA-triggered cell killing with CRISPR–Cas12a2",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "CRISPR-Cas12a2的RNA触发细胞杀伤，基因编辑新工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "De novo design of quasisymmetric two-component protein cages",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "准对称双组分蛋白质笼的从头设计，蛋白质工程新突破",
+      "republish_notes": ""
+    },
+    {
+      "title": "Design of one-component quasisymmetric protein nanocages",
+      "journal": "Nature",
+      "sent_date": "2026-07-03",
+      "reason": "单组分准对称蛋白质纳米笼设计，蛋白质自组装新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial multi-omics atlas of immunosenescence reveals germinal-center B cell alteration in human lymph nodes",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-03",
+      "reason": "免疫衰老空间多组学图谱揭示淋巴结生发中心B细胞改变，衰老免疫学",
+      "republish_notes": ""
+    },
+    {
+      "title": "SenCat: Cataloging human cell senescence through multi-omic profiling of multiple senescent primary cell types",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-03",
+      "reason": "SenCat：通过多组学分析建立人类细胞衰老目录，衰老研究资源",
+      "republish_notes": ""
+    },
+    {
+      "title": "Ribo-Tweezer: Rapid removal of ribosomal proteins reveals additional layers of post-transcriptional gene regulation",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-03",
+      "reason": "Ribo-Tweezer快速去除核糖体蛋白揭示转录后基因调控新层次",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genome-wide rotational and translational phasing of nucleosomes with human transcription factors",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-03",
+      "reason": "人转录因子介导核小体全基因组旋转和平移定相，染色质结构",
+      "republish_notes": ""
+    },
+    {
+      "title": "A bacterial reverse transcriptase: Protein-templated DNA synthesis fuels antiviral immunity",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-03",
+      "reason": "细菌逆转录酶：蛋白质模板DNA合成驱动抗病毒免疫，新型免疫机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mtg16/Eto2 tumor suppressor maintains and establishes repression by distinct mechanisms",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-03",
+      "reason": "Mtg16/Eto2肿瘤抑制因子通过不同机制维持和建立 repression",
+      "republish_notes": ""
+    },
+    {
       "title": "Ribosome基因突变与人类多样性",
       "journal": "Science",
       "sent_date": "2026-04-14",
@@ -3865,6 +4159,524 @@
       "journal": "Molecular Cell",
       "sent_date": "2026-06-20",
       "reason": "转座子抑制进化保守机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Making samples one billion times bigger lets simple microscopes pinpoint amino acids.",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与生物信息学、计算生物学、AI for Science相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Stem cells banish severe autoimmune disease for 15 years.",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与免疫学、干细胞研究相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Long-sought chemical inhibitors of β-arrestin proteins.",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与蛋白质科学、药物设计相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "A hidden predictor of sudden cardiac death uncovered by deep learning.",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与AI for Science、生物医学应用相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "An ECG biomarker for sudden cardiac death discovered with deep learning.",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与AI for Science、生物医学应用相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Zero-shot design of drug-binding proteins via neural iterative selection−expansion",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与蛋白质设计、AI for Science相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Alternate RNA decoding results in stable and abundant proteins in mammals",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与RNA生物学、计算生物学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cancer cells adopt unprecedented strategies to produce a molecule that protects them from iron-dependent death",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与肿瘤生物学、铁死亡相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genetic architecture of sugarcane traits in a polyploid genomics framework",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与基因组学、多组学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "The neural mechanisms supporting the rise and fall of maternal aggression",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与神经科学、脑科学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Postprandial lipid metabolism durably enhances T cell immunity",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与免疫代谢、T细胞免疫相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Ecotypes of triple-negative breast cancer in response to chemotherapy",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与肿瘤生物学、癌症治疗相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Large-scale discovery, analysis and design of protein energy landscapes",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与蛋白质科学、AI for Science相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Author Correction: De novo design of quasisymmetric two-component protein cages",
+      "journal": "Nature",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与蛋白质设计、合成生物学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cultural bias and cultural alignment of large language models",
+      "journal": "PNAS",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与AI、大语言模型相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Leveraging longitudinal data to boost statistical power for gene–environment interaction analysis",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与计算生物学、多组学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "BrainParc: unified lifespan brain parcellation from structural magnetic resonance images",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与神经科学、脑影像相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Self-optimized spectral distance for low-light high-throughput Raman hyperspectral imaging",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与计算生物学、成像技术相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "The Cellular Senescence Network (SenNet) consortium",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与衰老生物学、细胞生物学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Gut microbiome is associated with recurrence-free survival in patients with resected high-risk melanoma receiving adjuvant immune checkpoint blockade",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与免疫学、肿瘤微生物组相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Multimodal targeting chimeras enable integrated immunotherapy leveraging tumor-immune microenvironment",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与肿瘤免疫、免疫治疗相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Excessive vascular integrity restricts anti-tumor immunity",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与肿瘤免疫、肿瘤微环境相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "AI-driven discovery of GPNMB CAR T cells as a multi-cancer therapy",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与CAR-T治疗、AI for Science相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Plasma signals of lung tumor promotion for molecular cancer prevention",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与肿瘤预防、分子生物学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "A blood-brain barrier-like vascular gate limits immunotherapy efficacy in neuroendocrine cancers",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与肿瘤免疫、神经内分泌肿瘤相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genetic variation reveals a homeotic long noncoding RNA that modulates human hematopoietic stem cells",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与干细胞生物学、非编码RNA相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "The temporal architecture of the seminiferous epithelial cycle revealed by spatial transcriptomics",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与空间转录组学、生殖生物学相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "D-SPIN constructs regulatory network models from scRNA-seq that reveal organizing principles of perturbation response",
+      "journal": "Cell",
+      "sent_date": "2026-06-27",
+      "reason": "期刊追踪，与单细胞组学、基因调控网络相关",
+      "republish_notes": ""
+    },
+    {
+      "title": "Leveraging longitudinal data to boost statistical power for gene-environment interaction analysis",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-06-28",
+      "reason": "基因-环境互作统计分析新方法，计算生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "BrainParc: unified lifespan brain parcellation from structural magnetic resonance images",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-06-28",
+      "reason": "全生命周期脑分区研究，神经影像计算新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "Self-optimized spectral distance for low-light high-throughput Raman hyperspectral imaging",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-06-28",
+      "reason": "拉曼高光谱成像计算优化，生物光子学新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "The Cellular Senescence Network (SenNet) consortium",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "细胞衰老网络联盟介绍",
+      "republish_notes": ""
+    },
+    {
+      "title": "Gut microbiome is associated with recurrence-free survival in patients with resected high-risk melanoma receiving adjuvant immune checkpoint blockade",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "黑色素瘤免疫治疗响应与肠道菌群关联，免疫 oncology",
+      "republish_notes": ""
+    },
+    {
+      "title": "Towards a Statistical Foundation for Machine Learning Methods",
+      "journal": "Google Scholar Alert",
+      "sent_date": "2026-06-28",
+      "reason": "机器学习统计基础理论研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Multimodal targeting chimeras enable integrated immunotherapy leveraging tumor-immune microenvironment",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "多模态靶向嵌合体整合免疫治疗，肿瘤免疫新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Excessive vascular integrity restricts anti-tumor immunity",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "血管完整性抑制抗肿瘤免疫，肿瘤微环境新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "AI-driven discovery of GPNMB CAR T cells as a multi-cancer therapy",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "AI驱动发现GPNMB CAR-T多癌种疗法，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Plasma signals of lung tumor promotion for molecular cancer prevention",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "肺癌促进血浆信号用于分子防癌，液体活检新应用",
+      "republish_notes": ""
+    },
+    {
+      "title": "A blood-brain barrier-like vascular gate limits immunotherapy efficacy in neuroendocrine cancers",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "血脑屏障样血管门控限制神经内分泌癌免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genetic variation reveals a homeotic long noncoding RNA that modulates human hematopoietic stem cells",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "遗传变异揭示调控造血干细胞的同源异形长非编码RNA",
+      "republish_notes": ""
+    },
+    {
+      "title": "The temporal architecture of the seminiferous epithelial cycle revealed by spatial transcriptomics",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "空间转录组揭示精巢上皮周期时间架构，时空组学新应用",
+      "republish_notes": ""
+    },
+    {
+      "title": "D-SPIN constructs regulatory network models from scRNA-seq that reveal organizing principles of perturbation response",
+      "journal": "Cell",
+      "sent_date": "2026-06-28",
+      "reason": "D-SPIN从scRNA-seq构建调控网络模型，计算生物学新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "A tumultuous journey that led to AI in cancer",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "癌症AI发展的曲折历程综述",
+      "republish_notes": ""
+    },
+    {
+      "title": "Added value of ctDNA testing with primary treatment for metastatic prostate cancer prognosis",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "ctDNA检测联合一线治疗改善转移性前列腺癌预后",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mesenchymal tumor features predict response to immune-checkpoint blockade in glioblastoma",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "间质样肿瘤特征预测胶质母细胞瘤免疫检查点阻断响应",
+      "republish_notes": ""
+    },
+    {
+      "title": "Combination of paricalcitol with chemotherapy shows promise in phase 1 study of metastatic pancreatic cancer",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "Paricalcitol联合化疗在转移性胰腺癌1期研究中显示前景",
+      "republish_notes": ""
+    },
+    {
+      "title": "Hetairos is a histology-based artificial intelligence model for predicting central nervous system tumor methylation subtypes",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "Hetairos基于组织学的AI模型预测CNS肿瘤甲基化亚型，数字病理AI",
+      "republish_notes": ""
+    },
+    {
+      "title": "A high-MAPK, low-WNT cell state drives metastatic dissemination in colorectal cancer",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "高MAPK低WNT细胞状态驱动结直肠癌转移扩散",
+      "republish_notes": ""
+    },
+    {
+      "title": "Combined ctDNA and serum PSA for dynamic monitoring of metastatic prostate cancer starting first-line treatment",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "ctDNA联合血清PSA动态监测转移性前列腺癌一线治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Gemcitabine and nab-paclitaxel with or without the VDR agonist paricalcitol for metastatic pancreatic cancer",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "吉西他滨+白蛋白紫杉醇±Paricalcitol治疗转移性胰腺癌随机试验",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tumor transcriptional state predicts survival in immune-checkpoint-blockade-treated glioblastoma",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "肿瘤转录状态预测免疫检查点阻断治疗的胶质母细胞瘤生存",
+      "republish_notes": ""
+    },
+    {
+      "title": "First-line durvalumab in combination with trastuzumab deruxtecan in women with locally advanced unresectable or metastatic, hormone-receptor-negative, HER2-low breast cancer",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "Durvalumab联合T-DXd治疗HER2低表达乳腺癌1b/2期平台试验",
+      "republish_notes": ""
+    },
+    {
+      "title": "Publisher Correction: Tumor transcriptional state predicts survival in immune-checkpoint-blockade-treated glioblastoma",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-28",
+      "reason": "上述论文的出版更正说明",
+      "republish_notes": ""
+    },
+    {
+      "title": "First-line durvalumab in combination with trastuzumab deruxtecan in HER2-low breast cancer BEGONIA trial",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-06-29",
+      "reason": "HER2低表达乳腺癌联合治疗临床试验",
+      "republish_notes": ""
+    },
+    {
+      "title": "several schizophrenia-linked stretches of the genetic code become accessible to the regulatory proteins responsible for gene expression only after receiving a nudge",
+      "journal": "Journal",
+      "sent_date": "2026-06-30",
+      "reason": "精神分裂症相关基因调控机制研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "several schizophrenia-linked stretches of the genetic code become accessible to the regulatory proteins responsible for gene expression only after receiving a nudge",
+      "journal": "Journal",
+      "sent_date": "2026-07-01",
+      "reason": "精神分裂症相关基因调控研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Modeling autoimmune encephalitis with the human hippocampus.",
+      "journal": "PNAS",
+      "sent_date": "2026-07-01",
+      "reason": "自身免疫性脑炎人类海马模型，神经免疫学新工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "Chemical ecology and convergent evolution of natural hallucinogens:",
+      "journal": "Science",
+      "sent_date": "2026-07-01",
+      "reason": "天然致幻剂的化学生态学与合作演化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for Magaña et al., Not all gut cellular circadian oscillators are food entrainable",
+      "journal": "PNAS",
+      "sent_date": "2026-07-01",
+      "reason": "肠道细胞生物钟振荡器更正声明",
+      "republish_notes": ""
+    },
+    {
+      "title": "Erratum for the Research Article \"Guanosine diphosphate-mannose suppresses homologous recombination repair and potentiates antitumor immunity in triple-negative breast cancer\"",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-07-02",
+      "reason": "Erratum更正声明",
+      "republish_notes": ""
+    },
+    {
+      "title": "Modeling autoimmune encephalitis with the human hippocampus.",
+      "journal": "PNAS",
+      "sent_date": "2026-07-02",
+      "reason": "自身免疫脑炎的人类海马模型",
+      "republish_notes": ""
+    },
+    {
+      "title": "Chemical ecology and convergent evolution of natural hallucinogens:",
+      "journal": "Science",
+      "sent_date": "2026-07-02",
+      "reason": "天然迷幻剂的化学生态学与趋同演化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for Magaña et al., Not all gut cellular circadian oscillators are food entrainable",
+      "journal": "PNAS",
+      "sent_date": "2026-07-02",
+      "reason": "肠道生物钟校正声明",
+      "republish_notes": ""
+    },
+    {
+      "title": "Probe-based identification of metal-binding sites using deep learning representations.",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-02",
+      "reason": "深度学习识别金属结合位点，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Convergence and divergence of DNA methylation and gene expression patterns in neopolyploid Arabidopsis kamchatica",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-02",
+      "reason": "新多倍体拟南芥DNA甲基化与基因表达趋同与分异",
+      "republish_notes": ""
+    },
+    {
+      "title": "A pilot translational study of neoadjuvant fulvestrant plus abemaciclib in women with advanced low-grade serous carcinoma",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-02",
+      "reason": "fulvestrant+abemaciclib新辅助治疗的临床转化研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genomic surveillance: protecting sport in the post-CRISPR era",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-02",
+      "reason": "CRISPR时代后的基因组监测",
+      "republish_notes": ""
+    },
+    {
+      "title": "CRISPR screen-based mammalian cell engineering for complex biotherapeutics",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-02",
+      "reason": "CRISPR筛选哺乳动物细胞工程用于复杂生物制剂",
+      "republish_notes": ""
+    },
+    {
+      "title": "Chromoproteins: visible tools for advancing synthetic biology",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-02",
+      "reason": "色蛋白作为合成生物学可视化工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "CRISPR as a next-generation environmental biosurveillance tool for air, land, and water",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-02",
+      "reason": "CRISPR作为下一代环境生物监测工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "A synthetic biology roadmap for sustainable production of the plant-originated anti-cancer drug paclitaxel",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-02",
+      "reason": "植物来源抗癌药紫杉醇的可持续合成生物学路线图",
+      "republish_notes": ""
+    },
+    {
+      "title": "Synthetic M13 phage engagers expand CAR-T cell antigen recognition to overcome tumor heterogeneity",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-02",
+      "reason": "合成M13噬菌体衔接器扩展CAR-T抗原识别克服肿瘤异质性",
+      "republish_notes": ""
+    },
+    {
+      "title": "Breaking the immunosuppressive barrier: an armored CAR-M biotechnology with the original M1 phenotype dominance rescues antitumor immunity",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-02",
+      "reason": "装甲CAR-M打破免疫抑制屏障恢复抗肿瘤免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "Clinical-scale bioreactor production of hiPSC-derived extracellular vesicles modulates miRNA and protein cargo to enhance angiogenic function",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-07-02",
+      "reason": "临床规模生物反应器生产hiPSC外泌体增强血管生成功能",
       "republish_notes": ""
     }
   ]
