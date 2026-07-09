@@ -4678,6 +4678,69 @@
       "sent_date": "2026-07-02",
       "reason": "临床规模生物反应器生产hiPSC外泌体增强血管生成功能",
       "republish_notes": ""
+    },
+    {
+      "title": "Mechanically locking enzymes in covalent organic frameworks via light-responsive nanohands for stable biocatalysis.",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-09",
+      "reason": "光响应COF固定酶实现稳定生物催化，生物催化工程",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rapid GC content evolution in rice through GC-biased gene conversion and selection for translation efficiency.",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-09",
+      "reason": "GC偏向基因转换与翻译效率选择解析水稻GC含量进化，基因组进化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Primary sclerosing cholangitis displays distinct colonic mucosa topography yet a shared mast cell state with ulcerative colitis",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-09",
+      "reason": "PSC与溃疡性结肠炎黏膜地形及共享肥大细胞状态，结肠炎/免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mapping AAV capsid sequences to functions through function-guided in silico evolution",
+      "journal": "Trends (Cell Press)",
+      "sent_date": "2026-07-09",
+      "reason": "AAV衣壳序列-功能映射，基因治疗载体工程",
+      "republish_notes": ""
+    },
+    {
+      "title": "β-hydroxybutyrate supplementation boosts the tumor-killing potential of CAR T cells",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-07-09",
+      "reason": "β-羟基丁酸增强CAR-T肿瘤杀伤，免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Epigenetic remodeling after viral pneumonia accelerates lung tumorigenesis",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-07-09",
+      "reason": "病毒性肺炎后表观重编程加速肺肿瘤发生，肿瘤微环境",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rethinking mitochondria as a target for cancer therapy",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-07-09",
+      "reason": "线粒体作为癌症治疗靶点，肿瘤治疗策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mapping clinical CAR-T cells: insights from scRNA-seq",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-07-09",
+      "reason": "scRNA-seq解析临床CAR-T细胞，单细胞免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "GLP-1 agonists in neurodegeneration: a multimodal biomarker-guided approach",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-07-09",
+      "reason": "GLP-1激动剂用于神经退行性疾病，神经/代谢交叉",
+      "republish_notes": ""
     }
   ]
 }
