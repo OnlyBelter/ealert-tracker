@@ -4741,6 +4741,335 @@
       "sent_date": "2026-07-09",
       "reason": "GLP-1激动剂用于神经退行性疾病，神经/代谢交叉",
       "republish_notes": ""
+    },
+    {
+      "title": "Mechanically locking enzymes in covalent organic frameworks via light-responsive nanohands for stable biocatalysis",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-10",
+      "reason": "COF光响应纳米手稳定生物催化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rapid GC content evolution in rice through GC-biased gene conversion and selection for translation efficiency",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-10",
+      "reason": "水稻GC含量快速进化机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Primary sclerosing cholangitis displays distinct colonic mucosa topography yet a shared mast cell state with ulcerative colitis",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-10",
+      "reason": "原发性硬化性胆管炎与溃疡性结肠炎共享肥大细胞状态",
+      "republish_notes": ""
+    },
+    {
+      "title": "Erratum for the Research Article Granzyme A from cytotoxic lymphocytes cleaves GSDMB to trigger pyroptosis in target cells",
+      "journal": "Science",
+      "sent_date": "2026-07-10",
+      "reason": "Granzyme A切割GSDMB触发细胞焦亡勘误",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mapping AAV capsid sequences to functions through function-guided in silico evolution",
+      "journal": "Trends",
+      "sent_date": "2026-07-10",
+      "reason": "AAV衣壳序列功能映射计算进化",
+      "republish_notes": ""
+    },
+    {
+      "title": "β-hydroxybutyrate supplementation boosts the tumor-killing potential of CAR T cells",
+      "journal": "Trends",
+      "sent_date": "2026-07-10",
+      "reason": "β-羟基丁酸增强CAR T细胞杀伤肿瘤",
+      "republish_notes": ""
+    },
+    {
+      "title": "Epigenetic remodeling after viral pneumonia accelerates lung tumorigenesis",
+      "journal": "Trends",
+      "sent_date": "2026-07-10",
+      "reason": "病毒性肺炎后表观遗传重塑加速肺肿瘤发生",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rethinking mitochondria as a target for cancer therapy",
+      "journal": "Trends",
+      "sent_date": "2026-07-10",
+      "reason": "线粒体作为癌症治疗靶点的新思考",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mapping clinical CAR-T cells: insights from scRNA-seq",
+      "journal": "Trends",
+      "sent_date": "2026-07-10",
+      "reason": "临床CAR T细胞scRNA-seq图谱",
+      "republish_notes": ""
+    },
+    {
+      "title": "GLP-1 agonists in neurodegeneration: a multimodal biomarker-guided approach",
+      "journal": "Trends",
+      "sent_date": "2026-07-10",
+      "reason": "GLP-1激动剂神经退行性疾病多模态生物标志物",
+      "republish_notes": ""
+    },
+    {
+      "title": "How to advance revolutionary science: high turnover, high risk and a licence to fail",
+      "journal": "Nature",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Breast cancer driver genes found by screening chromosome aberrations in vivo.",
+      "journal": "Nature",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Large language models can predict the results of social science experiments.",
+      "journal": "Nature",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Aneuploidy selects for the acquisition of driver genes in breast cancer.",
+      "journal": "Nature",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Universal cell embedding provides a foundation model for cell biology.",
+      "journal": "Nature",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Diet–microbiome synergy underlies obesity-associated immunotherapy efficacy",
+      "journal": "Nature",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Adaptive cellular evolution in the intestine of hyperdiverse cichlid fishes",
+      "journal": "Nature",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Explosive cytotoxicity of ruptoblasts bridges hormone surveillance and immune defense",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bridging omics and physiology to build multimodal clocks of human aging",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "AI-predicted spatial transcriptomics unlocks breast cancer biomarkers from pathology",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cellular architecture and neighborhood-informed virtual spatial tumor profiling from histopathology",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Nociceptive innervation limits tertiary lymphoid structures to promote lung cancer",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Persistent and transient senescent cells contribute to brain-barrier development",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "LEF1 and niche factors determine T cell stemness across chronic diseases",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Paleogenomes reveal the evolutionary relationship between modern and cave lions",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "A CRISPR knockout mouse library for functional genomics in influenza research",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Multimodal clocks of human aging",
+      "journal": "Cell",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Neural tissues and chondrostean traits in a Carboniferous actinopterygian",
+      "journal": "PNAS",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bioimaging Brasil: democratizing in vivo optical microscopy to drive scientific progress across a vast nation",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mapping models of the tumor microenvironment",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial epitranscriptomics: from Cinderella to queen",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "The reluctant blank slate: reprogramming elephant cells",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "A foundation model to help understand the regulatory implications of 3D genome organization",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cloud-based microscope enables live neuroimaging for 24 h and beyond with worldwide access",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "A generalizable Hi-C foundation model for chromatin architecture, single-cell and multiomics analysis across species",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Brightness demixing for simultaneous multi-target imaging in 3D single-molecule localization microscopy",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Derivation of elephant induced pluripotent stem cells",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "A human induced pluripotent stem cell model for the holistic study of epithelial-to-mesenchymal transitions",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Simultaneous two- and three-photon multiplane imaging across cortical layers in freely moving mice",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Evaluating the role of pretraining dataset size and diversity on single-cell foundation model performance",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "A comprehensive benchmark of sequence-based subcellular localization predictors for human proteins",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-11",
+      "reason": "期刊追踪每日推送（EAlert Tracker 自动去重后发送）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bioimaging Brasil: democratizing in vivo optical microscopy to drive scientific progress across a vast nation.",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-12",
+      "reason": "巴西生物成像计划，大规模光学显微镜普及，科学民主化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial epitranscriptomics: from Cinderella to queen.",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-12",
+      "reason": "空间表观转录组学综述，空间组学新方向",
+      "republish_notes": ""
+    },
+    {
+      "title": "The reluctant blank slate: reprogramming elephant cells.",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-12",
+      "reason": "大象细胞重编程，干细胞生物学与物种保护",
+      "republish_notes": ""
+    },
+    {
+      "title": "A foundation model to help understand the regulatory implications of 3D genome organization.",
+      "journal": "Nature Methods",
+      "sent_date": "2026-07-12",
+      "reason": "3D基因组基础模型，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Efficient Privacy-preserving Training of Quantum Neural Networks Through Ensemble Encoding of Quantum States",
+      "journal": "Physical Review A",
+      "sent_date": "2026-07-12",
+      "reason": "量子神经网络隐私保护训练，量子计算+AI",
+      "republish_notes": ""
+    },
+    {
+      "title": "Noisyflow: Differentially Private Optimal Transport using Neural Networks for Secure Biomedical Data Sharing Across Multiple Institutions",
+      "journal": "Bioinformatics",
+      "sent_date": "2026-07-12",
+      "reason": "差分隐私最优传输，多机构生物医学数据安全共享",
+      "republish_notes": ""
     }
   ]
 }
