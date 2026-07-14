@@ -5070,6 +5070,125 @@
       "sent_date": "2026-07-12",
       "reason": "差分隐私最优传输，多机构生物医学数据安全共享",
       "republish_notes": ""
+    },
+    {
+      "title": "Targeting TROP2 in drug-tolerant persister cells delays EGFR tyrosine kinase inhibitor resistance in non-small-cell lung cancer",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "靶向TROP2延缓EGFR-TKI耐药细胞耐受，联合策略潜力",
+      "republish_notes": ""
+    },
+    {
+      "title": "Concurrent genetic and non-genetic resistance mechanisms to KRAS inhibition in colorectal cancer.",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-07-14",
+      "reason": "结直肠癌KRAS抑制剂遗传/非遗传双重耐药机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "GABA promotes resistance to immunotherapy in patients with TLS-positive tumors.",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-07-14",
+      "reason": "TLS阳性肿瘤GABA促进免疫耐药，代谢-免疫串扰",
+      "republish_notes": ""
+    },
+    {
+      "title": "OpenIO: An open framework for AI-native immunotherapy.",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-07-14",
+      "reason": "开源AI原生免疫治疗框架，AI for Science落地",
+      "republish_notes": ""
+    },
+    {
+      "title": "Context dependency in cancer neuroscience",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "肿瘤神经科学上下文依赖性机制解析",
+      "republish_notes": ""
+    },
+    {
+      "title": "STING unlocks CD4 T cell immunity in pancreatic cancer",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "STING重激活胰腺肿瘤CD4+ T细胞免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "Attack of the clones: Tracing the dynamics of innate immune cells in human cancer",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "克隆追踪揭示人癌天然免疫细胞动力学",
+      "republish_notes": ""
+    },
+    {
+      "title": "The cartography of KRAS inhibitor resistance in colorectal cancer",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "绘制结直肠癌KRAS抑制剂耐药图谱",
+      "republish_notes": ""
+    },
+    {
+      "title": "Intratumoral B cells under stress",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "应激状态下瘤内B细胞功能与可塑性",
+      "republish_notes": ""
+    },
+    {
+      "title": "An epigenetic four-lane route to camouflage for cancer cells",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "表观遗传四通道助力癌细胞免疫伪装逃逸",
+      "republish_notes": ""
+    },
+    {
+      "title": "High-plasticity oncofetal cell states in early pre-metastatic colorectal cancer",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "早期转移前结直肠癌高可塑性癌胎细胞态",
+      "republish_notes": ""
+    },
+    {
+      "title": "Molecular phenotypes and spatial archetypes: A new framework for cancer-associated fibroblasts",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "癌相关成纤维细胞分子表型与空间原型新框架",
+      "republish_notes": ""
+    },
+    {
+      "title": "Dendritic cell redundancy enables priming of anti-tumor CD4+ T cells in pancreatic cancer",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "树突状细胞冗余维持胰腺肿瘤CD4+ T细胞启动",
+      "republish_notes": ""
+    },
+    {
+      "title": "Chronic stress unleashes an intratumor phage-fibroblast-B cell circuit to promote tumor growth",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "慢性应激激活瘤内噬菌体-成纤维-B细胞环路促瘤",
+      "republish_notes": ""
+    },
+    {
+      "title": "Hypoxia shapes both therapeutic response and resistance in metastatic clear cell renal cell carcinoma",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "缺氧塑造转移肾透明细胞癌治疗应答与耐药",
+      "republish_notes": ""
+    },
+    {
+      "title": "Targeting tumor-intrinsic STK40 induces immune vulnerability and drives T cell reinvigoration",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "靶向瘤内STK40诱导免疫脆弱并重启T细胞",
+      "republish_notes": ""
+    },
+    {
+      "title": "Hippo Signaling Suppresses Cell Ploidy and Tumorigenesis through Skp2",
+      "journal": "Cell",
+      "sent_date": "2026-07-14",
+      "reason": "Hippo信号经Skp2抑制细胞倍性与肿瘤发生",
+      "republish_notes": ""
     }
   ]
 }
