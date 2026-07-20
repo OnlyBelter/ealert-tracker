@@ -5448,6 +5448,161 @@
       "sent_date": "2026-07-16",
       "reason": "LNP递送Cas9 RNP肺肝编辑（出版更正）",
       "republish_notes": ""
+    },
+    {
+      "title": "Could this mysterious disappearing organ hold the key to longevity?",
+      "journal": "Nature",
+      "sent_date": "2026-07-17",
+      "reason": "神秘消失器官与长寿机制，假说性文章"
+    },
+    {
+      "title": "Ketogenic diet mediates intestinal tumorigenesis through lipids not ketones",
+      "journal": "Nature",
+      "sent_date": "2026-07-17",
+      "reason": "生酮饮食通过脂质（非酮体）促进肠道肿瘤发生"
+    },
+    {
+      "title": "GPC3-specific dnTGFbetaRII-armoured CAR T cells for hepatocellular carcinoma",
+      "journal": "Nature",
+      "sent_date": "2026-07-17",
+      "reason": "GPC3装甲CAR-T治疗肝细胞癌，TGFβ阻断增强实体瘤疗效"
+    },
+    {
+      "title": "DNA-shredding CRISPR enzyme takes aim at cancer cells",
+      "journal": "Nature",
+      "sent_date": "2026-07-17",
+      "reason": "DNA粉碎型CRISPR酶靶向癌细胞，新型基因编辑工具"
+    },
+    {
+      "title": "State media control influences large language models",
+      "journal": "Nature",
+      "sent_date": "2026-07-17",
+      "reason": "国家媒体控制对大语言模型的影响，AI对齐与政治"
+    },
+    {
+      "title": "Developmental gene expression patterns driving species-specific cortical features",
+      "journal": "Nature",
+      "sent_date": "2026-07-17",
+      "reason": "皮层发育基因表达驱动物种特异性皮层特征"
+    },
+    {
+      "title": "Author Correction: cBAF complex components and MYC cooperate early in CD8+ T cell fate",
+      "journal": "Nature",
+      "sent_date": "2026-07-17",
+      "reason": "cBAF复合体与MYC在CD8+T细胞命运早期合作，勘误"
+    },
+    {
+      "title": "A PanIN-oramic view of early pancreatic cancer in 3D",
+      "journal": "Trends",
+      "sent_date": "2026-07-17",
+      "reason": "3D视角解析早期胰腺癌PanIN，为胰腺癌早诊提供空间参考"
+    },
+    {
+      "title": "Context-dependent androgen control of T cell immunity",
+      "journal": "Trends",
+      "sent_date": "2026-07-17",
+      "reason": "雄激素情境依赖性调控T细胞免疫，解释性别差异免疫反应"
+    },
+    {
+      "title": "Charting the nerve-immune axis in endometriosis",
+      "journal": "Trends",
+      "sent_date": "2026-07-17",
+      "reason": "绘制子宫内膜异位症的神经-免疫轴图谱"
+    },
+    {
+      "title": "Integration of biochemical and physical cues by patrolling CD8+ T cells",
+      "journal": "Trends",
+      "sent_date": "2026-07-17",
+      "reason": "巡逻CD8+T细胞整合生化与物理线索"
+    },
+    {
+      "title": "THEMIS: new insights into its evolution, structure, and function",
+      "journal": "Trends",
+      "sent_date": "2026-07-17",
+      "reason": "THEMIS进化、结构与功能新见解，T细胞发育关键分子"
+    },
+    {
+      "title": "Seven subsets, two fates: mouse gamma-delta T cells in cancer immunity",
+      "journal": "Trends",
+      "sent_date": "2026-07-17",
+      "reason": "gamma-delta T细胞的7个亚群及双重命运，肿瘤免疫"
+    },
+    {
+      "title": "Redefining nucleotide-binding oligomerization domain-like receptors: from immune sentinels to multifunctional regulators",
+      "journal": "Trends",
+      "sent_date": "2026-07-17",
+      "reason": "重新定义NLR：免疫哨兵到多功能调节器"
+    },
+    {
+      "title": "SMD2 reads pseudouridines to regulate mRNA splicing and promote tumorigenesis",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-17",
+      "reason": "SMD2识别假尿嘧啶调控mRNA剪接促进肿瘤发生"
+    },
+    {
+      "title": "Programmable cell killer: CRISPR-Cas12a2 eliminates cells via RNA identity",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-17",
+      "reason": "CRISPR-Cas12a2通过RNA身份可编程细胞杀伤"
+    },
+    {
+      "title": "Thyroid cancer-associated EZH1 Q571R mutation drives chromatin compaction and H3K27me3 invasion into active chromatin",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-17",
+      "reason": "甲状腺癌EZH1 Q571R突变驱动染色质压缩和H3K27me3扩散"
+    },
+    {
+      "title": "HDAC5 depletion promotes hyper-acetylation of FOXA1 and potentiates HIF1alpha transcriptional activation in pancreatic cancer",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-17",
+      "reason": "HDAC5缺失促进FOXA1超乙酰化增强HIF1α激活胰腺癌"
+    },
+    {
+      "title": "Large-scale tethered screen of RNA-binding proteins reveals novel regulators of poly(A) site selection",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-17",
+      "reason": "大规模RBP筛选揭示poly(A)位点选择新调控因子"
+    },
+    {
+      "title": "Longitudinal monitoring of cytoplasmic RBP-RNA interactions and transcriptome in living cells by engineered protein nanocages",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-17",
+      "reason": "工程蛋白纳米笼实时监测活细胞RBP-RNA互作和转录组"
+    },
+    {
+      "title": "GPC3-specific dnTGFβRII-armoured CAR T cells for hepatocellular carcinoma",
+      "journal": "Nature",
+      "sent_date": "2026-07-18",
+      "reason": "CAR-T实体瘤新靶点；GPC3是肝癌特异性抗原，dnTGFβRII装甲增强CAR-T浸润持久性；Nature 2026",
+      "republish_notes": ""
+    },
+    {
+      "title": "Charting the nerve–immune axis in endometriosis",
+      "journal": "Trends in Immunology",
+      "sent_date": "2026-07-18",
+      "reason": "神经-免疫互作在子宫内膜异位症中的新机制；Trends Immunology 2026",
+      "republish_notes": ""
+    },
+    {
+      "title": "Seven subsets, two fates: mouse γδ T cells in cancer immunity",
+      "journal": "Trends in Immunology",
+      "sent_date": "2026-07-18",
+      "reason": "γδ T细胞亚群系统分类与肿瘤免疫命运解析；Trends Immunology 2026",
+      "republish_notes": ""
+    },
+    {
+      "title": "HDAC5 depletion promotes hyper-acetylation of FOXA1 and potentiates HIF1α transcriptional activation in pancreatic cancer",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-07-18",
+      "reason": "HDAC5-FOXA1-HIF1α通路在胰腺癌中的新机制；Molecular Cell 2026",
+      "republish_notes": ""
+    },
+    {
+      "title": "the meteorite contained many organic chemicals, including amino acids, thought to be key ingredients for the emergence of life on Earth",
+      "journal": "Journal",
+      "sent_date": "2026-07-19",
+      "reason": "陨石有机化学物质与生命起源",
+      "republish_notes": ""
     }
   ]
 }
