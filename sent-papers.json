@@ -5603,6 +5603,104 @@
       "sent_date": "2026-07-19",
       "reason": "陨石有机化学物质与生命起源",
       "republish_notes": ""
+    },
+    {
+      "title": "Modeling network evolution by multi-agent reinforcement learning",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-23",
+      "reason": "多智能体强化学习建模网络演化，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Nucleotide flipping correlates with fluorescence activation in the RhoBAST imaging platform",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-23",
+      "reason": "RhoBAST成像平台核苷酸翻转与荧光激活，RNA成像技术",
+      "republish_notes": ""
+    },
+    {
+      "title": "Towards an enzyme cascade synthesis of the bulk chemical acrylic acid",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-23",
+      "reason": "酶级联合成丙烯酸，合成生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Domvanalimab plus zimberelimab in unresectable and immunotherapy refractory biliary tract cancers: a phase 2 trial",
+      "journal": "Nature Communications",
+      "sent_date": "2026-07-23",
+      "reason": "胆道癌免疫治疗2期试验，肿瘤免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Current evidence and future directions for KIM-1 as a blood-based biomarker in RCC",
+      "journal": "Nature reviews. Clinical oncology",
+      "sent_date": "2026-07-23",
+      "reason": "KIM-1作为肾癌血液生物标志物，肿瘤标志物",
+      "republish_notes": ""
+    },
+    {
+      "title": "Vendievolve: towards Diversity-aware Llm-guided Evolutionary Search",
+      "journal": "Google Scholar",
+      "sent_date": "2026-07-23",
+      "reason": "LLM引导的多样性感知进化搜索，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Conference Report: Airway Mucosal Sampling and Immune Analysis",
+      "journal": "Google Scholar",
+      "sent_date": "2026-07-23",
+      "reason": "气道黏膜采样与免疫分析会议报告，免疫学",
+      "republish_notes": ""
+    },
+    {
+      "title": "New standards and new constraints redefine treatment sequencing in platinum-resistant ovarian cancer",
+      "journal": "Nature",
+      "sent_date": "2026-07-23",
+      "reason": "铂耐药卵巢癌治疗新标准，肿瘤治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Emerging trends in the global burden of colorectal cancer",
+      "journal": "Nature",
+      "sent_date": "2026-07-23",
+      "reason": "全球结直肠癌负担新兴趋势，肿瘤流行病学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Transforming perioperative treatment of gastro-oesophageal adenocarcinoma: triumphs, setbacks and future horizons",
+      "journal": "Nature",
+      "sent_date": "2026-07-23",
+      "reason": "胃食管腺癌围手术期治疗进展，肿瘤治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Trial design and end points in hepatocellular carcinoma: an EASL–AASLD–ILCA consensus statement",
+      "journal": "Nature",
+      "sent_date": "2026-07-23",
+      "reason": "肝癌临床试验设计共识，临床研究方法学",
+      "republish_notes": ""
+    },
+    {
+      "title": "L.L. Thurstone, The law of effect and the dynamics of deep learning a deep history of deep learning",
+      "journal": "Journal",
+      "sent_date": "2026-07-23",
+      "reason": "深度学习历史与效应定律，AI理论",
+      "republish_notes": ""
+    },
+    {
+      "title": "Quantum adversarial machine learning: from classical adaptations to quantum-native methods",
+      "journal": "Journal",
+      "sent_date": "2026-07-23",
+      "reason": "量子对抗机器学习，量子AI",
+      "republish_notes": ""
+    },
+    {
+      "title": "The application of federated learning in breast cancer diagnosis and treatment: a survey",
+      "journal": "Journal",
+      "sent_date": "2026-07-23",
+      "reason": "联邦学习在乳腺癌诊疗中的应用，AI+肿瘤",
+      "republish_notes": ""
     }
   ]
 }
