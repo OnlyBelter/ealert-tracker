@@ -5925,6 +5925,153 @@
       "sent_date": "2026-07-24",
       "reason": "期刊新发表论文 (EAlert Tracker v3.9.2)",
       "republish_notes": ""
+    },
+    {
+      "title": "Protein fitness prediction with language models",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-25",
+      "reason": "语言模型预测蛋白质适应度，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Integrating cytological images and spatial transcriptomics for cell segmentation with DISSECT",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-25",
+      "reason": "DISSECT整合细胞影像与空间转录组，多组学新方法",
+      "republish_notes": ""
+    },
+    {
+      "title": "DeepSeMS: revealing the hidden biosynthetic potential of the global ocean microbiome with a large language model",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-25",
+      "reason": "LLM挖掘海洋微生物组生物合成潜力，天然产物发现新工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "AlphaFold2 turns five.",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-26",
+      "reason": "AlphaFold里程碑综述,AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rethinking privacy-preserving GWAS benchmarks for governance.",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-26",
+      "reason": "GWAS隐私保护基准,基因组学隐私",
+      "republish_notes": ""
+    },
+    {
+      "title": "Computing inspired by the brain: a journey from algorithms to organoids",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-26",
+      "reason": "脑启发计算,神经科学与AI交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "MetaSTAARlite: an all-in-one tool for biobank-scale whole-genome sequencing meta-analysis.",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-26",
+      "reason": "生物样本库WGS荟萃分析工具,基因组学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Understanding language model scaling for protein fitness prediction",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-26",
+      "reason": "语言模型缩放与蛋白质适应度,AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "NEP89: universal neuroevolution potential for inorganic and organic materials across 89 elements",
+      "journal": "Nature Computational Science",
+      "sent_date": "2026-07-26",
+      "reason": "通用神经进化势,材料科学+AI",
+      "republish_notes": ""
+    },
+    {
+      "title": "Local sensory innervation shapes anti-tumor immunity in lung cancer",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "肺癌感觉神经支配与抗肿瘤免疫,癌症神经科学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Androgen loss contributes to neuroinflammation and promotes brain tumor growth",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "雄激素缺失与脑肿瘤生长,肿瘤内分泌学",
+      "republish_notes": ""
+    },
+    {
+      "title": "The future of tertiary lymphoid structures in cancer immunotherapy as biomarkers and therapeutic targets",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "三级淋巴结构与肿瘤免疫治疗,肿瘤免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "GABA shapes GBM immune responses in a sex-dependent manner",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "GABA与胶质母细胞瘤免疫响应,神经-免疫互作",
+      "republish_notes": ""
+    },
+    {
+      "title": "A targetable micropeptide reprograms macrophages to suppress T cell anti-tumor immunity",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "微肽重编程巨噬细胞,肿瘤免疫新靶点",
+      "republish_notes": ""
+    },
+    {
+      "title": "Immunological outcomes of a bespoke DNA cancer vaccine in glioblastoma",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "定制DNA肿瘤疫苗治疗胶质母细胞瘤,肿瘤疫苗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Immune implications and therapeutic opportunities of tumor glycosylation",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "肿瘤糖基化与免疫,肿瘤免疫治疗新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "A micropeptide encoded by the lncRNA USP30-AS1 promotes tumor growth by attenuating cGAS–STING–type I IFN signaling in macrophages",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "lncRNA编码微肽调控cGAS-STING,肿瘤免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "Intrathecal nivolumab in metastatic solid tumors with leptomeningeal disease: dose escalation part of the multicenter IT-PD1/NOA-26 phase 1 trial",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "鞘内注射nivolumab临床试验,肿瘤免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tumor irradiation promotes antigen dressing of dendritic cells to enhance CAR T cell persistence and efficacy in lung metastases",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "放疗增强CAR-T疗效,肿瘤联合治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "CD300ld on pathologically activated neutrophils promotes tumor immune suppression by binding phosphatidylserine on CD8+ T cells",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "CD300ld+中性粒细胞抑制CD8+T,肿瘤免疫抑制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Long-term outcomes of adjuvant metronomic capecitabine in locoregionally advanced nasopharyngeal carcinoma: a randomized, controlled, multicenter, phase 3 study",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-26",
+      "reason": "鼻咽癌节拍化疗长期随访,肿瘤临床试验",
+      "republish_notes": ""
     }
   ]
 }
