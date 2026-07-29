@@ -6072,6 +6072,104 @@
       "sent_date": "2026-07-26",
       "reason": "鼻咽癌节拍化疗长期随访,肿瘤临床试验",
       "republish_notes": ""
+    },
+    {
+      "title": "Quantum convolutional HLA immunogenic peptide prediction (Q-CHIPP): Next-generation neoantigen prediction with quantum neural network.",
+      "journal": "Science Advances",
+      "sent_date": "2026-07-27",
+      "reason": "量子神经网络预测HLA免疫原性肽，AI+免疫治疗新工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "A micropeptide encoded by the lncRNA USP30-AS1 promotes tumor growth by attenuating cGAS-STING-type I IFN signaling in macrophages",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-27",
+      "reason": "lncRNA微肽调控cGAS-STING通路促进肿瘤免疫逃逸新机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Author Correction: Disrupting the phase separation of KAT8-IRF1 diminishes PD-L1 expression and promotes antitumor immunity",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-27",
+      "reason": "相分离调控PD-L1机制勘误，液-液相分离在免疫检查点中的意义",
+      "republish_notes": ""
+    },
+    {
+      "title": "Author Correction: The efficacy of chemotherapy is limited by intratumoral senescent cells expressing PD-L2",
+      "journal": "Nature Cancer",
+      "sent_date": "2026-07-27",
+      "reason": "衰老细胞PD-L2限制化疗疗效勘误，靶向衰老细胞联合治疗策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "PRISM enables accurate microbial discovery in cancer genomics.",
+      "journal": "Nature reviews. Cancer",
+      "sent_date": "2026-07-28",
+      "reason": "微生物组在癌症基因组学中的发现新方法，生物信息学+肿瘤微环境",
+      "republish_notes": ""
+    },
+    {
+      "title": "Regulation of immune checkpoint molecules in cancer immune evasion and therapy",
+      "journal": "Nature",
+      "sent_date": "2026-07-28",
+      "reason": "免疫检查点分子调控机制，肿瘤免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Beyond sex determination: the Y chromosome in male cancers",
+      "journal": "Nature",
+      "sent_date": "2026-07-28",
+      "reason": "Y染色体在男性癌症中的作用，肿瘤遗传学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mesenchymal stromal/stem cells in tumour initiation, progression and therapy",
+      "journal": "Nature",
+      "sent_date": "2026-07-28",
+      "reason": "间充质干细胞在肿瘤起始、进展和治疗中的作用，肿瘤微环境",
+      "republish_notes": ""
+    },
+    {
+      "title": "Stem cells as an essential mediator of the exercise–tumorigenesis link",
+      "journal": "Nature",
+      "sent_date": "2026-07-28",
+      "reason": "干细胞作为运动-肿瘤发生关联的关键介质，肿瘤预防",
+      "republish_notes": ""
+    },
+    {
+      "title": "PRISM enables accurate microbial discovery in cancer genomics",
+      "journal": "Nature reviews. Cancer",
+      "sent_date": "2026-07-29",
+      "reason": "肿瘤微生物组测序分析新方法，Nature reviews系列重要综述",
+      "republish_notes": ""
+    },
+    {
+      "title": "Reply to Cosgrove: Catalytic activity in expansin-like proteins does not explain wall creep but raises a flag",
+      "journal": "Science",
+      "sent_date": "2026-07-29",
+      "reason": "细胞壁扩张蛋白催化机制学术讨论（Reply文章）",
+      "republish_notes": ""
+    },
+    {
+      "title": "When does exercise hinder rather than halt tumor progression? The decisive role of immunotherapy responsiveness",
+      "journal": "Science (PNAS)",
+      "sent_date": "2026-07-29",
+      "reason": "运动与肿瘤进展双刃剑效应研究，免疫治疗响应决定运动效果",
+      "republish_notes": ""
+    },
+    {
+      "title": "Reply to Zhou et al.: Exercise, caloric restriction, and immunotherapy responsiveness in 4T1 breast cancer progression",
+      "journal": "Science (PNAS)",
+      "sent_date": "2026-07-29",
+      "reason": "热量限制与免疫治疗响应Reply文章（4T1乳腺癌模型）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for Fassl et al., Regulation of the immune",
+      "journal": "Science",
+      "sent_date": "2026-07-29",
+      "reason": "Fassl免疫调控研究更正通知",
+      "republish_notes": ""
     }
   ]
 }
