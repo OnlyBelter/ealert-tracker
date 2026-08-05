@@ -6429,6 +6429,27 @@
       "sent_date": "2026-08-01",
       "reason": "组织基因表达图谱十年,多组学",
       "republish_notes": ""
+    },
+    {
+      "title": "We often think of human evolution as a branching tree, but new genomic data and analytical methods reveal a much more interconnected history—more like a complex web of populations connected by repeated episodes of migration and mixing",
+      "journal": "Science",
+      "sent_date": "2026-08-04",
+      "reason": "人类演化基因组学,群体迁移混合模型,进化树替代模型",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for Newman et al., The soluble epoxide hydrolase encoded by EPXH2 is a bifunctional enzyme with novel lipid phosphate phosphatase activity",
+      "journal": "PNAS",
+      "sent_date": "2026-08-05",
+      "reason": "EPXH2双功能酶新发现，脂质磷酸酶活性",
+      "republish_notes": ""
+    },
+    {
+      "title": "EPXH2 is a bifunctional enzyme with novel lipid phosphate phosphatase activity",
+      "journal": "Science",
+      "sent_date": "2026-08-05",
+      "reason": "EPXH2双功能酶研究，脂质代谢与酶工程",
+      "republish_notes": ""
     }
   ]
 }
