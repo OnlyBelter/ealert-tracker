@@ -6450,6 +6450,35 @@
       "sent_date": "2026-08-05",
       "reason": "EPXH2双功能酶研究，脂质代谢与酶工程",
       "republish_notes": ""
+    },
+    {
+      "title": "Pregnancy promotes tumor metastasis through adenosine-induced immunosuppressive neutrophils in pre-metastatic microenvironment",
+      "journal": "Nature Communications",
+      "sent_date": "2026-08-06",
+      "doi": "10.1038/s41467-026-76158-3",
+      "reason": "妊娠-肿瘤转移-腺苷-中性粒细胞-预转移微环境"
+    },
+    {
+      "title": "Vibrio cholerae-synthesized tryptophan activates innate immune signaling in enteroendocrine cells via phosphorylation of the nuclear receptor ultraspiracle",
+      "journal": "Nature Communications",
+      "sent_date": "2026-08-06",
+      "doi": "10.1038/s41467-026-76080-8",
+      "reason": "霍乱弧菌-色氨酸-肠内分泌细胞-核受体uspi-固有免疫"
+    },
+    {
+      "title": "CRISPR/Cas strategies to enhance CAR T-cell function and persistence via metabolic reprogramming",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-08-06",
+      "doi": "10.1016/j.tibtech.2025.12.001",
+      "reason": "CRISPR-Cas-CAR T细胞-代谢重编程-持久性"
+    },
+    {
+      "title": "Synthetic RNA-protein decoy granules prevent SARS-CoV-2 infection",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-08-06",
+      "doi": "10.1016/j.tibtech.2026.02.017",
+      "reason": "合成RNA蛋白诱饵颗粒-SARS-CoV-2-相分离-抗病毒"
     }
-  ]
+  ],
+  "_last_updated": "2026-08-06"
 }
