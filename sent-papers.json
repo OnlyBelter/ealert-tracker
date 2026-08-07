@@ -6478,6 +6478,209 @@
       "sent_date": "2026-08-06",
       "doi": "10.1016/j.tibtech.2026.02.017",
       "reason": "合成RNA蛋白诱饵颗粒-SARS-CoV-2-相分离-抗病毒"
+    },
+    {
+      "title": "Synthetic RNA-protein decoy granules prevent SARS-CoV-2 infection.",
+      "journal": "Trends in Biotechnology",
+      "sent_date": "2026-08-07",
+      "reason": "合成RNA-蛋白诱饵颗粒预防新冠感染，蛋白质设计+抗病毒策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "How I explore trauma through cinematic neuroscience",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "电影神经科学探索创伤，神经科学方法论",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cancer-fighting antibodies with a one-two punch take aim at tumours",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "抗癌抗体双重打击靶向肿瘤，肿瘤免疫治疗新策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "This AI Raygun can shrink and supersize proteins",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "AI Raygun工具可缩小和放大蛋白质，AI for Science蛋白质工程",
+      "republish_notes": ""
+    },
+    {
+      "title": "ZFP36L2 orchestrates stress-adaptive plasticity in regeneration and cancer",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "ZFP36L2调控再生和癌症压力适应性，RNA结合蛋白新功能",
+      "republish_notes": ""
+    },
+    {
+      "title": "A dependency map enhanced with next-generation 3D cancer models",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "下一代3D癌症模型增强依赖性图谱，类器官+CRISPR筛选",
+      "republish_notes": ""
+    },
+    {
+      "title": "A compendium of next-generation patient-derived models for diverse cancers",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "多种癌症下一代患者来源模型汇编，肿瘤模型资源库",
+      "republish_notes": ""
+    },
+    {
+      "title": "The Virtual Tissues foundation model resolves spatial proteomics across scales",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "虚拟组织基础模型解析跨尺度空间蛋白质组学，AI+空间组学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Membranolytic peptide programs immunogenic cell death for cancer therapy",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "膜溶解肽程序化免疫原性细胞死亡用于癌症治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "A tumour-derived organoid biobank maps cancer gene dependencies",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "肿瘤类器官生物库绘制癌症基因依赖性图谱",
+      "republish_notes": ""
+    },
+    {
+      "title": "Large language models can predict the results of social science experiments",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "LLM可预测社会科学实验结果，AI+社会科学交叉",
+      "republish_notes": ""
+    },
+    {
+      "title": "Universal cell embedding provides a foundation model for cell biology",
+      "journal": "Nature",
+      "sent_date": "2026-08-07",
+      "reason": "通用细胞嵌入为细胞生物学提供基础模型，AI+单细胞组学",
+      "republish_notes": ""
+    },
+    {
+      "title": "RNA exonuclease REXO4 resolves m6A-marked R-loops and suppresses anti-tumor immunity",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-08-07",
+      "reason": "RNA外切酶REXO4解析m6A标记R-loop抑制抗肿瘤免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "Double donut versus filament: How structural shapes regulate SPOP activity and cancer pathogenesis",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-08-07",
+      "reason": "双环与丝状结构调控SPOP活性和癌症发病机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Two helices are better than one: TMD-pairs redefine multipass membrane protein biogenesis",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-08-07",
+      "reason": "双螺旋TMD对重新定义多次跨膜蛋白生物合成",
+      "republish_notes": ""
+    },
+    {
+      "title": "Large-scale quaternary structural transitions underlie gain of function of SPOP cancer mutations",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-08-07",
+      "reason": "大规模四级结构转变导致SPOP癌症突变功能获得",
+      "republish_notes": ""
+    },
+    {
+      "title": "Pairwise transmembrane domain insertion during multipass protein biogenesis",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-08-07",
+      "reason": "多次跨膜蛋白生物合成中的成对跨膜结构域插入",
+      "republish_notes": ""
+    },
+    {
+      "title": "DeorphaNN: Virtual screening of GPCR peptide agonists using AlphaFold-predicted active-state complexes",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-08-07",
+      "reason": "DeorphaNN虚拟筛选GPCR肽激动剂，AI+药物发现",
+      "republish_notes": ""
+    },
+    {
+      "title": "Filling the holes in whole genomes: A vision for personalized genomics from telomere to telomere",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "填补全基因组空白：端粒到端粒个性化基因组学愿景",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial biology reveals altered macrophage states in immunosuppressed non-melanoma skin cancer",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "空间生物学揭示免疫抑制非黑色素瘤皮肤癌巨噬细胞状态改变",
+      "republish_notes": ""
+    },
+    {
+      "title": "Distinct cellular phenotypes of language and executive decline in amyotrophic lateral sclerosis",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "ALS语言和执行功能下降的独特细胞表型，神经科学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Why studying females reveals more about aging: The reproductive resilience hypothesis",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "雌性研究揭示衰老：生殖韧性假说，衰老生物学新框架",
+      "republish_notes": ""
+    },
+    {
+      "title": "A complete diploid human genome benchmark for personalized genomics",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "完整二倍体人类基因组基准用于个性化基因组学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Expanding the scope of protein language modeling to protein-protein interactions with MSA Pairformer",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "MSA Pairformer扩展蛋白质语言建模至PPI，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Replaying germinal center evolution on a quantified affinity landscape",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "在量化亲和力景观上重演生发中心进化，免疫学+进化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Coordinated RNA- and protein-templated synthesis of double-stranded DNA by a dual reverse transcriptase immune system",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "双逆转录酶免疫系统协调RNA和蛋白质模板合成双链DNA",
+      "republish_notes": ""
+    },
+    {
+      "title": "Shared neural geometries for bilingual semantic representations in human hippocampal neurons",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "人类海马神经元双语语义表征共享神经几何，神经科学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Plant cell wall-plasma membrane attachments mediate stress resilience",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "植物细胞壁-质膜附着介导胁迫韧性，植物生物学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mechanism of lipid transfer by bridge-like protein VPS13A and the scramblase XK",
+      "journal": "Cell",
+      "sent_date": "2026-08-07",
+      "reason": "桥状蛋白VPS13A和scramblase XK脂质转移机制",
+      "republish_notes": ""
     }
   ],
   "_last_updated": "2026-08-06"
