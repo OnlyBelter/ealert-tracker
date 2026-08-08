@@ -6681,7 +6681,119 @@
       "sent_date": "2026-08-07",
       "reason": "桥状蛋白VPS13A和scramblase XK脂质转移机制",
       "republish_notes": ""
+    },
+    {
+      "title": "DeorphaNN: Virtual screening of GPCR peptide agonists using AlphaFold-predicted active-state complexes and deep learning embeddings",
+      "journal": "Molecular Cell",
+      "sent_date": "2026-08-08",
+      "reason": "AlphaFold活性态+深度学习做GPCR配体虚拟筛选",
+      "republish_notes": ""
+    },
+    {
+      "title": "Why studying females reveals more about aging: The reproductive resilience hypothesis for the evolution of sex-specific aging",
+      "journal": "Cell",
+      "sent_date": "2026-08-08",
+      "reason": "生殖韧性假说，性别特异性衰老",
+      "republish_notes": ""
+    },
+    {
+      "title": "Plant cell wall-plasma membrane attachments mediate stress resilience through cellulose synthase complexes and remorins",
+      "journal": "Cell",
+      "sent_date": "2026-08-08",
+      "reason": "细胞壁-质膜锚定介导植物抗逆",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bridging complexity and accessibility in metabolomics with MetaboApps",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "",
+      "republish_notes": ""
+    },
+    {
+      "title": "Inference of tumor spatial habitats",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "肿瘤空间生态位推断（Research Highlight）",
+      "republish_notes": ""
+    },
+    {
+      "title": "What’s your name, immune cell?",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "免疫细胞命名/注释标准化技术特写",
+      "republish_notes": ""
+    },
+    {
+      "title": "Decoding intercellular activities for more than 1,000 secreted proteins",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "SecAct研究简报",
+      "republish_notes": ""
+    },
+    {
+      "title": "SpaMTP: integrative statistical analysis and visualization of spatial metabolomics and transcriptomics data",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "空间代谢组+空间转录组整合工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "ClairS: a deep-learning method for long-read tumor–normal pair somatic small variant calling",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "长读长tumor-normal体细胞变异检测",
+      "republish_notes": ""
+    },
+    {
+      "title": "Inference of secreted protein signaling activities in intercellular communication",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "分泌蛋白信号活性推断，胞间通讯",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatialproteomics: an interoperable toolbox for analyzing highly multiplexed fluorescence image data",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "高多重免疫荧光图像分析工具箱",
+      "republish_notes": ""
+    },
+    {
+      "title": "CellTune: an integrative software for accurate cell classification in spatial proteomics",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "空间蛋白组细胞分型软件",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatio-DARLIN enables robust and efficient in situ lineage tracing in mice at single-cell resolution",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "小鼠原位单细胞谱系追踪",
+      "republish_notes": ""
+    },
+    {
+      "title": "FACED 2.0 enables large-scale voltage and calcium imaging in vivo",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "大规模在体电压与钙成像",
+      "republish_notes": ""
+    },
+    {
+      "title": "A versatile platform for two-photon neuronal population voltage imaging across cortical depths",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "双光子跨皮层深度电压成像平台",
+      "republish_notes": ""
+    },
+    {
+      "title": "Simultaneous single-cell calcium imaging of neuronal population activity and brain-wide BOLD fMRI",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-08",
+      "reason": "单细胞钙成像+全脑BOLD fMRI同步",
+      "republish_notes": ""
     }
   ],
-  "_last_updated": "2026-08-06"
+  "_last_updated": "2026-08-08"
 }
