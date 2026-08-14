@@ -6793,7 +6793,564 @@
       "sent_date": "2026-08-08",
       "reason": "单细胞钙成像+全脑BOLD fMRI同步",
       "republish_notes": ""
+    },
+    {
+      "title": "Bridging complexity and accessibility in metabolomics with MetaboApps.",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-09",
+      "reason": "代谢组学易用化平台MetaboApps，降低代谢组学分析门槛，AI for Science/多组学工具",
+      "republish_notes": ""
+    },
+    {
+      "title": "Inference of tumor spatial habitats.",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-09",
+      "reason": "肿瘤空间栖息地推断，解析肿瘤微环境异质性与联合治疗，癌生物学+空间组学",
+      "republish_notes": ""
+    },
+    {
+      "title": "What's your name, immune cell?",
+      "journal": "Nature Methods",
+      "sent_date": "2026-08-09",
+      "reason": "免疫细胞鉴定/命名方法导读，空间单细胞与免疫图谱支撑精准免疫治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial biomarker discovery via interpretable semantic learning in histopathology.",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "空间AI病理学生物标志物发现，AI for Science热点方法"
+    },
+    {
+      "title": "Spatial multi-omics landscape of colorectal cancer macro- and micrometastases.",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "结直肠癌转移灶空间多组学图谱，多组学技术"
+    },
+    {
+      "title": "Latent effector T cells mediate immunotherapy responses in the bone marrow microenvironment",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "骨髓微环境T细胞介导免疫治疗应答"
+    },
+    {
+      "title": "Latent tumor killers awakened",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "唤醒潜伏肿瘤杀伤细胞"
+    },
+    {
+      "title": "Your neighbors matter: Adjacent cancer cells dampen TLS function",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "邻近癌细胞削弱TLS功能，肿瘤微环境空间组织"
+    },
+    {
+      "title": "Dysbiosis-associated bile acids slam the brakes on immune checkpoint therapy",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "菌群失调胆汁酸抑制免疫检查点治疗耐药机制"
+    },
+    {
+      "title": "PD-1 blockade unleashes local hepatitis B virus-related B cell response inhibiting hepatocellular carcinoma",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "PD-1阻断释放HBV相关B细胞应答抑制肝癌"
+    },
+    {
+      "title": "Mapping cell type-resolved transcriptomic profiles to patient survival in pancreatic cancer",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "胰腺癌单细胞转录组图谱关联患者生存"
+    },
+    {
+      "title": "Subclinical cholestasis is a hallmark of gut dysbiosis causing resistance to cancer immunotherapy",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "亚临床胆汁淤积与菌群失调免疫治疗耐药"
+    },
+    {
+      "title": "Perioperative tislelizumab plus chemotherapy for locally advanced gastric cancer: A randomized, prospective phase 2 trial",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "替雷利珠单抗围手术期治疗局部晚期胃癌II期临床"
+    },
+    {
+      "title": "GABA promotes resistance to immunotherapy in patients with TLS-positive tumors",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "GABA促进TLS阳性肿瘤免疫治疗耐药"
+    },
+    {
+      "title": "Bile Acid and Inflammation Activate Gastric Cardia Stem Cells in a Mouse Model of Barrett-Like Metaplasia",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "胆汁酸炎症激活贲门干细胞Barrett样化生"
+    },
+    {
+      "title": "Vascular RhoJ Is an Effective and Selective Target for Tumor Angiogenesis and Vascular Disruption",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "RhoJ作为肿瘤血管生成靶点"
+    },
+    {
+      "title": "CHD4 Has Oncogenic Functions in Initiating and Maintaining Epigenetic Suppression of Multiple Tumor Suppressor Genes",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "CHD4表观遗传沉默肿瘤抑制基因致癌功能"
+    },
+    {
+      "title": "Defining UHRF1 Domains that Support Maintenance of Human Colon Cancer DNA Methylation and Oncogenic Properties",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "UHRF1维持结肠癌DNA甲基化和致癌特性"
+    },
+    {
+      "title": "The Terry Fox Research Institute Marathon of Hope Cancer Centres Network: A pan-Canadian precision oncology initiative",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-11",
+      "reason": "加拿大精准肿瘤学全国网络计划"
+    },
+    {
+      "title": "A Dual Pronged Approach to Cancer Immune Exclusion: Tumor-derived Lair-1 Simultaneously Drives Fibrosis and Blocks Immune Recruitment in Glioma",
+      "journal": "Google Scholar",
+      "sent_date": "2026-08-11",
+      "reason": "Lair-1驱动胶质瘤纤维化阻断免疫招募"
+    },
+    {
+      "title": "Spatial biomarker discovery via interpretable semantic learning in histopathology",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-12",
+      "reason": "空间生物标志物发现,可解释语义学习,组织病理学AI应用",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial multi-omics landscape of colorectal cancer macro- and micrometastases",
+      "journal": "Cancer cell",
+      "sent_date": "2026-08-12",
+      "reason": "结直肠癌空间多组学,转移微环境研究",
+      "republish_notes": ""
+    },
+    {
+      "title": "Neural checkpoint therapy in lung cancer.",
+      "journal": "Trends in cancer",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Exclusion of immune cells by vascular gates.",
+      "journal": "Trends in cancer",
+      "sent_date": "2026-08-13",
+      "reason": "免疫细胞在肿瘤微环境中的时空分布是理解免疫编辑机制的关键。本研究揭示了特定免疫细胞亚群的定位与功能关系,对精准免疫治疗策略设计有参考价值。",
+      "republish_notes": ""
+    },
+    {
+      "title": "A novel mechanism of autophagy-dependent immunosuppression in cancer?",
+      "journal": "Trends in cancer",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Microbial bile acids: Immunomodulatory signals in the tumor microenvironment",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤微环境复杂异质,单一靶点往往不足以解决治疗耐药问题。本研究从多维度解析肿瘤微环境,为联合治疗策略提供了理论依据。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Mitochondrial transfer reveals an organellar layer of cancer ecology",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Pseudomyxoma peritonei and the microbiome: Emerging observations and unanswered questions",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肠道微生物组与宿主健康存在复杂互作,本研究揭示了特定微生物在疾病或健康中的功能角色,为微生态干预提供了靶点。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Horizontal mitochondrial transfer and the tug-of-war between cancer cells and immune cells",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "免疫细胞在肿瘤微环境中的时空分布是理解免疫编辑机制的关键。本研究揭示了特定免疫细胞亚群的定位与功能关系,对精准免疫治疗策略设计有参考价值。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Deciphering tumor metabolites: emerging technologies shaping clinical implications",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤微环境复杂异质,单一靶点往往不足以解决治疗耐药问题。本研究从多维度解析肿瘤微环境,为联合治疗策略提供了理论依据。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Gut microbial metabolites for potentiating cancer therapy",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Amino acid metabolism at the senescence–cancer interface",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "An immunological panacea for cancer-related cachexia",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bioengineered systems to exploit tumor microenvironment metabolism",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤微环境复杂异质,单一靶点往往不足以解决治疗耐药问题。本研究从多维度解析肿瘤微环境,为联合治疗策略提供了理论依据。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cell Press Symposia: Next-generation cell biology: Advanced imaging, AI, and cellular engineering",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "衰老是肿瘤、心血管、神经退行性疾病的共同风险因素,理解衰老机制是延缓疾病发生的核心。本研究揭示了衰老相关的新分子或细胞事件,为干预策略提供了靶点。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Bile acids in cancer: From metabolism to immunomodulation",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "CCR7+ activated dendritic cells are essential for spontaneous and immunotherapy-driven anti-tumor immunity",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤微环境复杂异质,单一靶点往往不足以解决治疗耐药问题。本研究从多维度解析肿瘤微环境,为联合治疗策略提供了理论依据。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Peripheral vision: Treg cell induction in the gut",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注induction相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Purine and pyrimidine-based bacterial cyclic dinucleotides egress the phagosome and activate the innate immune sensor STING",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注STING相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Analysis of monoclonal antibodies against the malaria invasion complex protein RIPR reveals the structural basis for synergistic antibody protection",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "蛋白质结构与功能预测是AI for Science的标杆性应用。本研究针对蛋白质动态或设计问题,为理解生命分子机制提供了新工具。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Monocytic niches escape T cell surveillance and promote Mycobacterium tuberculosis persistence in lymph nodes",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注nodes相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "The liver-secreted protein FGL1 restrains a subset of innate-like B cell responses via the receptor TACI",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "蛋白质结构与功能预测是AI for Science的标杆性应用。本研究针对蛋白质动态或设计问题,为理解生命分子机制提供了新工具。",
+      "republish_notes": ""
+    },
+    {
+      "title": "B cell-derived type I interferon sustains T cell functionality upon strong TCR stimulation during chronic infection",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注infection相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "MEK-dependent bioenergetic demand drives terminal CD8+ T cell exhaustion",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注exhaustion相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "TCR origin and specificity to environmental or self-antigens on distinct antigen-presenting cells determine peripheral Treg cell differentiation",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注differentiation相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Disease-associated microglia adopt stage-specific phenotypes that regulate T cell fate and immunity in glioma",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注glioma相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Environmentally induced cell stiffening shapes metastatic site selection by tuning the immune vulnerability of cancer cells",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "CRISPR-mediated precise large fragment insertion in zygotes enables rapid generation of humanized immunoglobulin heavy-chain mice",
+      "journal": "Journal",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注mice相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Nuclear garbage disposal: An unexpected role for amyloid precursor protein in Alzheimer’s disease",
+      "journal": "Science",
+      "sent_date": "2026-08-13",
+      "reason": "蛋白质结构与功能预测是AI for Science的标杆性应用。本研究针对蛋白质动态或设计问题,为理解生命分子机制提供了新工具。",
+      "republish_notes": ""
+    },
+    {
+      "title": "A unifying framework for the evolution of metazoa and social insects, two major evolutionary transitions",
+      "journal": "Science",
+      "sent_date": "2026-08-13",
+      "reason": "病原体或细胞的进化追踪对理解疾病传播和耐药产生至关重要。本研究通过基因组或功能分析重建了进化路径,为防控策略提供了依据。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tattooing and immune response: A mouse model too far from clinical reality",
+      "journal": "Science",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注reality相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Reply to Kluger: Tattoo-induced inflammation and immune responses:",
+      "journal": "Science",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注responses相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for You et al., p53-dependent inhibition of FKHRL1 in response to DNA damage through protein kinase SGK1",
+      "journal": "Science",
+      "sent_date": "2026-08-13",
+      "reason": "蛋白质结构与功能预测是AI for Science的标杆性应用。本研究针对蛋白质动态或设计问题,为理解生命分子机制提供了新工具。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for Gardner et al., Competing models of hominin body size evolution",
+      "journal": "Science",
+      "sent_date": "2026-08-13",
+      "reason": "病原体或细胞的进化追踪对理解疾病传播和耐药产生至关重要。本研究通过基因组或功能分析重建了进化路径,为防控策略提供了依据。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Retraction for Khan et al., Macrophage TBK1 signaling drives the development and outgrowth of breast cancer brain metastasis",
+      "journal": "Science",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Host-aware Identification of Intrinsic Gene Expression Biopart Parameters using Combinatorial Libraries",
+      "journal": "Nature Communications",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注Libraries相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Ultra-sensitive profiling of CRISPR-Cas off-target effects with Tracking-seq2",
+      "journal": "Nature Communications",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注seq2相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Neutrophil extracellular traps promote liver metastasis by impairing NK cell-dependent tumor surveillance via CCDC25",
+      "journal": "Nature Communications",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤微环境复杂异质,单一靶点往往不足以解决治疗耐药问题。本研究从多维度解析肿瘤微环境,为联合治疗策略提供了理论依据。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tracing the rise of biomedical foundation models",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注models相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Killing resistant tumors with a click",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤微环境复杂异质,单一靶点往往不足以解决治疗耐药问题。本研究从多维度解析肿瘤微环境,为联合治疗策略提供了理论依据。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Genome-edited farm animals from haploid stem cells",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注cells相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Embryonic stem cells across bird species",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注species相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Discovery and protein language model-guided design of hyperactive transposases",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "蛋白质结构与功能预测是AI for Science的标杆性应用。本研究针对蛋白质动态或设计问题,为理解生命分子机制提供了新工具。",
+      "republish_notes": ""
+    },
+    {
+      "title": "A trimodal protein language model enables advanced protein searches",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "蛋白质结构与功能预测是AI for Science的标杆性应用。本研究针对蛋白质动态或设计问题,为理解生命分子机制提供了新工具。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Tissue and cellular spatiotemporal dynamics in colon aging",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "衰老是肿瘤、心血管、神经退行性疾病的共同风险因素,理解衰老机制是延缓疾病发生的核心。本研究揭示了衰老相关的新分子或细胞事件,为干预策略提供了靶点。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Generation of modified cows and sheep from spermatid-like haploid embryonic stem cells",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注cells相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Derivation of embryonic stem cells across avian species",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注species相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Single-cell proteomic landscape of the developing human brain",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "蛋白质组学技术的发展使大规模系统研究成为可能。本研究利用蛋白质组学揭示了疾病相关的新分子网络或通路。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Author Correction: Generation of modified cows and sheep from spermatid-like haploid embryonic stem cells",
+      "journal": "Nature Biotechnology",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注cells相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Cholesterol metabolism: a new checkpoint in cancer immunity",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "肿瘤生物学研究正从描述性向机制性转变。本研究针对癌症发生发展中的特定分子事件,为揭示肿瘤进化路径和耐药机制提供了新见解。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Stratification of immunotherapy responses by adaptive immune receptor repertoires",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注repertoires相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Advances in blood-based biomarkers of gut barrier integrity",
+      "journal": "Trends",
+      "sent_date": "2026-08-13",
+      "reason": "本研究关注integrity相关的生物学问题,对推动该领域发展具有参考意义,建议阅读原文了解详细发现。",
+      "republish_notes": ""
+    },
+    {
+      "title": "Human brain stimulation engages different gene programs in different cell types",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "脑刺激激活不同细胞类型基因程序，神经调控",
+      "republish_notes": ""
+    },
+    {
+      "title": "Temporal uncoupling of radial glia lineage progression in cortical organoids",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "皮层类器官放射状胶质细胞谱系进展时序解偶，神经发育",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rb-driven transcription limits its tumour-suppressive effects in breast cancer",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "Rb驱动转录限制其乳腺癌抑癌作用，肿瘤抑制因子机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Luminescent-reaction-enabled super-resolution imaging",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "发光反应超分辨成像，生物成像技术突破",
+      "republish_notes": ""
+    },
+    {
+      "title": "Neural basis of compositional control",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "组合控制神经基础，认知神经科学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Maternal influences on infant gut microbiome and health",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "母体对婴儿肠道微生物组与健康的影响，微生物组与发育",
+      "republish_notes": ""
+    },
+    {
+      "title": "In vivo genome-wide CRISPR screens of human T cells in solid tumours",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "实体瘤中人T细胞体内全基因组CRISPR筛选，肿瘤免疫与基因编辑",
+      "republish_notes": ""
+    },
+    {
+      "title": "Biomarkers of nivolumab benefit in resectable non-small cell lung cancer",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "可切除非小细胞肺癌纳武利尤单抗获益生物标志物，肿瘤免疫治疗标志物",
+      "republish_notes": ""
+    },
+    {
+      "title": "HIV vaccines guide rare immune cells to make broadly neutralizing antibodies",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "HIV疫苗引导稀有免疫细胞产生广谱中和抗体，HIV疫苗策略",
+      "republish_notes": ""
+    },
+    {
+      "title": "Learning millisecond protein dynamics from what is missing in NMR spectra",
+      "journal": "Nature",
+      "sent_date": "2026-08-14",
+      "reason": "从NMR谱缺失信息学习毫秒级蛋白质动力学，结构生物学与AI",
+      "republish_notes": ""
     }
   ],
-  "_last_updated": "2026-08-08"
+  "_last_updated": "2026-08-13"
 }
