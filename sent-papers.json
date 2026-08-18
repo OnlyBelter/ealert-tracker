@@ -7350,7 +7350,57 @@
       "sent_date": "2026-08-14",
       "reason": "从NMR谱缺失信息学习毫秒级蛋白质动力学，结构生物学与AI",
       "republish_notes": ""
+    },
+    {
+      "title": "Human brain stimulation engages different gene programs in different cell types.",
+      "journal": "Nature",
+      "sent_date": "2026-08-15",
+      "reason": "脑刺激在不同细胞类型中激活不同基因程序，神经科学/单细胞",
+      "republish_notes": ""
+    },
+    {
+      "title": "Temporal uncoupling of radial glia lineage progression in cortical organoids.",
+      "journal": "Nature",
+      "sent_date": "2026-08-15",
+      "reason": "皮层类器官放射状胶质细胞谱系进程的时间解耦，发育神经科学",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rb-driven transcription limits its tumour-suppressive effects in breast cancer.",
+      "journal": "Nature",
+      "sent_date": "2026-08-15",
+      "reason": "Rb驱动转录限制其乳腺癌抑癌效应，肿瘤机制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Luminescent-reaction-enabled super-resolution imaging.",
+      "journal": "Nature",
+      "sent_date": "2026-08-15",
+      "reason": "发光反应赋能超分辨成像，成像技术创新",
+      "republish_notes": ""
+    },
+    {
+      "title": "Neural basis of compositional control.",
+      "journal": "Nature",
+      "sent_date": "2026-08-15",
+      "reason": "组合控制的神经基础，神经科学与认知控制",
+      "republish_notes": ""
+    },
+    {
+      "title": "Editorial Expression of Concern: Carcinoma-produced factors activate myeloid cells through TLR2 to stimulate metastasis",
+      "journal": "Nature",
+      "sent_date": "2026-08-15",
+      "reason": "编辑关注声明，涉及肿瘤转移机制论文的科研诚信",
+      "republish_notes": ""
+    },
+    {
+      "title": "Wind-Informed Rapid Flight-Planning in Complex Urban Topologies via Machine Learning and Experimental Validation",
+      "authors": "Peter I. Renn, Alejandro A. Stefan-Zavala, Julian Humml, Sabera Talukder, Aysha AlMazrouei, Kresna Aji, Debashisha Mishra, Emanuele Panizio, Jennifer Simonjan, Yisong Yue, Morteza Gharib",
+      "date": "2026-08-10",
+      "url": "https://arxiv.org/abs/2608.10309",
+      "source": "Scholar",
+      "added": "2026-08-16"
     }
   ],
-  "_last_updated": "2026-08-13"
+  "_last_updated": "2026-08-16"
 }
