@@ -7890,6 +7890,22 @@
       "sent_date": "2026-08-25",
       "reason": "DNA损伤响应与癌症免疫治疗，DDR+免疫治疗交叉",
       "republish_notes": ""
+    },
+    {
+      "title": "Myelination sustains axonal bioenergetics by storing and consuming oxygen for aerobic metabolism",
+      "journal": "PNAS",
+      "doi": "10.1073/pnas.2526705123",
+      "sent_date": "2026-09-02",
+      "reason": "PNAS Letter：髓鞘储存/消耗氧气维持轴突有氧代谢，神经科学核心领域，学术争论（AI人工审核纳入，标题未命中关键词但主题属目标领域）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Reply to Panfoli et al.: From O2 consumption in myelin to gap junctional ATP delivery in axons: An energy link needing further scrutiny",
+      "journal": "PNAS",
+      "doi": "10.1073/pnas.2604869123",
+      "sent_date": "2026-09-02",
+      "reason": "PNAS Reply：Ghysels团队回复Panfoli Letter，质疑髓鞘O2消耗到轴突ATP传递的能量链接，同一学术争论的回应方",
+      "republish_notes": ""
     }
   ],
   "_last_updated": "2026-08-21",
