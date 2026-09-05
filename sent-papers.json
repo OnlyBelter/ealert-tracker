@@ -8200,6 +8200,41 @@
       "link": "https://click.notification.elsevier.com/CL0/https:%2F%2Fwww.cell.com%2Fcell%2Ffulltext%2FS0092-8674(26)00919-0%3Fdgcid=raven_jbs_etoc_email/1/010001a067f5d390-c6108490-6333-4ffe-84e8-52eed772d70b-000000/5N_tAeQSwPM7qjJgAFhyzZz2HYbyu39ILVbUeZT17Ds=452",
       "sent_date": "2026-09-04",
       "reason": "新增论文(已去重发送)"
+    },
+    {
+      "title": "Landmark pancreatic cancer drug shows potential against lung cancer too.",
+      "journal": "Nature",
+      "sent_date": "2026-09-05",
+      "reason": "标志性胰腺癌药物在肺癌中也显现潜力，精准肿瘤学/药物重定位",
+      "republish_notes": ""
+    },
+    {
+      "title": "Moderna cancer vaccine stops melanoma returning: what's next for personalized treatments?",
+      "journal": "Nature",
+      "sent_date": "2026-09-05",
+      "reason": "个性化mRNA癌症疫苗阻止黑色素瘤复发，辅助肿瘤治疗",
+      "republish_notes": ""
+    },
+    {
+      "title": "Blood cells replace the immune cells of the ageing human brain.",
+      "journal": "Nature",
+      "sent_date": "2026-09-05",
+      "reason": "外周血细胞在衰老人脑取代常驻免疫细胞，神经免疫/脑衰老",
+      "republish_notes": ""
+    },
+    {
+      "title": "These findings may help to explain why antioxidant supplementation has not had a general benefit in cancer prevention and has sometimes increased cancer incidence",
+      "journal": "Science",
+      "sent_date": "2026-09-05",
+      "reason": "Science Adviser快讯：抗氧化补充剂与癌症预防，元数据未确认",
+      "republish_notes": ""
+    },
+    {
+      "title": "Fragile preferences: A deep dive into order effects in large language models",
+      "journal": "PNAS Nexus",
+      "sent_date": "2026-09-05",
+      "reason": "PNAS Nexus：LLM选项顺序/框架导致的偏好脆弱性，AI评测",
+      "republish_notes": ""
     }
   ],
   "_last_updated": "2026-08-21",
