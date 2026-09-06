@@ -8235,6 +8235,125 @@
       "sent_date": "2026-09-05",
       "reason": "PNAS Nexus：LLM选项顺序/框架导致的偏好脆弱性，AI评测",
       "republish_notes": ""
+    },
+    {
+      "title": "Towards predictive virtual embryos with genomics and AI",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "基因组学+AI构建预测性虚拟胚胎，AI for Science方向",
+      "republish_notes": ""
+    },
+    {
+      "title": "Alignment with experimental data improves protein generative modeling",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "实验数据对齐改进蛋白质生成建模，AI for Science",
+      "republish_notes": ""
+    },
+    {
+      "title": "Aligning protein-generative models to experimental fitness with ProteinDPO",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "ProteinDPO蛋白生成模型与实验适应度对齐",
+      "republish_notes": ""
+    },
+    {
+      "title": "Capturing protein communication",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "蛋白质相互通讯检测方法，Research Highlight",
+      "republish_notes": ""
+    },
+    {
+      "title": "Revealing distinctive traits of individual proteins",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "单蛋白个体特征解析",
+      "republish_notes": ""
+    },
+    {
+      "title": "AI proteomics: from protein identification to virtual cells",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "AI蛋白质组学评述：从鉴定到虚拟细胞",
+      "republish_notes": ""
+    },
+    {
+      "title": "Benchmarking biomedical foundation models",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "生物医学基础模型基准评测",
+      "republish_notes": ""
+    },
+    {
+      "title": "Overcoming air–water interface-induced artifacts in cryo-EM with protein nanocrates",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "蛋白质纳米笼克服cryo-EM气液界面伪影",
+      "republish_notes": ""
+    },
+    {
+      "title": "Protein nanocages empower RNA profiling",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "蛋白质纳米笼赋能RNA表达谱分析（邮件重复条目已合并）",
+      "republish_notes": ""
+    },
+    {
+      "title": "Integration of imaging-based and sequencing-based spatial omics mapping on the same tissue section via DBiTplus",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "DBiTplus同一组织切片成像+测序空间组学集成",
+      "republish_notes": ""
+    },
+    {
+      "title": "Full-length single-cell spatial transcriptomics reveals spatial and cell-type-specific transcript isoforms in the primate brain",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "全长单细胞空间转录组，灵长类大脑异构体",
+      "republish_notes": ""
+    },
+    {
+      "title": "Spatial isoform sequencing at single-cell resolution reveals cell-type-specific spatial isoform variability in multiple brain cell types",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "单细胞分辨率空间异构体测序",
+      "republish_notes": ""
+    },
+    {
+      "title": "All-optical multimodal mapping of single-cell-type-specific metabolic activities via REDCAT",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "REDCAT全光学多模态代谢成像",
+      "republish_notes": ""
+    },
+    {
+      "title": "Voltage imaging of neurons distributed across entire brains of larval zebrafish",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "斑马鱼幼鱼全脑电压成像",
+      "republish_notes": ""
+    },
+    {
+      "title": "Designer binding for multiplexed molecular imaging",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "设计结合分子多重分子成像",
+      "republish_notes": ""
+    },
+    {
+      "title": "AI-empowered super-resolution microscopy: a revolution in nanoscale cellular imaging",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "AI超分辨显微评述",
+      "republish_notes": ""
+    },
+    {
+      "title": "From pixels to patterns: the AI revolution in stem cell-derived models",
+      "journal": "Nature Methods",
+      "sent_date": "2026-09-06",
+      "reason": "AI在干细胞衍生模型中的应用",
+      "republish_notes": ""
     }
   ],
   "_last_updated": "2026-08-21",
