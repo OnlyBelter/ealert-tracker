@@ -8508,10 +8508,360 @@
       "sent_date": "2026-09-09",
       "reason": "每日 EAlert 追踪新论文，Crossref 元数据校验",
       "republish_notes": ""
+    },
+    {
+      "title": "Lightning doesn't strike twice in HPV-positive adenosquamous carcinoma",
+      "journal": "Trends",
+      "sent_date": "2026-09-10",
+      "reason": "HPV阳性腺鳞癌罕见继发事件，病毒相关肿瘤克隆演化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Interpretable machine learning enables de novo mapping of cell type-specific RNA splicing regulation from scRNA-seq data",
+      "journal": "Nature Communications",
+      "sent_date": "2026-09-10",
+      "reason": "可解释ML从头映射RNA剪接调控，AI+单细胞组学",
+      "republish_notes": ""
+    },
+    {
+      "title": "A core transcriptional regulatory circuitry controls super-enhancer-driven activation of LGR5 in colorectal cancer",
+      "journal": "Nature Communications",
+      "sent_date": "2026-09-10",
+      "reason": "结直肠癌LGR5超级增强子调控网络，Wnt通路+肿瘤干细胞",
+      "republish_notes": ""
+    },
+    {
+      "title": "Deep learning CT signature for predicting early liver metastases in pancreatic ductal adenocarcinoma",
+      "journal": "Nature Communications",
+      "sent_date": "2026-09-10",
+      "reason": "深度学习CT预测胰腺癌肝转移，AI影像预后",
+      "republish_notes": ""
+    },
+    {
+      "title": "CD73 disruption with tumor-specific CRISPR/Cas9 nanoparticles reduces adenosine-mediated immunosuppression and amplifies response to chemotherapy",
+      "journal": "Nature Communications",
+      "sent_date": "2026-09-10",
+      "reason": "CRISPR纳米颗粒敲除CD73增强化疗，基因编辑+免疫联合",
+      "republish_notes": ""
+    },
+    {
+      "title": "On-device large language models: a survey of model compression and system optimization",
+      "journal": "Artificial Intelligence Review",
+      "sent_date": "2026-09-10",
+      "reason": "端侧LLM压缩与系统优化综述",
+      "republish_notes": ""
+    },
+    {
+      "title": "A comprehensive comparison of constrained multi-objective evolutionary algorithms",
+      "journal": "Artificial Intelligence Review",
+      "sent_date": "2026-09-10",
+      "reason": "约束多目标进化算法综合比较",
+      "republish_notes": ""
+    },
+    {
+      "title": "Empowering healthcare 5.0 with deep learning: techniques, trends, and future directions",
+      "journal": "Artificial Intelligence Review",
+      "sent_date": "2026-09-10",
+      "reason": "深度学习赋能Healthcare 5.0综述",
+      "republish_notes": ""
+    },
+    {
+      "title": "Deep learning techniques for otologic imaging: a systematic review of segmentation methods",
+      "journal": "Artificial Intelligence Review",
+      "sent_date": "2026-09-10",
+      "reason": "耳科影像深度学习分割综述",
+      "republish_notes": ""
+    },
+    {
+      "title": "Evaluating large language model compression: a comparative analysis on state-of-the-art models across diverse hardware platforms",
+      "journal": "Artificial Intelligence Review",
+      "sent_date": "2026-09-10",
+      "reason": "LLM压缩多硬件平台评估",
+      "republish_notes": ""
+    },
+    {
+      "title": "Rewiring viral immunity and autoimmunity through neuroimmune circuits",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-09-10",
+      "reason": "神经免疫回路重塑病毒与自身免疫",
+      "republish_notes": ""
+    },
+    {
+      "title": "Phage therapy in oncology: opportunities for cancer prevention and treatment",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-09-10",
+      "reason": "噬菌体疗法在肿瘤学中的应用前景",
+      "republish_notes": ""
+    },
+    {
+      "title": "Recent developments in cancer immuno-interception strategies",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-09-10",
+      "reason": "癌症免疫拦截策略最新进展",
+      "republish_notes": ""
+    },
+    {
+      "title": "Harnessing the lung microbiome for precision management of fibrotic lung disease",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-09-10",
+      "reason": "肺微生物组精准管理肺纤维化",
+      "republish_notes": ""
+    },
+    {
+      "title": "Patient-specific trophoblast stem cells for placental medicine",
+      "journal": "Trends in Molecular Medicine",
+      "sent_date": "2026-09-10",
+      "reason": "患者特异性滋养层干细胞用于胎盘医学",
+      "republish_notes": ""
     }
   ],
   "_last_updated": "2026-09-09",
   "empty-runs": [
     "2026-08-30"
-  ]
+  ],
+  "5": {
+    "title": "Interpretable machine learning enables de novo mapping of cell type-specific RNA splicing regulation from scRNA-seq data",
+    "journal": "Nature Communications",
+    "sent_date": "2026-09-11",
+    "reason": "可解释ML从scRNA-seq绘制RNA剪接调控图谱",
+    "republish_notes": ""
+  },
+  "6": {
+    "title": "A core transcriptional regulatory circuitry controls super-enhancer-driven activation of LGR5 in colorectal cancer",
+    "journal": "Nature Communications",
+    "sent_date": "2026-09-11",
+    "reason": "核心转录调控环路控制LGR5在结直肠癌中的激活",
+    "republish_notes": ""
+  },
+  "7": {
+    "title": "Deep learning CT signature for predicting early liver metastases in pancreatic ductal adenocarcinoma",
+    "journal": "Nature Communications",
+    "sent_date": "2026-09-11",
+    "reason": "深度学习CT特征预测PDAC早期肝转移",
+    "republish_notes": ""
+  },
+  "8": {
+    "title": "CD73 disruption with tumor-specific CRISPR/Cas9 nanoparticles reduces adenosine-mediated immunosuppression and amplifies response to chemotherapy",
+    "journal": "Nature Communications",
+    "sent_date": "2026-09-11",
+    "reason": "CRISPR纳米颗粒敲除CD73增强化疗响应",
+    "republish_notes": ""
+  },
+  "9": {
+    "title": "Chronic type II interferon promotes tumor growth through mitochondrial RNA-induced type I interferon and prostaglandin synthesis",
+    "journal": "Science",
+    "sent_date": "2026-09-11",
+    "reason": "慢性II型干扰素经线粒体RNA促肿瘤生长",
+    "republish_notes": ""
+  },
+  "10": {
+    "title": "On-device large language models: a survey of model compression and system optimization",
+    "journal": "Journal",
+    "sent_date": "2026-09-11",
+    "reason": "端侧大语言模型综述",
+    "republish_notes": ""
+  },
+  "11": {
+    "title": "A comprehensive comparison of constrained multi-objective evolutionary algorithms",
+    "journal": "Journal",
+    "sent_date": "2026-09-11",
+    "reason": "约束多目标进化算法综合比较",
+    "republish_notes": ""
+  },
+  "12": {
+    "title": "Empowering healthcare 5.0 with deep learning: techniques, trends, and future directions",
+    "journal": "Journal",
+    "sent_date": "2026-09-11",
+    "reason": "深度学习赋能医疗5.0",
+    "republish_notes": ""
+  },
+  "13": {
+    "title": "Deep learning techniques for otologic imaging: a systematic review of segmentation methods",
+    "journal": "Journal",
+    "sent_date": "2026-09-11",
+    "reason": "深度学习耳科影像分割方法综述",
+    "republish_notes": ""
+  },
+  "14": {
+    "title": "Evaluating large language model compression: a comparative analysis on state-of-the-art models across diverse hardware platforms",
+    "journal": "Journal",
+    "sent_date": "2026-09-11",
+    "reason": "LLM压缩跨硬件平台比较评估",
+    "republish_notes": ""
+  },
+  "15": {
+    "title": "Cell Press Symposia: Hallmarks of aging",
+    "journal": "Trends",
+    "sent_date": "2026-09-11",
+    "reason": "Cell Press衰老标志研讨会",
+    "republish_notes": ""
+  },
+  "16": {
+    "title": "Cell Press Symposia: Hallmarks of cancer",
+    "journal": "Trends",
+    "sent_date": "2026-09-11",
+    "reason": "Cell Press癌症标志研讨会",
+    "republish_notes": ""
+  },
+  "17": {
+    "title": "Rewiring viral immunity and autoimmunity through neuroimmune circuits",
+    "journal": "Trends",
+    "sent_date": "2026-09-11",
+    "reason": "神经免疫环路重连病毒免疫与自身免疫",
+    "republish_notes": ""
+  },
+  "18": {
+    "title": "Phage therapy in oncology: opportunities for cancer prevention and treatment",
+    "journal": "Trends",
+    "sent_date": "2026-09-11",
+    "reason": "噬菌体疗法在肿瘤学中的机遇",
+    "republish_notes": ""
+  },
+  "19": {
+    "title": "Recent developments in cancer immuno-interception strategies",
+    "journal": "Trends",
+    "sent_date": "2026-09-11",
+    "reason": "癌症免疫拦截策略最新进展",
+    "republish_notes": ""
+  },
+  "20": {
+    "title": "Harnessing the lung microbiome for precision management of fibrotic lung disease",
+    "journal": "Trends",
+    "sent_date": "2026-09-11",
+    "reason": "肺微生物组精准管理纤维化肺病",
+    "republish_notes": ""
+  },
+  "21": {
+    "title": "Patient-specific trophoblast stem cells for placental medicine",
+    "journal": "Trends",
+    "sent_date": "2026-09-11",
+    "reason": "患者特异性滋养层干细胞用于胎盘医学",
+    "republish_notes": ""
+  },
+  "22": {
+    "title": "AI model predicts which breast-cancer drugs work best",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "AI模型预测最佳乳腺癌药物",
+    "republish_notes": ""
+  },
+  "23": {
+    "title": "Landmark pancreatic cancer drug shows potential against lung cancer too",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "胰腺癌药物对肺癌也显示潜力",
+    "republish_notes": ""
+  },
+  "24": {
+    "title": "Probing the proteome at cellular scale",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "细胞尺度蛋白质组探测",
+    "republish_notes": ""
+  },
+  "25": {
+    "title": "An operational perturbation proteomics-based virtual cell model",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "基于扰动蛋白质组学的虚拟细胞模型",
+    "republish_notes": ""
+  },
+  "26": {
+    "title": "A serpin-myeloid axis in pancreatic cancer heterogeneity and immune evasion",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "丝氨酸蛋白酶-髓系轴在胰腺癌异质性和免疫逃逸中的作用",
+    "republish_notes": ""
+  },
+  "27": {
+    "title": "Ancient proteins identify various Denisovan remains from Southwest China",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "古蛋白鉴定中国西南丹尼索瓦人遗骸",
+    "republish_notes": ""
+  },
+  "28": {
+    "title": "Predicting genome-wide functional constraints with GPN-Star",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "GPN-Star预测全基因组功能约束",
+    "republish_notes": ""
+  },
+  "29": {
+    "title": "Imaging cellular activity across all organs reveals body-wide circuits",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "全器官细胞活动成像揭示全身环路",
+    "republish_notes": ""
+  },
+  "30": {
+    "title": "Superdark protein looks like a G-protein-coupled receptor but shows unconventional behaviour",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "Superdark蛋白类似GPCR但表现非典型",
+    "republish_notes": ""
+  },
+  "31": {
+    "title": "Integrated signatures define mutational processes in prostate cancer",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "整合特征定义前列腺癌突变过程",
+    "republish_notes": ""
+  },
+  "32": {
+    "title": "Evolutionary mystery revealed by structures of a key enzyme in the synthesis of glycolipids",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "糖脂合成关键酶结构揭示进化之谜",
+    "republish_notes": ""
+  },
+  "33": {
+    "title": "The secret life of a cell-cycle gatekeeper of breast cancer",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "乳腺癌细胞周期守门蛋白的秘密生活",
+    "republish_notes": ""
+  },
+  "34": {
+    "title": "The planktonic microbiome of the Great Barrier Reef",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "大堡礁浮游微生物组",
+    "republish_notes": ""
+  },
+  "35": {
+    "title": "Late-life semaglutide treatment slows ageing and extends lifespan in female mice",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "晚年semaglutide治疗延缓雌鼠衰老延长寿命",
+    "republish_notes": ""
+  },
+  "36": {
+    "title": "GPC3-specific dnTGFβRII-armoured CAR T cells for hepatocellular carcinoma",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "GPC3特异性dnTGFβRII装甲CAR-T治疗肝癌",
+    "republish_notes": ""
+  },
+  "37": {
+    "title": "Diet-microbiome synergy underlies obesity-associated immunotherapy efficacy",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "饮食-微生物组协同驱动肥胖相关免疫治疗疗效",
+    "republish_notes": ""
+  },
+  "38": {
+    "title": "Rb-driven transcription limits its tumour-suppressive effects in breast cancer",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "Rb驱动转录限制其在乳腺癌中的抑癌效应",
+    "republish_notes": ""
+  },
+  "39": {
+    "title": "AI-redesigned starting points and outcomes enhance protein evolution",
+    "journal": "Nature",
+    "sent_date": "2026-09-11",
+    "reason": "AI重设计的起点和结果增强蛋白进化",
+    "republish_notes": ""
+  }
 }
