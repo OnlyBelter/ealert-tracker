@@ -8502,9 +8502,76 @@
       "journal": "Cell",
       "sent_date": "2026-09-15",
       "reason": "EAlert Tracker 2026-09-15 daily tracking"
+    },
+    {
+      "title": "Molecular residual disease: Charting a new path for treating resectable solid tumors.",
+      "journal": "Cancer Cell",
+      "sent_date": "2026-09-16",
+      "reason": "MRD在可切除实体瘤中的临床应用路径综述，肿瘤液体活检精准分层",
+      "republish_notes": ""
+    },
+    {
+      "title": "One mechanism, two diseases: Involvement of enzyme–substrate complexes in the pathogenesis of celiac disease and rheumatoid arthritis",
+      "journal": "Science (PNAS)",
+      "sent_date": "2026-09-16",
+      "reason": "Celiac disease与rheumatoid arthritis共享致病机制，自身免疫病共同靶点",
+      "republish_notes": ""
+    },
+    {
+      "title": "Disproportionality analysis to investigate fatal adverse events with immune checkpoint inhibitors: Proceed with extreme caution",
+      "journal": "Science (PNAS)",
+      "sent_date": "2026-09-16",
+      "reason": "免疫检查点抑制剂致死性不良事件disproportionality分析警示",
+      "republish_notes": ""
+    },
+    {
+      "title": "Reply to Revol et al.: Interpreting fatality-reporting signals in checkpoint immunotherapy",
+      "journal": "Science (PNAS)",
+      "sent_date": "2026-09-16",
+      "reason": "Checkpoint免疫治疗致死报告信号解读方法学讨论",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for Mitchell et al., TRAIL-coated leukocytes that kill cancer cells in the circulation",
+      "journal": "Science (PNAS)",
+      "sent_date": "2026-09-16",
+      "reason": "TRAIL涂层白细胞循环杀瘤研究更正通知",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for Grünig et al., Evolution after whole-genome duplication (WGD) drives phenotypic and transcriptomic divergence more than WGD in an autopolyploid herb",
+      "journal": "Science (PNAS)",
+      "sent_date": "2026-09-16",
+      "reason": "WGD后进化研究更正通知",
+      "republish_notes": ""
+    },
+    {
+      "title": "Correction for Yates et al., Neural event segmentation of continuous experience in human infants",
+      "journal": "Science (PNAS)",
+      "sent_date": "2026-09-16",
+      "reason": "婴儿神经事件分割研究更正通知",
+      "republish_notes": ""
+    },
+    {
+      "title": "Unanticipated global emergence and evolution of Pneumocystis jirovecii mutations and resistance driven by a human-targeted drug.",
+      "journal": "Science Translational Medicine",
+      "sent_date": "2026-09-17",
+      "reason": "Pneumocystis jirovecii全球耐药进化追踪"
+    },
+    {
+      "title": "One mechanism, two diseases: Involvement of enzyme-substrate complexes in the pathogenesis of celiac disease and rheumatoid arthritis.",
+      "journal": "PNAS",
+      "sent_date": "2026-09-17",
+      "reason": "乳糜泻与类风湿关节炎共享酶-底物复合物机制"
+    },
+    {
+      "title": "Loss of NCOA6 protein causes aggressive prostate cancer with EGFR overexpression and dependency",
+      "journal": "Nature Communications",
+      "sent_date": "2026-09-17",
+      "reason": "NCOA6缺失驱动侵袭性前列腺癌，EGFR依赖"
     }
   ],
-  "_last_updated": "2026-09-09",
+  "_last_updated": "2026-09-17 08:04:09",
   "empty-runs": [
     "2026-08-30"
   ],
