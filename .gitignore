@@ -1,5 +1,9 @@
-node_modules/
+__pycache__/
+*.py[cod]
 .env
-package-lock.json
-reports/
+.env.*
+!.env.example
+credentials.env
+config.local.json
+sent-papers.json
 *.log

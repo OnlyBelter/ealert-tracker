@@ -1,138 +1,160 @@
 # EAlert Tracker
 
-> 科研期刊追踪器 — 自动追踪 Nature、Science、Cell 等主流期刊最新论文，生成结构化报告。
+EAlert Tracker is a portable TRAE Skill for finding research papers in recent
+journal Table of Contents and Google Scholar Alert email. It collects candidate
+metadata with Python's standard library, then uses the Skill to select papers
+for your configured research topics, verify citations, and write a Chinese
+report.
 
-[![Version](https://img.shields.io/badge/version-v3.8.6-blue.svg)](./CHANGELOG.md)
+## Features
 
----
+- Reads journal and Scholar Alert email from Gmail over read-only IMAP.
+- Searches a rolling 48-hour window and checks message timestamps precisely.
+- Filters out non-research items and papers unrelated to your configured topics.
+- Verifies bibliographic details before including them in a report.
+- Stores deduplication state outside the Skill checkout.
+- Optionally publishes one generated report to a configured Git repository.
+- Uses no Node.js packages or third-party Python dependencies.
 
-## 功能特点
+## Install
 
-- 📅 **每日自动追踪** — 通过 Gmail IMAP 读取最近 48 小时期刊目录邮件（由 Python pipeline 抓取与结构化解析）
-- 📰 **多期刊覆盖** — Nature、Science、Science Translational Medicine、Science Immunology、Science Advances、PNAS、Cell Press 等
-- 🔔 **Google Scholar Alerts** — 自动追踪指定研究者新发表论文（Shane Crotty、Faisal Mahmood 等）
-- 🤖 **AI 辅助摘要** — 自动提取标题、作者、期刊、链接、研究问题、主要贡献、专家点评
-- 🔍 **元数据补全** — 通过 PubMed / CrossRef API 自动补全摘要和作者信息
-- 📱 **多渠道发送** — QQ Bot 推送 + GitHub 归档
-- 📊 **每周综合评述** — 周日自动汇总本周论文，生成领域趋势分析
-
----
-
-## 目录结构
-
-```
-ealert-tracker/
-├── README.md              # 本文件
-├── CHANGELOG.md           # 版本变更记录
-├── SKILL.md               # OpenClaw Skill 定义（含报告模板 + 使用说明）
-├── template.md            # 每日报告模板（生成报告前必读）
-├── config.json            # Skill 配置
-├── package.json
-├── .env                   # 邮箱 IMAP 凭证（不提交 Git）
-├── sent-papers.json       # 已发送论文记录（防重复发送）
-├── scripts/
-│   ├── tracker.js         # Node.js 主脚本（v3.8.6）
-│   ├── email_pipeline.py  # Python：IMAP 抓取 + 解析，输出 papers JSON（主流程使用）
-│   ├── email_reader.py    # Python：期刊 ToC 邮件解析（HTML 结构优先）
-│   └── parse_scholar_emails.py # Python：Google Scholar Alerts 邮件解析器
-├── references/
-│   ├── INSTALL.md         # 安装说明
-│   └── keywords.md        # 领域关键词参考
-├── assets/
-│   └── template.md        # 报告模板资源
-└── reports/               # 本地报告备份
-    └── YYYY/MM/YYYY-Wxx/  # 按年月/周归档
-```
-
----
-
-## 快速开始
-
-### 1. 配置环境变量
-
-在 `~/.qclaw/workspace/ealert-tracker/.env` 中添加：
+Clone the repository into your TRAE Skill directory:
 
 ```bash
-IMAP_HOST=imap.gmail.com
-IMAP_PORT=993
-IMAP_USER=your_email@gmail.com
-IMAP_PASS=xxxx xxxx xxxx xxxx   # Gmail App Password（不带空格）
+mkdir -p "$HOME/.trae/skills"
+git clone https://github.com/OnlyBelter/ealert-tracker.git \
+  "$HOME/.trae/skills/ealert-tracker"
 ```
 
-**Gmail App Password 设置**：
-1. 访问 https://myaccount.google.com/apppasswords
-2. 创建 App Password（16位，带空格）
-3. 在 `.env` 中填入不带空格的版本
+Reload TRAE or the current workspace so it can discover the Skill. The
+collector requires Python 3.9 or later.
 
-### 2. 测试运行
+## Configure Gmail
+
+Create a Gmail App Password for the account that receives your journal and
+Google Scholar Alerts. See [Google's App Password guide](https://myaccount.google.com/apppasswords).
+Keep it private; never commit it to this repository.
 
 ```bash
-cd ~/.qclaw/workspace/ealert-tracker
-node scripts/tracker.js
+mkdir -p "$HOME/.config/ealert-tracker"
+cp -n "$HOME/.trae/skills/ealert-tracker/config.example.json" \
+  "$HOME/.config/ealert-tracker/config.json"
+cp -n "$HOME/.trae/skills/ealert-tracker/credentials.example.env" \
+  "$HOME/.config/ealert-tracker/credentials.env"
+chmod 600 "$HOME/.config/ealert-tracker/credentials.env"
 ```
 
-运行时说明：
-- `tracker.js` 会调用 `python3 scripts/email_pipeline.py --hours 48 --json` 抓取并结构化解析邮件。
-- 如需单独调试抓取/解析，可运行 `python3 scripts/email_pipeline.py --hours 48` 查看 JSON 输出。
+Edit `credentials.env` with your Gmail address and App Password. Edit
+`config.json` to set your research topics and report directory. The credential
+file and mutable state stay outside the Skill checkout. The collector uses
+validated SSL/TLS, opens the mailbox read-only, and does not configure SMTP.
 
-### 3. 订阅期刊邮件
+The sample configuration documents its fields here:
 
-在对应期刊官网注册 Table of Contents（ToC）提醒：
-- Nature: https://www.nature.com/alerts
-- Science: https://www.science.org/content/my-science
-- Cell Press: https://www.cell.com/cell/awayfrom keyboard
+| Setting | Purpose |
+| --- | --- |
+| `hours` | Rolling email search window; defaults to 48 hours. |
+| `max_emails` | Maximum recent messages to inspect per run. |
+| `journal_sender_domains` | Exact journal domains and their subdomains to accept. |
+| `scholar_senders` | Exact Google Scholar Alert sender addresses to accept. |
+| `target_topics` | Research areas the Skill uses for relevance decisions. |
+| `timezone` | Timezone for report dates, archive paths, and Schedule defaults. |
+| `reports_dir` | Local root directory for generated reports. |
+| `state_file` | User-local DOI/title/URL deduplication history. |
+| `publish_repo` | Optional local Git repository for report-only publishing. |
+| `git_remote`, `git_branch` | Remote and checked-out branch used for publishing. |
 
----
+The collector also accepts `IMAP_USER` and `IMAP_PASS` from the process
+environment. Environment values take precedence over the private credentials
+file. You can set `EALERT_CONFIG` and `EALERT_CREDENTIALS` to use other paths.
 
-## 定时任务
+## Update
 
-| 任务 | 时间 | 功能 |
-|------|------|------|
-| 每日期刊追踪 | 每天 08:30 (Asia/Hong_Kong) | 读取 48h 邮件 → 生成报告 → QQ + GitHub |
-| 每周期刊汇总 | 每周日 11:00 (Asia/Hong_Kong) | 汇总一周 → 综合评述 → QQ + GitHub |
+For an existing installation, back up or migrate its personal `sent-papers.json`
+before updating. Then fast-forward the Skill checkout:
 
-**Cron Task ID**: `d7e631a3-be6c-422f-a74a-f61c5641c23e`
+```bash
+git -C "$HOME/.trae/skills/ealert-tracker" pull --ff-only
+```
 
----
+See [Existing installations](#existing-installations) for the state migration
+command.
 
-## 报告格式
+## Run once
 
-详见 [`template.md`](./template.md)。
+Ask TRAE to use the `ealert-tracker` Skill for a one-time report. A one-time
+request does not create or change a Schedule. The Skill returns the complete
+report in the task result. It only writes a report when it finds new,
+topic-relevant research papers.
 
-每篇论文包含：
-1. **标题**（英文原文）
-2. **期刊 / 日期 / 作者 / 机构**
-3. **一句话概要**（≤40字）
-4. **主要贡献**（2-3条）
-5. **Critical 简评**（3-5句专家点评：背景→动机→突破→局限→future work）
+To test the collector directly, run:
 
----
+```bash
+python3 "$HOME/.trae/skills/ealert-tracker/scripts/email_pipeline.py" \
+  --config "$HOME/.config/ealert-tracker/config.json" \
+  --credentials "$HOME/.config/ealert-tracker/credentials.env" \
+  --output /tmp/ealert-candidates.json
+```
 
-## 追踪的研究者
+This command connects to Gmail and reads the configured mailbox. The JSON
+contains candidate metadata, per-source status, and no complete email bodies.
+Remove the temporary file after inspection.
 
-当前通过 Google Scholar Alerts 追踪：
-- **Shane Crotty** — La Jolla Institute for Immunology（疫苗/免疫学）
-- **Faisal Mahmood** — Harvard TH Chan School of Public Health（计算病理学/AI for Medicine）
+## Create a daily Schedule
 
----
+Ask TRAE to create a Schedule only when you want recurring runs. For example:
 
-## 故障排除
+> Use the `ealert-tracker` Skill to create a daily task at 08:00
+> (`Asia/Shanghai`). Check for an equivalent task first. Use my configured
+> Gmail credentials, report directory, and state file. Return the complete
+> report in the task result. If Git publishing is configured, publish only the
+> newly generated report. Do not send QQ messages or email.
 
-| 问题 | 解决方案 |
-|------|---------|
-| "登录失败" | 检查 IMAP_PASS 是否正确（Gmail App Password，不带空格） |
-| 邮件数量为 0 | 确认期刊 ToC 提醒已订阅；检查垃圾邮件文件夹 |
-| 报告重复发送 | 检查 `sent-papers.json`；去重逻辑基于标题+URL/DOI |
-| GitHub 推送失败 | 确认 Git 凭证有效；检查仓库权限 |
+TRAE uses its built-in Schedule capability. The default time is 08:00 in
+`Asia/Shanghai`; the example configuration can set a different timezone.
+Creating a Schedule does not run the tracker immediately. The scheduled prompt
+must include absolute paths so it works without the setup conversation.
 
----
+## Reports and publishing
 
-## 相关仓库
+Reports use this archive layout under `reports_dir`:
 
-- **bioinformatics-frontier**（报告归档）: https://github.com/OnlyPandaX/bioinformatics-frontier
-- **multi-omics-briefing**（多组学简报）: https://github.com/OnlyBelter/multi-omics-briefing
-- **bioinfo-weekly-summary**（每周综合汇总）: https://github.com/OnlyBelter/bioinfo-weekly-summary
+```text
+YYYY/MM/YYYY-Www/YYYY-MM-DD-journal-briefing.md
+```
 
----
+Git publishing is disabled when `publish_repo` is empty. To enable it, set
+`publish_repo` to a local Git repository and make sure `reports_dir` is inside
+that repository. The publisher refuses unsafe branch states and commits only
+the generated report. It never runs `git add .`.
 
-*EAlert Tracker 由 [胖达 🐼] 自动维护*
+## Existing installations
+
+The repository no longer includes the historical personal `sent-papers.json`.
+Before updating an older checkout, copy that file to a private backup outside
+the checkout. After installing the new Skill, migrate the backup:
+
+```bash
+python3 "$HOME/.trae/skills/ealert-tracker/scripts/migrate_state.py" \
+  --legacy-state "$HOME/.config/ealert-tracker/sent-papers-legacy.json" \
+  --state-file "$HOME/.local/state/ealert-tracker/sent-papers.json"
+```
+
+Migration creates a private user-local state file and refuses to overwrite an
+existing one. Fresh installations start empty.
+
+## Tests
+
+Run the offline tests from the repository root. They mock IMAP responses and
+use temporary Git repositories; they do not access your Gmail account or push
+to GitHub.
+
+```bash
+python3 -m unittest -v test_ealert
+python3 -m py_compile scripts/*.py test_ealert.py
+bash -n scripts/publish-report.sh
+```
+
+## License
+
+This project is licensed under the MIT License.

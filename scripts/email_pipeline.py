@@ -1,377 +1,432 @@
 #!/usr/bin/env python3
+"""Read recent journal and Google Scholar alert emails as candidate JSON."""
+
 import argparse
-import email
-import re
+from datetime import datetime, timedelta, timezone
+from email import policy
+from email.parser import BytesParser
+from email.utils import parseaddr, parsedate_to_datetime
 import imaplib
 import json
 import os
-import sys
-from datetime import datetime, timedelta
-from email.utils import parsedate_to_datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
-from uuid import uuid4
+import re
+import ssl
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-# 兼容映射：email_reader.py 重写后去除了函数名前的下划线
-# 这里统一做映射，避免修改 email_pipeline.py 的大量调用
-import email_reader as _er
-for _old, _new in [
-    ('_extract_best_body', 'extract_best_body'),
-    ('_extract_articles_from_html', 'extract_articles_from_html'),
-    ('_html_to_text', 'html_to_text'),
-    ('_is_journal_email', 'is_journal_email'),
-    ('_extract_journal_from_subject', 'extract_journal_from_subject'),
-    ('_normalize_url', 'normalize_url'),
-    ('_unwrap_tracking_link', 'unwrap_tracking_link'),
-]:
-    if not hasattr(_er, _old) and hasattr(_er, _new):
-        setattr(_er, _old, getattr(_er, _new))
-# 让后续代码能用 email_reader.xxx 访问
-import email_reader  # noqa: F401
+import email_reader
+from parse_scholar_emails import parse_scholar_email
+from state_store import filter_sent, load_state, normalize_doi
 
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-ROOT_DIR = SCRIPT_DIR.parent
-ENV_FILE = ROOT_DIR / ".env"
-
-SCHOLAR_SENDERS = ["scholaralerts-noreply@google.com"]
-SCHOLAR_EXCLUDE_SUBJECTS = ["confirm your scholar alert"]
-
-EXCLUDE_SUBJECT_KEYWORDS = [
-    "Security alert",
-    "Login",
-    "Careers",
-    "Career Path",
-    "Speak up for science",
-    "Unsubscribe",
-    "In Other Journals",
-]
-
-JOURNAL_SUBJECT_KEYWORDS = [
-    "Nature",
-    "Science",
-    "Cell",
-    "PNAS",
-    "Translational",
-    "Immunology",
-    "Advances",
-    "Cancer",
-    "Communications",
-    "Computational",
-    "Biotechnology",
-    "Methods",
-    "Genetics",
-    "Medicine",
-    "Molecular",
-    "Reports",
-    "Metabolism",
-    "Trends",
-]
+DEFAULT_CONFIG_PATH = Path.home() / ".config/ealert-tracker/config.json"
+DEFAULT_CREDENTIALS_PATH = Path.home() / ".config/ealert-tracker/credentials.env"
+DEFAULT_STATE_PATH = Path.home() / ".local/state/ealert-tracker/sent-papers.json"
+DOI_PATTERN = re.compile(
+    r"10\.\d{4,9}/[-._;()/:A-Z0-9]+",
+    flags=re.IGNORECASE,
+)
 
 
-def load_env(path: Path) -> Dict[str, str]:
-    env: Dict[str, str] = {}
-    if path.exists():
-        for raw in path.read_text().splitlines():
-            line = raw.strip()
-            if not line or line.startswith("#") or "=" not in line:
-                continue
-            k, v = line.split("=", 1)
-            env[k.strip()] = v.strip().strip('"').strip("'")
-    return env
+def load_env_file(path):
+    values = {}
+    env_path = Path(path).expanduser()
+    if not env_path.is_file():
+        return values
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        values[key.strip()] = value.strip().strip('"').strip("'")
+    return values
 
 
-def _decode_header_value(value: Optional[str]) -> str:
-    if not value:
-        return ""
+def load_config(path):
+    config_path = Path(path).expanduser()
+    if not config_path.is_file():
+        raise FileNotFoundError(f"Configuration file not found: {config_path}")
     try:
-        from email.header import decode_header
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise ValueError(f"Invalid JSON configuration: {config_path}") from error
+    if not isinstance(config, dict):
+        raise ValueError("Configuration must be a JSON object")
 
-        parts = decode_header(value)
-        out: List[str] = []
-        for part, charset in parts:
-            if isinstance(part, bytes):
-                cs = charset or "utf-8"
-                try:
-                    out.append(part.decode(cs, errors="replace"))
-                except Exception:
-                    out.append(part.decode("utf-8", errors="replace"))
-            else:
-                out.append(str(part))
-        return "".join(out)
-    except Exception:
-        return value
+    required_lists = (
+        "journal_sender_domains",
+        "scholar_senders",
+        "journal_subject_keywords",
+        "scholar_subject_keywords",
+        "exclude_subject_keywords",
+        "target_topics",
+    )
+    for key in required_lists:
+        value = config.get(key)
+        if not isinstance(value, list) or any(
+            not isinstance(item, str) or not item.strip() for item in value
+        ):
+            raise ValueError(f"{key} must be a list of non-empty strings")
+    if not config["journal_sender_domains"] or not config["scholar_senders"]:
+        raise ValueError("At least one journal domain and Scholar sender are required")
+    if not config["target_topics"]:
+        raise ValueError("target_topics must contain at least one research topic")
 
+    for key, default, minimum, maximum in (
+        ("hours", 48, 1, 168),
+        ("max_emails", 200, 1, 5000),
+        ("imap_port", 993, 1, 65535),
+        ("timeout_seconds", 30, 1, 300),
+    ):
+        try:
+            value = int(config.get(key, default))
+        except (TypeError, ValueError) as error:
+            raise ValueError(f"{key} must be an integer") from error
+        if not minimum <= value <= maximum:
+            raise ValueError(f"{key} must be between {minimum} and {maximum}")
+        config[key] = value
 
-def _safe_parse_date(value: str) -> Optional[datetime]:
-    if not value:
-        return None
+    config.setdefault("imap_host", "imap.gmail.com")
+    config.setdefault("mailbox", "INBOX")
+    config.setdefault("state_file", str(DEFAULT_STATE_PATH))
+    config.setdefault("timezone", "Asia/Shanghai")
+    config.setdefault("reports_dir", "~/Documents/ealert-tracker/reports")
+    config.setdefault("publish_repo", "")
+    config.setdefault("git_remote", "origin")
+    config.setdefault("git_branch", "main")
+    if not isinstance(config["imap_host"], str) or not config["imap_host"].strip():
+        raise ValueError("imap_host must be a non-empty string")
+    if not isinstance(config["mailbox"], str) or not config["mailbox"].strip():
+        raise ValueError("mailbox must be a non-empty string")
+    if not isinstance(config["state_file"], str) or not config["state_file"].strip():
+        raise ValueError("state_file must be a non-empty path")
+    if not isinstance(config["reports_dir"], str) or not config["reports_dir"].strip():
+        raise ValueError("reports_dir must be a non-empty path")
+    if not isinstance(config["timezone"], str) or not config["timezone"].strip():
+        raise ValueError("timezone must be a non-empty IANA timezone")
     try:
-        return parsedate_to_datetime(value)
-    except Exception:
-        return None
+        ZoneInfo(config["timezone"])
+    except ZoneInfoNotFoundError as error:
+        raise ValueError(f"Unknown timezone: {config['timezone']}") from error
+    for key in ("publish_repo", "git_remote", "git_branch"):
+        if not isinstance(config[key], str):
+            raise ValueError(f"{key} must be a string")
+    return config
 
 
-def _matches_any(text: str, keywords: List[str]) -> bool:
-    lower = (text or "").lower()
-    return any(k.lower() in lower for k in keywords)
-
-
-def _dedup_papers(papers: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    seen: Dict[str, int] = {}
-    out: List[Dict[str, Any]] = []
-    for p in papers:
-        link = (p.get("link") or "").split("?", 1)[0].lower().strip()
-        doi = (p.get("doi") or "").split("?", 1)[0].lower().strip()
-        if link or doi:
-            key = f"{link}|{doi}"
-        else:
-            title = (p.get("title") or "").lower()
-            title_key = "".join([c for c in title if c.isalnum()])[:60]
-            key = f"T:{title_key}"
-
-        idx = seen.get(key)
-        if idx is None:
-            seen[key] = len(out)
-            out.append(p)
-            continue
-        prev = out[idx]
-        if len(p.get("title") or "") > len(prev.get("title") or ""):
-            out[idx] = p
-    return out
-
-
-def _read_message_bytes(imap: imaplib.IMAP4_SSL, uid: bytes) -> Optional[bytes]:
-    try:
-        status, msg_data = imap.fetch(uid, "(RFC822)")
-        if status != "OK" or not msg_data:
-            return None
-        return msg_data[0][1]
-    except Exception:
-        return None
-
-
-def _import_local_modules():
-    sys.path.insert(0, str(SCRIPT_DIR))
-    import email_reader  # type: ignore
-    import parse_scholar_emails  # type: ignore
-
-    return email_reader, parse_scholar_emails
-
-
-def _extract_pseudo_abstract(email_text: str, title: str, link: str) -> str:
-    """从邮件正文中提取伪摘要（v3.9.0）
-    策略：找到标题所在位置，向后取1-3段描述性文字，过滤元信息和无关内容。
-    """
-    if not email_text or not title:
-        return ''
-    
-    # 找标题在正文中的位置
-    title_lower = title.lower()
-    lines = email_text.split('\n')
-    title_idx = -1
-    for i, line in enumerate(lines):
-        # 标题行通常完整出现或部分匹配
-        line_clean = re.sub(r'[^a-z0-9\s]', '', line.lower())
-        title_clean = re.sub(r'[^a-z0-9\s]', '', title_lower)
-        if len(title_clean) > 15 and title_clean[:40] in line_clean:
-            title_idx = i
-            break
-    
-    if title_idx < 0:
-        return ''
-    
-    # 收集标题后的1-3段文字
-    abstract_parts = []
-    skip_count = 0  # 跳过空行计数
-    
-    for i in range(title_idx + 1, min(title_idx + 20, len(lines))):
-        line = lines[i].strip()
-        
-        # 跳过：空行、URL、元信息
-        if not line:
-            skip_count += 1
-            if skip_count > 1:  # 超过1个空行则停止
-                break
-            continue
-        skip_count = 0
-        
-        lower_line = line.lower()
-        
-        # 跳过无关内容
-        if any(k in lower_line for k in [
-            'click here', 'unsubscribe', 'view in browser',
-            'advertisement', 'you are receiving',
-            'brought to you', 'follow us', 'twitter', 'facebook',
-            'image:', 'figure', 'fig.', 'table',
-            '©', 'copyright', 'all rights reserved',
-            'website:', 'visit:', 'read more',
-        ]):
-            continue
-        
-        # 跳过纯标题（ALL CAPS 短行）
-        if line.isupper() and len(line) < 80:
-            continue
-        
-        # 跳过引用/转发标记
-        if re.match(r'^>\s*', line):
-            continue
-        
-        # 跳过过短或过长的行
-        if len(line) < 40 or len(line) > 500:
-            continue
-        
-        # 这是描述性文字（包含动词或研究术语）
-        abstract_parts.append(line)
-        if len(abstract_parts) >= 3:
-            break
-    
-    if not abstract_parts:
-        return ''
-    
-    result = ' '.join(abstract_parts)
-    # 清理多余空格
-    result = re.sub(r'\s+', ' ', result).strip()
-    # 截断过长内容
-    if len(result) > 600:
-        result = result[:600] + '...'
-    return result
-
-
-def build_papers(hours: int, max_emails: int) -> List[Dict[str, Any]]:
-    env = load_env(ENV_FILE)
-    host = env.get("IMAP_HOST", "imap.gmail.com")
-    user = env.get("IMAP_USER", "")
-    password = env.get("IMAP_PASS", "")
-    port = int(env.get("IMAP_PORT", "993") or "993")
-
+def load_credentials(credentials_path):
+    values = load_env_file(credentials_path)
+    user = os.environ.get("IMAP_USER") or values.get("IMAP_USER", "")
+    password = os.environ.get("IMAP_PASS") or values.get("IMAP_PASS", "")
+    password = "".join(password.split())
     if not user or not password:
-        raise RuntimeError("missing IMAP_USER/IMAP_PASS in .env")
+        raise ValueError(
+            "Missing IMAP_USER or IMAP_PASS. Set them in the private "
+            "credentials file or environment."
+        )
+    return {"user": user, "password": password}
 
-    email_reader, parse_scholar_emails = _import_local_modules()
 
-    now = datetime.now().astimezone()
-    since = now - timedelta(hours=hours)
-    imap_since = (now - timedelta(days=max(1, int(hours / 24) + 1))).strftime("%d-%b-%Y")
-
-    imap = imaplib.IMAP4_SSL(host, port)
-    imap.login(user, password)
+def parse_message_date(value):
+    if not value:
+        return None
     try:
-        imap.select("INBOX")
-        status, uids = imap.search(None, f"SINCE {imap_since}")
-        if status != "OK":
-            return []
-        uid_list = uids[0].split()
-        if not uid_list:
-            return []
+        parsed = parsedate_to_datetime(str(value))
+    except (TypeError, ValueError, OverflowError):
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
 
-        uid_list = uid_list[-max_emails:]
-        papers: List[Dict[str, Any]] = []
 
+def extract_doi(value):
+    match = DOI_PATTERN.search(value or "")
+    return normalize_doi(match.group(0)) if match else ""
+
+
+def sender_kind(sender, config):
+    address = parseaddr(sender or "")[1].casefold()
+    if not address or "@" not in address:
+        return ""
+    _, domain = address.rsplit("@", 1)
+    if address in {value.casefold() for value in config["scholar_senders"]}:
+        return "scholar"
+    if email_reader.domain_matches(domain, config["journal_sender_domains"]):
+        return "journal"
+    return ""
+
+
+def subject_is_excluded(subject, config):
+    value = (subject or "").casefold()
+    return any(term.casefold() in value for term in config["exclude_subject_keywords"])
+
+
+def _candidate(
+    title,
+    url,
+    source,
+    journal="",
+    email_date="",
+    authors="",
+    doi="",
+    abstract="",
+    researcher="",
+    reported_year="",
+):
+    title = " ".join((title or "").split()).strip()
+    normalized_url = email_reader.normalize_url(url) if url else ""
+    return {
+        "title": title,
+        "url": normalized_url,
+        "doi": normalize_doi(doi) or extract_doi(normalized_url),
+        "journal": (journal or "").strip(),
+        "source": source,
+        "email_date": email_date,
+        "authors": (authors or "").strip(),
+        "abstract": " ".join((abstract or "").split()).strip(),
+        "researcher": (researcher or "").strip(),
+        "reported_year": str(reported_year or "").strip(),
+    }
+
+
+def parse_alert_message(message, kind, config):
+    subject = str(message.get("Subject", ""))
+    sender = str(message.get("From", ""))
+    if subject_is_excluded(subject, config):
+        return []
+
+    html, plain = email_reader.extract_best_body(message)
+    text = email_reader.html_to_text(html) if html else (plain or "")
+    date = parse_message_date(message.get("Date"))
+    date_text = date.isoformat() if date else ""
+
+    if kind == "scholar":
+        if config["scholar_subject_keywords"] and not any(
+            term.casefold() in subject.casefold()
+            for term in config["scholar_subject_keywords"]
+        ):
+            return []
+        papers = parse_scholar_email(text, subject)
+        return [
+            _candidate(
+                paper.get("title", ""),
+                paper.get("url", ""),
+                "scholar_alert",
+                paper.get("journal", ""),
+                date_text,
+                paper.get("authors", ""),
+                paper.get("doi", ""),
+                paper.get("abstract", ""),
+                paper.get("researcher", ""),
+                paper.get("year", ""),
+            )
+            for paper in papers
+            if paper.get("title")
+        ]
+
+    if config["journal_subject_keywords"] and not any(
+        term.casefold() in subject.casefold()
+        for term in config["journal_subject_keywords"]
+    ):
+        return []
+    journal = email_reader.extract_journal_from_subject(subject)
+    allowed_domains = config["journal_sender_domains"]
+    articles = email_reader.extract_articles_from_html(
+        html, subject, allowed_domains
+    ) if html else []
+    if not articles:
+        articles = email_reader.extract_articles_from_text(
+            text, subject, allowed_domains
+        )
+    return [
+        _candidate(
+            article.get("title", ""),
+            article.get("url", ""),
+            "journal_alert",
+            article.get("journal") or journal,
+            date_text,
+            doi=extract_doi(article.get("url", "")),
+        )
+        for article in articles
+        if article.get("title")
+    ]
+
+
+def _message_bytes(fetch_data):
+    for item in fetch_data or []:
+        if isinstance(item, tuple) and len(item) > 1 and isinstance(item[1], bytes):
+            return item[1]
+    return None
+
+
+def deduplicate_papers(papers):
+    results = []
+    by_identifier = {}
+    for paper in papers:
+        doi = normalize_doi(paper.get("doi", "")).casefold()
+        url = email_reader.normalize_url(paper.get("url", "")).casefold()
+        title = re.sub(r"\W+", " ", paper.get("title", "").casefold()).strip()
+        key = "doi:" + doi if doi else ("url:" + url if url else "title:" + title)
+        if key == "title:":
+            continue
+        if key not in by_identifier:
+            by_identifier[key] = len(results)
+            results.append(paper)
+            continue
+        existing = results[by_identifier[key]]
+        for field in ("doi", "url", "journal", "authors", "abstract", "researcher"):
+            if not existing.get(field) and paper.get(field):
+                existing[field] = paper[field]
+        if len(paper.get("title", "")) > len(existing.get("title", "")):
+            existing["title"] = paper["title"]
+    return results
+
+
+def collect_papers(config, credentials, now=None, imap_factory=None):
+    end = now or datetime.now(timezone.utc)
+    if end.tzinfo is None:
+        end = end.replace(tzinfo=timezone.utc)
+    end = end.astimezone(timezone.utc)
+    start = end - timedelta(hours=config["hours"])
+    coarse_since = (start - timedelta(days=1)).strftime("%d-%b-%Y")
+    factory = imap_factory or imaplib.IMAP4_SSL
+    mailbox = factory(
+        config["imap_host"],
+        config["imap_port"],
+        ssl_context=ssl.create_default_context(),
+        timeout=config["timeout_seconds"],
+    )
+    status = {
+        "imap": {"status": "error", "count": 0},
+        "journal_alerts": {"status": "ok", "count": 0},
+        "scholar_alerts": {"status": "ok", "count": 0},
+    }
+    parse_errors = 0
+    invalid_dates = 0
+    try:
+        try:
+            result, _ = mailbox.login(credentials["user"], credentials["password"])
+        except imaplib.IMAP4.error as error:
+            raise RuntimeError("IMAP login failed; verify the App Password and IMAP access") from error
+        if result != "OK":
+            raise RuntimeError("IMAP login failed; verify the App Password and IMAP access")
+
+        result, _ = mailbox.select(config["mailbox"], readonly=True)
+        if result != "OK":
+            raise RuntimeError("Could not open the configured mailbox in read-only mode")
+        result, search_data = mailbox.uid("SEARCH", None, "SINCE", coarse_since)
+        if result != "OK":
+            raise RuntimeError("IMAP message search failed")
+
+        uid_list = (search_data[0] if search_data else b"").split()
+        total_matches = len(uid_list)
+        truncated = total_matches > config["max_emails"]
+        uid_list = uid_list[-config["max_emails"]:]
+        papers = []
         for uid in uid_list:
-            raw = _read_message_bytes(imap, uid)
-            if not raw:
-                continue
-            msg = email.message_from_bytes(raw)
+            try:
+                result, fetch_data = mailbox.uid("FETCH", uid, "(BODY.PEEK[])")
+                raw = _message_bytes(fetch_data)
+                if result != "OK" or not raw:
+                    parse_errors += 1
+                    continue
+                message = BytesParser(policy=policy.default).parsebytes(raw)
+                message_date = parse_message_date(message.get("Date"))
+                if message_date is None:
+                    invalid_dates += 1
+                    continue
+                if not start <= message_date <= end:
+                    continue
+                kind = sender_kind(str(message.get("From", "")), config)
+                if not kind:
+                    continue
+                parsed = parse_alert_message(message, kind, config)
+                papers.extend(parsed)
+                source_key = "scholar_alerts" if kind == "scholar" else "journal_alerts"
+                status[source_key]["count"] += len(parsed)
+            except Exception:
+                parse_errors += 1
 
-            sender = _decode_header_value(msg.get("From", ""))
-            subject = _decode_header_value(msg.get("Subject", ""))
-            msg_date = msg.get("Date", "") or ""
-
-            dt = _safe_parse_date(msg_date)
-            if dt and dt < since:
-                continue
-
-            lower_sender = sender.lower()
-            lower_subject = subject.lower()
-
-            if _matches_any(subject, EXCLUDE_SUBJECT_KEYWORDS):
-                continue
-
-            is_scholar = any(s in lower_sender for s in SCHOLAR_SENDERS)
-            if is_scholar and _matches_any(lower_subject, SCHOLAR_EXCLUDE_SUBJECTS):
-                continue
-
-            html, plain = email_reader._extract_best_body(msg)
-            text = email_reader.html_to_text(html) if html else (plain or "")
-
-            if is_scholar:
-                extracted = parse_scholar_emails.parse_scholar_email(text, subject)
-                for p in extracted:
-                    papers.append(
-                        {
-                            "id": str(uuid4()),
-                            "title": p.get("title") or "",
-                            "authors": p.get("authors") or "",
-                            "journal": p.get("journal") or "",
-                            "date": p.get("year") or "",
-                            "link": p.get("url") or "",
-                            "doi": p.get("doi") or "",
-                            "source": "scholar",
-                            "researcher": p.get("researcher") or "Unknown",
-                            "abstract": p.get("abstract") or "",
-                        }
-                    )
-                continue
-
-            is_journal = email_reader.is_journal_email(sender) or _matches_any(subject, JOURNAL_SUBJECT_KEYWORDS)
-            if not is_journal:
-                continue
-
-            articles = email_reader._extract_articles_from_html(html, subject)
-            if not articles:
-                articles = email_reader.extract_articles_from_text(text, subject)
-
-            for a in articles:
-                # v3.9.0: 从邮件正文中提取伪摘要（用于 API 失败的兜底）
-                # 策略：找标题后第1-3段的描述性文字，过滤掉元信息
-                pseudo_abstract = _extract_pseudo_abstract(text, a.get('title') or '', a.get('url') or '')
-                papers.append(
-                    {
-                        "id": str(uuid4()),
-                        "title": a.get("title") or "",
-                        "authors": "见原文",
-                        "journal": a.get("journal") or email_reader.extract_journal_from_subject(subject),
-                        "date": a.get("date") or "",
-                        "link": a.get("url") or "",
-                        "doi": "",
-                        "source": "email",
-                        "researcher": "",
-                        "abstract": "",
-                        "email_body": pseudo_abstract,  # v3.9.0: 邮件正文伪摘要
-                    }
-                )
-
-        return _dedup_papers(papers)
+        status["imap"] = {
+            "status": "ok",
+            "count": total_matches,
+            "processed": len(uid_list),
+            "truncated": truncated,
+            "parse_errors": parse_errors,
+            "invalid_dates": invalid_dates,
+        }
+        unique = deduplicate_papers(papers)
+        state = load_state(config["state_file"])
+        return {
+            "generated_at": end.isoformat(),
+            "window": {
+                "start_utc": start.isoformat(),
+                "end_utc": end.isoformat(),
+                "hours": config["hours"],
+            },
+            "source_status": status,
+            "candidate_count": len(unique),
+            "papers": filter_sent(unique, state),
+            "state_file": str(Path(config["state_file"]).expanduser()),
+        }
     finally:
         try:
-            imap.logout()
-        except Exception:
+            mailbox.logout()
+        except (imaplib.IMAP4.error, OSError):
             pass
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--hours", type=int, default=48)
-    parser.add_argument("--max-emails", type=int, default=60)
-    parser.add_argument("--json", action="store_true")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--config",
+        default=os.environ.get("EALERT_CONFIG", str(DEFAULT_CONFIG_PATH)),
+        help="Path to private JSON configuration",
+    )
+    parser.add_argument(
+        "--credentials",
+        default=os.environ.get("EALERT_CREDENTIALS", str(DEFAULT_CREDENTIALS_PATH)),
+        help="Path to private IMAP credentials file",
+    )
+    parser.add_argument("--output", help="Optional path for candidate JSON")
+    parser.add_argument("--now", help=argparse.SUPPRESS)
     args = parser.parse_args()
-
-    papers = build_papers(hours=args.hours, max_emails=args.max_emails)
-    payload = {
-        "version": "1.0",
-        "generated_at": datetime.now().isoformat(),
-        "hours": args.hours,
-        "total_papers": len(papers),
-        "papers": papers,
-    }
-
-    if args.json:
-        sys.stdout.write(json.dumps(payload, ensure_ascii=False))
-        return
-
-    sys.stdout.write(json.dumps(payload, ensure_ascii=False, indent=2))
+    try:
+        config = load_config(args.config)
+        credentials = load_credentials(args.credentials)
+        now = parse_message_date(args.now) if args.now else None
+        if args.now and now is None:
+            raise ValueError("--now must be an RFC 2822 date")
+        output = collect_papers(config, credentials, now=now)
+        rendered = json.dumps(output, ensure_ascii=False, indent=2)
+        if args.output:
+            output_path = Path(args.output).expanduser()
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(rendered + "\n", encoding="utf-8")
+        print(rendered)
+        return 0
+    except imaplib.IMAP4.error:
+        error = "IMAP connection failed; check Gmail access and network connectivity"
+        failure = {
+            "source_status": {
+                "imap": {"status": "error", "error": error}
+            },
+            "candidate_count": 0,
+            "papers": [],
+        }
+        print(json.dumps(failure, ensure_ascii=False, indent=2))
+        return 1
+    except (OSError, ValueError, RuntimeError) as error:
+        failure = {
+            "source_status": {
+                "imap": {"status": "error", "error": str(error)}
+            },
+            "candidate_count": 0,
+            "papers": [],
+        }
+        print(json.dumps(failure, ensure_ascii=False, indent=2))
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

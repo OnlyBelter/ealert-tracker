@@ -1,0 +1,40 @@
+{
+  "skill_name": "ealert-tracker",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use the ealert-tracker Skill once. Read recent journal table-of-contents and Google Scholar Alert messages, include only papers directly relevant to my configured cancer immunology and single-cell topics, verify the citations, save the Chinese report, and return it here. Do not create a recurring task.",
+      "expected_output": "Collects recent emails, filters and verifies topic-relevant research papers, saves and returns the complete Chinese report, and does not create a Schedule.",
+      "files": [],
+      "expectations": [
+        "Does not create a recurring Schedule for a one-time request.",
+        "Uses the configured rolling 48-hour window and both journal and Scholar sources.",
+        "Excludes unrelated papers and non-research content.",
+        "Marks unverified metadata instead of inventing it."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Set up EAlert Tracker every day at 8 AM Shanghai time. Check whether this task already exists, use my local Gmail credentials and report repository, return the complete report in the task result, and do not send QQ messages or email.",
+      "expected_output": "Checks for an equivalent task and valid local configuration, then creates one self-contained daily TRAE Schedule using 08:00 Asia/Shanghai with optional report-only Git publishing and no QQ or email delivery.",
+      "files": [],
+      "expectations": [
+        "Checks for an equivalent Schedule before creating one.",
+        "Preserves 08:00 Asia/Shanghai.",
+        "Includes absolute collector, credentials, config, state, output, and optional publisher paths.",
+        "Does not expose credentials or send QQ messages or email."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run the journal tracker, but Gmail IMAP is currently unavailable and there may be no new articles. Tell me whether there are no papers or the collection failed.",
+      "expected_output": "Reports an IMAP source failure and does not claim a successful empty search, write an empty report, or update deduplication state.",
+      "files": [],
+      "expectations": [
+        "Distinguishes IMAP failure from a successful search with zero relevant papers.",
+        "Does not create an empty report.",
+        "Does not update the sent-paper state after a collection failure."
+      ]
+    }
+  ]
+}

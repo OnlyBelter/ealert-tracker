@@ -1,0 +1,61 @@
+{
+  "imap_host": "imap.gmail.com",
+  "imap_port": 993,
+  "mailbox": "INBOX",
+  "hours": 48,
+  "max_emails": 200,
+  "timeout_seconds": 30,
+  "journal_sender_domains": [
+    "nature.com",
+    "springernature.com",
+    "science.org",
+    "aaas.org",
+    "sciencepubs.org",
+    "cell.com",
+    "pnas.org",
+    "elsevier.com"
+  ],
+  "scholar_senders": [
+    "scholaralerts-noreply@google.com"
+  ],
+  "journal_subject_keywords": [
+    "Email Alert",
+    "Notification",
+    "Contents",
+    "Table of Contents",
+    "In this issue",
+    "Latest issue",
+    "New issue"
+  ],
+  "scholar_subject_keywords": [
+    "new articles",
+    "new citations",
+    "update"
+  ],
+  "exclude_subject_keywords": [
+    "confirm your scholar alert",
+    "security alert",
+    "career",
+    "unsubscribe",
+    "in other journals"
+  ],
+  "target_topics": [
+    "bioinformatics",
+    "computational biology",
+    "multi-omics",
+    "single-cell and spatial biology",
+    "genomics and transcriptomics",
+    "cancer biology and oncology",
+    "tumor immunology and immunotherapy",
+    "AI and machine learning for biology",
+    "proteomics and metabolomics",
+    "microbiome",
+    "systems biology"
+  ],
+  "timezone": "Asia/Shanghai",
+  "reports_dir": "~/Documents/ealert-tracker/reports",
+  "state_file": "~/.local/state/ealert-tracker/sent-papers.json",
+  "publish_repo": "",
+  "git_remote": "origin",
+  "git_branch": "main"
+}

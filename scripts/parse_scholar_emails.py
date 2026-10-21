@@ -18,37 +18,31 @@ import re
 import json
 import sys
 from pathlib import Path
+from urllib.parse import parse_qs, unquote, urlparse
 
 def extract_doi_from_url(url):
     """从 URL 中提取 DOI/真实链接"""
-    param_match = re.search(r'scholar_url\?url=([^&\s]+)', url)
-    if param_match:
-        decoded = param_match.group(1).replace('&amp;', '&')
-        doi_match = re.search(r'(10\.\d+/[^\s&\)]+)', decoded)
-        if doi_match:
-            return doi_match.group(1), decoded
-        return '', decoded
-    return '', url
-
-def title_case(s):
-    """智能标题大小写转换"""
-    lower_words = {'and','or','for','of','in','on','to','a','an','the','with','by','from','vs','via','based','using','towards','toward'}
-    words = s.split()
-    result = []
-    for i, w in enumerate(words):
-        if w.lower() in lower_words and i > 0:
-            result.append(w.lower())
-        else:
-            result.append(w.capitalize())
-    t = ' '.join(result)
-    return t.replace("'S", "'s").replace("'T", "'t").replace("'Re", "'re")
+    parsed = urlparse((url or "").replace("&amp;", "&"))
+    query = parse_qs(parsed.query)
+    resolved = unquote(
+        next(iter(query.get("url", [])), "")
+        or next(iter(query.get("q", [])), "")
+    )
+    candidate = resolved or url or ""
+    doi_match = re.search(
+        r"(10\.\d{4,9}/[-._;()/:A-Z0-9]+)",
+        candidate,
+        flags=re.IGNORECASE,
+    )
+    doi = doi_match.group(1).rstrip(".,;)") if doi_match else ""
+    return doi, candidate
 
 def parse_scholar_email(text, subject=''):
     """解析 Scholar Alert 邮件，返回论文列表"""
     papers = []
     
     researcher_match = re.match(r'^([^\-]+)\s+-\s+(\d+)\s+new articles?', subject, re.I)
-    researcher = researcher_match.group(1).strip() if researcher_match else 'Unknown'
+    researcher = researcher_match.group(1).strip() if researcher_match else ''
     
     raw_lines = text.split('\n')
     lines = []
@@ -70,17 +64,14 @@ def parse_scholar_email(text, subject=''):
     while idx < len(lines):
         line = lines[idx]
         
-        title_prefix = ''
         title_text = ''
         
         pdf_m = re.match(r'^\[PDF\]\s+(.+)', line)
         html_m = re.match(r'^\[HTML\]\s+(.+)', line)
         
         if pdf_m:
-            title_prefix = '[PDF] '
             title_text = pdf_m.group(1)
         elif html_m:
-            title_prefix = '[HTML] '
             title_text = html_m.group(1)
         elif line.isupper() and len(line) > 15 and not line.startswith('HTTP'):
             title_text = line
@@ -100,7 +91,7 @@ def parse_scholar_email(text, subject=''):
                         break
             
             paper = {
-                'title': title_prefix + title_case(full_title),
+                'title': full_title.strip(),
                 'authors': '',
                 'journal': '',
                 'year': '',
@@ -117,7 +108,11 @@ def parse_scholar_email(text, subject=''):
             for j in range(idx + 1, min(idx + 12, len(lines))):
                 next_line = lines[j]
                 
-                if not found_url and 'scholar_url' in next_line:
+                if (
+                    not found_url
+                    and next_line.startswith(('http://', 'https://'))
+                    and not next_line.startswith('https://scholar.google.com/intl/')
+                ):
                     paper['url'] = next_line
                     doi, real_url = extract_doi_from_url(next_line)
                     paper['doi'] = doi
@@ -157,9 +152,6 @@ def parse_scholar_email(text, subject=''):
                         break
             
             paper['abstract'] = ' '.join(paper['abstract'])[:500]
-            if not paper['authors']:
-                paper['authors'] = researcher + ' et al.'
-            
             if paper['title'] and len(paper['title']) > 15:
                 papers.append(paper)
         
@@ -175,7 +167,11 @@ def main():
     if len(args) > 1 and not Path(args[0]).exists():
         subject = args[1]
     
-    text = open(args[0]).read() if args and Path(args[0]).exists() else (args[0] if args else '')
+    text = (
+        Path(args[0]).read_text(encoding='utf-8', errors='replace')
+        if args and Path(args[0]).is_file()
+        else (args[0] if args else '')
+    )
     
     papers = parse_scholar_email(text, subject)
     
